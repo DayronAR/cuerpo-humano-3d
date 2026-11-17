@@ -1,0 +1,25 @@
+{
+  "_comentario": "Ejemplo de mapeo Z-Anatomy -> nombres del proyecto. Los nombres fuente son orientativos: confírmalos con --listar sobre tu archivo.",
+  "max_triangulos": 15000,
+  "escala": 1.0,
+  "sistemas": {
+    "Circulatorio": {
+      "Corazon": ["Heart", "*heart*"]
+    },
+    "Respiratorio": {
+      "PulmonIzq": ["Left lung", "*lung*.l"],
+      "PulmonDer": ["Right lung", "*lung*.r"],
+      "Traquea": ["Trachea"]
+    },
+    "Digestivo": {
+      "Esofago": ["Esophagus"],
+      "Estomago": ["Stomach"],
+      "Higado": ["Liver"],
+      "IntestinoDelgado": ["coleccion:Small intestine"],
+      "IntestinoGrueso": ["coleccion:Large intestine"]
+    },
+    "Nervioso": {
+      "Cerebro": ["coleccion:Brain"]
+    }
+  }
+}

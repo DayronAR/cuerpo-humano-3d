@@ -1,0 +1,29 @@
+# --- Godot 4 ---
+.godot/
+/android/
+*.translation
+export_credentials.cfg
+*.tmp
+
+# --- Builds exportados ---
+builds/
+*.exe
+*.pck
+*.app/
+*.dmg
+*.zip
+
+# --- Assets fuente pesados (Z-Anatomy, Mixamo, .blend de trabajo) ---
+assets_fuente/
+*.blend1
+*.blend2
+
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- Sistema / editores ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

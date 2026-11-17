@@ -1,0 +1,201 @@
+# Cuerpo Humano 3D Interactivo
+
+Atlas 3D interactivo del cuerpo humano con simulaciones fisiológicas simples (correr, fumar, comer).
+Aplicación de escritorio 100 % offline hecha con **Godot 4.7.2 (GDScript)**.
+
+> Simulación educativa con valores aproximados.
+
+---
+
+## 1. Requisitos de desarrollo (macOS, Apple Silicon)
+
+| Herramienta | Versión usada | Instalación |
+|---|---|---|
+| macOS | 27.2.1 (arm64) | — |
+| Xcode Command Line Tools | ya instaladas | `xcode-select --install` |
+| Homebrew | 7.0.13 | https://brew.sh |
+| git | 2.56.1 (Homebrew) | `brew install git` |
+| Godot (estándar, **no** .NET) | 4.7.2.stable | `brew install --cask godot` |
+| Plantillas de exportación | 4.7.2.stable | ver abajo |
+| Blender | 5.3.0 | `brew install --cask blender` (o instalador oficial) |
+
+Comandos en la terminal (zsh):
+
+- `godot` → `/opt/homebrew/bin/godot` (enlace creado por Homebrew). `~/.zprofile` ejecuta
+  `brew shellenv` para que `/opt/homebrew/bin` vaya primero en el PATH.
+- `blender` → `~/.local/bin/blender`, un script envoltorio que ejecuta
+  `/Applications/Blender.app/Contents/MacOS/Blender`. **No usar un enlace simbólico**: Blender
+  busca su Python y sus recursos a partir de la ruta con la que se invoca, y con un symlink falla
+  con `No module named 'encodings'`.
+
+Plantillas de exportación: `~/Library/Application Support/Godot/export_templates/4.7.2.stable/`
+(descargadas de `Godot_v4.7.2-stable_export_templates.tpz` del release oficial en GitHub y
+verificadas con SHA-512). Deben coincidir **exactamente** con la versión del editor.
+
+## 2. Cómo correr el proyecto
+
+```bash
+godot -e --path .      # abrir el editor
+godot --path .         # ejecutar el juego directamente
+```
+
+Validación de scripts sin interfaz (se usa antes de cerrar cada fase):
+
+```bash
+godot --headless --path . --import          # reimporta recursos
+godot --headless --path . --quit-after 5    # carga la escena principal y sale
+```
+
+## 3. Renderer: Mobile
+
+Se usa el renderer **Mobile** (`rendering/renderer/rendering_method="mobile"`) porque:
+
+- La sustentación es en laptops de gama media con Windows, normalmente con GPU integrada
+  (Intel UHD/Iris, AMD Vega). Mobile hace un solo pase de render y usa menos ancho de banda que
+  Forward+, que está pensado para GPU dedicadas (clustered lighting, SDFGI, SSR, volumetría…).
+- La escena tiene pocas luces y no necesita GI ni efectos de pantalla avanzados: lo que sí
+  necesitamos (transparencia, shaders propios, partículas GPU, SubViewport) Mobile lo soporta.
+- `rendering/rendering_device/fallback_to_opengl3=true`: si el equipo no tiene Vulkan/D3D12
+  usable, Godot cae automáticamente al renderer Compatibility (OpenGL 3.3) en lugar de cerrarse.
+- En esta Mac, Mobile corre sobre Metal.
+
+## 4. Exportar a .exe y .app
+
+Presets en `export_presets.cfg`:
+
+| Preset | Salida | Uso |
+|---|---|---|
+| Windows Desktop | `builds/windows/CuerpoHumano3D.exe` (x86_64, PCK incrustado) | entrega y sustentación |
+| macOS | `builds/macos/CuerpoHumano3D.app` (universal) | pruebas en esta Mac |
+
+```bash
+mkdir -p builds/windows builds/macos
+godot --headless --path . --export-release "Windows Desktop" builds/windows/CuerpoHumano3D.exe
+godot --headless --path . --export-release "macOS" builds/macos/CuerpoHumano3D.app
+```
+
+Ambos presets incluyen `data/*.json` en el filtro de recursos no importados, para que los JSON
+viajen dentro del .pck.
+
+### Limitaciones de exportar a Windows desde macOS
+
+- **Firma de código**: el .exe sale sin firmar. Firmarlo desde macOS requiere `osslsigncode` y un
+  certificado Authenticode (de pago). Sin firma, Windows SmartScreen puede mostrar
+  "Windows protegió su PC" → *Más información* → *Ejecutar de todas formas*. Para la
+  sustentación conviene probar el .exe antes en la misma laptop.
+- **Icono y metadatos del .exe**: desde Godot 4.2 el exportador modifica el icono y la
+  información de versión del .exe por sí mismo (sin `rcedit` ni Wine), con
+  `application/modify_resources=true`. Hay que asignar un `.ico` en el preset
+  (`application/icon`) cuando tengamos el definitivo.
+- **Antivirus**: algunos antivirus marcan ejecutables sin firmar recién creados. Si pasa,
+  entregar el .exe dentro de un .zip y/o agregarlo como excepción en la máquina de la sustentación.
+- **No se puede probar el .exe en esta Mac** (Apple Silicon no ejecuta binarios x86 de Windows
+  sin una VM). Hay que probarlo en una PC con Windows.
+- macOS: el .app se firma *ad-hoc* (suficiente para esta Mac). En otra Mac, Gatekeeper lo
+  bloqueará por no estar notarizado: clic derecho → *Abrir*, o
+  `xattr -dr com.apple.quarantine CuerpoHumano3D.app`.
+
+## 5. Estructura del proyecto
+
+```
+res://
+├── scenes/            escenas (.tscn): main, body_viewer, ui/
+├── scripts/           scripts GDScript
+├── data/              JSON: sistemas, órganos, escenarios (nunca datos en los scripts)
+├── models/            .glb exportados con tools/procesar_modelo.py
+├── shaders/           shaders propios
+└── tools/             herramientas fuera del juego (script de Blender)
+assets_fuente/         (NO versionado) modelos de origen pesados
+├── z-anatomy/         archivos de Z-Anatomy (.blend)
+└── mixamo/            personaje y animaciones de Mixamo (.fbx)
+builds/                (NO versionado) ejecutables exportados
+```
+
+`assets_fuente/` y `builds/` están en `.gitignore`: cada integrante descarga los modelos fuente
+por su cuenta (requieren cuenta/navegador).
+
+## 6. Arquitectura
+
+_Se completa en las fases 1–4._
+
+## 7. Herramienta de modelos: `tools/procesar_modelo.py`
+
+Script de Blender que se ejecuta sin interfaz y convierte los modelos fuente en un `.glb` por
+sistema, con los nombres de nodo que espera el proyecto.
+
+Qué hace, en orden, para cada órgano del mapeo:
+
+1. Busca los objetos fuente (nombre exacto, `coleccion:Nombre` o comodín como `*lung*`).
+2. Los copia, les quita el padre conservando la posición, convierte modificadores a malla y
+   aplica transformaciones (ubicación, rotación, escala).
+3. Si hay varios objetos fuente, los une en uno solo.
+4. Aplica la escala extra (si se pidió) y un **Decimate** (Collapse) hasta el máximo de
+   triángulos por objeto.
+5. Pone el origen en el centro de la geometría (necesario para el latido del corazón, la
+   respiración de los pulmones, etc.).
+6. Renombra el objeto con el nombre del proyecto (`Corazon`, `PulmonIzq`, …).
+7. Exporta todos los órganos del sistema a `models/<Sistema>.glb` (eje Y arriba).
+8. Imprime un reporte de triángulos antes/después por objeto, la altura de cada sistema (para
+   verificar la escala) y los destinos que no encontraron coincidencias.
+
+### Uso
+
+```bash
+# 1) Ver los nombres de colecciones y objetos del archivo fuente
+blender -b assets_fuente/z-anatomy/Z-Anatomy.blend --python tools/procesar_modelo.py -- --listar
+
+# 2) Copiar tools/mapeo_ejemplo.json, ajustar los nombres fuente y probar sin escribir archivos
+blender -b assets_fuente/z-anatomy/Z-Anatomy.blend --python tools/procesar_modelo.py -- \
+    --mapeo tools/mapeo_zanatomy.json --simular
+
+# 3) Exportar (todos los sistemas o solo algunos)
+blender -b assets_fuente/z-anatomy/Z-Anatomy.blend --python tools/procesar_modelo.py -- \
+    --mapeo tools/mapeo_zanatomy.json --max-tris 12000 --sistemas Circulatorio,Respiratorio
+
+# Con un .fbx (Mixamo): Blender arranca vacío e importa el archivo
+blender -b --factory-startup --python tools/procesar_modelo.py -- \
+    --entrada assets_fuente/mixamo/personaje.fbx --listar
+```
+
+| Argumento | Descripción |
+|---|---|
+| `--entrada RUTA` | `.blend` o `.fbx`. Si se omite, usa el `.blend` abierto con `-b`. |
+| `--mapeo RUTA` | JSON de mapeo (formato abajo). |
+| `--salida DIR` | Carpeta de salida (por defecto `models/`). |
+| `--max-tris N` | Máximo de triángulos por objeto (sobrescribe el JSON). |
+| `--sistemas A,B` | Exporta solo esos sistemas. |
+| `--escala F` | Escala uniforme extra. |
+| `--sin-origen` | No centrar el origen de cada objeto. |
+| `--listar` | Solo lista colecciones y mallas con sus triángulos. |
+| `--simular` | Procesa y reporta sin escribir `.glb`. |
+
+Formato del mapeo:
+
+```json
+{
+  "max_triangulos": 15000,
+  "escala": 1.0,
+  "sistemas": {
+    "Circulatorio": { "Corazon": ["Heart"] },
+    "Respiratorio": { "PulmonIzq": ["Left lung"], "PulmonDer": ["Right lung"] },
+    "Nervioso":     { "Cerebro": ["coleccion:Brain"] }
+  }
+}
+```
+
+Los nombres fuente de `tools/mapeo_ejemplo.json` son orientativos: confírmalos con `--listar`.
+El script no modifica el archivo fuente (no guarda el `.blend`).
+
+## 8. Dónde colocar los modelos externos
+
+Estos recursos requieren cuenta o navegador, así que se descargan a mano:
+
+- **Z-Anatomy** (modelos anatómicos, licencia CC BY-SA 4.0 — hay que citarlo en los créditos):
+  colocar el `.blend` en `assets_fuente/z-anatomy/`.
+- **Mixamo** (personaje y animaciones, requiere cuenta Adobe): descargar en formato FBX
+  (*FBX Binary*, personaje *With Skin*; las animaciones de caminar/correr/respirar cansado
+  pueden ir *Without Skin* y *In Place*) y colocarlas en `assets_fuente/mixamo/`.
+
+## 9. Guía para reemplazar primitivas por modelos .glb
+
+_Se completa en la Fase 4._
