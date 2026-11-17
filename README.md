@@ -39,11 +39,18 @@ godot -e --path .      # abrir el editor
 godot --path .         # ejecutar el juego directamente
 ```
 
-Validación de scripts sin interfaz (se usa antes de cerrar cada fase):
+Validación sin interfaz (se usa antes de cerrar cada fase):
 
 ```bash
-godot --headless --path . --import          # reimporta recursos
-godot --headless --path . --quit-after 5    # carga la escena principal y sale
+godot --headless --path . --import                                   # reimporta recursos
+godot --headless --path . --quit-after 10                            # carga la escena principal y sale
+godot --headless --path . --script res://tools/validar_cuerpo.gd     # convención de nombres vs JSON
+```
+
+Regenerar el cuerpo de prueba (si se cambia `tools/generar_cuerpo_prueba.gd`):
+
+```bash
+godot --headless --path . --script res://tools/generar_cuerpo_prueba.gd
 ```
 
 ## 3. Renderer: Mobile
@@ -101,10 +108,10 @@ viajen dentro del .pck.
 res://
 ├── scenes/            escenas (.tscn): main, body_viewer, ui/
 ├── scripts/           scripts GDScript
-├── data/              JSON: sistemas, órganos, escenarios (nunca datos en los scripts)
+├── data/              JSON: sistemas, órganos, cámara, escenarios (nunca datos en los scripts)
 ├── models/            .glb exportados con tools/procesar_modelo.py
 ├── shaders/           shaders propios
-└── tools/             herramientas fuera del juego (script de Blender)
+└── tools/             herramientas fuera del juego (Blender, generador y validador); excluidas del export
 assets_fuente/         (NO versionado) modelos de origen pesados
 ├── z-anatomy/         archivos de Z-Anatomy (.blend)
 └── mixamo/            personaje y animaciones de Mixamo (.fbx)
@@ -116,7 +123,87 @@ por su cuenta (requieren cuenta/navegador).
 
 ## 6. Arquitectura
 
-_Se completa en las fases 1–4._
+### Principios
+
+1. **Datos fuera del código**: todo lo que es contenido (sistemas, fichas de órganos, vistas de
+   cámara, luego escenarios) vive en `res://data/*.json`. Los scripts solo saben *leerlo*.
+2. **Un único punto de acceso a los datos**: el autoload `Datos` (`scripts/datos.gd`) carga los
+   JSON al arrancar. Ningún otro script abre archivos.
+3. **Componentes que no se conocen entre sí**: cada escena tiene su script y se comunica por
+   **señales**. La escena principal (`main`) es la única que conecta unas con otras.
+4. **Convención de nombres** como contrato entre el 3D y los datos (ver abajo).
+
+### Escenas y scripts
+
+```
+Main (Node)                         scenes/main.tscn · scripts/main.gd
+├── BodyViewer (Node3D)             scenes/body_viewer.tscn · scripts/body_viewer.gd
+│   ├── Entorno, LuzPrincipal, LuzRelleno, Plataforma
+│   ├── Cuerpo  ← instancia de scenes/cuerpo_prueba.tscn (luego, del cuerpo con .glb)
+│   └── Camara (Camera3D)           scripts/camara_orbital.gd
+└── UI (CanvasLayer)
+    ├── Aviso, Ayuda (Label)
+    ├── PanelFicha                  scenes/ui/panel_ficha.tscn · scripts/ui/panel_ficha.gd
+    └── BarraVistas                 scenes/ui/barra_vistas.tscn · scripts/ui/barra_vistas.gd
+Autoload: Datos                     scripts/datos.gd
+```
+
+| Componente | Responsabilidad | Señales que emite |
+|---|---|---|
+| `Datos` | Carga y expone `sistemas.json`, `organos.json`, `camara.json` | — |
+| `CamaraOrbital` | Girar, zoom, desplazar (mouse y trackpad), vistas rápidas con Tween | `transicion_terminada` |
+| `BodyViewer` | Indexa el cuerpo, crea colisiones, detecta clics, resalta el órgano | `organo_seleccionado(id, sistema)`, `seleccion_limpiada` |
+| `PanelFicha` | Muestra la ficha que recibe | `cerrado` |
+| `BarraVistas` | Crea un botón por vista definida en JSON | `vista_solicitada(id)` |
+| `Main` | Conecta las señales anteriores | — |
+
+Flujo de una selección:
+
+```
+clic → BodyViewer (rayo físico → órgano) ──organo_seleccionado──▶ Main
+Main → Datos.ficha_organo(id) → PanelFicha.mostrar(ficha)
+PanelFicha ──cerrado──▶ BodyViewer.limpiar_seleccion() ──seleccion_limpiada──▶ PanelFicha.ocultar()
+```
+
+### Convención del cuerpo (obligatoria)
+
+```
+Cuerpo (Node3D)
+└── <Sistema> (Node3D)   Piel, Muscular, Oseo, Circulatorio, Respiratorio, Digestivo, Nervioso
+    └── <Organo>         MeshInstance3D, o Node3D con varias MeshInstance3D (partes)
+```
+
+- El nombre del **sistema** debe coincidir con un `id` de `data/sistemas.json`.
+- El nombre del **órgano** debe ser una clave de `data/organos.json` y ser único en todo el cuerpo.
+- El sistema de un órgano se deduce de su nodo padre (no se repite en el JSON).
+- Ejes: Y hacia arriba, el cuerpo mira hacia **+Z**, pies en y = 0, ~1,75 m de altura.
+  El lado **izquierdo del paciente** está en **+X** (sufijo `Izq`).
+
+Detalles de implementación:
+
+- **Selección**: `BodyViewer` crea en tiempo de ejecución un `StaticBody3D` con forma *trimesh*
+  por cada malla. Así no hay que preparar colisiones a mano ni en las primitivas ni en los .glb.
+  Un clic solo cuenta si el puntero se movió menos de 6 px entre presionar y soltar (si no, fue
+  un arrastre de cámara).
+- **Resaltado**: se usa `material_overlay` con `shaders/resaltado.gdshader` (brillo Fresnel que
+  pulsa). Es una capa encima del material original: no modifica los materiales del modelo.
+- **Cámara**: la entrada modifica un estado *deseado* (yaw, pitch, distancia, objetivo) y la
+  cámara lo sigue con suavizado exponencial, lo que da movimiento fluido con trackpad. Las
+  vistas rápidas animan ese estado con un `Tween` (el yaw toma el camino más corto).
+- **Cuerpo de prueba**: `scenes/cuerpo_prueba.tscn` lo genera `tools/generar_cuerpo_prueba.gd`
+  (no editarlo a mano; cambiar el generador y volver a ejecutarlo).
+
+### Controles
+
+| Acción | Mouse | Trackpad de Mac |
+|---|---|---|
+| Seleccionar | clic izquierdo | clic |
+| Girar | arrastrar con clic izquierdo | clic y arrastrar |
+| Zoom | rueda | pellizco, o ⌘ + dos dedos |
+| Desplazar | arrastrar con clic derecho/central, o Mayús + clic izquierdo | dos dedos |
+
+Si el desplazamiento con dos dedos va al revés, cambiar `invertir_gesto_desplazamiento` en
+`data/camara.json`.
 
 ## 7. Herramienta de modelos: `tools/procesar_modelo.py`
 

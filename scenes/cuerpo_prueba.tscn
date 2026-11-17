@@ -1,0 +1,566 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbyua"]
+albedo_color = Color(0.86, 0.64, 0.52, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_lsxtb"]
+material = SubResource("StandardMaterial3D_rbyua")
+radius = 0.11
+height = 0.22
+radial_segments = 32
+rings = 16
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_icmu7"]
+material = SubResource("StandardMaterial3D_rbyua")
+radius = 0.055
+height = 0.16
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jqqvg"]
+material = SubResource("StandardMaterial3D_rbyua")
+radius = 0.17
+height = 0.64
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0mh0b"]
+material = SubResource("StandardMaterial3D_rbyua")
+radius = 0.05
+height = 0.64
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xcvmh"]
+material = SubResource("StandardMaterial3D_rbyua")
+radius = 0.05
+height = 0.64
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h6bd6"]
+material = SubResource("StandardMaterial3D_rbyua")
+radius = 0.075
+height = 0.9
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tp0og"]
+material = SubResource("StandardMaterial3D_rbyua")
+radius = 0.075
+height = 0.9
+radial_segments = 24
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7o8p"]
+albedo_color = Color(0.72, 0.2, 0.2, 1)
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_cdn2p"]
+material = SubResource("StandardMaterial3D_p7o8p")
+size = Vector3(0.24, 0.12, 0.03)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hqqpu"]
+material = SubResource("StandardMaterial3D_p7o8p")
+size = Vector3(0.16, 0.22, 0.03)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i2xis"]
+material = SubResource("StandardMaterial3D_p7o8p")
+radius = 0.035
+height = 0.24
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tk64k"]
+material = SubResource("StandardMaterial3D_p7o8p")
+radius = 0.035
+height = 0.24
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bfhyt"]
+material = SubResource("StandardMaterial3D_p7o8p")
+radius = 0.06
+height = 0.4
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e8ww1"]
+material = SubResource("StandardMaterial3D_p7o8p")
+radius = 0.06
+height = 0.4
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h678r"]
+material = SubResource("StandardMaterial3D_p7o8p")
+radius = 0.05
+height = 0.28
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kdeui"]
+material = SubResource("StandardMaterial3D_p7o8p")
+radius = 0.05
+height = 0.28
+radial_segments = 24
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1p3a"]
+albedo_color = Color(0.92, 0.9, 0.82, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_xblo7"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.095
+height = 0.19
+radial_segments = 32
+rings = 16
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b28bw"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.018
+height = 0.56
+radial_segments = 24
+rings = 6
+
+[sub_resource type="TorusMesh" id="TorusMesh_e2cmh"]
+material = SubResource("StandardMaterial3D_e1p3a")
+inner_radius = 0.14
+outer_radius = 0.155
+rings = 32
+ring_segments = 12
+
+[sub_resource type="TorusMesh" id="TorusMesh_l1yj4"]
+material = SubResource("StandardMaterial3D_e1p3a")
+inner_radius = 0.14
+outer_radius = 0.155
+rings = 32
+ring_segments = 12
+
+[sub_resource type="TorusMesh" id="TorusMesh_8nb36"]
+material = SubResource("StandardMaterial3D_e1p3a")
+inner_radius = 0.14
+outer_radius = 0.155
+rings = 32
+ring_segments = 12
+
+[sub_resource type="TorusMesh" id="TorusMesh_3m2gc"]
+material = SubResource("StandardMaterial3D_e1p3a")
+inner_radius = 0.14
+outer_radius = 0.155
+rings = 32
+ring_segments = 12
+
+[sub_resource type="TorusMesh" id="TorusMesh_0jpjd"]
+material = SubResource("StandardMaterial3D_e1p3a")
+inner_radius = 0.14
+outer_radius = 0.155
+rings = 32
+ring_segments = 12
+
+[sub_resource type="BoxMesh" id="BoxMesh_i72ik"]
+material = SubResource("StandardMaterial3D_e1p3a")
+size = Vector3(0.03, 0.18, 0.015)
+
+[sub_resource type="TorusMesh" id="TorusMesh_j8am7"]
+material = SubResource("StandardMaterial3D_e1p3a")
+inner_radius = 0.07
+outer_radius = 0.11
+rings = 32
+ring_segments = 12
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bsloa"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.018
+height = 0.3
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ddg3j"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.018
+height = 0.3
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q78w8"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.022
+height = 0.44
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hywxx"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.022
+height = 0.44
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bmkpm"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.018
+height = 0.4
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_much1"]
+material = SubResource("StandardMaterial3D_e1p3a")
+radius = 0.018
+height = 0.4
+radial_segments = 24
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a61a4"]
+albedo_color = Color(0.78, 0.1, 0.15, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_4b51s"]
+material = SubResource("StandardMaterial3D_a61a4")
+radius = 0.05
+height = 0.1
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7tch2"]
+albedo_color = Color(0.85, 0.12, 0.15, 1)
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s51i2"]
+material = SubResource("StandardMaterial3D_7tch2")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.34
+radial_segments = 16
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q061t"]
+albedo_color = Color(0.22, 0.32, 0.75, 1)
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_etiuw"]
+material = SubResource("StandardMaterial3D_q061t")
+top_radius = 0.011
+bottom_radius = 0.011
+height = 0.36
+radial_segments = 16
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51aed"]
+albedo_color = Color(0.88, 0.7, 0.7, 1)
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ng45e"]
+material = SubResource("StandardMaterial3D_51aed")
+top_radius = 0.011
+bottom_radius = 0.011
+height = 0.16
+radial_segments = 16
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnegs"]
+albedo_color = Color(0.93, 0.56, 0.6, 1)
+roughness = 0.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yuwak"]
+material = SubResource("StandardMaterial3D_wnegs")
+radius = 0.06
+height = 0.22
+radial_segments = 24
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5bbtx"]
+material = SubResource("StandardMaterial3D_wnegs")
+radius = 0.062
+height = 0.23
+radial_segments = 24
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8bp4"]
+albedo_color = Color(0.85, 0.55, 0.45, 1)
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qkwj2"]
+material = SubResource("StandardMaterial3D_t8bp4")
+top_radius = 0.009
+bottom_radius = 0.009
+height = 0.3
+radial_segments = 16
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_14dod"]
+albedo_color = Color(0.88, 0.6, 0.5, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_yl4p2"]
+material = SubResource("StandardMaterial3D_14dod")
+radius = 0.055
+height = 0.11
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgrfp"]
+albedo_color = Color(0.55, 0.2, 0.18, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_8lden"]
+material = SubResource("StandardMaterial3D_cgrfp")
+radius = 0.07
+height = 0.14
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktvoq"]
+albedo_color = Color(0.93, 0.68, 0.6, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_vv30c"]
+material = SubResource("StandardMaterial3D_ktvoq")
+radius = 0.08
+height = 0.16
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkfpv"]
+albedo_color = Color(0.8, 0.52, 0.42, 1)
+roughness = 0.6
+
+[sub_resource type="TorusMesh" id="TorusMesh_0c25n"]
+material = SubResource("StandardMaterial3D_bkfpv")
+inner_radius = 0.07
+outer_radius = 0.088
+rings = 32
+ring_segments = 12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_riitk"]
+albedo_color = Color(0.93, 0.72, 0.72, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_vwpx1"]
+material = SubResource("StandardMaterial3D_riitk")
+radius = 0.08
+height = 0.16
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wofa7"]
+albedo_color = Color(0.85, 0.62, 0.62, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_ovpjt"]
+material = SubResource("StandardMaterial3D_wofa7")
+radius = 0.03
+height = 0.06
+radial_segments = 32
+rings = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uujwg"]
+albedo_color = Color(0.95, 0.85, 0.55, 1)
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c7ndo"]
+material = SubResource("StandardMaterial3D_uujwg")
+top_radius = 0.008
+bottom_radius = 0.008
+height = 0.62
+radial_segments = 16
+rings = 1
+
+[node name="Cuerpo" type="Node3D" unique_id=497630]
+
+[node name="Piel" type="Node3D" parent="." unique_id=1871524556]
+
+[node name="Epidermis" type="Node3D" parent="Piel" unique_id=1260218848]
+
+[node name="Cabeza" type="MeshInstance3D" parent="Piel/Epidermis" unique_id=1191821817]
+transform = Transform3D(0.9, 0, 0, 0, 1.05, 0, 0, 0, 1, 0, 1.63, 0)
+mesh = SubResource("SphereMesh_lsxtb")
+
+[node name="Cuello" type="MeshInstance3D" parent="Piel/Epidermis" unique_id=1047896214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49, 0)
+mesh = SubResource("CapsuleMesh_icmu7")
+
+[node name="Torso" type="MeshInstance3D" parent="Piel/Epidermis" unique_id=1957815698]
+transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 0.72, 0, 1.17, 0)
+mesh = SubResource("CapsuleMesh_jqqvg")
+
+[node name="BrazoIzq" type="MeshInstance3D" parent="Piel/Epidermis" unique_id=1384450633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.13, 0)
+mesh = SubResource("CapsuleMesh_0mh0b")
+
+[node name="BrazoDer" type="MeshInstance3D" parent="Piel/Epidermis" unique_id=1764495687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.13, 0)
+mesh = SubResource("CapsuleMesh_xcvmh")
+
+[node name="PiernaIzq" type="MeshInstance3D" parent="Piel/Epidermis" unique_id=168611382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.45, 0)
+mesh = SubResource("CapsuleMesh_h6bd6")
+
+[node name="PiernaDer" type="MeshInstance3D" parent="Piel/Epidermis" unique_id=820094167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.45, 0)
+mesh = SubResource("CapsuleMesh_tp0og")
+
+[node name="Muscular" type="Node3D" parent="." unique_id=379728662]
+
+[node name="Pectorales" type="MeshInstance3D" parent="Muscular" unique_id=1191698441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29, 0.075)
+mesh = SubResource("BoxMesh_cdn2p")
+
+[node name="Abdominales" type="MeshInstance3D" parent="Muscular" unique_id=697525984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08, 0.075)
+mesh = SubResource("BoxMesh_hqqpu")
+
+[node name="BicepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=876067667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.28, 0.012)
+mesh = SubResource("CapsuleMesh_i2xis")
+
+[node name="BicepsDer" type="MeshInstance3D" parent="Muscular" unique_id=627534544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.28, 0.012)
+mesh = SubResource("CapsuleMesh_tk64k")
+
+[node name="CuadricepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=1890977930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.66, 0.012)
+mesh = SubResource("CapsuleMesh_bfhyt")
+
+[node name="CuadricepsDer" type="MeshInstance3D" parent="Muscular" unique_id=1338672434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.66, 0.012)
+mesh = SubResource("CapsuleMesh_e8ww1")
+
+[node name="GemeloIzq" type="MeshInstance3D" parent="Muscular" unique_id=1613478534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.26, -0.02)
+mesh = SubResource("CapsuleMesh_h678r")
+
+[node name="GemeloDer" type="MeshInstance3D" parent="Muscular" unique_id=1348740723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.26, -0.02)
+mesh = SubResource("CapsuleMesh_kdeui")
+
+[node name="Oseo" type="Node3D" parent="." unique_id=1791160260]
+
+[node name="Craneo" type="MeshInstance3D" parent="Oseo" unique_id=896089040]
+transform = Transform3D(0.9, 0, 0, 0, 1.05, 0, 0, 0, 1, 0, 1.635, 0)
+mesh = SubResource("SphereMesh_xblo7")
+
+[node name="ColumnaVertebral" type="MeshInstance3D" parent="Oseo" unique_id=679222085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17, -0.05)
+mesh = SubResource("CapsuleMesh_b28bw")
+
+[node name="CajaToracica" type="Node3D" parent="Oseo" unique_id=526653144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24, 0)
+
+[node name="Costilla1" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1241143659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.55, 0, -0.1, 0)
+mesh = SubResource("TorusMesh_e2cmh")
+
+[node name="Costilla2" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1892304450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.55, 0, -0.05, 0)
+mesh = SubResource("TorusMesh_l1yj4")
+
+[node name="Costilla3" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=963495485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.55, 0, 0, 0)
+mesh = SubResource("TorusMesh_8nb36")
+
+[node name="Costilla4" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1172381521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.55, 0, 0.05, 0)
+mesh = SubResource("TorusMesh_3m2gc")
+
+[node name="Costilla5" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1946577654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.55, 0, 0.1, 0)
+mesh = SubResource("TorusMesh_0jpjd")
+
+[node name="Esternon" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1617404946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08)
+mesh = SubResource("BoxMesh_i72ik")
+
+[node name="Pelvis" type="MeshInstance3D" parent="Oseo" unique_id=1964833372]
+transform = Transform3D(1.2, 0, 0, 0, 1.6, 0, 0, 0, 0.75, 0, 0.92, 0)
+mesh = SubResource("TorusMesh_j8am7")
+
+[node name="HumeroIzq" type="MeshInstance3D" parent="Oseo" unique_id=873214405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.28, -0.01)
+mesh = SubResource("CapsuleMesh_bsloa")
+
+[node name="HumeroDer" type="MeshInstance3D" parent="Oseo" unique_id=1957747157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.28, -0.01)
+mesh = SubResource("CapsuleMesh_ddg3j")
+
+[node name="FemurIzq" type="MeshInstance3D" parent="Oseo" unique_id=1475314842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.66, 0)
+mesh = SubResource("CapsuleMesh_q78w8")
+
+[node name="FemurDer" type="MeshInstance3D" parent="Oseo" unique_id=601665113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.66, 0)
+mesh = SubResource("CapsuleMesh_hywxx")
+
+[node name="TibiaIzq" type="MeshInstance3D" parent="Oseo" unique_id=472193064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.23, 0.01)
+mesh = SubResource("CapsuleMesh_bmkpm")
+
+[node name="TibiaDer" type="MeshInstance3D" parent="Oseo" unique_id=857641496]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.23, 0.01)
+mesh = SubResource("CapsuleMesh_much1")
+
+[node name="Circulatorio" type="Node3D" parent="." unique_id=2129622545]
+
+[node name="Corazon" type="MeshInstance3D" parent="Circulatorio" unique_id=1720731072]
+transform = Transform3D(0.90630776, -0.50714195, 0, 0.42261827, 1.0875694, 0, 0, 0, 0.9, 0.025, 1.2, 0.03)
+mesh = SubResource("SphereMesh_4b51s")
+
+[node name="Aorta" type="MeshInstance3D" parent="Circulatorio" unique_id=433369505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06, -0.025)
+mesh = SubResource("CylinderMesh_s51i2")
+
+[node name="VenaCava" type="MeshInstance3D" parent="Circulatorio" unique_id=746788152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 1.08, -0.015)
+mesh = SubResource("CylinderMesh_etiuw")
+
+[node name="Respiratorio" type="Node3D" parent="." unique_id=738617151]
+
+[node name="Traquea" type="MeshInstance3D" parent="Respiratorio" unique_id=836479389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42, 0)
+mesh = SubResource("CylinderMesh_ng45e")
+
+[node name="PulmonIzq" type="MeshInstance3D" parent="Respiratorio" unique_id=136731383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07, 1.25, 0)
+mesh = SubResource("CapsuleMesh_yuwak")
+
+[node name="PulmonDer" type="MeshInstance3D" parent="Respiratorio" unique_id=546678333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07, 1.25, 0)
+mesh = SubResource("CapsuleMesh_5bbtx")
+
+[node name="Digestivo" type="Node3D" parent="." unique_id=688408006]
+
+[node name="Esofago" type="MeshInstance3D" parent="Digestivo" unique_id=384616808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27, -0.03)
+mesh = SubResource("CylinderMesh_qkwj2")
+
+[node name="Estomago" type="MeshInstance3D" parent="Digestivo" unique_id=964724908]
+transform = Transform3D(1.2, 0, 0, 0, 0.9, 0, 0, 0, 0.8, 0.055, 1.06, 0.02)
+mesh = SubResource("SphereMesh_yl4p2")
+
+[node name="Higado" type="MeshInstance3D" parent="Digestivo" unique_id=1476819606]
+transform = Transform3D(1.4, 0, 0, 0, 0.6, 0, 0, 0, 0.9, -0.05, 1.09, 0.02)
+mesh = SubResource("SphereMesh_8lden")
+
+[node name="IntestinoDelgado" type="MeshInstance3D" parent="Digestivo" unique_id=34130926]
+transform = Transform3D(1.1, 0, 0, 0, 0.75, 0, 0, 0, 0.55, 0, 0.96, 0.03)
+mesh = SubResource("SphereMesh_vv30c")
+
+[node name="IntestinoGrueso" type="MeshInstance3D" parent="Digestivo" unique_id=1721635067]
+transform = Transform3D(1.15, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.96, 0.03)
+mesh = SubResource("TorusMesh_0c25n")
+
+[node name="Nervioso" type="Node3D" parent="." unique_id=733392444]
+
+[node name="Cerebro" type="MeshInstance3D" parent="Nervioso" unique_id=602050469]
+transform = Transform3D(0.9, 0, 0, 0, 0.8, 0, 0, 0, 1.05, 0, 1.655, 0.005)
+mesh = SubResource("SphereMesh_vwpx1")
+
+[node name="Cerebelo" type="MeshInstance3D" parent="Nervioso" unique_id=1545643913]
+transform = Transform3D(1.2, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 1.6, -0.045)
+mesh = SubResource("SphereMesh_ovpjt")
+
+[node name="MedulaEspinal" type="MeshInstance3D" parent="Nervioso" unique_id=850414534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27, -0.05)
+mesh = SubResource("CylinderMesh_c7ndo")

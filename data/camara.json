@@ -1,0 +1,25 @@
+{
+  "_comentario": "Configuración de la cámara orbital. Ángulos en grados; distancias en metros. yaw 0 = frente del cuerpo (+Z). El lado izquierdo del paciente está en +X.",
+  "objetivo_inicial": [0.0, 0.9, 0.0],
+  "distancia_inicial": 3.0,
+  "distancia_min": 0.35,
+  "distancia_max": 6.0,
+  "pitch_min": -80.0,
+  "pitch_max": 88.0,
+  "limite_objetivo_min": [-1.0, 0.0, -1.0],
+  "limite_objetivo_max": [1.0, 2.0, 1.0],
+  "sensibilidad_rotacion": 0.35,
+  "sensibilidad_desplazamiento": 0.0016,
+  "sensibilidad_gesto_desplazamiento": 0.0015,
+  "invertir_gesto_desplazamiento": false,
+  "paso_zoom_rueda": 0.1,
+  "suavizado": 14.0,
+  "duracion_transicion": 0.7,
+  "vistas": [
+    { "id": "frente",    "nombre": "Frente",    "yaw": 0.0,   "pitch": 5.0,  "tooltip": "Ver el cuerpo de frente" },
+    { "id": "espalda",   "nombre": "Espalda",   "yaw": 180.0, "pitch": 5.0,  "tooltip": "Ver el cuerpo por detrás" },
+    { "id": "izquierda", "nombre": "Izquierda", "yaw": 90.0,  "pitch": 5.0,  "tooltip": "Ver el lado izquierdo del cuerpo" },
+    { "id": "derecha",   "nombre": "Derecha",   "yaw": -90.0, "pitch": 5.0,  "tooltip": "Ver el lado derecho del cuerpo" },
+    { "id": "arriba",    "nombre": "Arriba",    "yaw": 0.0,   "pitch": 88.0, "tooltip": "Ver el cuerpo desde arriba" }
+  ]
+}

@@ -1,0 +1,101 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/panel_ficha.gd" id="1_panel"]
+
+[sub_resource type="StyleBoxFlat" id="Estilo_panel"]
+bg_color = Color(1, 1, 1, 0.94)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 18.0
+shadow_color = Color(0, 0.1, 0.2, 0.18)
+shadow_size = 8
+
+[node name="PanelFicha" type="PanelContainer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -376.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("Estilo_panel")
+script = ExtResource("1_panel")
+
+[node name="Contenido" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Encabezado" type="HBoxContainer" parent="Contenido"]
+layout_mode = 2
+
+[node name="Titulo" type="Label" parent="Contenido/Encabezado"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 24
+text = "Órgano"
+autowrap_mode = 3
+
+[node name="BotonCerrar" type="Button" parent="Contenido/Encabezado"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Cerrar ficha"
+theme_override_colors/font_color = Color(0.3, 0.4, 0.45, 1)
+theme_override_colors/font_hover_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+focus_mode = 0
+text = "✕"
+flat = true
+
+[node name="FilaSistema" type="HBoxContainer" parent="Contenido"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MarcaColor" type="ColorRect" parent="Contenido/FilaSistema"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Sistema" type="Label" parent="Contenido/FilaSistema"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.4, 0.45, 1)
+text = "Sistema"
+
+[node name="Separador" type="HSeparator" parent="Contenido"]
+layout_mode = 2
+
+[node name="EtiquetaFuncion" type="Label" parent="Contenido"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 15
+text = "FUNCIÓN"
+
+[node name="Funcion" type="Label" parent="Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
+autowrap_mode = 3
+
+[node name="EtiquetaCuriosos" type="Label" parent="Contenido"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 15
+text = "DATOS CURIOSOS"
+
+[node name="Curiosos" type="Label" parent="Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
+autowrap_mode = 3

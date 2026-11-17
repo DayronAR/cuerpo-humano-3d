@@ -1,0 +1,47 @@
+{
+  "_comentario": "Sistemas del cuerpo. El 'id' debe coincidir EXACTAMENTE con el nombre del nodo Node3D del sistema en la escena del cuerpo.",
+  "sistemas": [
+    {
+      "id": "Piel",
+      "nombre": "Piel (tegumentario)",
+      "color": "#e8b796",
+      "descripcion": "Cubre y protege el cuerpo, regula la temperatura y percibe el tacto."
+    },
+    {
+      "id": "Muscular",
+      "nombre": "Sistema muscular",
+      "color": "#c0393b",
+      "descripcion": "Músculos que mueven el esqueleto, mantienen la postura y generan calor."
+    },
+    {
+      "id": "Oseo",
+      "nombre": "Sistema óseo",
+      "color": "#d9d2bd",
+      "descripcion": "Huesos que sostienen el cuerpo, protegen órganos y producen células sanguíneas."
+    },
+    {
+      "id": "Circulatorio",
+      "nombre": "Sistema circulatorio",
+      "color": "#d62839",
+      "descripcion": "Corazón y vasos que transportan oxígeno, nutrientes y desechos por la sangre."
+    },
+    {
+      "id": "Respiratorio",
+      "nombre": "Sistema respiratorio",
+      "color": "#ef8fa0",
+      "descripcion": "Vías aéreas y pulmones que llevan oxígeno a la sangre y eliminan CO₂."
+    },
+    {
+      "id": "Digestivo",
+      "nombre": "Sistema digestivo",
+      "color": "#d4885f",
+      "descripcion": "Tubo y glándulas que transforman los alimentos en nutrientes absorbibles."
+    },
+    {
+      "id": "Nervioso",
+      "nombre": "Sistema nervioso",
+      "color": "#e6c35c",
+      "descripcion": "Encéfalo, médula y nervios que reciben información y coordinan el cuerpo."
+    }
+  ]
+}
