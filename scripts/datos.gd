@@ -7,6 +7,7 @@ const RUTA_ORGANOS := "res://data/organos.json"
 const RUTA_CAMARA := "res://data/camara.json"
 const RUTA_ESCENARIOS := "res://data/escenarios.json"
 const RUTA_VISUALES := "res://data/visuales.json"
+const RUTA_CUESTIONARIO := "res://data/cuestionario.json"
 
 var sistemas: Array = []          ## Lista ordenada de sistemas (cada uno es un Dictionary)
 var orden_capas: Array = []       ## ids de sistema de afuera hacia adentro
@@ -15,6 +16,7 @@ var organos: Dictionary = {}      ## id de nodo del órgano -> ficha
 var camara: Dictionary = {}       ## Configuración de la cámara orbital
 var simulacion: Dictionary = {}   ## Modelo de simulación: variables, estados, escenarios
 var visuales: Dictionary = {}     ## Órganos, trayectorias y personaje de las visualizaciones
+var cuestionario: Dictionary = {} ## Preguntas y reglas del modo cuestionario
 
 var _sistemas_por_id: Dictionary = {}
 
@@ -28,6 +30,7 @@ func _init() -> void:
 	camara = _cargar_json(RUTA_CAMARA)
 	simulacion = _cargar_json(RUTA_ESCENARIOS)
 	visuales = _cargar_json(RUTA_VISUALES)
+	cuestionario = _cargar_json(RUTA_CUESTIONARIO)
 	for s in sistemas:
 		_sistemas_por_id[s.get("id", "")] = s
 

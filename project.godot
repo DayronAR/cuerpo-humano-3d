@@ -8,14 +8,16 @@ config_version=5
 config/name="Cuerpo Humano 3D"
 config/description="Atlas 3D interactivo del cuerpo humano con simulaciones fisiológicas educativas."
 config/version="0.1.0"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/inicio.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+config/windows_native_icon="res://ui/icono.ico"
 
 [autoload]
 
 Datos="*res://scripts/datos.gd"
 SimulationEngine="*res://scripts/simulation_engine.gd"
+App="*res://scripts/app.gd"
 
 [display]
 
@@ -26,6 +28,8 @@ window/stretch/aspect="expand"
 
 [gui]
 
+theme/custom="res://ui/tema.tres"
+timers/tooltip_delay_sec=0.35
 common/drop_mouse_on_gui_input_disabled=true
 
 [input_devices]

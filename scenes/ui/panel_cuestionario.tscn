@@ -1,0 +1,120 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/panel_cuestionario.gd" id="1_panel"]
+
+[node name="PanelCuestionario" type="VBoxContainer"]
+theme_override_constants/separation = 10
+script = ExtResource("1_panel")
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 20
+text = "Cuestionario"
+
+[node name="Record" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+text = "Mejor puntaje"
+
+[node name="Inicio" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Instrucciones" type="Label" parent="Inicio"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.38, 0.44, 1)
+theme_override_font_sizes/font_size = 13
+text = "Se te pedirá encontrar órganos en el cuerpo. Haz clic sobre el órgano correcto.
+
+• 10 puntos si aciertas al primer intento.
+• 5 puntos si aciertas al segundo.
+• Puedes girar y acercar la cámara como siempre.
+
+Tu mejor puntaje se guarda en este equipo."
+autowrap_mode = 3
+
+[node name="Resultado" type="Label" parent="Inicio"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.17, 0.55, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+
+[node name="BotonComenzar" type="Button" parent="Inicio"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+tooltip_text = "Empezar una ronda de preguntas"
+focus_mode = 0
+theme_override_font_sizes/font_size = 16
+text = "Comenzar"
+
+[node name="Juego" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Progreso" type="Label" parent="Juego"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.36, 0.45, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "Pregunta 1 de 10"
+
+[node name="Barra" type="ProgressBar" parent="Juego"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+max_value = 10.0
+show_percentage = false
+
+[node name="Pregunta" type="Label" parent="Juego"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 20
+text = "Selecciona el hígado"
+autowrap_mode = 3
+
+[node name="Retro" type="Label" parent="Juego"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 3
+
+[node name="Puntos" type="Label" parent="Juego"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Puntos: 0"
+
+[node name="Botones" type="HBoxContainer" parent="Juego"]
+layout_mode = 2
+
+[node name="BotonSaltar" type="Button" parent="Juego/Botones"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Pasar a la siguiente pregunta sin puntos"
+focus_mode = 0
+text = "Saltar"
+
+[node name="BotonSiguiente" type="Button" parent="Juego/Botones"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Siguiente  ▶"

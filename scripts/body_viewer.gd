@@ -14,6 +14,7 @@ extends Node3D
 signal organo_seleccionado(id_organo: String, id_sistema: String)
 signal seleccion_limpiada
 signal sistema_mostrado(id_sistema: String)   ## "" = cuerpo completo
+signal organo_bajo_cursor(id_organo: String)  ## "" = ninguno (para mostrar su nombre al pasar)
 
 ## Distancia máxima (en píxeles) entre presionar y soltar para considerar que fue un clic
 const UMBRAL_CLIC := 6.0
@@ -36,6 +37,8 @@ var _tintes: Dictionary = {}          ## Node3D del órgano -> ShaderMaterial de
 var _organo_actual: Node3D = null
 var _material_resaltado: ShaderMaterial
 var _pos_presion := Vector2.INF
+var _pos_cursor_pendiente := Vector2.INF   ## Última posición del mouse aún sin consultar
+var _organo_bajo_cursor := ""
 
 
 func _ready() -> void:
@@ -51,7 +54,8 @@ func _ready() -> void:
 
 # --- API pública --------------------------------------------------------------
 
-func seleccionar_organo(id: String) -> void:
+## emitir = false: solo resalta (lo usa el cuestionario para mostrar la respuesta correcta).
+func seleccionar_organo(id: String, emitir := true) -> void:
 	var organo: Node3D = _organos.get(id)
 	if organo == null:
 		push_warning("Órgano desconocido: %s" % id)
@@ -62,7 +66,8 @@ func seleccionar_organo(id: String) -> void:
 	_organo_actual = organo
 	_actualizar_overlay_si(anterior)
 	_actualizar_overlay(organo)
-	organo_seleccionado.emit(id, organo.get_meta("sistema"))
+	if emitir:
+		organo_seleccionado.emit(id, organo.get_meta("sistema"))
 
 
 func limpiar_seleccion() -> void:
@@ -81,6 +86,22 @@ func mostrar_sistema(id: String) -> void:
 		return
 	_sistema_actual = id
 	capas.retirar_solo(Datos.cubierto_por(id))
+	_encuadrar(_cajas_sistemas[id])
+	sistema_mostrado.emit(id)
+
+
+## Muestra un sistema dejando todos los demás sistemas internos como fantasma, para que nada
+## tape a sus órganos (lo usa el cuestionario). Los fantasmas no se pueden seleccionar.
+func enfocar_sistema(id: String, transparencia := 0.85) -> void:
+	if not _sistemas.has(id):
+		return
+	_sistema_actual = id
+	var retirar: Array = Datos.cubierto_por(id)
+	var fantasmas := {}
+	for otro in _sistemas:
+		if otro != id and not otro in retirar:
+			fantasmas[otro] = transparencia
+	capas.retirar_solo(retirar, fantasmas)
 	_encuadrar(_cajas_sistemas[id])
 	sistema_mostrado.emit(id)
 
@@ -162,6 +183,11 @@ func obtener_organo(id: String) -> Node3D:
 
 func obtener_sistema(id: String) -> Node3D:
 	return _sistemas.get(id)
+
+
+func sistema_de(id_organo: String) -> String:
+	var organo: Node3D = _organos.get(id_organo)
+	return organo.get_meta("sistema") if organo else ""
 
 
 func ids_organos() -> Array:
@@ -253,6 +279,9 @@ func _on_capa_restaurada(id_sistema: String) -> void:
 # --- Entrada -------------------------------------------------------------------
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		# Solo se consulta el órgano bajo el cursor si no se está arrastrando la cámara
+		_pos_cursor_pendiente = event.position if event.button_mask == 0 else Vector2.INF
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.shift_pressed:
 		if event.pressed:
 			_pos_presion = event.position
@@ -262,16 +291,38 @@ func _unhandled_input(event: InputEvent) -> void:
 			_pos_presion = Vector2.INF
 
 
+func _process(_delta: float) -> void:
+	# Una consulta por cuadro como máximo, aunque lleguen muchos eventos de movimiento
+	var id := _organo_bajo_cursor
+	if get_viewport().gui_get_hovered_control() != null:
+		id = ""
+	elif _pos_cursor_pendiente != Vector2.INF:
+		var organo := _organo_en(_pos_cursor_pendiente)
+		id = String(organo.name) if organo else ""
+		_pos_cursor_pendiente = Vector2.INF
+	if id != _organo_bajo_cursor:
+		_organo_bajo_cursor = id
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND if id != "" else Input.CURSOR_ARROW)
+		organo_bajo_cursor.emit(id)
+
+
 func _seleccionar_en_pantalla(pos: Vector2) -> void:
+	var organo := _organo_en(pos)
+	if organo == null:
+		limpiar_seleccion()
+		return
+	seleccionar_organo(String(organo.name))
+
+
+## Órgano visible bajo un punto de la pantalla (rayo físico), o null.
+func _organo_en(pos: Vector2) -> Node3D:
 	var desde := camara.project_ray_origin(pos)
 	var hasta := desde + camara.project_ray_normal(pos) * LARGO_RAYO
 	var consulta := PhysicsRayQueryParameters3D.create(desde, hasta)
 	var choque := get_world_3d().direct_space_state.intersect_ray(consulta)
 	if choque.is_empty() or not choque.collider.has_meta("organo"):
-		limpiar_seleccion()
-		return
-	var organo: Node3D = choque.collider.get_meta("organo")
-	seleccionar_organo(String(organo.name))
+		return null
+	return choque.collider.get_meta("organo")
 
 
 func _actualizar_overlay_si(organo: Node3D) -> void:

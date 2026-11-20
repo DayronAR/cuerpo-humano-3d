@@ -37,6 +37,7 @@ var _variables: Dictionary = {}
 var _info_estados: Dictionary = {}
 var _actividades: Dictionary = {}
 var _escenario := ""
+var _intensidad := ""
 var _activo := false
 var _pausado := false
 
@@ -129,9 +130,12 @@ func mostrar_escenario(id: String, activo: bool) -> void:
 		_botones_escenario[clave].set_pressed_no_signal(clave == id)
 	var e: Dictionary = _datos_escenarios.get(id, {})
 	_descripcion.text = e.get("descripcion", "Elige un escenario y pulsa Iniciar.")
+	var cambio := id != _escenario or _botones_intensidad.is_empty()
 	_escenario = id
 	_activo = activo
 	_actualizar_botones()
+	if not cambio:
+		return
 	# Botones de intensidad del escenario (caminar / trotar / correr)
 	for hijo in _intensidades.get_children():
 		hijo.queue_free()
@@ -145,9 +149,11 @@ func mostrar_escenario(id: String, activo: bool) -> void:
 		b.pressed.connect(intensidad_elegida.emit.bind(i.get("id")))
 		_intensidades.add_child(b)
 		_botones_intensidad[i.get("id")] = b
+	mostrar_intensidad(_intensidad)
 
 
 func mostrar_intensidad(id: String) -> void:
+	_intensidad = id
 	for clave in _botones_intensidad:
 		_botones_intensidad[clave].set_pressed_no_signal(clave == id)
 

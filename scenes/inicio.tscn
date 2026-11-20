@@ -1,0 +1,157 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/inicio.gd" id="1_inicio"]
+[ext_resource type="PackedScene" path="res://scenes/cuerpo_prueba.tscn" id="2_cuerpo"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_icono"]
+
+[sub_resource type="Environment" id="Entorno"]
+background_mode = 1
+background_color = Color(0.86, 0.9, 0.93, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.85, 0.9, 1, 1)
+ambient_light_energy = 0.4
+tonemap_mode = 2
+
+[sub_resource type="StyleBoxFlat" id="Tarjeta"]
+bg_color = Color(1, 1, 1, 0.95)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 36.0
+content_margin_top = 32.0
+content_margin_right = 36.0
+content_margin_bottom = 28.0
+shadow_color = Color(0, 0.1, 0.2, 0.18)
+shadow_size = 14
+
+[node name="Inicio" type="Node"]
+script = ExtResource("1_inicio")
+
+[node name="Fondo" type="Node3D" parent="."]
+
+[node name="Entorno" type="WorldEnvironment" parent="Fondo"]
+environment = SubResource("Entorno")
+
+[node name="Luz" type="DirectionalLight3D" parent="Fondo"]
+transform = Transform3D(0.8480, -0.3158, 0.4256, 0.0000, 0.8031, 0.5959, -0.5300, -0.5053, 0.6810, 0, 3, 3)
+light_energy = 0.9
+
+[node name="Giro" type="Node3D" parent="Fondo"]
+
+[node name="Cuerpo" parent="Fondo/Giro" instance=ExtResource("2_cuerpo")]
+
+[node name="Camara" type="Camera3D" parent="Fondo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.95, 3.2)
+fov = 40.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Tarjeta" type="PanelContainer" parent="UI"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -250.0
+offset_right = 504.0
+offset_bottom = 250.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Tarjeta")
+
+[node name="Contenido" type="VBoxContainer" parent="UI/Tarjeta"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Cabecera" type="HBoxContainer" parent="UI/Tarjeta/Contenido"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Icono" type="TextureRect" parent="UI/Tarjeta/Contenido/Cabecera"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+texture = ExtResource("3_icono")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Titulos" type="VBoxContainer" parent="UI/Tarjeta/Contenido/Cabecera"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Titulo" type="Label" parent="UI/Tarjeta/Contenido/Cabecera/Titulos"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 30
+text = "Cuerpo Humano 3D"
+
+[node name="Subtitulo" type="Label" parent="UI/Tarjeta/Contenido/Cabecera/Titulos"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.36, 0.45, 0.5, 1)
+text = "Atlas interactivo y simulaciones fisiológicas"
+
+[node name="Espacio" type="Control" parent="UI/Tarjeta/Contenido"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="BotonExplorar" type="Button" parent="UI/Tarjeta/Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+tooltip_text = "Recorre los sistemas del cuerpo, desarma las capas y consulta la ficha de cada órgano."
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+text = "Explorar el cuerpo"
+
+[node name="BotonSimular" type="Button" parent="UI/Tarjeta/Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+tooltip_text = "Observa qué le pasa al cuerpo al correr, fumar o comer."
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+text = "Simulaciones"
+
+[node name="BotonCuestionario" type="Button" parent="UI/Tarjeta/Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+tooltip_text = "Pon a prueba lo aprendido: encuentra los órganos en el cuerpo."
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+text = "Cuestionario"
+
+[node name="Record" type="Label" parent="UI/Tarjeta/Contenido"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+text = "Mejor puntaje"
+horizontal_alignment = 1
+
+[node name="Espacio2" type="Control" parent="UI/Tarjeta/Contenido"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BotonSalir" type="Button" parent="UI/Tarjeta/Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+tooltip_text = "Cerrar la aplicación"
+focus_mode = 0
+text = "Salir"
+
+[node name="Aviso" type="Label" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -40.0
+offset_right = 300.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.3, 0.4, 0.45, 1)
+theme_override_font_sizes/font_size = 13
+text = "Simulación educativa con valores aproximados · Pulsa F11 para pantalla completa"
+horizontal_alignment = 1
