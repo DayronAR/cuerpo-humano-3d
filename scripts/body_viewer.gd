@@ -101,6 +101,26 @@ func limpiar_seleccion() -> void:
 	seleccion_limpiada.emit()
 
 
+## Lleva a una estructura aunque esté escondida (p. ej. el estribo, dentro del temporal):
+## muestra su sistema, la selecciona, la aísla y acerca la cámara.
+func ir_a_estructura(id_organo: String, id_parte := "") -> void:
+	var organo: Node3D = _organos.get(id_organo)
+	if organo == null:
+		return
+	if not _aislado.is_empty():
+		aislar(false)
+	var sistema: String = organo.get_meta("sistema")
+	if sistema == CAPA_CERRADA:
+		mostrar_cuerpo_completo()
+	else:
+		mostrar_sistema(sistema)
+	var parte: Node3D = null
+	if not id_parte.is_empty():
+		parte = organo.find_child(id_parte, true, false)
+	seleccionar_organo(id_organo, true, parte)
+	aislar(true)
+
+
 ## Muestra SOLO la parte (u órgano) seleccionada y la encuadra; activo = false vuelve a mostrar todo.
 ## Se hace con capas de dibujo (la cámara solo ve la capa 2), sin tocar la visibilidad de los
 ## nodos, así no interfiere con la animación de capas.

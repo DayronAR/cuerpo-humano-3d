@@ -66,6 +66,8 @@ func _conectar_atlas() -> void:
 	_visor.aislamiento_cambiado.connect(_panel_ficha.mostrar_aislado)
 
 	_barra_sistemas.configurar(Datos.sistemas)
+	_barra_sistemas.configurar_buscador(Datos.organos, Datos.partes, _visor.ids_organos() + _visor.ids_partes())
+	_barra_sistemas.estructura_elegida.connect(_visor.ir_a_estructura)
 	_barra_sistemas.sistema_solicitado.connect(_on_sistema_solicitado)
 	_barra_sistemas.modo_fantasma_cambiado.connect(_visor.establecer_modo_fantasma)
 	_visor.sistema_mostrado.connect(_barra_sistemas.marcar)
@@ -88,7 +90,7 @@ func _on_organo_seleccionado(id_organo: String, id_sistema: String, id_parte: St
 		_cuestionario.responder(id_organo, id_parte)
 		return
 	_panel_ficha.mostrar(Datos.ficha_organo(id_organo), Datos.nombre_sistema(id_sistema),
-			Datos.color_sistema(id_sistema), Datos.nombre_parte(id_parte))
+			Datos.color_sistema(id_sistema), Datos.nombre_parte(id_parte), Datos.ficha_parte(id_parte))
 
 
 func _on_sistema_solicitado(id_sistema: String) -> void:

@@ -5,12 +5,19 @@ extends PanelContainer
 
 signal sistema_solicitado(id_sistema: String)   ## "" = cuerpo completo
 signal modo_fantasma_cambiado(activo: bool)
+signal estructura_elegida(id_organo: String, id_parte: String)   ## Desde el buscador ("" = órgano completo)
+
+const MAX_RESULTADOS := 40
 
 const ALTO_ELEMENTO := 66
 
 @onready var _lista: VBoxContainer = %Lista
 @onready var _boton_completo: Button = %BotonCompleto
 @onready var _fantasma: CheckButton = %Fantasma
+@onready var _buscador: LineEdit = %Buscador
+@onready var _resultados: ItemList = %Resultados
+
+var _indice_busqueda: Array = []   ## [texto normalizado, nombre visible, id_organo, id_parte]
 
 const COLOR_TEXTO := Color(0.12, 0.2, 0.26)
 const COLOR_TEXTO_SUAVE := Color(0.38, 0.46, 0.52)
@@ -28,6 +35,9 @@ func _ready() -> void:
 	_boton_completo.pressed.connect(sistema_solicitado.emit.bind(""))
 	_botones[""] = _boton_completo
 	_fantasma.toggled.connect(modo_fantasma_cambiado.emit)
+	_buscador.text_changed.connect(_buscar)
+	_buscador.text_submitted.connect(func(_t): _elegir(0))
+	_resultados.item_clicked.connect(func(i, _pos, _boton): _elegir(i))
 
 
 func configurar(sistemas: Array) -> void:
@@ -110,3 +120,66 @@ func _aplicar_estilo(boton: Button) -> void:
 		boton.add_theme_stylebox_override(estado, caja)
 	for estado in ["font_color", "font_hover_color", "font_pressed_color", "font_hover_pressed_color"]:
 		boton.add_theme_color_override(estado, COLOR_ACENTO if "pressed" in estado else COLOR_TEXTO)
+
+
+# --- Buscador ---------------------------------------------------------------------------
+
+## organos: id -> ficha (organos.json) · partes: id -> {nombre, organo} (partes.json) ·
+## existentes: ids de órganos y partes que tiene el modelo cargado (se ignoran los demás).
+func configurar_buscador(organos: Dictionary, partes: Dictionary, existentes: Array) -> void:
+	_indice_busqueda.clear()
+	var hay := {}
+	for id in existentes:
+		hay[id] = true
+	for id in organos:
+		if hay.has(id):
+			var nombre: String = organos[id].get("nombre", id)
+			_indice_busqueda.append([_normalizar(nombre), nombre, id, ""])
+	for id in partes:
+		if hay.has(id):
+			var p: Dictionary = partes[id]
+			var nombre: String = p.get("nombre", id)
+			var organo: String = p.get("organo", "")
+			var texto := "%s  ·  %s" % [nombre, organos.get(organo, {}).get("nombre", organo)]
+			_indice_busqueda.append([_normalizar(nombre + " " + p.get("nombre_en", "")), texto, organo, id])
+
+
+func _buscar(texto: String) -> void:
+	_resultados.clear()
+	var consulta := _normalizar(texto.strip_edges())
+	_resultados.visible = consulta.length() >= 2
+	if not _resultados.visible:
+		return
+	var palabras := consulta.split(" ", false)
+	var empiezan := []
+	var contienen := []
+	for entrada in _indice_busqueda:
+		var ok := true
+		for palabra in palabras:
+			if not entrada[0].contains(palabra):
+				ok = false
+				break
+		if ok:
+			(empiezan if entrada[0].begins_with(palabras[0]) else contienen).append(entrada)
+	for entrada in (empiezan + contienen).slice(0, MAX_RESULTADOS):
+		var i := _resultados.add_item(entrada[1])
+		_resultados.set_item_metadata(i, [entrada[2], entrada[3]])
+		_resultados.set_item_tooltip(i, entrada[1])
+	if _resultados.item_count == 0:
+		_resultados.add_item("Sin resultados")
+		_resultados.set_item_disabled(0, true)
+
+
+func _elegir(indice: int) -> void:
+	if indice < 0 or indice >= _resultados.item_count or _resultados.is_item_disabled(indice):
+		return
+	var datos: Array = _resultados.get_item_metadata(indice)
+	estructura_elegida.emit(datos[0], datos[1])
+
+
+## Minúsculas y sin tildes, para que "rinon" encuentre "riñón" y "femur" encuentre "fémur".
+static func _normalizar(texto: String) -> String:
+	var t := texto.to_lower()
+	for par in [["á", "a"], ["é", "e"], ["í", "i"], ["ó", "o"], ["ú", "u"], ["ü", "u"], ["ñ", "n"]]:
+		t = t.replace(par[0], par[1])
+	return t

@@ -9,6 +9,7 @@ const RUTA_ESCENARIOS := "res://data/escenarios.json"
 const RUTA_VISUALES := "res://data/visuales.json"
 const RUTA_CUESTIONARIO := "res://data/cuestionario.json"
 const RUTA_PARTES := "res://data/partes.json"
+const RUTA_PARTES_FICHAS := "res://data/partes_fichas.json"
 
 var sistemas: Array = []          ## Lista ordenada de sistemas (cada uno es un Dictionary)
 var orden_capas: Array = []       ## ids de sistema de afuera hacia adentro
@@ -19,6 +20,7 @@ var simulacion: Dictionary = {}   ## Modelo de simulación: variables, estados, 
 var visuales: Dictionary = {}     ## Órganos, trayectorias y personaje de las visualizaciones
 var cuestionario: Dictionary = {} ## Preguntas y reglas del modo cuestionario
 var partes: Dictionary = {}       ## id de nodo de la parte -> {nombre, nombre_en, organo} (generado)
+var partes_fichas: Dictionary = {} ## prefijo de id de parte -> {funcion, datos_curiosos} (opcional)
 
 var _sistemas_por_id: Dictionary = {}
 
@@ -35,6 +37,8 @@ func _init() -> void:
 	cuestionario = _cargar_json(RUTA_CUESTIONARIO)
 	if FileAccess.file_exists(RUTA_PARTES):
 		partes = _cargar_json(RUTA_PARTES).get("partes", {})
+	if FileAccess.file_exists(RUTA_PARTES_FICHAS):
+		partes_fichas = _cargar_json(RUTA_PARTES_FICHAS).get("partes", {})
 	for s in sistemas:
 		_sistemas_por_id[s.get("id", "")] = s
 
@@ -59,6 +63,16 @@ func ficha_organo(id: String) -> Dictionary:
 ## Nombre en español de una parte (p. ej. "Estribo (lado derecho)"); "" si no tiene ficha de parte.
 func nombre_parte(id_parte: String) -> String:
 	return partes.get(id_parte, {}).get("nombre", "")
+
+
+## Ficha propia de una parte (por id exacto o por su comienzo), o {} si no tiene.
+func ficha_parte(id_parte: String) -> Dictionary:
+	if id_parte.is_empty():
+		return {}
+	for prefijo in partes_fichas:
+		if id_parte.begins_with(prefijo):
+			return partes_fichas[prefijo]
+	return {}
 
 
 func sistema(id: String) -> Dictionary:

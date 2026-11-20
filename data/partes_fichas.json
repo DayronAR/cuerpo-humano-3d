@@ -1,0 +1,26 @@
+{
+  "_comentario": "Fichas propias de algunas partes (opcional). La clave es el id de la parte o su comienzo (vale para ambos lados). Si una parte no está aquí, se muestra la ficha de su órgano.",
+  "partes": {
+    "Craneo__Malleus": {
+      "funcion": "Primer huesecillo del oído medio: está unido al tímpano y recibe sus vibraciones para pasarlas al yunque.",
+      "datos_curiosos": [
+        "Mide unos 8 mm.",
+        "Junto con el yunque y el estribo forma la cadena de huesecillos, que amplifica el sonido unas 20 veces."
+      ]
+    },
+    "Craneo__Incus": {
+      "funcion": "Segundo huesecillo del oído medio: conecta el martillo con el estribo y transmite las vibraciones del sonido.",
+      "datos_curiosos": [
+        "Su nombre en latín (incus) significa yunque, por su forma.",
+        "Los huesecillos son los únicos huesos que alcanzan su tamaño adulto antes de nacer."
+      ]
+    },
+    "Craneo__Stapes": {
+      "funcion": "Tercer huesecillo y el hueso más pequeño del cuerpo: empuja la ventana oval del oído interno y transmite el sonido a la cóclea.",
+      "datos_curiosos": [
+        "Mide unos 3 mm y pesa alrededor de 3 miligramos.",
+        "Su músculo, el estapedio, protege el oído reduciendo su movimiento ante ruidos fuertes."
+      ]
+    }
+  }
+}

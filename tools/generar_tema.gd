@@ -78,6 +78,28 @@ func _init() -> void:
 	t.set_stylebox("grabber_pressed", "VScrollBar", _caja(PRIMARIO, PRIMARIO, 4, 0))
 	t.set_stylebox("scroll", "VScrollBar", _caja(Color(0, 0, 0, 0), Color(0, 0, 0, 0), 4, 0))
 
+	# --- Campo de texto (buscador) ---
+	t.set_stylebox("normal", "LineEdit", _caja(BLANCO, BORDE))
+	t.set_stylebox("focus", "LineEdit", _caja(Color(0, 0, 0, 0), PRIMARIO))
+	t.set_color("font_color", "LineEdit", TEXTO)
+	t.set_color("font_placeholder_color", "LineEdit", TEXTO_SUAVE)
+	t.set_color("clear_button_color", "LineEdit", TEXTO_SUAVE)
+	t.set_color("clear_button_color_pressed", "LineEdit", PRIMARIO)
+	t.set_color("caret_color", "LineEdit", PRIMARIO)
+
+	# --- Lista de resultados ---
+	t.set_stylebox("panel", "ItemList", _caja(Color("f7fafb"), BORDE, 8, 4))
+	t.set_stylebox("focus", "ItemList", StyleBoxEmpty.new())
+	t.set_stylebox("hovered", "ItemList", _caja(FONDO_BOTON_HOVER, Color(0, 0, 0, 0), 6, 2))
+	t.set_stylebox("selected", "ItemList", _caja(PRIMARIO_SUAVE, Color(0, 0, 0, 0), 6, 2))
+	t.set_stylebox("selected_focus", "ItemList", _caja(PRIMARIO_SUAVE, Color(0, 0, 0, 0), 6, 2))
+	t.set_stylebox("cursor", "ItemList", StyleBoxEmpty.new())
+	t.set_stylebox("cursor_unfocused", "ItemList", StyleBoxEmpty.new())
+	t.set_color("font_color", "ItemList", TEXTO)
+	t.set_color("font_hovered_color", "ItemList", PRIMARIO_OSCURO)
+	t.set_color("font_selected_color", "ItemList", PRIMARIO_OSCURO)
+	t.set_color("guide_color", "ItemList", Color("e6edf1"))
+
 	# --- Barra de progreso ---
 	t.set_stylebox("background", "ProgressBar", _caja(Color("e3ebef"), Color(0, 0, 0, 0), 4, 0))
 	t.set_stylebox("fill", "ProgressBar", _caja(PRIMARIO, Color(0, 0, 0, 0), 4, 0))

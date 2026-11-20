@@ -23,7 +23,9 @@ func _ready() -> void:
 
 ## ficha: {nombre, funcion, datos_curiosos[]} del órgano · nombre_sistema/color_sistema para la
 ## etiqueta · nombre_parte: si se eligió una parte del órgano (p. ej. "Estribo"), es el título.
-func mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, nombre_parte := "") -> void:
+## ficha_parte: ficha propia de la parte (opcional); reemplaza función y datos del órgano.
+func mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, nombre_parte := "",
+		ficha_parte: Dictionary = {}) -> void:
 	if nombre_parte.is_empty():
 		_titulo.text = ficha.get("nombre", "")
 		_sistema.text = nombre_sistema
@@ -32,6 +34,8 @@ func mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, no
 		_sistema.text = "Parte de: %s · %s" % [ficha.get("nombre", ""), nombre_sistema]
 	mostrar_aislado(false)
 	_marca_color.color = color_sistema
+	if not ficha_parte.is_empty():
+		ficha = ficha_parte
 	_funcion.text = ficha.get("funcion", "")
 	var lineas := PackedStringArray()
 	for dato in ficha.get("datos_curiosos", []):

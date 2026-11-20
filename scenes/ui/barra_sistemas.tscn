@@ -36,6 +36,22 @@ theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
 theme_override_font_sizes/font_size = 20
 text = "Sistemas del cuerpo"
 
+[node name="Buscador" type="LineEdit" parent="Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+tooltip_text = "Busca cualquier estructura (por ejemplo: estribo, fémur, riñón, giro precentral)"
+placeholder_text = "Buscar estructura…"
+clear_button_enabled = true
+
+[node name="Resultados" type="ItemList" parent="Contenido"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 13
+
 [node name="BotonCompleto" type="Button" parent="Contenido"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 38)
