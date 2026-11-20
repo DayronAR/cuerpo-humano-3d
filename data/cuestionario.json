@@ -160,6 +160,82 @@
     {
       "organo": "Isquiotibiales",
       "texto": "Selecciona los isquiotibiales (parte posterior del muslo)"
+    },
+    {
+      "organo": "Epidermis",
+      "parte": "Epidermis__Mano",
+      "texto": "Selecciona una mano (en la piel)"
+    },
+    {
+      "organo": "Epidermis",
+      "parte": "Epidermis__Oreja",
+      "texto": "Selecciona una oreja"
+    },
+    {
+      "organo": "Epidermis",
+      "parte": "Epidermis__Rodilla",
+      "texto": "Selecciona una rodilla (en la piel)"
+    },
+    {
+      "organo": "Craneo",
+      "parte": "Craneo__Frontal_bone",
+      "texto": "Selecciona el hueso frontal"
+    },
+    {
+      "organo": "Craneo",
+      "parte": "Craneo__Mandible",
+      "texto": "Selecciona la mandíbula"
+    },
+    {
+      "organo": "Craneo",
+      "parte": "Craneo__Parietal_bone",
+      "texto": "Selecciona un hueso parietal"
+    },
+    {
+      "organo": "Craneo",
+      "parte": "Craneo__Occipital_bone",
+      "texto": "Selecciona el hueso occipital"
+    },
+    {
+      "organo": "Corazon",
+      "parte": "Corazon__Left_ventricle",
+      "texto": "Selecciona el ventrículo izquierdo del corazón"
+    },
+    {
+      "organo": "Corazon",
+      "parte": "Corazon__Right_atrium",
+      "texto": "Selecciona la aurícula (atrio) derecha"
+    },
+    {
+      "organo": "CajaToracica",
+      "parte": "CajaToracica__Body_of_sternum",
+      "texto": "Selecciona el cuerpo del esternón"
+    },
+    {
+      "organo": "PulmonDer",
+      "parte": "PulmonDer__Middle_lobe",
+      "texto": "Selecciona el lóbulo medio del pulmón derecho"
+    },
+    {
+      "organo": "ColumnaVertebral",
+      "parte": "ColumnaVertebral__Atlas",
+      "texto": "Selecciona el atlas (primera vértebra cervical)"
+    },
+    {
+      "organo": "MusculosMiembroInferior",
+      "parte": "MusculosMiembroInferior__Sartorius",
+      "texto": "Selecciona el sartorio, el músculo más largo del cuerpo"
+    },
+    {
+      "organo": "MusculosTronco",
+      "parte": "MusculosTronco__Diaphragm",
+      "texto": "Selecciona el diafragma, el principal músculo de la respiración"
+    },
+    {
+      "organo": "Cerebro",
+      "parte": "Cerebro__Precentral_gyrus",
+      "texto": "Selecciona el giro precentral (área motora del cerebro)"
     }
-  ]
+  ],
+  "_partes": "Preguntas con 'parte': hay que hacer clic en esa parte exacta (id de nodo o su comienzo; ambos lados valen). Solo aparecen si el modelo 3D tiene esa parte (Z-Anatomy)."
 }

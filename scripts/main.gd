@@ -62,6 +62,8 @@ func _conectar_atlas() -> void:
 	_visor.organo_seleccionado.connect(_on_organo_seleccionado)
 	_visor.seleccion_limpiada.connect(_panel_ficha.ocultar)
 	_panel_ficha.cerrado.connect(_visor.limpiar_seleccion)
+	_panel_ficha.aislar_cambiado.connect(_visor.aislar)
+	_visor.aislamiento_cambiado.connect(_panel_ficha.mostrar_aislado)
 
 	_barra_sistemas.configurar(Datos.sistemas)
 	_barra_sistemas.sistema_solicitado.connect(_on_sistema_solicitado)
@@ -71,20 +73,22 @@ func _conectar_atlas() -> void:
 
 
 ## Muestra el nombre del órgano junto al cursor (no durante el cuestionario: daría la respuesta).
-func _on_organo_bajo_cursor(id_organo: String) -> void:
+func _on_organo_bajo_cursor(id_organo: String, id_parte: String) -> void:
 	var mostrar := id_organo != "" and not _cuestionario.activo
 	_etiqueta_organo.visible = mostrar
 	if mostrar:
-		$UI/EtiquetaOrgano/Texto.text = Datos.ficha_organo(id_organo).get("nombre", id_organo)
+		var nombre := Datos.nombre_parte(id_parte)
+		$UI/EtiquetaOrgano/Texto.text = nombre if not nombre.is_empty() \
+				else Datos.ficha_organo(id_organo).get("nombre", id_organo)
 		_etiqueta_organo.reset_size()
 
 
-func _on_organo_seleccionado(id_organo: String, id_sistema: String) -> void:
+func _on_organo_seleccionado(id_organo: String, id_sistema: String, id_parte: String) -> void:
 	if _cuestionario.activo:
-		_cuestionario.responder(id_organo)
+		_cuestionario.responder(id_organo, id_parte)
 		return
 	_panel_ficha.mostrar(Datos.ficha_organo(id_organo), Datos.nombre_sistema(id_sistema),
-			Datos.color_sistema(id_sistema))
+			Datos.color_sistema(id_sistema), Datos.nombre_parte(id_parte))
 
 
 func _on_sistema_solicitado(id_sistema: String) -> void:
@@ -146,7 +150,7 @@ func _actualizar_tiempo_personaje() -> void:
 # --- Cuestionario --------------------------------------------------------------------
 
 func _conectar_cuestionario() -> void:
-	_cuestionario.configurar(Datos.cuestionario, _visor.ids_organos())
+	_cuestionario.configurar(Datos.cuestionario, _visor.ids_organos(), _visor.ids_partes())
 	_panel_cuestionario.comenzar_pulsado.connect(_cuestionario.iniciar)
 	_panel_cuestionario.siguiente_pulsado.connect(_cuestionario.siguiente)
 	_panel_cuestionario.saltar_pulsado.connect(_cuestionario.saltar)
@@ -169,8 +173,12 @@ func _on_respuesta_evaluada(correcta: bool, id_respondido: String, id_correcto: 
 		puntaje: int, restantes: int) -> void:
 	_puntaje_actual = puntaje
 	if not correcta and restantes == 0:
-		_visor.seleccionar_organo(id_correcto, false)   # Mostrar dónde estaba
-	_panel_cuestionario.mostrar_resultado(correcta, _nombre(id_respondido), _nombre(id_correcto), puntos,
+		# Mostrar dónde estaba (la parte exacta si la pregunta pedía una)
+		_visor.seleccionar_organo(id_correcto, false, _visor.buscar_parte(id_correcto, _cuestionario.parte_actual()))
+	var pedida := _cuestionario.parte_actual()
+	var parte_correcta := _visor.buscar_parte(id_correcto, pedida)
+	var nombre_correcto := _nombre(String(parte_correcta.name)) if parte_correcta else _nombre(id_correcto)
+	_panel_cuestionario.mostrar_resultado(correcta, _nombre(id_respondido), nombre_correcto, puntos,
 			puntaje, restantes)
 
 
@@ -181,5 +189,8 @@ func _on_ronda_terminada(puntaje: int, maximo: int, es_record: bool) -> void:
 	_panel_cuestionario.mostrar_final(puntaje, maximo, es_record)
 
 
-func _nombre(id_organo: String) -> String:
-	return Datos.ficha_organo(id_organo).get("nombre", id_organo) if id_organo != "" else ""
+func _nombre(id: String) -> String:
+	if id.is_empty():
+		return ""
+	var parte := Datos.nombre_parte(id)
+	return parte if not parte.is_empty() else Datos.ficha_organo(id).get("nombre", id)

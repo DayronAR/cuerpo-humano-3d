@@ -20,7 +20,7 @@ extends SceneTree
 
 const CARPETA_MALLAS := "res://models/zanatomy"
 const CARPETA_MATERIALES := "res://models/prueba/materiales"
-const SISTEMAS_CON_SOMBRA := ["Piel", "Muscular", "Oseo"]
+const SISTEMAS_CON_SOMBRA := ["Piel"]   ## Con cientos de partes, solo la piel proyecta sombra
 
 
 func _init() -> void:
@@ -55,36 +55,10 @@ func _init() -> void:
 		raiz.add_child(nodo_sistema)
 		nodo_sistema.owner = raiz
 
-		var mallas_gltf := estado.get_meshes()
-		for nodo_gltf in estado.get_nodes():
-			if nodo_gltf.mesh < 0:
-				continue
-			var nombre: String = nodo_gltf.original_name if not nodo_gltf.original_name.is_empty() \
-					else nodo_gltf.resource_name
-			var importador: ImporterMesh = mallas_gltf[nodo_gltf.mesh].mesh
-			var material := _material(materiales.get(nombre, materiales.get(sistema, "")))
-			for s in importador.get_surface_count():
-				importador.set_surface_material(s, material)
-			importador.generate_lods(25.0, 60.0, [])
-			var malla := importador.get_mesh()
-			var ruta_malla := "%s/%s_%s.res" % [CARPETA_MALLAS, sistema, nombre]
-			ResourceSaver.save(malla, ruta_malla, ResourceSaver.FLAG_COMPRESS)
-			# Se recarga desde disco para que la escena la referencie (y no la incruste)
-			malla = ResourceLoader.load(ruta_malla, "", ResourceLoader.CACHE_MODE_REPLACE)
-
-			var mi := MeshInstance3D.new()
-			mi.name = nombre
-			mi.mesh = malla
-			mi.transform = nodo_gltf.xform
-			if not sistema in SISTEMAS_CON_SOMBRA:
-				mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			nodo_sistema.add_child(mi)
-			mi.owner = raiz
-			var tris := 0
-			for s in malla.get_surface_count():
-				tris += malla.surface_get_array_index_len(s) / 3
-			total += tris
-			print("  %-14s %-24s %7d triángulos" % [sistema, nombre, tris])
+		var nodos_gltf := estado.get_nodes()
+		for i in nodos_gltf.size():
+			if nodos_gltf[i].parent == -1:
+				total += _crear_nodo(estado, i, nodo_sistema, raiz, sistema, materiales, materiales.get(sistema, ""))
 
 	var escena := PackedScene.new()
 	var error := escena.pack(raiz)
@@ -97,6 +71,50 @@ func _init() -> void:
 		return
 	print("Cuerpo ensamblado en %s · %d triángulos" % [salida, total])
 	quit()
+
+
+## Crea el nodo glTF i (órgano o parte) bajo "padre" y, recursivamente, sus hijos.
+## Un nodo sin malla es un órgano con partes (Node3D en el centro del órgano).
+## Devuelve los triángulos agregados.
+func _crear_nodo(estado: GLTFState, i: int, padre: Node3D, raiz: Node3D, sistema: String,
+		materiales: Dictionary, material_heredado: String) -> int:
+	var nodo_gltf: GLTFNode = estado.get_nodes()[i]
+	var nombre: String = nodo_gltf.original_name if not nodo_gltf.original_name.is_empty() \
+			else nodo_gltf.resource_name
+	# Material: el del órgano si está en la lista; si no, el heredado (sistema u órgano padre)
+	var nombre_organo := nombre.get_slice("__", 0)
+	var material_nombre: String = materiales.get(nombre_organo, material_heredado)
+	var nodo: Node3D
+	var tris := 0
+	if nodo_gltf.mesh >= 0:
+		var importador: ImporterMesh = estado.get_meshes()[nodo_gltf.mesh].mesh
+		var material := _material(material_nombre)
+		for s in importador.get_surface_count():
+			importador.set_surface_material(s, material)
+		importador.generate_lods(25.0, 60.0, [])
+		var malla := importador.get_mesh()
+		var ruta_malla := "%s/%s_%s.res" % [CARPETA_MALLAS, sistema, nombre]
+		ResourceSaver.save(malla, ruta_malla, ResourceSaver.FLAG_COMPRESS)
+		# Se recarga desde disco para que la escena la referencie (y no la incruste)
+		malla = ResourceLoader.load(ruta_malla, "", ResourceLoader.CACHE_MODE_REPLACE)
+		var mi := MeshInstance3D.new()
+		mi.mesh = malla
+		if not sistema in SISTEMAS_CON_SOMBRA:
+			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		nodo = mi
+		for s in malla.get_surface_count():
+			tris += malla.surface_get_array_index_len(s) / 3
+	else:
+		nodo = Node3D.new()
+	nodo.name = nombre
+	nodo.transform = nodo_gltf.xform
+	padre.add_child(nodo)
+	nodo.owner = raiz
+	for hijo in nodo_gltf.children:
+		tris += _crear_nodo(estado, hijo, nodo, raiz, sistema, materiales, material_nombre)
+	if padre.get_parent() == raiz:
+		print("  %-14s %-26s %4d partes %8d triángulos" % [sistema, nombre, nodo_gltf.children.size(), tris])
+	return tris
 
 
 func _material(nombre: String) -> Material:

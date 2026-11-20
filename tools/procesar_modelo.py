@@ -56,6 +56,7 @@ from mathutils import Matrix, Vector
 
 TIPOS_GEOMETRIA = ("MESH", "CURVE")   # Las curvas con grosor (vasos, esófago...) se convierten a malla
 EXCLUIR = None                        # Expresión regular de nombres a ignorar (del JSON: "excluir_regex")
+RESOLUCION_CURVAS = 0                 # Resolución máxima de las curvas al convertirlas (0 = sin cambio)
 
 # Raíz del proyecto Godot = carpeta padre de tools/
 RAIZ_PROYECTO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -192,6 +193,13 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
     """
     escena = bpy.context.scene
     for f in fuentes:
+        # Las curvas (vasos, nervios) se convierten con poca resolución: son tubos finos y el
+        # Decimate casi no puede reducirlos después. Solo cambia la copia en memoria.
+        if f.type == "CURVE" and RESOLUCION_CURVAS:
+            f.data.resolution_u = min(f.data.resolution_u, RESOLUCION_CURVAS)
+            f.data.bevel_resolution = min(f.data.bevel_resolution, 1)
+            if f.data.bevel_object is None and f.data.bevel_depth > 0:
+                f.data.bevel_resolution = 0
         # Asegurar que la fuente se evalúe (la plantilla de Z-Anatomy oculta muchos objetos)
         f.hide_viewport = False
         if f.name not in bpy.context.view_layer.objects:
@@ -211,14 +219,21 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
     # regiones de la piel) y ayuda a que el Decimate no abra grietas
     if simetria:
         # Simetría: conservar solo el lado derecho del paciente (x <= 0), cortado exactamente en
-        # la línea media, y completarlo con su reflejo. Elimina las diferencias entre lados.
+        # la línea media. Modos:
+        #   True / "completa": completar con su reflejo (pieza central, p. ej. el tórax)
+        #   "derecha":         solo el lado derecho (pieza lateral derecha)
+        #   "izquierda":       el reflejo del lado derecho (pieza lateral izquierda)
         bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], dist=0.0001,
                                plane_co=(0, 0, 0), plane_no=(1, 0, 0), clear_outer=True)
-        reflejo = bmesh.ops.duplicate(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:])
-        verts_reflejo = [e for e in reflejo["geom"] if isinstance(e, bmesh.types.BMVert)]
-        bmesh.ops.scale(bm, vec=(-1, 1, 1), verts=verts_reflejo)
-        caras_reflejo = [e for e in reflejo["geom"] if isinstance(e, bmesh.types.BMFace)]
-        bmesh.ops.reverse_faces(bm, faces=caras_reflejo)
+        if simetria in (True, "completa"):
+            reflejo = bmesh.ops.duplicate(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:])
+            verts_reflejo = [e for e in reflejo["geom"] if isinstance(e, bmesh.types.BMVert)]
+            bmesh.ops.scale(bm, vec=(-1, 1, 1), verts=verts_reflejo)
+            caras_reflejo = [e for e in reflejo["geom"] if isinstance(e, bmesh.types.BMFace)]
+            bmesh.ops.reverse_faces(bm, faces=caras_reflejo)
+        elif simetria == "izquierda":
+            bmesh.ops.scale(bm, vec=(-1, 1, 1), verts=bm.verts[:])
+            bmesh.ops.reverse_faces(bm, faces=bm.faces[:])
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=soldar)
     # Caras repetidas (piezas superpuestas que quedaron con los mismos vértices tras soldar)
     vistas = set()
@@ -319,6 +334,213 @@ def exportar_glb(objetos, ruta):
 # Programa principal
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Partes (estructuras individuales dentro de un órgano) y nombres en español
+# ---------------------------------------------------------------------------
+
+LADO = re.compile(r"\.([lr])$")
+
+
+def separar_lado(nombre):
+    """'Stapes.r' -> ('Stapes', 'r'); 'Sacrum' -> ('Sacrum', '')."""
+    m = LADO.search(nombre)
+    return (nombre[:m.start()], m.group(1)) if m else (nombre, "")
+
+
+def id_valido(texto):
+    """Nombre de nodo válido en Godot: solo letras, números y guion bajo."""
+    limpio = re.sub(r"[^A-Za-z0-9]+", "_", texto).strip("_")
+    return limpio or "Parte"
+
+
+class Terminologia:
+    """Traducción inglés -> español con la Terminología Anatómica (TA2.csv de Z-Anatomy) y
+    una lista de excepciones del JSON de mapeo (nombres más usados en clase)."""
+
+    def __init__(self, ruta, excepciones):
+        self.tabla = {}
+        self.excepciones = {k.lower(): v for k, v in excepciones.items()}
+        if ruta and os.path.exists(ruta):
+            for linea in open(ruta, encoding="utf-8-sig"):
+                campos = linea.strip().strip('"').split(";")
+                if len(campos) > 4 and campos[4].strip():
+                    self.tabla.setdefault(campos[1].strip().lower(), campos[4].strip())
+        self.sin_traduccion = set()
+
+    def espanol(self, ingles):
+        clave = ingles.strip().lower()
+        if clave in self.excepciones:
+            return self.excepciones[clave]
+        for variante in (clave, clave + " muscle", clave + " bone", re.sub(r" muscle$", "", clave)):
+            if variante in self.tabla:
+                texto = self.tabla[variante]
+                return texto[0].upper() + texto[1:]
+        self.sin_traduccion.add(ingles)
+        return ingles
+
+
+def agrupar_partes(fuentes, modo):
+    """Agrupa las fuentes en partes: {clave: (nombre_ingles, lado, [objetos])}.
+    'individual': una parte por objeto; 'bilateral': une izquierda y derecha de cada estructura."""
+    grupos = {}
+    for f in fuentes:
+        base, lado = separar_lado(f.name)
+        if modo == "bilateral":
+            clave, lado_parte = id_valido(base), ""
+        else:
+            clave = id_valido(base) + {"l": "_Izq", "r": "_Der"}.get(lado, "")
+            lado_parte = lado
+        grupos.setdefault(clave, [base, lado_parte, []])[2].append(f)
+    return grupos
+
+
+def construir_organo_con_partes(destino, partes, max_tris, min_tris_parte, escala, desplazamiento, soldar,
+                                sin_reducir=None):
+    """partes: {clave: {"fuentes": [...], "simetria": ..., "nombre": ..., "lado": ...}}.
+    Crea un objeto por parte (origen en su centro) colgando de un vacío con el nombre del órgano,
+    ubicado en el centro del órgano. El presupuesto de triángulos se reparte según el tamaño."""
+    tris_fuente = {}
+    for clave, p in partes.items():
+        tris_fuente[clave] = max(1, sum(contar_triangulos(f) if f.type == "MESH" else 500 for f in p["fuentes"]))
+    total = sum(tris_fuente.values())
+    objetos = []
+    for clave, p in partes.items():
+        limite = max(min_tris_parte, int(max_tris * tris_fuente[clave] / total))
+        if sin_reducir and sin_reducir.search(clave):
+            limite = 0   # Estructuras diminutas que se ven aisladas de cerca (p. ej. huesecillos del oído)
+        obj, _ = preparar_organo(f"{destino}__{clave}", p["fuentes"], limite, escala, desplazamiento, True,
+                                 soldar=soldar, simetria=p.get("simetria", False))
+        if len(obj.data.polygons) == 0:
+            bpy.data.objects.remove(obj, do_unlink=True)
+            continue
+        objetos.append((clave, obj))
+    if not objetos:
+        return None, []
+    mn = Vector((min(o.location[i] for _, o in objetos) for i in range(3)))
+    mx = Vector((max(o.location[i] for _, o in objetos) for i in range(3)))
+    anterior = bpy.data.objects.get(destino)
+    if anterior is not None:
+        anterior.name = destino + "_original"   # Z-Anatomy puede tener un objeto con el mismo nombre
+    vacio = bpy.data.objects.new(destino, None)
+    bpy.context.scene.collection.objects.link(vacio)
+    vacio.location = (mn + mx) / 2
+    bpy.context.view_layer.update()
+    for _, o in objetos:
+        mundo = o.matrix_world.copy()
+        o.parent = vacio
+        o.matrix_world = mundo
+    return vacio, objetos
+
+
+def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar):
+    """Piel sin costuras: construye la superficie COMPLETA (simétrica y soldada), la reduce, y
+    después la corta en partes asignando cada cara a la región fuente más cercana. Las partes
+    comparten exactamente los bordes y conservan las normales de la superficie completa, así
+    que no se notan cortes entre ellas."""
+    from mathutils.kdtree import KDTree
+    todas = []
+    for p in partes.values():
+        for f in p["fuentes"]:
+            if f not in todas:
+                todas.append(f)
+    completa, _ = preparar_organo(destino + "__completa", todas, max_tris, escala, desplazamiento, False,
+                                  soldar=soldar, simetria=True)
+    # Centros de las caras de cada región fuente (el lado izquierdo es el reflejo del derecho)
+    dg = bpy.context.evaluated_depsgraph_get()
+    ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
+    puntos, etiquetas = [], []
+    for clave, p in partes.items():
+        for f in p["fuentes"]:
+            malla = bpy.data.meshes.new_from_object(f.evaluated_get(dg), depsgraph=dg)
+            malla.transform(ajuste @ f.matrix_world)
+            for poligono in malla.polygons:
+                c = poligono.center.copy()
+                if c.x > 0.0005:
+                    continue   # Solo el lado derecho (x <= 0) de las fuentes
+                espejo = Vector((-c.x, c.y, c.z))
+                if p.get("simetria") == "derecha":
+                    puntos.append(c)
+                elif p.get("simetria") == "izquierda":
+                    puntos.append(espejo)
+                else:
+                    puntos.extend([c, espejo])
+                    etiquetas.append(clave)
+                etiquetas.append(clave)
+            bpy.data.meshes.remove(malla)
+    arbol = KDTree(len(puntos))
+    for i, pt in enumerate(puntos):
+        arbol.insert(pt, i)
+    arbol.balance()
+
+    m = completa.data
+    mundo = completa.matrix_world
+    normales = [v.normal.copy() for v in m.vertices]
+    arbol_vertices = KDTree(len(m.vertices))
+    for v in m.vertices:
+        arbol_vertices.insert(mundo @ v.co, v.index)
+    arbol_vertices.balance()
+    asignacion = {}
+    for poligono in m.polygons:
+        _, i, _ = arbol.find(mundo @ poligono.center)
+        asignacion.setdefault(etiquetas[i], []).append(poligono.index)
+
+    objetos = []
+    for clave, caras in asignacion.items():
+        bm = bmesh.new()
+        bm.from_mesh(m)
+        bm.faces.ensure_lookup_table()
+        conservar = set(caras)
+        bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.index not in conservar], context="FACES")
+        bmesh.ops.transform(bm, matrix=mundo, verts=bm.verts[:])
+        nueva = bpy.data.meshes.new(f"{destino}__{clave}_malla")
+        bm.to_mesh(nueva)
+        bm.free()
+        # Normales de la superficie completa en cada vértice (bordes idénticos entre partes)
+        nueva.normals_split_custom_set_from_vertices(
+            [normales[arbol_vertices.find(v.co)[1]] for v in nueva.vertices])
+        obj = bpy.data.objects.new(f"{destino}__{clave}", nueva)
+        bpy.context.scene.collection.objects.link(obj)
+        mn = Vector((min(v.co[i] for v in nueva.vertices) for i in range(3)))
+        mx = Vector((max(v.co[i] for v in nueva.vertices) for i in range(3)))
+        centro = (mn + mx) / 2
+        nueva.transform(Matrix.Translation(-centro))
+        obj.location = centro
+        objetos.append((clave, obj))
+    bpy.data.objects.remove(completa, do_unlink=True)
+
+    anterior = bpy.data.objects.get(destino)
+    if anterior is not None:
+        anterior.name = destino + "_original"
+    vacio = bpy.data.objects.new(destino, None)
+    bpy.context.scene.collection.objects.link(vacio)
+    mn = Vector((min(o.location[i] for _, o in objetos) for i in range(3)))
+    mx = Vector((max(o.location[i] for _, o in objetos) for i in range(3)))
+    vacio.location = (mn + mx) / 2
+    bpy.context.view_layer.update()
+    for _, o in objetos:
+        mundo_o = o.matrix_world.copy()
+        o.parent = vacio
+        o.matrix_world = mundo_o
+    return vacio, objetos
+
+
+def clasificar_por_region(obj, regiones):
+    """Primera región cuya condición cumple el centro del objeto (coordenadas de Blender: Z arriba)."""
+    centro = sum((obj.matrix_world @ Vector(c) for c in obj.bound_box), Vector()) / 8
+    x, z = abs(centro.x), centro.z
+    for r in regiones:
+        if ("z_min" in r and z < r["z_min"]) or ("z_max" in r and z > r["z_max"]):
+            continue
+        if ("x_min" in r and x < r["x_min"]) or ("x_max" in r and x > r["x_max"]):
+            continue
+        return r["organo"]
+    return regiones[-1]["organo"]
+
+
+# ---------------------------------------------------------------------------
+# Programa principal
+# ---------------------------------------------------------------------------
+
 def main():
     args = leer_argumentos()
 
@@ -338,75 +560,164 @@ def main():
         mapeo = json.load(f)
 
     max_tris = args.max_tris if args.max_tris is not None else int(mapeo.get("max_triangulos", 15000))
+    min_tris_parte = int(mapeo.get("min_triangulos_parte", 150))
     escala = args.escala if args.escala is not None else float(mapeo.get("escala", 1.0))
     desplazamiento = mapeo.get("desplazamiento", [0.0, 0.0, 0.0])
-    global EXCLUIR
+    global EXCLUIR, RESOLUCION_CURVAS
+    RESOLUCION_CURVAS = int(mapeo.get("resolucion_curvas", 0))
     if mapeo.get("excluir_regex"):
         EXCLUIR = re.compile(mapeo["excluir_regex"])
+    terminos = Terminologia(mapeo.get("terminologia"), mapeo.get("nombres_es", {}))
     sistemas = mapeo.get("sistemas", {})
-    if args.sistemas:
-        pedidos = [s.strip() for s in args.sistemas.split(",")]
-        sistemas = {k: v for k, v in sistemas.items() if k in pedidos}
+    pedidos = [s.strip() for s in args.sistemas.split(",")] if args.sistemas else list(sistemas)
 
     if bpy.context.object and bpy.context.object.mode != "OBJECT":
         bpy.ops.object.mode_set(mode="OBJECT")
 
     os.makedirs(args.salida, exist_ok=True)
-    reporte = []      # (sistema, destino, fuentes, antes, despues)
+    reporte = []      # (sistema, destino, partes, antes, despues)
     faltantes = []    # (sistema, destino, patrones)
+    nombres_partes = {}
+    usados = set()    # Objetos fuente ya asignados (para el "resto" de cada sistema)
 
     for sistema, organos in sistemas.items():
-        procesados = []
-        for destino, definicion in organos.items():
-            if destino.startswith("_"):
-                continue   # Comentarios
-            # Formatos: lista de patrones, o {"fuentes": [...], "max_triangulos": N}
+        exportables = []
+        organos_def = {k: v for k, v in organos.items() if not k.startswith("_")}
+        resto = organos_def.pop("resto", None)
+
+        # El "resto" reparte por regiones del cuerpo los objetos de una colección que no usó
+        # ningún órgano explícito (p. ej. todos los demás músculos).
+        if resto:
+            for d in organos_def.values():
+                pats = d.get("fuentes", []) if isinstance(d, dict) else d
+                usados.update(o.name for o in buscar_fuentes(pats if isinstance(pats, list) else [pats]))
+                for g in (d.get("grupos", {}).values() if isinstance(d, dict) else []):
+                    usados.update(o.name for o in buscar_fuentes(g.get("fuentes", [])))
+            # Varias reglas en orden; cada objeto lo toma la primera regla que lo acepta
+            for regla in (resto if isinstance(resto, list) else [resto]):
+                filtro = re.compile(regla["incluir_regex"], re.I) if regla.get("incluir_regex") else None
+                restantes = [o for o in mallas_de_coleccion(regla["coleccion"])
+                             if o.name not in usados and (filtro is None or filtro.search(o.name))]
+                usados.update(o.name for o in restantes)
+                if regla.get("descartar"):
+                    continue   # Estructuras que se omiten a propósito (p. ej. fascias que tapan los músculos)
+                por_organo = {}
+                for o in restantes:
+                    por_organo.setdefault(clasificar_por_region(o, regla["regiones"]), []).append(o)
+                for organo, objs in por_organo.items():
+                    organos_def[organo] = {"fuentes_objetos": objs, "partes": regla.get("partes"),
+                                           "max_triangulos": regla.get("max_triangulos", max_tris)}
+
+        if sistema not in pedidos:
+            continue
+
+        for destino, definicion in organos_def.items():
             limite = max_tris
-            remallado = 0.0
-            soldar = 0.0004
+            soldar = 0.00005   # Tolerancia pequeña: hay piezas de pocos milímetros (huesecillos, oído interno)
             simetria = False
+            modo = None
             patrones = definicion
             if isinstance(definicion, dict):
                 patrones = definicion.get("fuentes", [])
                 limite = int(definicion.get("max_triangulos", max_tris))
-                remallado = float(definicion.get("remallado_voxel", 0.0))
-                soldar = float(definicion.get("soldar", 0.0004))
-                simetria = bool(definicion.get("simetria", False))
-            fuentes = buscar_fuentes(patrones if isinstance(patrones, list) else [patrones])
-            if not fuentes:
-                faltantes.append((sistema, destino, patrones))
-                continue
-            obj, antes = preparar_organo(destino, fuentes, limite, escala, desplazamiento, not args.sin_origen, remallado, soldar, simetria)
-            procesados.append(obj)
-            reporte.append((sistema, destino, len(fuentes), antes, contar_triangulos(obj)))
+                soldar = float(definicion.get("soldar", 0.00005))
+                simetria = definicion.get("simetria", False)
+                modo = definicion.get("partes")
+            fuentes = definicion.get("fuentes_objetos") if isinstance(definicion, dict) and "fuentes_objetos" in definicion \
+                else buscar_fuentes(patrones if isinstance(patrones, list) else [patrones])
 
-        if not procesados:
+            if modo == "grupos":
+                # Partes definidas a mano (p. ej. regiones de la piel), con simetría por grupo
+                partes = {}
+                for clave, g in definicion["grupos"].items():
+                    fg = buscar_fuentes(g["fuentes"])
+                    if not fg:
+                        faltantes.append((sistema, f"{destino}/{clave}", g["fuentes"]))
+                        continue
+                    if g.get("lateral"):
+                        partes[clave + "Der"] = {"fuentes": fg, "simetria": "derecha", "nombre": g["nombre"], "lado": "r"}
+                        partes[clave + "Izq"] = {"fuentes": fg, "simetria": "izquierda", "nombre": g["nombre"], "lado": "l"}
+                    else:
+                        partes[clave] = {"fuentes": fg, "simetria": "completa", "nombre": g["nombre"], "lado": ""}
+                n_fuentes = sum(len(p["fuentes"]) for p in partes.values())
+            elif modo in ("individual", "bilateral"):
+                if not fuentes:
+                    faltantes.append((sistema, destino, patrones))
+                    continue
+                partes = {}
+                for clave, (base, lado, objs) in agrupar_partes(fuentes, modo).items():
+                    partes[clave] = {"fuentes": objs, "nombre": terminos.espanol(base), "lado": lado,
+                                     "nombre_en": base}
+                n_fuentes = len(fuentes)
+            else:
+                if not fuentes:
+                    faltantes.append((sistema, destino, patrones))
+                    continue
+                obj, antes = preparar_organo(destino, fuentes, limite, escala, desplazamiento, not args.sin_origen,
+                                             soldar=soldar, simetria=simetria)
+                exportables.append(obj)
+                reporte.append((sistema, destino, len(fuentes), antes, contar_triangulos(obj)))
+                continue
+
+            if modo == "grupos" and definicion.get("dividir_superficie"):
+                vacio, objetos = dividir_superficie(destino, partes, limite, escala, desplazamiento, soldar)
+            else:
+                sin_reducir = re.compile(definicion["sin_reducir_regex"]) if definicion.get("sin_reducir_regex") else None
+                vacio, objetos = construir_organo_con_partes(destino, partes, limite, min_tris_parte, escala,
+                                                             desplazamiento, soldar, sin_reducir)
+            if vacio is None:
+                faltantes.append((sistema, destino, "(sin geometría)"))
+                continue
+            exportables.append(vacio)
+            exportables.extend(o for _, o in objetos)
+            for clave, o in objetos:
+                p = partes[clave]
+                lado = {"l": "izquierdo", "r": "derecho"}.get(p.get("lado", ""), "")
+                nombres_partes[o.name] = {"nombre": p["nombre"] + (f" (lado {lado})" if lado else ""),
+                                          "nombre_en": p.get("nombre_en", ""), "organo": destino}
+            despues = sum(contar_triangulos(o) for _, o in objetos)
+            reporte.append((sistema, f"{destino} [{len(objetos)} partes]", n_fuentes, 0, despues))
+
+        mallas = [o for o in exportables if o.type == "MESH"]
+        if not mallas:
             print(f"[AVISO] El sistema {sistema} no tiene objetos; no se exporta.")
             continue
-
-        # Altura del sistema (ayuda a comprobar la escala: un cuerpo adulto mide ~1.7 m)
-        zs = [(o.matrix_world @ v.co).z for o in procesados for v in o.data.vertices] or [0.0]
+        zs = [(o.matrix_world @ v.co).z for o in mallas for v in o.data.vertices] or [0.0]
         print(f"[INFO] {sistema}: altura {max(zs) - min(zs):.3f} m (Z de {min(zs):.3f} a {max(zs):.3f})")
 
         ruta = os.path.join(args.salida, f"{sistema}.glb")
         if args.simular:
             print(f"[SIMULAR] Se exportaría {ruta}")
         else:
-            exportar_glb(procesados, ruta)
+            exportar_glb(exportables, ruta)
             print(f"[OK] Exportado {ruta}")
+
+    if mapeo.get("salida_nombres") and not args.simular:
+        ruta_nombres = mapeo["salida_nombres"]
+        existentes = {}
+        if os.path.exists(ruta_nombres) and args.sistemas:
+            existentes = json.load(open(ruta_nombres, encoding="utf-8")).get("partes", {})
+        existentes.update(nombres_partes)
+        with open(ruta_nombres, "w", encoding="utf-8") as f:
+            json.dump({"_comentario": "Generado por tools/procesar_modelo.py: nombre en español de cada parte "
+                       "(id de nodo -> nombre, nombre en inglés y órgano al que pertenece). No editar a mano: "
+                       "las excepciones van en tools/mapeo_zanatomy.json -> nombres_es.",
+                       "partes": dict(sorted(existentes.items()))}, f, ensure_ascii=False, indent=1)
+        print(f"[OK] Nombres de {len(nombres_partes)} partes en {ruta_nombres}")
 
     # ----- Reporte final -----
     print("\n" + "=" * 78)
-    print(f"REPORTE DE TRIÁNGULOS (máximo por objeto: {max_tris})")
+    print(f"REPORTE DE TRIÁNGULOS (máximo por órgano: {max_tris})")
     print("=" * 78)
-    print(f"{'Sistema':<14}{'Objeto':<24}{'Fuentes':>8}{'Antes':>14}{'Después':>14}")
-    print("-" * 78)
     total = 0
     for sistema, destino, n, antes, despues in reporte:
-        print(f"{sistema:<14}{destino:<24}{n:>8}{antes:>14,}{despues:>14,}")
+        print(f"{sistema:<14}{destino:<40}{n:>6}{despues:>12,}")
         total += despues
     print("-" * 78)
-    print(f"{'TOTAL':<46}{total:>32,}")
+    print(f"{'TOTAL':<60}{total:>12,}")
+    if terminos.sin_traduccion:
+        print(f"\n[INFO] {len(terminos.sin_traduccion)} nombres sin traducción (quedan en inglés):")
+        print("   " + " | ".join(sorted(terminos.sin_traduccion)[:80]))
     if faltantes:
         print("\n[AVISO] Destinos sin coincidencias (revisa los nombres con --listar):")
         for sistema, destino, patrones in faltantes:

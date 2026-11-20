@@ -75,6 +75,15 @@ func configurar(cfg: Dictionary) -> void:
 	_saltar_a_deseado()
 
 
+## Permite acercarse mucho a estructuras diminutas (p. ej. el estribo, de ~3 mm) mientras
+## están aisladas; al desactivarlo se restauran los límites de data/camara.json.
+func permitir_acercamiento(activo: bool) -> void:
+	_distancia_min = 0.03 if activo else float(_cfg.get("distancia_min", 0.35))
+	near = 0.002 if activo else 0.02
+	if not activo:
+		distancia = maxf(distancia, _distancia_min)
+
+
 func objetivo_inicial() -> Vector3:
 	return _objetivo_inicial
 

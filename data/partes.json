@@ -1,0 +1,4220 @@
+{
+ "_comentario": "Generado por tools/procesar_modelo.py: nombre en español de cada parte (id de nodo -> nombre, nombre en inglés y órgano al que pertenece). No editar a mano: las excepciones van en tools/mapeo_zanatomy.json -> nombres_es.",
+ "partes": {
+  "Abdominales__Rectus_abdominis_muscle_Der": {
+   "nombre": "Músculo recto del abdomen (lado derecho)",
+   "nombre_en": "Rectus abdominis muscle",
+   "organo": "Abdominales"
+  },
+  "Abdominales__Rectus_abdominis_muscle_Izq": {
+   "nombre": "Músculo recto del abdomen (lado izquierdo)",
+   "nombre_en": "Rectus abdominis muscle",
+   "organo": "Abdominales"
+  },
+  "Aorta__Abdominal_aorta": {
+   "nombre": "Aorta abdominal",
+   "nombre_en": "Abdominal aorta",
+   "organo": "Aorta"
+  },
+  "Aorta__Aortic_arch": {
+   "nombre": "Arco aórtico",
+   "nombre_en": "Aortic arch",
+   "organo": "Aorta"
+  },
+  "Aorta__Ascending_aorta": {
+   "nombre": "Aorta ascendente",
+   "nombre_en": "Ascending aorta",
+   "organo": "Aorta"
+  },
+  "Aorta__Brachiocephalic_trunk": {
+   "nombre": "Tronco braquiocefálico",
+   "nombre_en": "Brachiocephalic trunk",
+   "organo": "Aorta"
+  },
+  "Aorta__Common_iliac_artery_Der": {
+   "nombre": "Arteria ilíaca común (lado derecho)",
+   "nombre_en": "Common iliac artery",
+   "organo": "Aorta"
+  },
+  "Aorta__Common_iliac_artery_Izq": {
+   "nombre": "Arteria ilíaca común (lado izquierdo)",
+   "nombre_en": "Common iliac artery",
+   "organo": "Aorta"
+  },
+  "Aorta__Left_common_carotid_artery": {
+   "nombre": "Arteria carótida común izquierda",
+   "nombre_en": "Left common carotid artery",
+   "organo": "Aorta"
+  },
+  "Aorta__Left_subclavian_artery": {
+   "nombre": "Arteria subclavia izquierda",
+   "nombre_en": "Left subclavian artery",
+   "organo": "Aorta"
+  },
+  "Aorta__Right_common_carotid_artery": {
+   "nombre": "Arteria carótida común derecha",
+   "nombre_en": "Right common carotid artery",
+   "organo": "Aorta"
+  },
+  "Aorta__Right_subclavian_artery": {
+   "nombre": "Arteria subclavia derecha",
+   "nombre_en": "Right subclavian artery",
+   "organo": "Aorta"
+  },
+  "Aorta__Thoracic_aorta": {
+   "nombre": "Aorta torácica",
+   "nombre_en": "Thoracic aorta",
+   "organo": "Aorta"
+  },
+  "BicepsDer__Long_head_of_biceps_brachii_Der": {
+   "nombre": "Cabeza larga del músculo bíceps braquial (lado derecho)",
+   "nombre_en": "Long head of biceps brachii",
+   "organo": "BicepsDer"
+  },
+  "BicepsDer__Short_head_of_biceps_brachii_Der": {
+   "nombre": "Cabeza corta músculo del bíceps braquial (lado derecho)",
+   "nombre_en": "Short head of biceps brachii",
+   "organo": "BicepsDer"
+  },
+  "BicepsIzq__Long_head_of_biceps_brachii_Izq": {
+   "nombre": "Cabeza larga del músculo bíceps braquial (lado izquierdo)",
+   "nombre_en": "Long head of biceps brachii",
+   "organo": "BicepsIzq"
+  },
+  "BicepsIzq__Short_head_of_biceps_brachii_Izq": {
+   "nombre": "Cabeza corta músculo del bíceps braquial (lado izquierdo)",
+   "nombre_en": "Short head of biceps brachii",
+   "organo": "BicepsIzq"
+  },
+  "CajaToracica__Body_of_sternum": {
+   "nombre": "Cuerpo del esternón",
+   "nombre_en": "Body of sternum",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_eighth_rib_Der": {
+   "nombre": "Cartílago costal de la octava costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of eighth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_eighth_rib_Izq": {
+   "nombre": "Cartílago costal de la octava costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of eighth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_fifth_rib_Der": {
+   "nombre": "Cartílago costal de la quinta costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of fifth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_fifth_rib_Izq": {
+   "nombre": "Cartílago costal de la quinta costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of fifth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_first_rib_Der": {
+   "nombre": "Cartílago costal de la primera costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of first rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_first_rib_Izq": {
+   "nombre": "Cartílago costal de la primera costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of first rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_fourth_rib_Der": {
+   "nombre": "Cartílago costal de la cuarta costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of fourth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_fourth_rib_Izq": {
+   "nombre": "Cartílago costal de la cuarta costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of fourth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_ninth_rib_Der": {
+   "nombre": "Cartílago costal de la novena costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of ninth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_ninth_rib_Izq": {
+   "nombre": "Cartílago costal de la novena costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of ninth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_second_rib_Der": {
+   "nombre": "Cartílago costal de la segunda costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of second rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_second_rib_Izq": {
+   "nombre": "Cartílago costal de la segunda costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of second rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_seventh_rib_Der": {
+   "nombre": "Cartílago costal de la séptima costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of seventh rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_seventh_rib_Izq": {
+   "nombre": "Cartílago costal de la séptima costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of seventh rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_sixth_rib_Der": {
+   "nombre": "Cartílago costal de la sexta costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of sixth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_sixth_rib_Izq": {
+   "nombre": "Cartílago costal de la sexta costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of sixth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_tenth_rib_Der": {
+   "nombre": "Cartílago costal de la décima costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of tenth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_tenth_rib_Izq": {
+   "nombre": "Cartílago costal de la décima costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of tenth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_third_rib_Der": {
+   "nombre": "Cartílago costal de la tercera costilla (lado derecho)",
+   "nombre_en": "Costal cartilage of third rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Costal_cartilage_of_third_rib_Izq": {
+   "nombre": "Cartílago costal de la tercera costilla (lado izquierdo)",
+   "nombre_en": "Costal cartilage of third rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Eighth_rib_Der": {
+   "nombre": "Octava costilla (lado derecho)",
+   "nombre_en": "Eighth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Eighth_rib_Izq": {
+   "nombre": "Octava costilla (lado izquierdo)",
+   "nombre_en": "Eighth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Eleventh_rib_Der": {
+   "nombre": "Undécima costilla (lado derecho)",
+   "nombre_en": "Eleventh rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Eleventh_rib_Izq": {
+   "nombre": "Undécima costilla (lado izquierdo)",
+   "nombre_en": "Eleventh rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Fifth_rib_Der": {
+   "nombre": "Quinta costilla (lado derecho)",
+   "nombre_en": "Fifth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Fifth_rib_Izq": {
+   "nombre": "Quinta costilla (lado izquierdo)",
+   "nombre_en": "Fifth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__First_rib_Der": {
+   "nombre": "Primera costilla (lado derecho)",
+   "nombre_en": "First rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__First_rib_Izq": {
+   "nombre": "Primera costilla (lado izquierdo)",
+   "nombre_en": "First rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Fourth_rib_Der": {
+   "nombre": "Cuarta costilla (lado derecho)",
+   "nombre_en": "Fourth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Fourth_rib_Izq": {
+   "nombre": "Cuarta costilla (lado izquierdo)",
+   "nombre_en": "Fourth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Manubrium_of_sternum": {
+   "nombre": "Manubrio del esternón",
+   "nombre_en": "Manubrium of sternum",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Ninth_rib_Der": {
+   "nombre": "Novena costilla (lado derecho)",
+   "nombre_en": "Ninth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Ninth_rib_Izq": {
+   "nombre": "Novena costilla (lado izquierdo)",
+   "nombre_en": "Ninth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Second_rib_Der": {
+   "nombre": "Segunda costilla (lado derecho)",
+   "nombre_en": "Second rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Second_rib_Izq": {
+   "nombre": "Segunda costilla (lado izquierdo)",
+   "nombre_en": "Second rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Seventh_rib_Der": {
+   "nombre": "Séptima costilla (lado derecho)",
+   "nombre_en": "Seventh rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Seventh_rib_Izq": {
+   "nombre": "Séptima costilla (lado izquierdo)",
+   "nombre_en": "Seventh rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Sixth_rib_Der": {
+   "nombre": "Sexta costilla (lado derecho)",
+   "nombre_en": "Sixth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Sixth_rib_Izq": {
+   "nombre": "Sexta costilla (lado izquierdo)",
+   "nombre_en": "Sixth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Tenth_rib_Der": {
+   "nombre": "Décima costilla (lado derecho)",
+   "nombre_en": "Tenth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Tenth_rib_Izq": {
+   "nombre": "Décima costilla (lado izquierdo)",
+   "nombre_en": "Tenth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Third_rib_Der": {
+   "nombre": "Tercera costilla (lado derecho)",
+   "nombre_en": "Third rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Third_rib_Izq": {
+   "nombre": "Tercera costilla (lado izquierdo)",
+   "nombre_en": "Third rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Twelfth_rib_Der": {
+   "nombre": "Duodécima costilla (lado derecho)",
+   "nombre_en": "Twelfth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Twelfth_rib_Izq": {
+   "nombre": "Duodécima costilla (lado izquierdo)",
+   "nombre_en": "Twelfth rib",
+   "organo": "CajaToracica"
+  },
+  "CajaToracica__Xiphoid_process": {
+   "nombre": "Proceso xifoides",
+   "nombre_en": "Xiphoid process",
+   "organo": "CajaToracica"
+  },
+  "Cerebelo__Anterior_quadrangular_lobule": {
+   "nombre": "Lóbulo cuadrangular anterior",
+   "nombre_en": "Anterior quadrangular lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Base_of_peduncle": {
+   "nombre": "Base del pedúnculo",
+   "nombre_en": "Base of peduncle",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Biventral_lobule": {
+   "nombre": "Lóbulo biventral",
+   "nombre_en": "Biventral lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Central_lobule": {
+   "nombre": "Lóbulo central",
+   "nombre_en": "Central lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Culmen": {
+   "nombre": "Culmen",
+   "nombre_en": "Culmen",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Declive": {
+   "nombre": "Declive",
+   "nombre_en": "Declive",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Flocculus": {
+   "nombre": "Flocculus",
+   "nombre_en": "Flocculus",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Folium_of_vermis": {
+   "nombre": "Folio del vermis",
+   "nombre_en": "Folium of vermis",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Gracile_lobule": {
+   "nombre": "Lóbulo grácil",
+   "nombre_en": "Gracile lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Inferior_semilunar_lobule": {
+   "nombre": "Lóbulo semilunar inferior",
+   "nombre_en": "Inferior semilunar lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Lingula_of_cerebellum": {
+   "nombre": "Lingula del cerebelo",
+   "nombre_en": "Lingula of cerebellum",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Nodule_of_vermis": {
+   "nombre": "Nódulo del vermis",
+   "nombre_en": "Nodule of vermis",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Peduncle_of_flocculus": {
+   "nombre": "Pedúnculo del flóculo",
+   "nombre_en": "Peduncle of flocculus",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Posterior_quadrangular_lobule": {
+   "nombre": "Lóbulo cuadrangular posterior",
+   "nombre_en": "Posterior quadrangular lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Pyramis_of_vermis": {
+   "nombre": "Pirámide del vermis",
+   "nombre_en": "Pyramis of vermis",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Superior_cerebellar_peduncle": {
+   "nombre": "Pedúnculo cerebeloso superior",
+   "nombre_en": "Superior cerebellar peduncle",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Superior_semilunar_lobule": {
+   "nombre": "Lóbulo semilunar superior",
+   "nombre_en": "Superior semilunar lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Tonsil_of_cerebellum": {
+   "nombre": "Amígdala del cerebelo",
+   "nombre_en": "Tonsil of cerebellum",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Tuber_of_vermis": {
+   "nombre": "Tubérculo del vermis",
+   "nombre_en": "Tuber of vermis",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Uvula_of_vermis": {
+   "nombre": "Úvula del vermis",
+   "nombre_en": "Uvula of vermis",
+   "organo": "Cerebelo"
+  },
+  "Cerebelo__Wing_of_central_lobule": {
+   "nombre": "Ala del lóbulo central",
+   "nombre_en": "Wing of central lobule",
+   "organo": "Cerebelo"
+  },
+  "Cerebro__Amygdaloid_body": {
+   "nombre": "Cuerpo amigdaloide",
+   "nombre_en": "Amygdaloid body",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Angular_gyrus": {
+   "nombre": "Giro angular",
+   "nombre_en": "Angular gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Anterior_commissure": {
+   "nombre": "Comisura anterior",
+   "nombre_en": "Anterior commissure",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Anterior_occipital_sulcus": {
+   "nombre": "Anterior occipital sulcus*",
+   "nombre_en": "Anterior occipital sulcus*",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Calcarine_sulcus": {
+   "nombre": "Surco calcarino",
+   "nombre_en": "Calcarine sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Caudate_nucleus": {
+   "nombre": "Núcleo caudado",
+   "nombre_en": "Caudate nucleus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Central_sulcus": {
+   "nombre": "Surco central",
+   "nombre_en": "Central sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Cingulate_gyrus_Posteroventral_part": {
+   "nombre": "Cingulate gyrus (Posteroventral part*)",
+   "nombre_en": "Cingulate gyrus (Posteroventral part*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Cingulate_gyrus_and_sulcus_Middle_anterior_part": {
+   "nombre": "Cingulate gyrus and sulcus (Middle anterior part)",
+   "nombre_en": "Cingulate gyrus and sulcus (Middle anterior part)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Cingulate_gyrus_and_sulcus_Middle_posterior_part": {
+   "nombre": "Cingulate gyrus and sulcus (Middle posterior part)",
+   "nombre_en": "Cingulate gyrus and sulcus (Middle posterior part)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Cingulate_gyrus_and_sulcus_Posterior_dorsal_part": {
+   "nombre": "Cingulate gyrus and sulcus (Posterior dorsal part)",
+   "nombre_en": "Cingulate gyrus and sulcus (Posterior dorsal part)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Cingulate_sulcus_Marginal_part": {
+   "nombre": "Cingulate sulcus (Marginal part*)",
+   "nombre_en": "Cingulate sulcus (Marginal part*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Circular_sulcus_of_insula": {
+   "nombre": "Surco circular de la ínsula",
+   "nombre_en": "Circular sulcus of insula",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Collateral_sulcus": {
+   "nombre": "Surco colateral",
+   "nombre_en": "Collateral sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Corpus_callosum": {
+   "nombre": "Cuerpo calloso",
+   "nombre_en": "Corpus callosum",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Cuneus": {
+   "nombre": "Cuneus",
+   "nombre_en": "Cuneus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Fornix": {
+   "nombre": "Fornix",
+   "nombre_en": "Fornix",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Globus_pallidus": {
+   "nombre": "Globo pálido",
+   "nombre_en": "Globus pallidus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Habenula": {
+   "nombre": "Habénula",
+   "nombre_en": "Habenula",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Hippocampal_commissure": {
+   "nombre": "Comisura hipocampal",
+   "nombre_en": "Hippocampal commissure",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Hippocampus": {
+   "nombre": "Hipocampo",
+   "nombre_en": "Hippocampus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Hypothalamus": {
+   "nombre": "Hipotálamo",
+   "nombre_en": "Hypothalamus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Inferior_frontal_sulcus": {
+   "nombre": "Surco frontal inferior",
+   "nombre_en": "Inferior frontal sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Inferior_occipital_gyrus_and_sulcus": {
+   "nombre": "Inferior occipital gyrus and sulcus*",
+   "nombre_en": "Inferior occipital gyrus and sulcus*",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Inferior_temporal_gyrus": {
+   "nombre": "Giro temporal inferior",
+   "nombre_en": "Inferior temporal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Inferior_temporal_sulcus": {
+   "nombre": "Surco temporal inferior",
+   "nombre_en": "Inferior temporal sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Insula_Subcentral_gyrus_and_ant_and_post_sulci": {
+   "nombre": "Insula (Subcentral gyrus and ant. and post. sulci*)",
+   "nombre_en": "Insula (Subcentral gyrus and ant. and post. sulci*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Intraparietal_sulcus": {
+   "nombre": "Surco intraparietal",
+   "nombre_en": "Intraparietal sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lat_Fis_ant_Horizont": {
+   "nombre": "Lat_Fis-ant-Horizont",
+   "nombre_en": "Lat_Fis-ant-Horizont",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lat_Fis_ant_Vertical": {
+   "nombre": "Lat_Fis-ant-Vertical",
+   "nombre_en": "Lat_Fis-ant-Vertical",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lat_Fis_post": {
+   "nombre": "Lat_Fis-post",
+   "nombre_en": "Lat_Fis-post",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lateral_geniculate_body": {
+   "nombre": "Cuerpo geniculado lateral",
+   "nombre_en": "Lateral geniculate body",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lateral_occipital_gyrus_Middle_occipital_gyrus": {
+   "nombre": "Lateral occipital gyrus (Middle occipital gyrus*)",
+   "nombre_en": "Lateral occipital gyrus (Middle occipital gyrus*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lateral_occipitotemporal_gyrus": {
+   "nombre": "Giro occipitotemporal lateral",
+   "nombre_en": "Lateral occipitotemporal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lateral_ventricle": {
+   "nombre": "Ventrículo lateral",
+   "nombre_en": "Lateral ventricle",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lentiform_nucleus": {
+   "nombre": "Núcleo lentiforme",
+   "nombre_en": "Lentiform nucleus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lingual_gyrus": {
+   "nombre": "Giro lingual",
+   "nombre_en": "Lingual gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Lunate_sulcus": {
+   "nombre": "Lunate sulcus",
+   "nombre_en": "Lunate sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Mamillary_body": {
+   "nombre": "Cuerpo mamilar",
+   "nombre_en": "Mamillary body",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Medial_geniculate_body": {
+   "nombre": "Cuerpo geniculado medial",
+   "nombre_en": "Medial geniculate body",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Medial_occipitotemporal_gyrus_Parahippocampal": {
+   "nombre": "Medial occipitotemporal gyrus (Parahippocampal*)",
+   "nombre_en": "Medial occipitotemporal gyrus (Parahippocampal*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Middle_frontal_gyrus": {
+   "nombre": "Giro frontal medio",
+   "nombre_en": "Middle frontal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Middle_temporal_gyrus": {
+   "nombre": "Giro temporal medio",
+   "nombre_en": "Middle temporal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Occipital_pole": {
+   "nombre": "Polo occipital",
+   "nombre_en": "Occipital pole",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Occipitotemporal_sulcus_Lateral_part": {
+   "nombre": "Occipitotemporal sulcus (Lateral part*)",
+   "nombre_en": "Occipitotemporal sulcus (Lateral part*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Olfactory_sulcus": {
+   "nombre": "Surco olfatorio",
+   "nombre_en": "Olfactory sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Opercular_part_of_inferior_frontal_gyrus": {
+   "nombre": "Parte opercular del giro frontal inferior",
+   "nombre_en": "Opercular part of inferior frontal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Optic_chiasm": {
+   "nombre": "Quiasma óptico",
+   "nombre_en": "Optic chiasm",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Optic_tract": {
+   "nombre": "Tracto óptico",
+   "nombre_en": "Optic tract",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Orbital_gyri": {
+   "nombre": "Giros orbitales",
+   "nombre_en": "Orbital gyri",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Orbital_gyri_Frontomarginal_gyrus_and_sulcus": {
+   "nombre": "Orbital gyri (Frontomarginal gyrus and sulcus*)",
+   "nombre_en": "Orbital gyri (Frontomarginal gyrus and sulcus*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Orbital_part_of_inferior_frontal_gyrus": {
+   "nombre": "Orbital part of  inferior frontal gyrus",
+   "nombre_en": "Orbital part of  inferior frontal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Orbital_sulci_H_shaped_orbital_sulci": {
+   "nombre": "Orbital sulci (H-shaped orbital sulci*)",
+   "nombre_en": "Orbital sulci (H-shaped orbital sulci*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Orbital_sulci_Lateral_Orbital_sulcus": {
+   "nombre": "Orbital sulci (Lateral Orbital sulcus*)",
+   "nombre_en": "Orbital sulci (Lateral Orbital sulcus*)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Paracentral_gyrus_and_sulcus": {
+   "nombre": "Paracentral gyrus and sulcus*",
+   "nombre_en": "Paracentral gyrus and sulcus*",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Paracentral_sulcus": {
+   "nombre": "Surco paracentral",
+   "nombre_en": "Paracentral sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Parieto_occipital_sulcus": {
+   "nombre": "Surco parieto-occipital",
+   "nombre_en": "Parieto-occipital sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Postcentral_gyrus": {
+   "nombre": "Giro poscentral",
+   "nombre_en": "Postcentral gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Postcentral_sulcus": {
+   "nombre": "Surco poscentral",
+   "nombre_en": "Postcentral sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Posterior_commissure": {
+   "nombre": "Comisura posterior",
+   "nombre_en": "Posterior commissure",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Posterior_transverse_collateral_sulcus": {
+   "nombre": " Posterior transverse collateral sulcus",
+   "nombre_en": " Posterior transverse collateral sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Precentral_gyrus": {
+   "nombre": "Giro precentral",
+   "nombre_en": "Precentral gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Precentral_sulcus_Superior_part": {
+   "nombre": "Precentral sulcus (Superior part)*",
+   "nombre_en": "Precentral sulcus (Superior part)*",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Precentral_sulcus_inferior_part": {
+   "nombre": "Precentral sulcus (inferior part)*",
+   "nombre_en": "Precentral sulcus (inferior part)*",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Precuneus": {
+   "nombre": "Precuneus",
+   "nombre_en": "Precuneus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Putamen": {
+   "nombre": "Putamen",
+   "nombre_en": "Putamen",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Septal_nuclei": {
+   "nombre": "Núcleos septales",
+   "nombre_en": "Septal nuclei",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Septum_pellucidum": {
+   "nombre": "Septum pellucidum",
+   "nombre_en": "Septum pellucidum",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Straight_gyrus_Gyrus_rectus": {
+   "nombre": "Straight gyrus (Gyrus rectus)",
+   "nombre_en": "Straight gyrus (Gyrus rectus)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Stria_medullaris_thalami": {
+   "nombre": "Estrías talámicas medulares",
+   "nombre_en": "Stria medullaris thalami",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Stria_terminalis": {
+   "nombre": "Stria terminalis",
+   "nombre_en": "Stria terminalis",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Subparietal_sulcus": {
+   "nombre": "Surco subparietal",
+   "nombre_en": "Subparietal sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Sulcus_interm_prim_Jensen": {
+   "nombre": "Sulcus interm_prim-Jensen",
+   "nombre_en": "Sulcus interm_prim-Jensen",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Superior_frontal_gyrus": {
+   "nombre": "Giro frontal superior",
+   "nombre_en": "Superior frontal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Superior_frontal_sulcus": {
+   "nombre": "Surco frontal superior",
+   "nombre_en": "Superior frontal sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Superior_occipital_gyri": {
+   "nombre": "Giros occipitales superiores",
+   "nombre_en": "Superior occipital gyri",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Superior_parietal_lobule": {
+   "nombre": "Lóbulo parietal superior",
+   "nombre_en": "Superior parietal lobule",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Superior_temporal_gyrus_Lateral_part": {
+   "nombre": "Superior temporal gyrus (Lateral part)",
+   "nombre_en": "Superior temporal gyrus (Lateral part)",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Superior_temporal_sulcus": {
+   "nombre": "Surco temporal superior",
+   "nombre_en": "Superior temporal sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Supramarginal_gyrus": {
+   "nombre": "Giro supramarginal",
+   "nombre_en": "Supramarginal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Temporal_plane": {
+   "nombre": "Plano temporal",
+   "nombre_en": "Temporal plane",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Temporal_pole": {
+   "nombre": "Polo temporal",
+   "nombre_en": "Temporal pole",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Thalamus": {
+   "nombre": "Tálamo",
+   "nombre_en": "Thalamus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Third_ventricle": {
+   "nombre": "Tercer ventrículo",
+   "nombre_en": "Third ventricle",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Transverse_frontopolar_gyrus_and_sulcus": {
+   "nombre": "Transverse frontopolar gyrus and sulcus*",
+   "nombre_en": "Transverse frontopolar gyrus and sulcus*",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Transverse_occipital_sulcus": {
+   "nombre": "Surco occipital transversal",
+   "nombre_en": "Transverse occipital sulcus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Transverse_temporal_gyri": {
+   "nombre": "Giros temporales transversos",
+   "nombre_en": "Transverse temporal gyri",
+   "organo": "Cerebro"
+  },
+  "Cerebro__Triangular_part_of_inferior_frontal_gyrus": {
+   "nombre": "Parte triangular del giro frontal inferior",
+   "nombre_en": "Triangular part of inferior frontal gyrus",
+   "organo": "Cerebro"
+  },
+  "Cerebro__White_matter_of_telencephalon": {
+   "nombre": "Sustancia blanca del telencéfalo",
+   "nombre_en": "White matter of telencephalon",
+   "organo": "Cerebro"
+  },
+  "Claviculas__Clavicle_Der": {
+   "nombre": "Clavícula (lado derecho)",
+   "nombre_en": "Clavicle",
+   "organo": "Claviculas"
+  },
+  "Claviculas__Clavicle_Izq": {
+   "nombre": "Clavícula (lado izquierdo)",
+   "nombre_en": "Clavicle",
+   "organo": "Claviculas"
+  },
+  "ColumnaVertebral__Atlas_C1": {
+   "nombre": "Atlas (C1)",
+   "nombre_en": "Atlas (C1)",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Axis_C2": {
+   "nombre": "Axis (C2)",
+   "nombre_en": "Axis (C2)",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_C3": {
+   "nombre": "Vértebra C3",
+   "nombre_en": "Vertebra C3",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_C4": {
+   "nombre": "Vértebra C4",
+   "nombre_en": "Vertebra C4",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_C5": {
+   "nombre": "Vértebra C5",
+   "nombre_en": "Vertebra C5",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_C6": {
+   "nombre": "Vértebra C6",
+   "nombre_en": "Vertebra C6",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_C7": {
+   "nombre": "Vértebra C7",
+   "nombre_en": "Vertebra C7",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_L1": {
+   "nombre": "Vértebra L1",
+   "nombre_en": "Vertebra L1",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_L2": {
+   "nombre": "Vértebra L2",
+   "nombre_en": "Vertebra L2",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_L3": {
+   "nombre": "Vértebra L3",
+   "nombre_en": "Vertebra L3",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_L4": {
+   "nombre": "Vértebra L4",
+   "nombre_en": "Vertebra L4",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_L5": {
+   "nombre": "Vértebra L5",
+   "nombre_en": "Vertebra L5",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T1": {
+   "nombre": "Vértebra T1",
+   "nombre_en": "Vertebra T1",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T10": {
+   "nombre": "Vértebra T10",
+   "nombre_en": "Vertebra T10",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T11": {
+   "nombre": "Vértebra T11",
+   "nombre_en": "Vertebra T11",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T12": {
+   "nombre": "Vértebra T12",
+   "nombre_en": "Vertebra T12",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T2": {
+   "nombre": "Vértebra T2",
+   "nombre_en": "Vertebra T2",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T3": {
+   "nombre": "Vértebra T3",
+   "nombre_en": "Vertebra T3",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T4": {
+   "nombre": "Vértebra T4",
+   "nombre_en": "Vertebra T4",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T5": {
+   "nombre": "Vértebra T5",
+   "nombre_en": "Vertebra T5",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T6": {
+   "nombre": "Vértebra T6",
+   "nombre_en": "Vertebra T6",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T7": {
+   "nombre": "Vértebra T7",
+   "nombre_en": "Vertebra T7",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T8": {
+   "nombre": "Vértebra T8",
+   "nombre_en": "Vertebra T8",
+   "organo": "ColumnaVertebral"
+  },
+  "ColumnaVertebral__Vertebra_T9": {
+   "nombre": "Vértebra T9",
+   "nombre_en": "Vertebra T9",
+   "organo": "ColumnaVertebral"
+  },
+  "Corazon__Anterior_papillary_muscle_of_right_ventricle": {
+   "nombre": "Músculo papilar anterior del ventrículo derecho",
+   "nombre_en": "Anterior papillary muscle of right ventricle",
+   "organo": "Corazon"
+  },
+  "Corazon__Anterior_semilunar_leaflet_of_pulmonary_valve": {
+   "nombre": "Válvula semilunar anterior de la valva pulmonar",
+   "nombre_en": "Anterior semilunar leaflet of pulmonary valve",
+   "organo": "Corazon"
+  },
+  "Corazon__Inferior_leaflet_of_right_atrioventricular_valve": {
+   "nombre": "Válvula posterior de la valva atrioventricular derecha",
+   "nombre_en": "Inferior leaflet of right atrioventricular valve",
+   "organo": "Corazon"
+  },
+  "Corazon__Inferior_papillary_muscle_of_left_ventricle": {
+   "nombre": "Músculo papilar inferior del ventrículo izquierdo",
+   "nombre_en": "Inferior papillary muscle of left ventricle",
+   "organo": "Corazon"
+  },
+  "Corazon__Inferior_papillary_muscle_of_right_ventricle": {
+   "nombre": "Músculo papilar posterior del ventrículo derecho",
+   "nombre_en": "Inferior papillary muscle of right ventricle",
+   "organo": "Corazon"
+  },
+  "Corazon__Left_atrium": {
+   "nombre": "Atrio izquierdo",
+   "nombre_en": "Left atrium",
+   "organo": "Corazon"
+  },
+  "Corazon__Left_coronary_leaflet": {
+   "nombre": "Válvula coronaria aórtica izquierda",
+   "nombre_en": "Left coronary leaflet",
+   "organo": "Corazon"
+  },
+  "Corazon__Left_pulmonary_artery": {
+   "nombre": "Arteria pulmonar izquierda",
+   "nombre_en": "Left pulmonary artery",
+   "organo": "Corazon"
+  },
+  "Corazon__Left_semilunar_leaflet_of_pulmonary_valve": {
+   "nombre": "Válvula semilunar izquierda de la valva pulmonar",
+   "nombre_en": "Left semilunar leaflet of pulmonary valve",
+   "organo": "Corazon"
+  },
+  "Corazon__Left_ventricle": {
+   "nombre": "Ventrículo izquierdo",
+   "nombre_en": "Left ventricle",
+   "organo": "Corazon"
+  },
+  "Corazon__Non_coronary_leaflet": {
+   "nombre": "Válvula no coronaria de la valva aórtica",
+   "nombre_en": "Non-coronary leaflet",
+   "organo": "Corazon"
+  },
+  "Corazon__Posterior_leaflet_of_left_atrioventricular_valve": {
+   "nombre": "Válvula posterior de la valva atrioventricular izquierda",
+   "nombre_en": "Posterior leaflet of left atrioventricular valve",
+   "organo": "Corazon"
+  },
+  "Corazon__Pulmonary_trunk": {
+   "nombre": "Tronco pulmonar",
+   "nombre_en": "Pulmonary trunk",
+   "organo": "Corazon"
+  },
+  "Corazon__Right_atrium": {
+   "nombre": "Atrio derecho",
+   "nombre_en": "Right atrium",
+   "organo": "Corazon"
+  },
+  "Corazon__Right_coronary_leaflet": {
+   "nombre": "Válvula coronaria aórtica derecha",
+   "nombre_en": "Right coronary leaflet",
+   "organo": "Corazon"
+  },
+  "Corazon__Right_pulmonary_artery": {
+   "nombre": "Arteria pulmonar derecha",
+   "nombre_en": "Right pulmonary artery",
+   "organo": "Corazon"
+  },
+  "Corazon__Right_semilunar_leaflet_of_pulmonary_valve": {
+   "nombre": "Válvula semilunar derecha de la valva pulmonar",
+   "nombre_en": "Right semilunar leaflet of pulmonary valve",
+   "organo": "Corazon"
+  },
+  "Corazon__Right_ventricle": {
+   "nombre": "Ventrículo derecho",
+   "nombre_en": "Right ventricle",
+   "organo": "Corazon"
+  },
+  "Corazon__Septal_leaflet_of_right_atrioventricular_valve": {
+   "nombre": "Válvula septal de la valva atrioventricular derecha",
+   "nombre_en": "Septal leaflet of right atrioventricular valve",
+   "organo": "Corazon"
+  },
+  "Corazon__Septal_papillary_muscle_of_right_ventricle": {
+   "nombre": "Musculo papilar septal del ventrículo derecho",
+   "nombre_en": "Septal papillary muscle of right ventricle",
+   "organo": "Corazon"
+  },
+  "Craneo__Ethmoid_bone": {
+   "nombre": "Hueso etmoides",
+   "nombre_en": "Ethmoid bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Frontal_bone": {
+   "nombre": "Hueso frontal",
+   "nombre_en": "Frontal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Incus_Der": {
+   "nombre": "Yunque (lado derecho)",
+   "nombre_en": "Incus",
+   "organo": "Craneo"
+  },
+  "Craneo__Incus_Izq": {
+   "nombre": "Yunque (lado izquierdo)",
+   "nombre_en": "Incus",
+   "organo": "Craneo"
+  },
+  "Craneo__Inferior_nasal_concha_bone_Der": {
+   "nombre": "Hueso concha nasal inferior (lado derecho)",
+   "nombre_en": "Inferior nasal concha bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Inferior_nasal_concha_bone_Izq": {
+   "nombre": "Hueso concha nasal inferior (lado izquierdo)",
+   "nombre_en": "Inferior nasal concha bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Lacrimal_bone_Der": {
+   "nombre": "Hueso lagrimal (lado derecho)",
+   "nombre_en": "Lacrimal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Lacrimal_bone_Izq": {
+   "nombre": "Hueso lagrimal (lado izquierdo)",
+   "nombre_en": "Lacrimal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Lateral_process_of_nasal_septal_cartilage_Der": {
+   "nombre": "Proceso lateral del cartílago septal nasal (lado derecho)",
+   "nombre_en": "Lateral process of nasal septal cartilage",
+   "organo": "Craneo"
+  },
+  "Craneo__Lateral_process_of_nasal_septal_cartilage_Izq": {
+   "nombre": "Proceso lateral del cartílago septal nasal (lado izquierdo)",
+   "nombre_en": "Lateral process of nasal septal cartilage",
+   "organo": "Craneo"
+  },
+  "Craneo__Major_alar_cartilage_Der": {
+   "nombre": "Cartílago alar mayor (lado derecho)",
+   "nombre_en": "Major alar cartilage",
+   "organo": "Craneo"
+  },
+  "Craneo__Major_alar_cartilage_Izq": {
+   "nombre": "Cartílago alar mayor (lado izquierdo)",
+   "nombre_en": "Major alar cartilage",
+   "organo": "Craneo"
+  },
+  "Craneo__Malleus_Der": {
+   "nombre": "Martillo (lado derecho)",
+   "nombre_en": "Malleus",
+   "organo": "Craneo"
+  },
+  "Craneo__Malleus_Izq": {
+   "nombre": "Martillo (lado izquierdo)",
+   "nombre_en": "Malleus",
+   "organo": "Craneo"
+  },
+  "Craneo__Mandible": {
+   "nombre": "Mandíbula",
+   "nombre_en": "Mandible",
+   "organo": "Craneo"
+  },
+  "Craneo__Maxilla_Der": {
+   "nombre": "Hueso maxilar (lado derecho)",
+   "nombre_en": "Maxilla",
+   "organo": "Craneo"
+  },
+  "Craneo__Maxilla_Izq": {
+   "nombre": "Hueso maxilar (lado izquierdo)",
+   "nombre_en": "Maxilla",
+   "organo": "Craneo"
+  },
+  "Craneo__Nasal_bone_Der": {
+   "nombre": "Hueso nasal (lado derecho)",
+   "nombre_en": "Nasal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Nasal_bone_Izq": {
+   "nombre": "Hueso nasal (lado izquierdo)",
+   "nombre_en": "Nasal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Nasal_septal_cartilage": {
+   "nombre": "Cartílago del septo nasal",
+   "nombre_en": "Nasal septal cartilage",
+   "organo": "Craneo"
+  },
+  "Craneo__Occipital_bone": {
+   "nombre": "Hueso occipital",
+   "nombre_en": "Occipital bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Palatine_bone_Der": {
+   "nombre": "Hueso palatino (lado derecho)",
+   "nombre_en": "Palatine bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Palatine_bone_Izq": {
+   "nombre": "Hueso palatino (lado izquierdo)",
+   "nombre_en": "Palatine bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Parietal_bone_Der": {
+   "nombre": "Hueso parietal (lado derecho)",
+   "nombre_en": "Parietal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Parietal_bone_Izq": {
+   "nombre": "Hueso parietal (lado izquierdo)",
+   "nombre_en": "Parietal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Sinus_of_frontal_bone": {
+   "nombre": "Seno del hueso frontal",
+   "nombre_en": "Sinus of frontal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Sinus_of_sphenoid_bone": {
+   "nombre": "Seno del hueso esfenoidal",
+   "nombre_en": "Sinus of sphenoid bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Sphenoid_bone": {
+   "nombre": "Hueso esfenoide",
+   "nombre_en": "Sphenoid bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Stapes_Der": {
+   "nombre": "Estribo (lado derecho)",
+   "nombre_en": "Stapes",
+   "organo": "Craneo"
+  },
+  "Craneo__Stapes_Izq": {
+   "nombre": "Estribo (lado izquierdo)",
+   "nombre_en": "Stapes",
+   "organo": "Craneo"
+  },
+  "Craneo__Temporal_bone_Der": {
+   "nombre": "Hueso temporal (lado derecho)",
+   "nombre_en": "Temporal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Temporal_bone_Izq": {
+   "nombre": "Hueso temporal (lado izquierdo)",
+   "nombre_en": "Temporal bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_canine_Der": {
+   "nombre": "Diente canino superior (lado derecho)",
+   "nombre_en": "Upper canine",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_canine_Izq": {
+   "nombre": "Diente canino superior (lado izquierdo)",
+   "nombre_en": "Upper canine",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_first_molar_tooth_Der": {
+   "nombre": "Diente primer molar superior (lado derecho)",
+   "nombre_en": "Upper first molar tooth",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_first_molar_tooth_Izq": {
+   "nombre": "Diente primer molar superior (lado izquierdo)",
+   "nombre_en": "Upper first molar tooth",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_first_premolar_Der": {
+   "nombre": "Diente primer premolar superior (lado derecho)",
+   "nombre_en": "Upper first premolar",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_first_premolar_Izq": {
+   "nombre": "Diente primer premolar superior (lado izquierdo)",
+   "nombre_en": "Upper first premolar",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_lateral_incisor_Der": {
+   "nombre": "Diente incisivo superolateral (lado derecho)",
+   "nombre_en": "Upper lateral incisor",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_lateral_incisor_Izq": {
+   "nombre": "Diente incisivo superolateral (lado izquierdo)",
+   "nombre_en": "Upper lateral incisor",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_medial_incisor_Der": {
+   "nombre": "Diente incisivo superomedial (lado derecho)",
+   "nombre_en": "Upper medial incisor",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_medial_incisor_Izq": {
+   "nombre": "Diente incisivo superomedial (lado izquierdo)",
+   "nombre_en": "Upper medial incisor",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_second_molar_tooth_Der": {
+   "nombre": "Diente segundo molar superior (lado derecho)",
+   "nombre_en": "Upper second molar tooth",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_second_molar_tooth_Izq": {
+   "nombre": "Diente segundo molar superior (lado izquierdo)",
+   "nombre_en": "Upper second molar tooth",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_second_premolar_Der": {
+   "nombre": "Diente segundo premolar superior (lado derecho)",
+   "nombre_en": "Upper second premolar",
+   "organo": "Craneo"
+  },
+  "Craneo__Upper_second_premolar_Izq": {
+   "nombre": "Diente segundo premolar superior (lado izquierdo)",
+   "nombre_en": "Upper second premolar",
+   "organo": "Craneo"
+  },
+  "Craneo__Vomer": {
+   "nombre": "Vómer",
+   "nombre_en": "Vomer",
+   "organo": "Craneo"
+  },
+  "Craneo__Zygomatic_bone_Der": {
+   "nombre": "Hueso cigomático (lado derecho)",
+   "nombre_en": "Zygomatic bone",
+   "organo": "Craneo"
+  },
+  "Craneo__Zygomatic_bone_Izq": {
+   "nombre": "Hueso cigomático (lado izquierdo)",
+   "nombre_en": "Zygomatic bone",
+   "organo": "Craneo"
+  },
+  "CuadricepsDer__Rectus_femoris_muscle_Der": {
+   "nombre": "Músculo recto femoral (lado derecho)",
+   "nombre_en": "Rectus femoris muscle",
+   "organo": "CuadricepsDer"
+  },
+  "CuadricepsDer__Vastus_intermedius_muscle_Der": {
+   "nombre": "Músculo vasto intermedio (lado derecho)",
+   "nombre_en": "Vastus intermedius muscle",
+   "organo": "CuadricepsDer"
+  },
+  "CuadricepsDer__Vastus_lateralis_muscle_Der": {
+   "nombre": "Músculo vasto lateral (lado derecho)",
+   "nombre_en": "Vastus lateralis muscle",
+   "organo": "CuadricepsDer"
+  },
+  "CuadricepsDer__Vastus_medialis_muscle_Der": {
+   "nombre": "Músculo vasto medial (lado derecho)",
+   "nombre_en": "Vastus medialis muscle",
+   "organo": "CuadricepsDer"
+  },
+  "CuadricepsIzq__Rectus_femoris_muscle_Izq": {
+   "nombre": "Músculo recto femoral (lado izquierdo)",
+   "nombre_en": "Rectus femoris muscle",
+   "organo": "CuadricepsIzq"
+  },
+  "CuadricepsIzq__Vastus_intermedius_muscle_Izq": {
+   "nombre": "Músculo vasto intermedio (lado izquierdo)",
+   "nombre_en": "Vastus intermedius muscle",
+   "organo": "CuadricepsIzq"
+  },
+  "CuadricepsIzq__Vastus_lateralis_muscle_Izq": {
+   "nombre": "Músculo vasto lateral (lado izquierdo)",
+   "nombre_en": "Vastus lateralis muscle",
+   "organo": "CuadricepsIzq"
+  },
+  "CuadricepsIzq__Vastus_medialis_muscle_Izq": {
+   "nombre": "Músculo vasto medial (lado izquierdo)",
+   "nombre_en": "Vastus medialis muscle",
+   "organo": "CuadricepsIzq"
+  },
+  "Deltoides__Acromial_part_of_deltoid_muscle_Der": {
+   "nombre": "Porción acromial del músculo deltoides (lado derecho)",
+   "nombre_en": "Acromial part of deltoid muscle",
+   "organo": "Deltoides"
+  },
+  "Deltoides__Acromial_part_of_deltoid_muscle_Izq": {
+   "nombre": "Porción acromial del músculo deltoides (lado izquierdo)",
+   "nombre_en": "Acromial part of deltoid muscle",
+   "organo": "Deltoides"
+  },
+  "Deltoides__Clavicular_part_of_deltoid_muscle_Der": {
+   "nombre": "Porción clavicular del músculo deltoides (lado derecho)",
+   "nombre_en": "Clavicular part of deltoid muscle",
+   "organo": "Deltoides"
+  },
+  "Deltoides__Clavicular_part_of_deltoid_muscle_Izq": {
+   "nombre": "Porción clavicular del músculo deltoides (lado izquierdo)",
+   "nombre_en": "Clavicular part of deltoid muscle",
+   "organo": "Deltoides"
+  },
+  "Deltoides__Scapular_spinal_part_of_deltoid_muscle_Der": {
+   "nombre": "Porción espinal escapular del músculo deltoides (lado derecho)",
+   "nombre_en": "Scapular spinal part of deltoid muscle",
+   "organo": "Deltoides"
+  },
+  "Deltoides__Scapular_spinal_part_of_deltoid_muscle_Izq": {
+   "nombre": "Porción espinal escapular del músculo deltoides (lado izquierdo)",
+   "nombre_en": "Scapular spinal part of deltoid muscle",
+   "organo": "Deltoides"
+  },
+  "Dorsal__Latissimus_dorsi_muscle_Der": {
+   "nombre": "Músculo latísimo del dorso (lado derecho)",
+   "nombre_en": "Latissimus dorsi muscle",
+   "organo": "Dorsal"
+  },
+  "Dorsal__Latissimus_dorsi_muscle_Izq": {
+   "nombre": "Músculo latísimo del dorso (lado izquierdo)",
+   "nombre_en": "Latissimus dorsi muscle",
+   "organo": "Dorsal"
+  },
+  "EncefaloYSentidos__Ampulla_of_lacrimal_canaliculus": {
+   "nombre": "Ampulla del canalículo lacrimal",
+   "nombre_en": "Ampulla of lacrimal canaliculus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_chamber_of_eyeball": {
+   "nombre": "Cámara anterior del globo ocular",
+   "nombre_en": "Anterior chamber of eyeball",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_cochlear_nucleus": {
+   "nombre": "Núcleo coclear anterior",
+   "nombre_en": "Anterior cochlear nucleus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_corticospinal_tract": {
+   "nombre": "Tracto corticoespinal anterior",
+   "nombre_en": "Anterior corticospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_fasciculus_proprius": {
+   "nombre": "Fascículo anterior propio",
+   "nombre_en": "Anterior fasciculus proprius",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_horn_of_spinal_cord": {
+   "nombre": "Cuerno anterior de la médula espinal",
+   "nombre_en": "Anterior horn of spinal cord",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_segment_of_eyeball": {
+   "nombre": "Segmento anterior del globo ocular",
+   "nombre_en": "Anterior segment of eyeball",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_spinocerebellar_tract": {
+   "nombre": "Tracto espinocerebeloso anterior",
+   "nombre_en": "Anterior spinocerebellar tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Anterior_spinothalamic_tract": {
+   "nombre": "Tracto espinotalámico anterior",
+   "nombre_en": "Anterior spinothalamic tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Aqueduct_of_midbrain": {
+   "nombre": "Acueducto del mesencéfalo",
+   "nombre_en": "Aqueduct of midbrain",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Auditory_tube": {
+   "nombre": "Tuba auditiva",
+   "nombre_en": "Auditory tube",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Cauda_equina": {
+   "nombre": "Cauda equina",
+   "nombre_en": "Cauda equina",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Central_canal": {
+   "nombre": "Central canal'",
+   "nombre_en": "Central canal'",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Chorda_tympani": {
+   "nombre": "Cuerda del tímpano",
+   "nombre_en": "Chorda tympani",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Cochlea": {
+   "nombre": "Cóclea",
+   "nombre_en": "Cochlea",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Cornea": {
+   "nombre": "Córnea",
+   "nombre_en": "Cornea",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Cuneate_fasciculus": {
+   "nombre": "Fascículo cuneiforme",
+   "nombre_en": "Cuneate fasciculus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Falx_cerebri": {
+   "nombre": "Hoz del cerebro",
+   "nombre_en": "Falx cerebri",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Fourth_ventricle": {
+   "nombre": "Cuarto ventrículo",
+   "nombre_en": "Fourth ventricle",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Gracile_fasciculus": {
+   "nombre": "Fascículo grácil",
+   "nombre_en": "Gracile fasciculus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Inferior_colliculus": {
+   "nombre": "Colículo inferior",
+   "nombre_en": "Inferior colliculus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Inferior_salivatory_nucleus": {
+   "nombre": "Núcleo salival inferior",
+   "nombre_en": "Inferior salivatory nucleus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Intermediolateral_nucleus": {
+   "nombre": "Núcleo intermediolateral",
+   "nombre_en": "Intermediolateral nucleus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Intermediomedial_nucleus": {
+   "nombre": "Núcleo intermediomedial",
+   "nombre_en": "Intermediomedial nucleus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Interpeduncular_fossa": {
+   "nombre": "Fosa interpeduncular",
+   "nombre_en": "Interpeduncular fossa",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Iris": {
+   "nombre": "Iris",
+   "nombre_en": "Iris",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lacrimal_canaliculus": {
+   "nombre": "Canalículo lagrimal",
+   "nombre_en": "Lacrimal canaliculus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lacrimal_gland": {
+   "nombre": "Glándula lagrimal",
+   "nombre_en": "Lacrimal gland",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lacrimal_sac": {
+   "nombre": "Saco lagrimal",
+   "nombre_en": "Lacrimal sac",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lateral_corticospinal_tract": {
+   "nombre": "Tracto corticoespinal lateral",
+   "nombre_en": "Lateral corticospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lateral_fasciculus_proprius": {
+   "nombre": "Fascículo lateral propio",
+   "nombre_en": "Lateral fasciculus proprius",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lateral_intermediate_substance": {
+   "nombre": "Sustancia intermedia lateral",
+   "nombre_en": "Lateral intermediate substance",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lateral_reticulospinal_tract": {
+   "nombre": "Tracto reticuloespinal lateral",
+   "nombre_en": "Lateral reticulospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lateral_spinothalamic_tract": {
+   "nombre": "Tracto espinotalámico lateral",
+   "nombre_en": "Lateral spinothalamic tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lateral_vestibulospinal_tract": {
+   "nombre": "Tracto vestibuloespinal lateral",
+   "nombre_en": "Lateral vestibulospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Lens": {
+   "nombre": "Lente",
+   "nombre_en": "Lens",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Medial_reticulospinal_tract": {
+   "nombre": "Tracto reticuloespinal medial",
+   "nombre_en": "Medial reticulospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Medial_vestibulospinal_tract": {
+   "nombre": "Tracto vestibuloespinal medial",
+   "nombre_en": "Medial vestibulospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Medulla_oblongata": {
+   "nombre": "Bulbo",
+   "nombre_en": "Medulla oblongata",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Midbrain": {
+   "nombre": "Mesencéfalo",
+   "nombre_en": "Midbrain",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Nasolacrimal_duct": {
+   "nombre": "Conducto nasolagrimal",
+   "nombre_en": "Nasolacrimal duct",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Nucleus_ambiguus": {
+   "nombre": "Núcleo ambiguo",
+   "nombre_en": "Nucleus ambiguus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Nucleus_of_solitary_tract": {
+   "nombre": "Núcleo del tracto solitario",
+   "nombre_en": "Nucleus of solitary tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Nucleus_proprius": {
+   "nombre": "Núcleo propio",
+   "nombre_en": "Nucleus proprius",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Olive": {
+   "nombre": "Oliva",
+   "nombre_en": "Olive",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Pons": {
+   "nombre": "Puente troncoencefálico",
+   "nombre_en": "Pons",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Posterior_cochlear_nucleus": {
+   "nombre": "Núcleo coclear posterior",
+   "nombre_en": "Posterior cochlear nucleus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Posterior_fasciculus_proprius": {
+   "nombre": "Fascículo posterior propio",
+   "nombre_en": "Posterior fasciculus proprius",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Posterior_horn_of_spinal_cord": {
+   "nombre": "Cuerno posterior de la médula espinal",
+   "nombre_en": "Posterior horn of spinal cord",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Posterior_segment_of_eyeball": {
+   "nombre": "Segmento posterior del globo ocular",
+   "nombre_en": "Posterior segment of eyeball",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Posterior_spinocerebellar_tract": {
+   "nombre": "Tracto espinocerebeloso posterior",
+   "nombre_en": "Posterior spinocerebellar tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Posterolateral_tract": {
+   "nombre": "Tracto posterolateral",
+   "nombre_en": "Posterolateral tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Red_nucleus": {
+   "nombre": "Núcleo rojo",
+   "nombre_en": "Red nucleus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Retina": {
+   "nombre": "Retina",
+   "nombre_en": "Retina",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Rubrospinal_tract": {
+   "nombre": "Tracto rubroespinal",
+   "nombre_en": "Rubrospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Sclera": {
+   "nombre": "Esclera",
+   "nombre_en": "Sclera",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Spinal_reticular_process": {
+   "nombre": "Proceso reticular espinal",
+   "nombre_en": "Spinal reticular process",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Spinotectal_tract": {
+   "nombre": "Tracto spinotectal",
+   "nombre_en": "Spinotectal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Superior_colliculus": {
+   "nombre": "Colículo superior",
+   "nombre_en": "Superior colliculus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Superior_salivatory_nucleus": {
+   "nombre": "Núcleo salival superior",
+   "nombre_en": "Superior salivatory nucleus",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Suspensory_ligament_of_eyeball": {
+   "nombre": "Ligamento suspensorio del globo ocular",
+   "nombre_en": "Suspensory ligament of eyeball",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Tectospinal_tract": {
+   "nombre": "Tracto tectoespinal",
+   "nombre_en": "Tectospinal tract",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Tentorium_cerebelli": {
+   "nombre": "Tienda del cerebello",
+   "nombre_en": "Tentorium cerebelli",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Tympanic_membrane": {
+   "nombre": "Membrana timpánica",
+   "nombre_en": "Tympanic membrane",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Vestibular_nuclei": {
+   "nombre": "Núcleos vestibulares",
+   "nombre_en": "Vestibular nuclei",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Vestibule": {
+   "nombre": "Vestíbulo",
+   "nombre_en": "Vestibule",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Vitreous_body": {
+   "nombre": "Cuerpo vitreo",
+   "nombre_en": "Vitreous body",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__White_matter_of_spinal_cord": {
+   "nombre": "Sustancia blanca de la médula espinal",
+   "nombre_en": "White matter of spinal cord",
+   "organo": "EncefaloYSentidos"
+  },
+  "EncefaloYSentidos__Zonular_fibres": {
+   "nombre": "Fibras zonulares",
+   "nombre_en": "Zonular fibres",
+   "organo": "EncefaloYSentidos"
+  },
+  "Epidermis__Abdomen": {
+   "nombre": "Abdomen",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__AntebrazoDer": {
+   "nombre": "Antebrazo (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__AntebrazoIzq": {
+   "nombre": "Antebrazo (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__BrazoDer": {
+   "nombre": "Brazo (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__BrazoIzq": {
+   "nombre": "Brazo (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__Cabeza": {
+   "nombre": "Cuero cabelludo y cráneo",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__CaderaDer": {
+   "nombre": "Cadera y glúteo (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__CaderaIzq": {
+   "nombre": "Cadera y glúteo (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__Cara": {
+   "nombre": "Cara",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__CodoDer": {
+   "nombre": "Codo (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__CodoIzq": {
+   "nombre": "Codo (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__Cuello": {
+   "nombre": "Cuello",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__Espalda": {
+   "nombre": "Espalda",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__ManoDer": {
+   "nombre": "Mano y muñeca (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__ManoIzq": {
+   "nombre": "Mano y muñeca (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__MusloDer": {
+   "nombre": "Muslo (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__MusloIzq": {
+   "nombre": "Muslo (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__OrejaDer": {
+   "nombre": "Oreja (pabellón auricular) (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__OrejaIzq": {
+   "nombre": "Oreja (pabellón auricular) (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__Pelvis": {
+   "nombre": "Región perineal y púbica",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__PieDer": {
+   "nombre": "Pie y tobillo (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__PieIzq": {
+   "nombre": "Pie y tobillo (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__PiernaDer": {
+   "nombre": "Pierna (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__PiernaIzq": {
+   "nombre": "Pierna (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__RodillaDer": {
+   "nombre": "Rodilla (lado derecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__RodillaIzq": {
+   "nombre": "Rodilla (lado izquierdo)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Epidermis__Torax": {
+   "nombre": "Tórax (pecho)",
+   "nombre_en": "",
+   "organo": "Epidermis"
+  },
+  "Escapulas__Scapula_Der": {
+   "nombre": "Escápula (omóplato) (lado derecho)",
+   "nombre_en": "Scapula",
+   "organo": "Escapulas"
+  },
+  "Escapulas__Scapula_Izq": {
+   "nombre": "Escápula (omóplato) (lado izquierdo)",
+   "nombre_en": "Scapula",
+   "organo": "Escapulas"
+  },
+  "Esternocleidomastoideo__Sternocleidomastoid_muscle_Der": {
+   "nombre": "Músculo esternocleidomastoideo (lado derecho)",
+   "nombre_en": "Sternocleidomastoid muscle",
+   "organo": "Esternocleidomastoideo"
+  },
+  "Esternocleidomastoideo__Sternocleidomastoid_muscle_Izq": {
+   "nombre": "Músculo esternocleidomastoideo (lado izquierdo)",
+   "nombre_en": "Sternocleidomastoid muscle",
+   "organo": "Esternocleidomastoideo"
+  },
+  "FemurDer__Femur_Der": {
+   "nombre": "Fémur (lado derecho)",
+   "nombre_en": "Femur",
+   "organo": "FemurDer"
+  },
+  "FemurDer__Patella_Der": {
+   "nombre": "Rótula (lado derecho)",
+   "nombre_en": "Patella",
+   "organo": "FemurDer"
+  },
+  "FemurIzq__Femur_Izq": {
+   "nombre": "Fémur (lado izquierdo)",
+   "nombre_en": "Femur",
+   "organo": "FemurIzq"
+  },
+  "FemurIzq__Patella_Izq": {
+   "nombre": "Rótula (lado izquierdo)",
+   "nombre_en": "Patella",
+   "organo": "FemurIzq"
+  },
+  "GemeloDer__Lateral_head_of_gastrocnemius_Der": {
+   "nombre": "Cabeza lateral del músculo gastrocnemio (lado derecho)",
+   "nombre_en": "Lateral head of gastrocnemius",
+   "organo": "GemeloDer"
+  },
+  "GemeloDer__Medial_head_of_gastrocnemius_Der": {
+   "nombre": "Cabeza medial del músculo gastrocnemio (lado derecho)",
+   "nombre_en": "Medial head of gastrocnemius",
+   "organo": "GemeloDer"
+  },
+  "GemeloIzq__Lateral_head_of_gastrocnemius_Izq": {
+   "nombre": "Cabeza lateral del músculo gastrocnemio (lado izquierdo)",
+   "nombre_en": "Lateral head of gastrocnemius",
+   "organo": "GemeloIzq"
+  },
+  "GemeloIzq__Medial_head_of_gastrocnemius_Izq": {
+   "nombre": "Cabeza medial del músculo gastrocnemio (lado izquierdo)",
+   "nombre_en": "Medial head of gastrocnemius",
+   "organo": "GemeloIzq"
+  },
+  "Gluteos__Gluteus_maximus_muscle_Der": {
+   "nombre": "Músculo glúteo máximo (lado derecho)",
+   "nombre_en": "Gluteus maximus muscle",
+   "organo": "Gluteos"
+  },
+  "Gluteos__Gluteus_maximus_muscle_Izq": {
+   "nombre": "Músculo glúteo máximo (lado izquierdo)",
+   "nombre_en": "Gluteus maximus muscle",
+   "organo": "Gluteos"
+  },
+  "Gluteos__Gluteus_medius_muscle_Der": {
+   "nombre": "Músculo glúteo medio (lado derecho)",
+   "nombre_en": "Gluteus medius muscle",
+   "organo": "Gluteos"
+  },
+  "Gluteos__Gluteus_medius_muscle_Izq": {
+   "nombre": "Músculo glúteo medio (lado izquierdo)",
+   "nombre_en": "Gluteus medius muscle",
+   "organo": "Gluteos"
+  },
+  "Higado__Gallbladder": {
+   "nombre": "Vesícula biliar",
+   "nombre_en": "Gallbladder",
+   "organo": "Higado"
+  },
+  "Higado__Liver": {
+   "nombre": "Hígado",
+   "nombre_en": "Liver",
+   "organo": "Higado"
+  },
+  "HuesosMano__Capitate_bone_Der": {
+   "nombre": "Hueso capitado (lado derecho)",
+   "nombre_en": "Capitate bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Capitate_bone_Izq": {
+   "nombre": "Hueso capitado (lado izquierdo)",
+   "nombre_en": "Capitate bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Deep_transverse_metacarpal_ligament_Der": {
+   "nombre": "Ligamento metacarpiano transverso profundo (lado derecho)",
+   "nombre_en": "Deep transverse metacarpal ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Deep_transverse_metacarpal_ligament_Izq": {
+   "nombre": "Ligamento metacarpiano transverso profundo (lado izquierdo)",
+   "nombre_en": "Deep transverse metacarpal ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Dorsal_carpometacarpal_ligaments_Der": {
+   "nombre": "Ligamentos carpometacarpianos dorsales (lado derecho)",
+   "nombre_en": "Dorsal carpometacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Dorsal_carpometacarpal_ligaments_Izq": {
+   "nombre": "Ligamentos carpometacarpianos dorsales (lado izquierdo)",
+   "nombre_en": "Dorsal carpometacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Dorsal_metacarpal_arteries_Der": {
+   "nombre": "Arterias metacarpianas dorsales (lado derecho)",
+   "nombre_en": "Dorsal metacarpal arteries",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Dorsal_metacarpal_arteries_Izq": {
+   "nombre": "Arterias metacarpianas dorsales (lado izquierdo)",
+   "nombre_en": "Dorsal metacarpal arteries",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Dorsal_metacarpal_ligaments_Der": {
+   "nombre": "Ligamentos metacarpianos dorsales (lado derecho)",
+   "nombre_en": "Dorsal metacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Dorsal_metacarpal_ligaments_Izq": {
+   "nombre": "Ligamentos metacarpianos dorsales (lado izquierdo)",
+   "nombre_en": "Dorsal metacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Fifth_metacarpal_bone_Der": {
+   "nombre": "Quinto hueso metacarpiano (lado derecho)",
+   "nombre_en": "Fifth metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Fifth_metacarpal_bone_Izq": {
+   "nombre": "Quinto hueso metacarpiano (lado izquierdo)",
+   "nombre_en": "Fifth metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__First_metacarpal_bone_Der": {
+   "nombre": "Primer hueso metacarpiano (lado derecho)",
+   "nombre_en": "First metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__First_metacarpal_bone_Izq": {
+   "nombre": "Primer hueso metacarpiano (lado izquierdo)",
+   "nombre_en": "First metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Fourth_metacarpal_bone_Der": {
+   "nombre": "Cuarto hueso metacarpiano (lado derecho)",
+   "nombre_en": "Fourth metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Fourth_metacarpal_bone_Izq": {
+   "nombre": "Cuarto hueso metacarpiano (lado izquierdo)",
+   "nombre_en": "Fourth metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Hamate_bone_Der": {
+   "nombre": "Hueso hamatal (lado derecho)",
+   "nombre_en": "Hamate bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Hamate_bone_Izq": {
+   "nombre": "Hueso hamatal (lado izquierdo)",
+   "nombre_en": "Hamate bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Interosseous_metacarpal_ligaments_Der": {
+   "nombre": "Ligamentos metacarpianos interóseos (lado derecho)",
+   "nombre_en": "Interosseous metacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Interosseous_metacarpal_ligaments_Izq": {
+   "nombre": "Ligamentos metacarpianos interóseos (lado izquierdo)",
+   "nombre_en": "Interosseous metacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Lunate_bone_Der": {
+   "nombre": "Hueso lunado (lado derecho)",
+   "nombre_en": "Lunate bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Lunate_bone_Izq": {
+   "nombre": "Hueso lunado (lado izquierdo)",
+   "nombre_en": "Lunate bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Palmar_carpometacarpal_ligaments_Der": {
+   "nombre": "Ligamentos carpometacarpianos palmares (lado derecho)",
+   "nombre_en": "Palmar carpometacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Palmar_carpometacarpal_ligaments_Izq": {
+   "nombre": "Ligamentos carpometacarpianos palmares (lado izquierdo)",
+   "nombre_en": "Palmar carpometacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Palmar_metacarpal_arteries_Der": {
+   "nombre": "Arterias metacarpianas palmares (lado derecho)",
+   "nombre_en": "Palmar metacarpal arteries",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Palmar_metacarpal_arteries_Izq": {
+   "nombre": "Arterias metacarpianas palmares (lado izquierdo)",
+   "nombre_en": "Palmar metacarpal arteries",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Palmar_metacarpal_ligaments_Der": {
+   "nombre": "Ligamentos metacarpianos palmares (lado derecho)",
+   "nombre_en": "Palmar metacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Palmar_metacarpal_ligaments_Izq": {
+   "nombre": "Ligamentos metacarpianos palmares (lado izquierdo)",
+   "nombre_en": "Palmar metacarpal ligaments",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Pisiform_bone_Der": {
+   "nombre": "Hueso pisiforme (lado derecho)",
+   "nombre_en": "Pisiform bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Pisiform_bone_Izq": {
+   "nombre": "Hueso pisiforme (lado izquierdo)",
+   "nombre_en": "Pisiform bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Pisometacarpal_ligament_Der": {
+   "nombre": "Ligamento pisometacarpiano (lado derecho)",
+   "nombre_en": "Pisometacarpal ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Pisometacarpal_ligament_Izq": {
+   "nombre": "Ligamento pisometacarpiano (lado izquierdo)",
+   "nombre_en": "Pisometacarpal ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Scaphoid_bone_Der": {
+   "nombre": "Hueso escafoides (lado derecho)",
+   "nombre_en": "Scaphoid bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Scaphoid_bone_Izq": {
+   "nombre": "Hueso escafoides (lado izquierdo)",
+   "nombre_en": "Scaphoid bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Second_metacarpal_bone_Der": {
+   "nombre": "Segundo hueso metacarpiano (lado derecho)",
+   "nombre_en": "Second metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Second_metacarpal_bone_Izq": {
+   "nombre": "Segundo hueso metacarpiano (lado izquierdo)",
+   "nombre_en": "Second metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Superficial_transverse_metacarpal_ligament_Der": {
+   "nombre": "Ligamento metacarpiano transverso superficial (lado derecho)",
+   "nombre_en": "Superficial transverse metacarpal ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Superficial_transverse_metacarpal_ligament_Izq": {
+   "nombre": "Ligamento metacarpiano transverso superficial (lado izquierdo)",
+   "nombre_en": "Superficial transverse metacarpal ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Third_metacarpal_bone_Der": {
+   "nombre": "Tercer hueso metacarpiano (lado derecho)",
+   "nombre_en": "Third metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Third_metacarpal_bone_Izq": {
+   "nombre": "Tercer hueso metacarpiano (lado izquierdo)",
+   "nombre_en": "Third metacarpal bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezium_bone_Der": {
+   "nombre": "Hueso trapecio (lado derecho)",
+   "nombre_en": "Trapezium bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezium_bone_Izq": {
+   "nombre": "Hueso trapecio (lado izquierdo)",
+   "nombre_en": "Trapezium bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezoid_bone_Der": {
+   "nombre": "Hueso trapezoide (lado derecho)",
+   "nombre_en": "Trapezoid bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezoid_bone_Izq": {
+   "nombre": "Hueso trapezoide (lado izquierdo)",
+   "nombre_en": "Trapezoid bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezoid_ligament_Der": {
+   "nombre": "Ligamento trapezoide (lado derecho)",
+   "nombre_en": "Trapezoid ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezoid_ligament_Izq": {
+   "nombre": "Ligamento trapezoide (lado izquierdo)",
+   "nombre_en": "Trapezoid ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezoideocapitate_interosseous_ligament_Der": {
+   "nombre": "Ligamento trapezoideocapitado interóseo (lado derecho)",
+   "nombre_en": "Trapezoideocapitate interosseous ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Trapezoideocapitate_interosseous_ligament_Izq": {
+   "nombre": "Ligamento trapezoideocapitado interóseo (lado izquierdo)",
+   "nombre_en": "Trapezoideocapitate interosseous ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Triquetrocapitate_ligament_Der": {
+   "nombre": "Ligamento triquetrocapitado (lado derecho)",
+   "nombre_en": "Triquetrocapitate ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Triquetrocapitate_ligament_Izq": {
+   "nombre": "Ligamento triquetrocapitado (lado izquierdo)",
+   "nombre_en": "Triquetrocapitate ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Triquetrohamate_ligament_Der": {
+   "nombre": "Ligamento triquetrohamatal (lado derecho)",
+   "nombre_en": "Triquetrohamate ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Triquetrohamate_ligament_Izq": {
+   "nombre": "Ligamento triquetrohamatal (lado izquierdo)",
+   "nombre_en": "Triquetrohamate ligament",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Triquetrum_bone_Der": {
+   "nombre": "Hueso triquetral (lado derecho)",
+   "nombre_en": "Triquetrum bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosMano__Triquetrum_bone_Izq": {
+   "nombre": "Hueso triquetral (lado izquierdo)",
+   "nombre_en": "Triquetrum bone",
+   "organo": "HuesosMano"
+  },
+  "HuesosPie__Calcaneus_Der": {
+   "nombre": "Calcáneo (lado derecho)",
+   "nombre_en": "Calcaneus",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Calcaneus_Izq": {
+   "nombre": "Calcáneo (lado izquierdo)",
+   "nombre_en": "Calcaneus",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Cuboid_bone_Der": {
+   "nombre": "Hueso cuboide (lado derecho)",
+   "nombre_en": "Cuboid bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Cuboid_bone_Izq": {
+   "nombre": "Hueso cuboide (lado izquierdo)",
+   "nombre_en": "Cuboid bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Cuneometatarsal_interosseous_ligaments_Der": {
+   "nombre": "Ligamentos cuneometatarsianos interóseos (lado derecho)",
+   "nombre_en": "Cuneometatarsal interosseous ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Cuneometatarsal_interosseous_ligaments_Izq": {
+   "nombre": "Ligamentos cuneometatarsianos interóseos (lado izquierdo)",
+   "nombre_en": "Cuneometatarsal interosseous ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Deep_transverse_metatarsal_ligament_Der": {
+   "nombre": "Ligamento metatarsiano transverso profundo (lado derecho)",
+   "nombre_en": "Deep transverse metatarsal ligament",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Deep_transverse_metatarsal_ligament_Izq": {
+   "nombre": "Ligamento metatarsiano transverso profundo (lado izquierdo)",
+   "nombre_en": "Deep transverse metatarsal ligament",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_fifth_finger_of_foot_Der": {
+   "nombre": "Falange distal del quinto dedo del pie (lado derecho)",
+   "nombre_en": "Distal phalanx of fifth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_fifth_finger_of_foot_Izq": {
+   "nombre": "Falange distal del quinto dedo del pie (lado izquierdo)",
+   "nombre_en": "Distal phalanx of fifth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_first_finger_of_foot_Der": {
+   "nombre": "Falange distal del primer dedo del pie (lado derecho)",
+   "nombre_en": "Distal phalanx of first finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_first_finger_of_foot_Izq": {
+   "nombre": "Falange distal del primer dedo del pie (lado izquierdo)",
+   "nombre_en": "Distal phalanx of first finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_fourth_finger_of_foot_Der": {
+   "nombre": "Falange distal del cuarto dedo del pie (lado derecho)",
+   "nombre_en": "Distal phalanx of fourth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_fourth_finger_of_foot_Izq": {
+   "nombre": "Falange distal del cuarto dedo del pie (lado izquierdo)",
+   "nombre_en": "Distal phalanx of fourth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_second_finger_of_foot_Der": {
+   "nombre": "Falange distal del segundo dedo del pie (lado derecho)",
+   "nombre_en": "Distal phalanx of second finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_second_finger_of_foot_Izq": {
+   "nombre": "Falange distal del segundo dedo del pie (lado izquierdo)",
+   "nombre_en": "Distal phalanx of second finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_third_finger_of_foot_Der": {
+   "nombre": "Falange distal del tercer dedo del pie (lado derecho)",
+   "nombre_en": "Distal phalanx of third finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Distal_phalanx_of_third_finger_of_foot_Izq": {
+   "nombre": "Falange distal del tercer dedo del pie (lado izquierdo)",
+   "nombre_en": "Distal phalanx of third finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_metatarsal_arteries_Der": {
+   "nombre": "Arterias metatarsianas dorsales (lado derecho)",
+   "nombre_en": "Dorsal metatarsal arteries",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_metatarsal_arteries_Izq": {
+   "nombre": "Arterias metatarsianas dorsales (lado izquierdo)",
+   "nombre_en": "Dorsal metatarsal arteries",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_metatarsal_ligaments_Der": {
+   "nombre": "Ligamentos metatarsianos dorsales (lado derecho)",
+   "nombre_en": "Dorsal metatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_metatarsal_ligaments_Izq": {
+   "nombre": "Ligamentos metatarsianos dorsales (lado izquierdo)",
+   "nombre_en": "Dorsal metatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_metatarsal_veins_Der": {
+   "nombre": "Venas metatarsianas dorsales (lado derecho)",
+   "nombre_en": "Dorsal metatarsal veins",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_metatarsal_veins_Izq": {
+   "nombre": "Venas metatarsianas dorsales (lado izquierdo)",
+   "nombre_en": "Dorsal metatarsal veins",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_tarsometatarsal_ligaments_Der": {
+   "nombre": "Ligamentos tarsometatarsianos dorsales (lado derecho)",
+   "nombre_en": "Dorsal tarsometatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Dorsal_tarsometatarsal_ligaments_Izq": {
+   "nombre": "Ligamentos tarsometatarsianos dorsales (lado izquierdo)",
+   "nombre_en": "Dorsal tarsometatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Fifth_metatarsal_bone_Der": {
+   "nombre": "Quinto hueso metatarsiano (lado derecho)",
+   "nombre_en": "Fifth metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Fifth_metatarsal_bone_Izq": {
+   "nombre": "Quinto hueso metatarsiano (lado izquierdo)",
+   "nombre_en": "Fifth metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__First_metatarsal_bone_Der": {
+   "nombre": "Primer hueso metatarsiano (lado derecho)",
+   "nombre_en": "First metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__First_metatarsal_bone_Izq": {
+   "nombre": "Primer hueso metatarsiano (lado izquierdo)",
+   "nombre_en": "First metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Fourth_metatarsal_bone_Der": {
+   "nombre": "Cuarto hueso metatarsiano (lado derecho)",
+   "nombre_en": "Fourth metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Fourth_metatarsal_bone_Izq": {
+   "nombre": "Cuarto hueso metatarsiano (lado izquierdo)",
+   "nombre_en": "Fourth metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Intermediate_cuneiform_bone_Der": {
+   "nombre": "Hueso cuneiforme intermedio (lado derecho)",
+   "nombre_en": "Intermediate cuneiform bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Intermediate_cuneiform_bone_Izq": {
+   "nombre": "Hueso cuneiforme intermedio (lado izquierdo)",
+   "nombre_en": "Intermediate cuneiform bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Lateral_cuneiform_bone_Der": {
+   "nombre": "Hueso cuneiforme lateral (lado derecho)",
+   "nombre_en": "Lateral cuneiform bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Lateral_cuneiform_bone_Izq": {
+   "nombre": "Hueso cuneiforme lateral (lado izquierdo)",
+   "nombre_en": "Lateral cuneiform bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Medial_cuneiform_bone_Der": {
+   "nombre": "Hueso cuneiforme medial (lado derecho)",
+   "nombre_en": "Medial cuneiform bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Medial_cuneiform_bone_Izq": {
+   "nombre": "Hueso cuneiforme medial (lado izquierdo)",
+   "nombre_en": "Medial cuneiform bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Metatarsal_interosseous_ligaments_Der": {
+   "nombre": "Ligamentos interóseos metatarsianos (lado derecho)",
+   "nombre_en": "Metatarsal interosseous ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Metatarsal_interosseous_ligaments_Izq": {
+   "nombre": "Ligamentos interóseos metatarsianos (lado izquierdo)",
+   "nombre_en": "Metatarsal interosseous ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Metatarsal_region_Der": {
+   "nombre": "Region metatarsiana (lado derecho)",
+   "nombre_en": "Metatarsal region",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Metatarsal_region_Izq": {
+   "nombre": "Region metatarsiana (lado izquierdo)",
+   "nombre_en": "Metatarsal region",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_fifth_finger_of_foot_Der": {
+   "nombre": "Falange media del quinto dedo del pie (lado derecho)",
+   "nombre_en": "Middle phalanx of fifth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_fifth_finger_of_foot_Izq": {
+   "nombre": "Falange media del quinto dedo del pie (lado izquierdo)",
+   "nombre_en": "Middle phalanx of fifth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_fourth_finger_of_foot_Der": {
+   "nombre": "Falange media del cuarto dedo del pie (lado derecho)",
+   "nombre_en": "Middle phalanx of fourth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_fourth_finger_of_foot_Izq": {
+   "nombre": "Falange media del cuarto dedo del pie (lado izquierdo)",
+   "nombre_en": "Middle phalanx of fourth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_second_finger_of_foot_Der": {
+   "nombre": "Falange media del segundo dedo del pie (lado derecho)",
+   "nombre_en": "Middle phalanx of second finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_second_finger_of_foot_Izq": {
+   "nombre": "Falange media del segundo dedo del pie (lado izquierdo)",
+   "nombre_en": "Middle phalanx of second finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_third_finger_of_foot_Der": {
+   "nombre": "Falange media del tercer dedo del pie (lado derecho)",
+   "nombre_en": "Middle phalanx of third finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Middle_phalanx_of_third_finger_of_foot_Izq": {
+   "nombre": "Falange media del tercer dedo del pie (lado izquierdo)",
+   "nombre_en": "Middle phalanx of third finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Navicular_bone_Der": {
+   "nombre": "Hueso navicular (lado derecho)",
+   "nombre_en": "Navicular bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Navicular_bone_Izq": {
+   "nombre": "Hueso navicular (lado izquierdo)",
+   "nombre_en": "Navicular bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Perforating_branches_of_plantar_metatarsal_arteries_Der": {
+   "nombre": "Ramas perforantes de las arterias metatarsianas plantares (lado derecho)",
+   "nombre_en": "Perforating branches of plantar metatarsal arteries",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Perforating_branches_of_plantar_metatarsal_arteries_Izq": {
+   "nombre": "Ramas perforantes de las arterias metatarsianas plantares (lado izquierdo)",
+   "nombre_en": "Perforating branches of plantar metatarsal arteries",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_metatarsal_arteries_Der": {
+   "nombre": "Arterias metatarsianas plantares (lado derecho)",
+   "nombre_en": "Plantar metatarsal arteries",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_metatarsal_arteries_Izq": {
+   "nombre": "Arterias metatarsianas plantares (lado izquierdo)",
+   "nombre_en": "Plantar metatarsal arteries",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_metatarsal_ligaments_Der": {
+   "nombre": "Ligamentos metatarsianos plantares (lado derecho)",
+   "nombre_en": "Plantar metatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_metatarsal_ligaments_Izq": {
+   "nombre": "Ligamentos metatarsianos plantares (lado izquierdo)",
+   "nombre_en": "Plantar metatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_metatarsal_veins_Der": {
+   "nombre": "Venas metatarsianas plantares (lado derecho)",
+   "nombre_en": "Plantar metatarsal veins",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_metatarsal_veins_Izq": {
+   "nombre": "Venas metatarsianas plantares (lado izquierdo)",
+   "nombre_en": "Plantar metatarsal veins",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_tarsometatarsal_ligaments_Der": {
+   "nombre": "Ligamentos tarsometatarsianos plantares (lado derecho)",
+   "nombre_en": "Plantar tarsometatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Plantar_tarsometatarsal_ligaments_Izq": {
+   "nombre": "Ligamentos tarsometatarsianos plantares (lado izquierdo)",
+   "nombre_en": "Plantar tarsometatarsal ligaments",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_fifth_finger_of_foot_Der": {
+   "nombre": "Falange proximal del quinto dedo del pie (lado derecho)",
+   "nombre_en": "Proximal phalanx of fifth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_fifth_finger_of_foot_Izq": {
+   "nombre": "Falange proximal del quinto dedo del pie (lado izquierdo)",
+   "nombre_en": "Proximal phalanx of fifth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_first_finger_of_foot_Der": {
+   "nombre": "Falange proximal del primer dedo del pie (lado derecho)",
+   "nombre_en": "Proximal phalanx of first finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_first_finger_of_foot_Izq": {
+   "nombre": "Falange proximal del primer dedo del pie (lado izquierdo)",
+   "nombre_en": "Proximal phalanx of first finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_fourth_finger_of_foot_Der": {
+   "nombre": "Falange proximal del cuarto dedo del pie (lado derecho)",
+   "nombre_en": "Proximal phalanx of fourth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_fourth_finger_of_foot_Izq": {
+   "nombre": "Falange proximal del cuarto dedo del pie (lado izquierdo)",
+   "nombre_en": "Proximal phalanx of fourth finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_second_finger_of_foot_Der": {
+   "nombre": "Falange proximal del segundo dedo del pie (lado derecho)",
+   "nombre_en": "Proximal phalanx of second finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_second_finger_of_foot_Izq": {
+   "nombre": "Falange proximal del segundo dedo del pie (lado izquierdo)",
+   "nombre_en": "Proximal phalanx of second finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_third_finger_of_foot_Der": {
+   "nombre": "Falange proximal del tercer dedo del pie (lado derecho)",
+   "nombre_en": "Proximal phalanx of third finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Proximal_phalanx_of_third_finger_of_foot_Izq": {
+   "nombre": "Falange proximal del tercer dedo del pie (lado izquierdo)",
+   "nombre_en": "Proximal phalanx of third finger of foot",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Second_metatarsal_bone_Der": {
+   "nombre": "Segundo hueso metatarsiano (lado derecho)",
+   "nombre_en": "Second metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Second_metatarsal_bone_Izq": {
+   "nombre": "Segundo hueso metatarsiano (lado izquierdo)",
+   "nombre_en": "Second metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Superficial_transverse_metatarsal_ligament_Der": {
+   "nombre": "Ligamento metatarsiano transverso superficial (lado derecho)",
+   "nombre_en": "Superficial transverse metatarsal ligament",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Superficial_transverse_metatarsal_ligament_Izq": {
+   "nombre": "Ligamento metatarsiano transverso superficial (lado izquierdo)",
+   "nombre_en": "Superficial transverse metatarsal ligament",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Talus_Der": {
+   "nombre": "Hueso Talo (lado derecho)",
+   "nombre_en": "Talus",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Talus_Izq": {
+   "nombre": "Hueso Talo (lado izquierdo)",
+   "nombre_en": "Talus",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Third_metatarsal_bone_Der": {
+   "nombre": "Tercer hueso metatarsiano (lado derecho)",
+   "nombre_en": "Third metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HuesosPie__Third_metatarsal_bone_Izq": {
+   "nombre": "Tercer hueso metatarsiano (lado izquierdo)",
+   "nombre_en": "Third metatarsal bone",
+   "organo": "HuesosPie"
+  },
+  "HumeroDer__Humerus_Der": {
+   "nombre": "Húmero (lado derecho)",
+   "nombre_en": "Humerus",
+   "organo": "HumeroDer"
+  },
+  "HumeroIzq__Humerus_Izq": {
+   "nombre": "Húmero (lado izquierdo)",
+   "nombre_en": "Humerus",
+   "organo": "HumeroIzq"
+  },
+  "IntestinoGrueso__Ascending_colon": {
+   "nombre": "Colon ascendente",
+   "nombre_en": "Ascending colon",
+   "organo": "IntestinoGrueso"
+  },
+  "IntestinoGrueso__Descending_colon": {
+   "nombre": "Colon descendente",
+   "nombre_en": "Descending colon",
+   "organo": "IntestinoGrueso"
+  },
+  "IntestinoGrueso__Sigmoid_colon": {
+   "nombre": "Colon sigmoideo",
+   "nombre_en": "Sigmoid colon",
+   "organo": "IntestinoGrueso"
+  },
+  "IntestinoGrueso__Transverse_colon": {
+   "nombre": "Colon transverso",
+   "nombre_en": "Transverse colon",
+   "organo": "IntestinoGrueso"
+  },
+  "IntestinoGrueso__Vermiform_appendix": {
+   "nombre": "Apéndice vermiforme",
+   "nombre_en": "Vermiform appendix",
+   "organo": "IntestinoGrueso"
+  },
+  "Isquiotibiales__Long_head_of_biceps_femoris_Der": {
+   "nombre": "Cabeza larga del músculo bíceps femoral (lado derecho)",
+   "nombre_en": "Long head of biceps femoris",
+   "organo": "Isquiotibiales"
+  },
+  "Isquiotibiales__Long_head_of_biceps_femoris_Izq": {
+   "nombre": "Cabeza larga del músculo bíceps femoral (lado izquierdo)",
+   "nombre_en": "Long head of biceps femoris",
+   "organo": "Isquiotibiales"
+  },
+  "Isquiotibiales__Semimembranosus_muscle_Der": {
+   "nombre": "Músculo semimembranoso (lado derecho)",
+   "nombre_en": "Semimembranosus muscle",
+   "organo": "Isquiotibiales"
+  },
+  "Isquiotibiales__Semimembranosus_muscle_Izq": {
+   "nombre": "Músculo semimembranoso (lado izquierdo)",
+   "nombre_en": "Semimembranosus muscle",
+   "organo": "Isquiotibiales"
+  },
+  "Isquiotibiales__Semitendinosus_muscle_Der": {
+   "nombre": "Músculo semitendinoso (lado derecho)",
+   "nombre_en": "Semitendinosus muscle",
+   "organo": "Isquiotibiales"
+  },
+  "Isquiotibiales__Semitendinosus_muscle_Izq": {
+   "nombre": "Músculo semitendinoso (lado izquierdo)",
+   "nombre_en": "Semitendinosus muscle",
+   "organo": "Isquiotibiales"
+  },
+  "Isquiotibiales__Short_head_of_biceps_femoris_Der": {
+   "nombre": "Cabeza corta del músculo bíceps femoral (lado derecho)",
+   "nombre_en": "Short head of biceps femoris",
+   "organo": "Isquiotibiales"
+  },
+  "Isquiotibiales__Short_head_of_biceps_femoris_Izq": {
+   "nombre": "Cabeza corta del músculo bíceps femoral (lado izquierdo)",
+   "nombre_en": "Short head of biceps femoris",
+   "organo": "Isquiotibiales"
+  },
+  "MusculosAntebrazo__Brachioradialis_muscle_Der": {
+   "nombre": "Músculo braquiorradial (lado derecho)",
+   "nombre_en": "Brachioradialis muscle",
+   "organo": "MusculosAntebrazo"
+  },
+  "MusculosAntebrazo__Brachioradialis_muscle_Izq": {
+   "nombre": "Músculo braquiorradial (lado izquierdo)",
+   "nombre_en": "Brachioradialis muscle",
+   "organo": "MusculosAntebrazo"
+  },
+  "MusculosAntebrazo__Palmaris_longus_muscle_Der": {
+   "nombre": "Músculo palmar largo (lado derecho)",
+   "nombre_en": "Palmaris longus muscle",
+   "organo": "MusculosAntebrazo"
+  },
+  "MusculosAntebrazo__Palmaris_longus_muscle_Izq": {
+   "nombre": "Músculo palmar largo (lado izquierdo)",
+   "nombre_en": "Palmaris longus muscle",
+   "organo": "MusculosAntebrazo"
+  },
+  "MusculosCabeza__Anterior_belly_of_digastric_muscle": {
+   "nombre": "Vientre anterior del músculo digástrico",
+   "nombre_en": "Anterior belly of digastric muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Bucinator": {
+   "nombre": "Buccinador",
+   "nombre_en": "Bucinator",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Corrugator_supercilii": {
+   "nombre": "Músculo corrugador del supercilio",
+   "nombre_en": "Corrugator supercilii",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Deep_part_of_masseter": {
+   "nombre": "Porción profunda del masétero",
+   "nombre_en": "Deep part of masseter",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Depressor_anguli_oris": {
+   "nombre": "Depresor del ángulo oral",
+   "nombre_en": "Depressor anguli oris",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Depressor_labii_inferioris": {
+   "nombre": "Depresor del labio inferior",
+   "nombre_en": "Depressor labii inferioris",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Depressor_septi_nasi": {
+   "nombre": "Depresor del septo nasal",
+   "nombre_en": "Depressor septi nasi",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Frontalis_muscle": {
+   "nombre": "Músculo frontal",
+   "nombre_en": "Frontalis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Genioglossus_muscle": {
+   "nombre": "Músculo geniogloso",
+   "nombre_en": "Genioglossus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Geniohyoid_muscle": {
+   "nombre": "Músculo geniohioideo",
+   "nombre_en": "Geniohyoid muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Hyoglossus_muscle": {
+   "nombre": "Músculo hiogloso",
+   "nombre_en": "Hyoglossus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Inferior_head_of_lateral_pterygoid_muscle": {
+   "nombre": "Cabeza inferior del músculo pterigoideo lateral",
+   "nombre_en": "Inferior head of lateral pterygoid muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Inferior_oblique_muscle": {
+   "nombre": "Músculo oblicuo inferior del bulbo ocular",
+   "nombre_en": "Inferior oblique muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Inferior_rectus_muscle": {
+   "nombre": "Músculo recto inferior",
+   "nombre_en": "Inferior rectus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Inferior_tarsus": {
+   "nombre": "Tarso inferior",
+   "nombre_en": "Inferior tarsus",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Intermediate_tendon_of_digastric_muscle": {
+   "nombre": "Tendón intermedio del músculo digástrico",
+   "nombre_en": "Intermediate tendon of digastric muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Lateral_rectus_muscle": {
+   "nombre": "Músculo recto lateral",
+   "nombre_en": "Lateral rectus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Levator_anguli_oris": {
+   "nombre": "Elevador del angulo de la boca",
+   "nombre_en": "Levator anguli oris",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Levator_labii_superioris": {
+   "nombre": "Elevador del labio superior",
+   "nombre_en": "Levator labii superioris",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Levator_nasolabialis": {
+   "nombre": "Elevador nasolabial",
+   "nombre_en": "Levator nasolabialis",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Levator_palpebrae_superioris": {
+   "nombre": "Elevador del párpado superior",
+   "nombre_en": "Levator palpebrae superioris",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Longus_capitis_muscle": {
+   "nombre": "Músculo largo de la cabeza",
+   "nombre_en": "Longus capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Medial_pterygoid_muscle": {
+   "nombre": "Músculo pterigoideo medial",
+   "nombre_en": "Medial pterygoid muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Medial_rectus_muscle": {
+   "nombre": "Músculo recto medial",
+   "nombre_en": "Medial rectus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Mentalis_muscle": {
+   "nombre": "Músculo mental",
+   "nombre_en": "Mentalis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Middle_pharyngeal_constrictor": {
+   "nombre": "Constrictor medio de la faringe",
+   "nombre_en": "Middle pharyngeal constrictor",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Mylohyoid_muscle": {
+   "nombre": "Músculo milohioideo",
+   "nombre_en": "Mylohyoid muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Nasalis_muscle": {
+   "nombre": "Músculo nasal",
+   "nombre_en": "Nasalis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Obliquus_inferior_capitis_muscle": {
+   "nombre": "Músculo oblicuo inferior de la cabeza",
+   "nombre_en": "Obliquus inferior capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Obliquus_superior_capitis_muscle": {
+   "nombre": "Músculo oblicuo superior de la cabeza",
+   "nombre_en": "Obliquus superior capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Occipitalis_muscle": {
+   "nombre": "Músculo occipital",
+   "nombre_en": "Occipitalis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Orbicularis_oris_muscle": {
+   "nombre": "Músculo orbicular de la boca",
+   "nombre_en": "Orbicularis oris muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Orbital_part_of_orbicularis_oculi": {
+   "nombre": "Porción orbitaria del músculo orbicular del ojo",
+   "nombre_en": "Orbital part of orbicularis oculi",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Palatopharyngeus_muscle": {
+   "nombre": "Músculo palatofaríngeo",
+   "nombre_en": "Palatopharyngeus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Palpebral_part_of_orbicularis_oculi": {
+   "nombre": "Parte palpebral del múculo orbicular del ojo",
+   "nombre_en": "Palpebral part of orbicularis oculi",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Posterior_belly_of_digastric_muscle": {
+   "nombre": "Vientre posterior del músculo digástrico",
+   "nombre_en": "Posterior belly of digastric muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Procerus_muscle": {
+   "nombre": "Músculo prócero",
+   "nombre_en": "Procerus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Rectus_anterior_capitis_muscle": {
+   "nombre": "Músculo recto anterior de la cabeza",
+   "nombre_en": "Rectus anterior capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Rectus_lateralis_capitis_muscle": {
+   "nombre": "Músculo recto lateral de la cabeza",
+   "nombre_en": "Rectus lateralis capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Rectus_posterior_major_capitis_muscle": {
+   "nombre": "Músculo recto posterior mayor de la cabeza",
+   "nombre_en": "Rectus posterior major capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Rectus_posterior_minor_capitis_muscle": {
+   "nombre": "Músculo recto posterior menor de la cabeza",
+   "nombre_en": "Rectus posterior minor capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Risorius_muscle": {
+   "nombre": "Músculo risorio",
+   "nombre_en": "Risorius muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Spinalis_capitis_muscle": {
+   "nombre": "Músculo espinal de la cabeza",
+   "nombre_en": "Spinalis capitis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Stylohyoid_muscle": {
+   "nombre": "Músculo estilohioideo",
+   "nombre_en": "Stylohyoid muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Stylopharyngeus_muscle": {
+   "nombre": "Músculo estilofaríngeo",
+   "nombre_en": "Stylopharyngeus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Superficial_part_of_masseter": {
+   "nombre": "Porción superficial del masétero",
+   "nombre_en": "Superficial part of masseter",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Superior_head_of_lateral_pterygoid_muscle": {
+   "nombre": "Cabeza superior del músculo pterigoideo lateral",
+   "nombre_en": "Superior head of lateral pterygoid muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Superior_oblique_muscle": {
+   "nombre": "Músculo oblicuo superior del bulbo ocular",
+   "nombre_en": "Superior oblique muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Superior_pharyngeal_constrictor": {
+   "nombre": "Constrictor superior de la faringe",
+   "nombre_en": "Superior pharyngeal constrictor",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Superior_rectus_muscle": {
+   "nombre": "Músculo recto superior",
+   "nombre_en": "Superior rectus muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Superior_tarsus": {
+   "nombre": "Tarso superior",
+   "nombre_en": "Superior tarsus",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Temporalis_muscle": {
+   "nombre": "Músculo temporal",
+   "nombre_en": "Temporalis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Temporoparietalis_muscle": {
+   "nombre": "Músculo temporoparietal",
+   "nombre_en": "Temporoparietalis muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Trochlea_of_superior_oblique_muscle": {
+   "nombre": "Tróclea del músculo oblicuo superior",
+   "nombre_en": "Trochlea of superior oblique muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Zygomaticus_major_muscle": {
+   "nombre": "Músculo cigomático mayor",
+   "nombre_en": "Zygomaticus major muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCabeza__Zygomaticus_minor_muscle": {
+   "nombre": "Músculo cigomático menor",
+   "nombre_en": "Zygomaticus minor muscle",
+   "organo": "MusculosCabeza"
+  },
+  "MusculosCuello__Ary_epiglottic_part_of_oblique_arytenoid_muscle": {
+   "nombre": "Porción ariepiglótica del músculo aritenoideo oblicuo",
+   "nombre_en": "Ary-epiglottic part of oblique arytenoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__External_part_of_thyro_arytenoid_muscle": {
+   "nombre": "Porción externa del músculo tiroaritenoideo",
+   "nombre_en": "External part of thyro-arytenoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Iliocostalis_colli_muscle": {
+   "nombre": "Músculo iliocostal del cuello",
+   "nombre_en": "Iliocostalis colli muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Inferior_pharyngeal_constrictor": {
+   "nombre": "Constrictor inferior de la faringe",
+   "nombre_en": "Inferior pharyngeal constrictor",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Interspinales_colli_muscles": {
+   "nombre": "Músculos interespinosos del cuello",
+   "nombre_en": "Interspinales colli muscles",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Interspinales_thoracis_muscles": {
+   "nombre": "Músculos interespinosos del tórax",
+   "nombre_en": "Interspinales thoracis muscles",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Lateral_crico_arytenoid_muscle": {
+   "nombre": "Músculo cricoaritenoideo lateral",
+   "nombre_en": "Lateral crico-arytenoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Levator_scapulae": {
+   "nombre": "Elevador de la escápula",
+   "nombre_en": "Levator scapulae",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Longissimus_capitis_muscle": {
+   "nombre": "Músculo longísimo de la cabeza",
+   "nombre_en": "Longissimus capitis muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Longissimus_colli_muscle": {
+   "nombre": "Músculo longísmo del cuello",
+   "nombre_en": "Longissimus colli muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Longus_colli_muscle": {
+   "nombre": "Músculo largo del cuello",
+   "nombre_en": "Longus colli muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Multifidus_colli_muscle": {
+   "nombre": "Músculo multifido del cuello",
+   "nombre_en": "Multifidus colli muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Oblique_part_of_cricothyroid_muscle": {
+   "nombre": "Porción oblicua del músculo cricotiroideo",
+   "nombre_en": "Oblique part of cricothyroid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Omohyoid_muscle": {
+   "nombre": "Músculo omohioideo",
+   "nombre_en": "Omohyoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Platysma": {
+   "nombre": "Platisma",
+   "nombre_en": "Platysma",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Posterior_crico_arytenoid_muscle": {
+   "nombre": "Músculo crico-aritenoideo posterior",
+   "nombre_en": "Posterior crico-arytenoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Rhomboid_minor_muscle": {
+   "nombre": "Músculo romboides menor",
+   "nombre_en": "Rhomboid minor muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Scalenus_anterior_muscle": {
+   "nombre": "Músculo escaleno anterior",
+   "nombre_en": "Scalenus anterior muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Scalenus_medius_muscle": {
+   "nombre": "Músculo escaleno medio",
+   "nombre_en": "Scalenus medius muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Scalenus_posterior_muscle": {
+   "nombre": "Músculo escaleno posterior",
+   "nombre_en": "Scalenus posterior muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Semispinalis_colli_muscle": {
+   "nombre": "Músculo semiespinoso del cuello",
+   "nombre_en": "Semispinalis colli muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Serratus_posterior_superior_muscle": {
+   "nombre": "Músculo serrato posterior superior",
+   "nombre_en": "Serratus posterior superior muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Spinalis_colli_muscle": {
+   "nombre": "Músculo espinal del cuello",
+   "nombre_en": "Spinalis colli muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Splenius_capitis_muscle": {
+   "nombre": "Músculo esplenio de la cabeza",
+   "nombre_en": "Splenius capitis muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Splenius_colli_muscle": {
+   "nombre": "Músculo esplenio del cuello",
+   "nombre_en": "Splenius colli muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Sternohyoid_muscle": {
+   "nombre": "Músculo esternohioideo",
+   "nombre_en": "Sternohyoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Sternothyroid_muscle": {
+   "nombre": "Músculo esternotiroideo",
+   "nombre_en": "Sternothyroid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Straight_part_of_cricothyroid_muscle": {
+   "nombre": "Porción recta del músculo cricotiroideo",
+   "nombre_en": "Straight part of cricothyroid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Subclavius_muscle": {
+   "nombre": "Músculo subclavio",
+   "nombre_en": "Subclavius muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Thyro_epiglottic_part_of_thyro_arytenoid_muscle": {
+   "nombre": "Porción tiroepiglótica del músculo tiroaritenoideo",
+   "nombre_en": "Thyro-epiglottic part of thyro-arytenoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Thyrohyoid_muscle": {
+   "nombre": "Músculo tirohioideo",
+   "nombre_en": "Thyrohyoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosCuello__Transverse_arytenoid_muscle": {
+   "nombre": "Músculo aritenoideo transverso",
+   "nombre_en": "Transverse arytenoid muscle",
+   "organo": "MusculosCuello"
+  },
+  "MusculosMiembroInferior__Abductor_digiti_minimi_of_foot": {
+   "nombre": "Abductor del dedo mínimo del pie",
+   "nombre_en": "Abductor digiti minimi of foot",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Abductor_hallucis": {
+   "nombre": "Abductor del hállux",
+   "nombre_en": "Abductor hallucis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Adductor_brevis": {
+   "nombre": "Aductor corto",
+   "nombre_en": "Adductor brevis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Adductor_longus": {
+   "nombre": "Aductor largo",
+   "nombre_en": "Adductor longus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Adductor_magnus": {
+   "nombre": "Aductor mayor",
+   "nombre_en": "Adductor magnus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Adductor_minimus": {
+   "nombre": "(Aductor mínimo)",
+   "nombre_en": "(Adductor minimus)",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Calcaneal_tendon": {
+   "nombre": "Tendón calcáneo",
+   "nombre_en": "Calcaneal tendon",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Coccygeus_muscle": {
+   "nombre": "Músculo coccígeo",
+   "nombre_en": "Coccygeus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Dorsal_interossei_muscles_of_foot": {
+   "nombre": "Músculos interóseos dorsales del pie",
+   "nombre_en": "Dorsal interossei muscles of foot",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Extensor_digitorum_brevis": {
+   "nombre": "Extensor corto de los dedos",
+   "nombre_en": "Extensor digitorum brevis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Extensor_digitorum_longus": {
+   "nombre": "Extensor largo de los dedos",
+   "nombre_en": "Extensor digitorum longus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Extensor_hallucis_brevis": {
+   "nombre": "Extensor corto del hállux",
+   "nombre_en": "Extensor hallucis brevis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Extensor_hallucis_longus": {
+   "nombre": "Extensor largo del hállux",
+   "nombre_en": "Extensor hallucis longus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__External_anal_sphincter": {
+   "nombre": "Esfínter anal externo",
+   "nombre_en": "External anal sphincter",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Fibularis_brevis_muscle": {
+   "nombre": "Músculo fibular corto",
+   "nombre_en": "Fibularis brevis muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Fibularis_longus_muscle": {
+   "nombre": "Músculo fibular largo",
+   "nombre_en": "Fibularis longus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Fibularis_tertius_muscle": {
+   "nombre": "Músculo fibular tercero",
+   "nombre_en": "Fibularis tertius muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Flexor_digiti_minimi_of_foot": {
+   "nombre": "Flexor del dedo mínimo del pie",
+   "nombre_en": "Flexor digiti minimi of foot",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Flexor_digitorum_brevis": {
+   "nombre": "Flexor corto de los dedos",
+   "nombre_en": "Flexor digitorum brevis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Flexor_digitorum_longus": {
+   "nombre": "Músculo flexor largo de los dedos",
+   "nombre_en": "Flexor digitorum longus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Flexor_hallucis_longus": {
+   "nombre": "Flexor largo del hállux",
+   "nombre_en": "Flexor hallucis longus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Gracilis_muscle": {
+   "nombre": "Músculo grácil",
+   "nombre_en": "Gracilis muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Iliococcygeus_muscle": {
+   "nombre": "Músculo iliococcígeo",
+   "nombre_en": "Iliococcygeus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Iliotibial_tract": {
+   "nombre": "Tracto iliotibial",
+   "nombre_en": "Iliotibial tract",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Inferior_gemellus_muscle": {
+   "nombre": "Músculo gemelo inferior",
+   "nombre_en": "Inferior gemellus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Lateral_head_of_flexor_hallucis_brevis": {
+   "nombre": "Cabeza lateral del flexor corto del hállux",
+   "nombre_en": "Lateral head of flexor hallucis brevis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Lumbrical_muscles_of_foot": {
+   "nombre": "Músculos lumbricales del pie",
+   "nombre_en": "Lumbrical muscles of foot",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Medial_head_of_flexor_hallucis_brevis": {
+   "nombre": "Cabeza medial del flexor corto del hállux",
+   "nombre_en": "Medial head of flexor hallucis brevis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Oblique_head_of_adductor_hallucis": {
+   "nombre": "Cabeza oblicua del aductor del hállux",
+   "nombre_en": "Oblique head of adductor hallucis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Obturator_externus": {
+   "nombre": "Obturador externo",
+   "nombre_en": "Obturator externus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Obturator_internus": {
+   "nombre": "Obturador interno",
+   "nombre_en": "Obturator internus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Opponens_digiti_minimi_muscle_of_foot": {
+   "nombre": "(Músculo oponente del dedo mínimo del pie)",
+   "nombre_en": "(Opponens digiti minimi muscle of foot)",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Pectineus_muscle": {
+   "nombre": "Músculo pectíneo",
+   "nombre_en": "Pectineus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Plantar_interossei_muscles": {
+   "nombre": "Músculos interóseos plantares",
+   "nombre_en": "Plantar interossei muscles",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Plantaris_muscle": {
+   "nombre": "Músculo plantar",
+   "nombre_en": "Plantaris muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Popliteus_muscle": {
+   "nombre": "Músculo poplíteo",
+   "nombre_en": "Popliteus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Pubo_analis_muscle": {
+   "nombre": "Músculo puboanal",
+   "nombre_en": "Pubo-analis muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Pubococcygeus_muscle": {
+   "nombre": "Músculo pubococcígeo",
+   "nombre_en": "Pubococcygeus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Quadratus_femoris_muscle": {
+   "nombre": "Músculo cuadrado femoral",
+   "nombre_en": "Quadratus femoris muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Quadratus_plantae_muscle": {
+   "nombre": "Músculo cuadrado plantar",
+   "nombre_en": "Quadratus plantae muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Sartorius_muscle": {
+   "nombre": "Músculo sartorio",
+   "nombre_en": "Sartorius muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Soleus_muscle": {
+   "nombre": "Músculo sóleo",
+   "nombre_en": "Soleus muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Tendon_of_extensor_digitorum_longus": {
+   "nombre": "Tendón del extensor largo de los dedos",
+   "nombre_en": "Tendon of extensor digitorum longus",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Tibialis_posterior_muscle": {
+   "nombre": "Músculo tibial posterior",
+   "nombre_en": "Tibialis posterior muscle",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroInferior__Transverse_head_of_adductor_hallucis": {
+   "nombre": "Cabeza transversa del aductor del hállux",
+   "nombre_en": "Transverse head of adductor hallucis",
+   "organo": "MusculosMiembroInferior"
+  },
+  "MusculosMiembroSuperior__Abductor_digiti_minimi_of_hand": {
+   "nombre": "Abductor del dedo mínimo de la mano",
+   "nombre_en": "Abductor digiti minimi of hand",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Abductor_pollicis_brevis": {
+   "nombre": "Abductor corto del pulgar",
+   "nombre_en": "Abductor pollicis brevis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Abductor_pollicis_longus": {
+   "nombre": "Abductor largo del pulgar",
+   "nombre_en": "Abductor pollicis longus",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Anconeus_muscle": {
+   "nombre": "Músculo ancóneo",
+   "nombre_en": "Anconeus muscle",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Brachialis_muscle": {
+   "nombre": "Músculo braquial",
+   "nombre_en": "Brachialis muscle",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Coracobrachialis_muscle": {
+   "nombre": "Músculo coracobraquial",
+   "nombre_en": "Coracobrachialis muscle",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Deep_head_of_flexor_pollicis_brevis": {
+   "nombre": "Cabeza profunda del flexor corto del pulgar",
+   "nombre_en": "Deep head of flexor pollicis brevis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Deep_head_of_pronator_teres": {
+   "nombre": "Cabeza profunda del pronador redondo",
+   "nombre_en": "Deep head of pronator teres",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Dorsal_interossei_muscles_of_hand": {
+   "nombre": "Músculos interóseos dorsales de la mano",
+   "nombre_en": "Dorsal interossei muscles of hand",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Extensor_carpi_radialis_brevis": {
+   "nombre": "Extensor radial corto del carpo",
+   "nombre_en": "Extensor carpi radialis brevis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Extensor_carpi_radialis_longus": {
+   "nombre": "Extensor radial largo del carpo",
+   "nombre_en": "Extensor carpi radialis longus",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Extensor_digiti_minimi": {
+   "nombre": "Extensor del dedo mínimo",
+   "nombre_en": "Extensor digiti minimi",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Extensor_digitorum": {
+   "nombre": "Extensor de los dedos",
+   "nombre_en": "Extensor digitorum",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Extensor_indicis": {
+   "nombre": "Extensor del índice",
+   "nombre_en": "Extensor indicis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Extensor_pollicis_brevis": {
+   "nombre": "Extensor corto del pulgar",
+   "nombre_en": "Extensor pollicis brevis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Extensor_pollicis_longus": {
+   "nombre": "Extensor largo del pulgar",
+   "nombre_en": "Extensor pollicis longus",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Flexor_carpi_radialis": {
+   "nombre": "Flexor radial del carpo",
+   "nombre_en": "Flexor carpi radialis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Flexor_digiti_minimi_of_hand": {
+   "nombre": "Flexor del dedo mínimo de la mano",
+   "nombre_en": "Flexor digiti minimi of hand",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Flexor_digitorum_profundus": {
+   "nombre": "Flexor profundo de los dedos",
+   "nombre_en": "Flexor digitorum profundus",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Flexor_pollicis_longus": {
+   "nombre": "Flexor largo del pulgar",
+   "nombre_en": "Flexor pollicis longus",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Humeral_head_of_extensor_carpi_ulnaris": {
+   "nombre": "Cabeza humeral del extensor ulnar del carpo",
+   "nombre_en": "Humeral head of extensor carpi ulnaris",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Humeral_head_of_flexor_carpi_ulnaris": {
+   "nombre": "Cabeza humeral del flexor ulnar del carpo",
+   "nombre_en": "Humeral head of flexor carpi ulnaris",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Humero_ulnar_head_of_flexor_digitorum_superficialis": {
+   "nombre": "Cabeza humeroulnar del flexor superficial de los dedos",
+   "nombre_en": "Humero-ulnar head of flexor digitorum superficialis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Lumbrical_muscles_of_hand": {
+   "nombre": "Músculos lumbricales de la mano",
+   "nombre_en": "Lumbrical muscles of hand",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Oblique_head_of_adductor_pollicis": {
+   "nombre": "Cabeza oblicua del aductor del pulgar",
+   "nombre_en": "Oblique head of adductor pollicis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Opponens_digiti_minimi_muscle_of_hand": {
+   "nombre": "Músculo oponente del dedo mínimo de la mano",
+   "nombre_en": "Opponens digiti minimi muscle of hand",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Opponens_pollicis_muscle": {
+   "nombre": "Músculo oponente del pulgar",
+   "nombre_en": "Opponens pollicis muscle",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Palmar_interossei_muscles": {
+   "nombre": "Músculos interóseos palmares",
+   "nombre_en": "Palmar interossei muscles",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Pronator_quadratus": {
+   "nombre": "Pronador cuadrado",
+   "nombre_en": "Pronator quadratus",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Radial_head_of_flexor_digitorum_superficialis": {
+   "nombre": "Cabeza radial del flexor superficial de los dedos",
+   "nombre_en": "Radial head of flexor digitorum superficialis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Superficial_head_of_flexor_pollicis_brevis": {
+   "nombre": "Cabeza superficial del flexor corto del pulgar",
+   "nombre_en": "Superficial head of flexor pollicis brevis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Superficial_head_of_pronator_teres": {
+   "nombre": "Cabeza superficial del pronador redondo",
+   "nombre_en": "Superficial head of pronator teres",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Supinator": {
+   "nombre": "Supinador",
+   "nombre_en": "Supinator",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Transverse_head_of_adductor_pollicis": {
+   "nombre": "Cabeza transversa del aductor del pulgar",
+   "nombre_en": "Transverse head of adductor pollicis",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Ulnar_head_of_extensor_carpi_ulnaris": {
+   "nombre": "Cabeza ulnar del extensor ulnar del carpo",
+   "nombre_en": "Ulnar head of extensor carpi ulnaris",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosMiembroSuperior__Ulnar_head_of_flexor_carpi_ulnaris": {
+   "nombre": "Cabeza ulnar del flexor ulnar del carpo",
+   "nombre_en": "Ulnar head of flexor carpi ulnaris",
+   "organo": "MusculosMiembroSuperior"
+  },
+  "MusculosTronco__Diaphragm": {
+   "nombre": "Diafragma",
+   "nombre_en": "Diaphragm",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Dorsal_parts_of_lateral_intertransversarii_lumborum_muscles": {
+   "nombre": "Partes dorsales de los m. lumbares intertransversarios lat.",
+   "nombre_en": "Dorsal parts of lateral intertransversarii lumborum muscles",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__External_intercostal_muscles": {
+   "nombre": "Músculos intercostales externos",
+   "nombre_en": "External intercostal muscles",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Gluteus_minimus_muscle": {
+   "nombre": "Músculo glúteo mínimo",
+   "nombre_en": "Gluteus minimus muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Iliacus_muscle": {
+   "nombre": "Músculo ilíaco",
+   "nombre_en": "Iliacus muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Iliocostalis_lumborum_muscle": {
+   "nombre": "Músculo iliocostal lumbar",
+   "nombre_en": "Iliocostalis lumborum muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Iliocostalis_thoracis_muscle": {
+   "nombre": "Músculo iliocostal del tórax",
+   "nombre_en": "Iliocostalis thoracis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Iliopectineal_arch": {
+   "nombre": "Arco iliopectinato",
+   "nombre_en": "Iliopectineal arch",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Infraspinatus_muscle": {
+   "nombre": "Músculo infraespinoso",
+   "nombre_en": "Infraspinatus muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Innermost_intercostal_muscles": {
+   "nombre": "Músculos intercostales íntimos",
+   "nombre_en": "Innermost intercostal muscles",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Internal_abdominal_oblique_muscle": {
+   "nombre": "Músculo oblicuo interno del abdomen",
+   "nombre_en": "Internal abdominal oblique muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Internal_intercostal_muscles": {
+   "nombre": "Músculos intercostales internos",
+   "nombre_en": "Internal intercostal muscles",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Interspinales_lumborum_muscles": {
+   "nombre": "Músculos interespinosos lumbares",
+   "nombre_en": "Interspinales lumborum muscles",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Levatores_breves_costarum": {
+   "nombre": "Elevadores cortos de las costillas",
+   "nombre_en": "Levatores breves costarum",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Levatores_longi_costarum": {
+   "nombre": "Elevadores largos de las costillas",
+   "nombre_en": "Levatores longi costarum",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Linea_alba": {
+   "nombre": "Linea alba",
+   "nombre_en": "Linea alba",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Longissimus_thoracis_muscle": {
+   "nombre": "Músculo longísimo del tórax",
+   "nombre_en": "Longissimus thoracis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Multifidus_lumborum_muscle": {
+   "nombre": "Músculo multifido lumbar",
+   "nombre_en": "Multifidus lumborum muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Multifidus_thoracis_muscle": {
+   "nombre": "Músculo multifido del tórax",
+   "nombre_en": "Multifidus thoracis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Pectoralis_minor_muscle": {
+   "nombre": "Músculo pectoral menor",
+   "nombre_en": "Pectoralis minor muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Piriformis_muscle": {
+   "nombre": "Músculo piriforme",
+   "nombre_en": "Piriformis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Psoas_major": {
+   "nombre": "Psoas mayor",
+   "nombre_en": "Psoas major",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Pyramidalis_muscle": {
+   "nombre": "Músculo piramidal",
+   "nombre_en": "Pyramidalis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Quadratus_lumborum_muscle": {
+   "nombre": "Músculo cuadrado lumbar",
+   "nombre_en": "Quadratus lumborum muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Rhomboid_major_muscle": {
+   "nombre": "Músculo romboides mayor",
+   "nombre_en": "Rhomboid major muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Rotatores": {
+   "nombre": "Rotadores",
+   "nombre_en": "Rotatores",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Semispinalis_thoracis_muscle": {
+   "nombre": "Músculo semiespinoso del tórax",
+   "nombre_en": "Semispinalis thoracis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Serratus_anterior_muscle": {
+   "nombre": "Músculo serrato anterior",
+   "nombre_en": "Serratus anterior muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Serratus_posterior_inferior_muscle": {
+   "nombre": "Músculo serrato posterior inferior",
+   "nombre_en": "Serratus posterior inferior muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Spinalis_thoracis_muscle": {
+   "nombre": "Músculo espinal del tórax",
+   "nombre_en": "Spinalis thoracis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Subscapularis_muscle": {
+   "nombre": "Músculo subescapular",
+   "nombre_en": "Subscapularis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Superior_gemellus_muscle": {
+   "nombre": "Músculo gemelo superior",
+   "nombre_en": "Superior gemellus muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Supraspinatus_muscle": {
+   "nombre": "Músculo supraespinoso",
+   "nombre_en": "Supraspinatus muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Teres_major_muscle": {
+   "nombre": "Músculo redondo mayor",
+   "nombre_en": "Teres major muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Teres_minor_muscle": {
+   "nombre": "Músculo redondo menor",
+   "nombre_en": "Teres minor muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Transversus_abdominis_muscle": {
+   "nombre": "Músculo transverso del abdomen",
+   "nombre_en": "Transversus abdominis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Transversus_thoracis_muscle": {
+   "nombre": "Músculo transverso del tórax",
+   "nombre_en": "Transversus thoracis muscle",
+   "organo": "MusculosTronco"
+  },
+  "MusculosTronco__Ventral_parts_of_lateral_intertransversarii_lumborum_muscles": {
+   "nombre": "Partes ventrales de los m. lumbares intertransvarios lat.",
+   "nombre_en": "Ventral parts of lateral intertransversarii lumborum muscles",
+   "organo": "MusculosTronco"
+  },
+  "Oblicuos__External_abdominal_oblique_muscle_Der": {
+   "nombre": "Músculo oblicuo externo del abdomen (lado derecho)",
+   "nombre_en": "External abdominal oblique muscle",
+   "organo": "Oblicuos"
+  },
+  "Oblicuos__External_abdominal_oblique_muscle_Izq": {
+   "nombre": "Músculo oblicuo externo del abdomen (lado izquierdo)",
+   "nombre_en": "External abdominal oblique muscle",
+   "organo": "Oblicuos"
+  },
+  "OtrosHuesos__Anterior_cells_of_ethmoid_bone": {
+   "nombre": "Células óseas etmoidales etmoidales anteriores",
+   "nombre_en": "Anterior cells of ethmoid bone",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Arytenoid_cartilage": {
+   "nombre": "Cartílago aritenoides",
+   "nombre_en": "Arytenoid cartilage",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Corniculate_cartilage": {
+   "nombre": "Cartílago corniculado",
+   "nombre_en": "Corniculate cartilage",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Cricoid_cartilage": {
+   "nombre": "Cartílago cricoides",
+   "nombre_en": "Cricoid cartilage",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Distal_phalanx_of_fifth_finger_of_hand": {
+   "nombre": "Falange distal del quinto dedo de la mano",
+   "nombre_en": "Distal phalanx of fifth finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Distal_phalanx_of_first_finger_of_hand": {
+   "nombre": "Falange distal del primer dedo de la mano",
+   "nombre_en": "Distal phalanx of first finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Distal_phalanx_of_fourth_finger_of_hand": {
+   "nombre": "Falange distal del cuarto dedo de la mano",
+   "nombre_en": "Distal phalanx of fourth finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Distal_phalanx_of_second_finger_of_hand": {
+   "nombre": "Falange distal del segundo dedo de la mano",
+   "nombre_en": "Distal phalanx of second finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Distal_phalanx_of_third_finger_of_hand": {
+   "nombre": "Falange distal del tercer dedo de la mano",
+   "nombre_en": "Distal phalanx of third finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Hyoid_bone": {
+   "nombre": "Hueso hioides",
+   "nombre_en": "Hyoid bone",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Lower_canine": {
+   "nombre": "Diente canino inferior",
+   "nombre_en": "Lower canine",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Lower_first_molar_tooth": {
+   "nombre": "Diente primer molar inferior",
+   "nombre_en": "Lower first molar tooth",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Lower_first_premolar": {
+   "nombre": "Diente primer premolar inferior",
+   "nombre_en": "Lower first premolar",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Lower_lateral_incisor": {
+   "nombre": "Diente incisivo inferolateral",
+   "nombre_en": "Lower lateral incisor",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Lower_medial_incisor": {
+   "nombre": "Diente incisivo inferomedial",
+   "nombre_en": "Lower medial incisor",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Lower_second_molar_tooth": {
+   "nombre": "Diente segundo molar inferior",
+   "nombre_en": "Lower second molar tooth",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Lower_second_premolar": {
+   "nombre": "Diente segundo premolar inferior",
+   "nombre_en": "Lower second premolar",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Middle_cells_of_ethmoid_bone": {
+   "nombre": "Células óseas etmoidales etmoidales medias",
+   "nombre_en": "Middle cells of ethmoid bone",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Middle_phalanx_of_fifth_finger_of_hand": {
+   "nombre": "Falange media del quinto dedo de la mano",
+   "nombre_en": "Middle phalanx of fifth finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Middle_phalanx_of_fourth_finger_of_hand": {
+   "nombre": "Falange media del cuarto dedo de la mano",
+   "nombre_en": "Middle phalanx of fourth finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Middle_phalanx_of_second_finger_of_hand": {
+   "nombre": "Falange media del segundo dedo de la mano",
+   "nombre_en": "Middle phalanx of second finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Middle_phalanx_of_third_finger_of_hand": {
+   "nombre": "Falange media del tercer dedo de la mano",
+   "nombre_en": "Middle phalanx of third finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Posterior_cells_of_ethmoid_bone": {
+   "nombre": "Células óseas etmoidales etmoidales posteriores",
+   "nombre_en": "Posterior cells of ethmoid bone",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Proximal_phalanx_of_fifth_finger_of_hand": {
+   "nombre": "Falange proximal del quinto dedo de la mano",
+   "nombre_en": "Proximal phalanx of fifth finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Proximal_phalanx_of_first_finger_of_hand": {
+   "nombre": "Falange proximal del primer dedo de la mano",
+   "nombre_en": "Proximal phalanx of first finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Proximal_phalanx_of_fourth_finger_of_hand": {
+   "nombre": "Falange proximal del cuarto dedo de la mano",
+   "nombre_en": "Proximal phalanx of fourth finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Proximal_phalanx_of_second_finger_of_hand": {
+   "nombre": "Falange proximal del segundo dedo de la mano",
+   "nombre_en": "Proximal phalanx of second finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Proximal_phalanx_of_third_finger_of_hand": {
+   "nombre": "Falange proximal del tercer dedo de la mano",
+   "nombre_en": "Proximal phalanx of third finger of hand",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Sesamoid_bones_of_foot": {
+   "nombre": "Huesos sesamoideos del pie",
+   "nombre_en": "Sesamoid bones of foot",
+   "organo": "OtrosHuesos"
+  },
+  "OtrosHuesos__Thyroid_cartilage": {
+   "nombre": "Cartílago tiroideo",
+   "nombre_en": "Thyroid cartilage",
+   "organo": "OtrosHuesos"
+  },
+  "Pancreas__Accessory_pancreatic_duct": {
+   "nombre": "Conducto pancreático accesorio",
+   "nombre_en": "Accessory pancreatic duct",
+   "organo": "Pancreas"
+  },
+  "Pancreas__Pancreas": {
+   "nombre": "Páncreas",
+   "nombre_en": "Pancreas",
+   "organo": "Pancreas"
+  },
+  "Pancreas__Pancreatic_duct": {
+   "nombre": "Conducto pancreático",
+   "nombre_en": "Pancreatic duct",
+   "organo": "Pancreas"
+  },
+  "Pectorales__Abdominal_part_of_pectoralis_major_muscle_Der": {
+   "nombre": "(Porción abdominal del músculo pectoral mayor) (lado derecho)",
+   "nombre_en": "(Abdominal part of pectoralis major muscle)",
+   "organo": "Pectorales"
+  },
+  "Pectorales__Abdominal_part_of_pectoralis_major_muscle_Izq": {
+   "nombre": "(Porción abdominal del músculo pectoral mayor) (lado izquierdo)",
+   "nombre_en": "(Abdominal part of pectoralis major muscle)",
+   "organo": "Pectorales"
+  },
+  "Pectorales__Clavicular_head_of_pectoralis_major_muscle_Der": {
+   "nombre": "Porción clavicular del músculo pectoral mayor (lado derecho)",
+   "nombre_en": "Clavicular head of pectoralis major muscle",
+   "organo": "Pectorales"
+  },
+  "Pectorales__Clavicular_head_of_pectoralis_major_muscle_Izq": {
+   "nombre": "Porción clavicular del músculo pectoral mayor (lado izquierdo)",
+   "nombre_en": "Clavicular head of pectoralis major muscle",
+   "organo": "Pectorales"
+  },
+  "Pectorales__Sternocostal_head_of_pectoralis_major_muscle_Der": {
+   "nombre": "Porción esternocostal del músculo pectoral mayor (lado derecho)",
+   "nombre_en": "Sternocostal head of pectoralis major muscle",
+   "organo": "Pectorales"
+  },
+  "Pectorales__Sternocostal_head_of_pectoralis_major_muscle_Izq": {
+   "nombre": "Porción esternocostal del músculo pectoral mayor (lado izquierdo)",
+   "nombre_en": "Sternocostal head of pectoralis major muscle",
+   "organo": "Pectorales"
+  },
+  "Pelvis__Coccyx": {
+   "nombre": "Cóccix",
+   "nombre_en": "Coccyx",
+   "organo": "Pelvis"
+  },
+  "Pelvis__Hip_bone_Der": {
+   "nombre": "Hueso coxal (lado derecho)",
+   "nombre_en": "Hip bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__Hip_bone_Izq": {
+   "nombre": "Hueso coxal (lado izquierdo)",
+   "nombre_en": "Hip bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__Sacrum": {
+   "nombre": "Hueso sacro",
+   "nombre_en": "Sacrum",
+   "organo": "Pelvis"
+  },
+  "PulmonDer__Inferior_lobe_of_right_lung": {
+   "nombre": "Lóbulo inferior del pulmón derecho",
+   "nombre_en": "Inferior lobe of right lung",
+   "organo": "PulmonDer"
+  },
+  "PulmonDer__Middle_lobe_of_right_lung": {
+   "nombre": "Lóbulo medio del pulmón derecho",
+   "nombre_en": "Middle lobe of right lung",
+   "organo": "PulmonDer"
+  },
+  "PulmonDer__Superior_lobe_of_right_lung": {
+   "nombre": "Lóbulo superior del pulmón derecho",
+   "nombre_en": "Superior lobe of right lung",
+   "organo": "PulmonDer"
+  },
+  "PulmonIzq__Inferior_lobe_of_left_lung": {
+   "nombre": "Lóbulo inferior del pulmón izquierdo",
+   "nombre_en": "Inferior lobe of left lung",
+   "organo": "PulmonIzq"
+  },
+  "PulmonIzq__Superior_lobe_of_left_lung": {
+   "nombre": "Lóbulo superior del pulmón izquierdo",
+   "nombre_en": "Superior lobe of left lung",
+   "organo": "PulmonIzq"
+  },
+  "RadioCubito__Radius_Der": {
+   "nombre": "Radio (lado derecho)",
+   "nombre_en": "Radius",
+   "organo": "RadioCubito"
+  },
+  "RadioCubito__Radius_Izq": {
+   "nombre": "Radio (lado izquierdo)",
+   "nombre_en": "Radius",
+   "organo": "RadioCubito"
+  },
+  "RadioCubito__Ulna_Der": {
+   "nombre": "Cúbito (lado derecho)",
+   "nombre_en": "Ulna",
+   "organo": "RadioCubito"
+  },
+  "RadioCubito__Ulna_Izq": {
+   "nombre": "Cúbito (lado izquierdo)",
+   "nombre_en": "Ulna",
+   "organo": "RadioCubito"
+  },
+  "TibiaDer__Fibula_Der": {
+   "nombre": "Peroné (lado derecho)",
+   "nombre_en": "Fibula",
+   "organo": "TibiaDer"
+  },
+  "TibiaDer__Tibia_Der": {
+   "nombre": "Tibia (lado derecho)",
+   "nombre_en": "Tibia",
+   "organo": "TibiaDer"
+  },
+  "TibiaIzq__Fibula_Izq": {
+   "nombre": "Peroné (lado izquierdo)",
+   "nombre_en": "Fibula",
+   "organo": "TibiaIzq"
+  },
+  "TibiaIzq__Tibia_Izq": {
+   "nombre": "Tibia (lado izquierdo)",
+   "nombre_en": "Tibia",
+   "organo": "TibiaIzq"
+  },
+  "TibialAnterior__Tibialis_anterior_muscle_Der": {
+   "nombre": "Músculo tibial anterior (lado derecho)",
+   "nombre_en": "Tibialis anterior muscle",
+   "organo": "TibialAnterior"
+  },
+  "TibialAnterior__Tibialis_anterior_muscle_Izq": {
+   "nombre": "Músculo tibial anterior (lado izquierdo)",
+   "nombre_en": "Tibialis anterior muscle",
+   "organo": "TibialAnterior"
+  },
+  "Trapecio__Ascending_part_of_trapezius_muscle_Der": {
+   "nombre": "Porción ascendente del músculo trapecio (lado derecho)",
+   "nombre_en": "Ascending part of trapezius muscle",
+   "organo": "Trapecio"
+  },
+  "Trapecio__Ascending_part_of_trapezius_muscle_Izq": {
+   "nombre": "Porción ascendente del músculo trapecio (lado izquierdo)",
+   "nombre_en": "Ascending part of trapezius muscle",
+   "organo": "Trapecio"
+  },
+  "Trapecio__Descending_part_of_trapezius_muscle_Der": {
+   "nombre": "Porción descendente del músculo trapecio (lado derecho)",
+   "nombre_en": "Descending part of trapezius muscle",
+   "organo": "Trapecio"
+  },
+  "Trapecio__Descending_part_of_trapezius_muscle_Izq": {
+   "nombre": "Porción descendente del músculo trapecio (lado izquierdo)",
+   "nombre_en": "Descending part of trapezius muscle",
+   "organo": "Trapecio"
+  },
+  "Trapecio__Transverse_part_of_trapezius_muscle_Der": {
+   "nombre": "Porción transversa del músculo trapecio (lado derecho)",
+   "nombre_en": "Transverse part of trapezius muscle",
+   "organo": "Trapecio"
+  },
+  "Trapecio__Transverse_part_of_trapezius_muscle_Izq": {
+   "nombre": "Porción transversa del músculo trapecio (lado izquierdo)",
+   "nombre_en": "Transverse part of trapezius muscle",
+   "organo": "Trapecio"
+  },
+  "Traquea__Left_main_bronchus": {
+   "nombre": "Bronquio principal izquierdo",
+   "nombre_en": "Left main bronchus",
+   "organo": "Traquea"
+  },
+  "Traquea__Right_main_bronchus": {
+   "nombre": "Bronquio principal derecho",
+   "nombre_en": "Right main bronchus",
+   "organo": "Traquea"
+  },
+  "Traquea__Trachea": {
+   "nombre": "Tráquea",
+   "nombre_en": "Trachea",
+   "organo": "Traquea"
+  },
+  "Triceps__Lateral_head_of_triceps_brachii_Der": {
+   "nombre": "Cabeza lateral del músculo tríceps braquial (lado derecho)",
+   "nombre_en": "Lateral head of triceps brachii",
+   "organo": "Triceps"
+  },
+  "Triceps__Lateral_head_of_triceps_brachii_Izq": {
+   "nombre": "Cabeza lateral del músculo tríceps braquial (lado izquierdo)",
+   "nombre_en": "Lateral head of triceps brachii",
+   "organo": "Triceps"
+  },
+  "Triceps__Long_head_of_triceps_brachii_Der": {
+   "nombre": "Cabeza larga del músculo tríceps braquial (lado derecho)",
+   "nombre_en": "Long head of triceps brachii",
+   "organo": "Triceps"
+  },
+  "Triceps__Long_head_of_triceps_brachii_Izq": {
+   "nombre": "Cabeza larga del músculo tríceps braquial (lado izquierdo)",
+   "nombre_en": "Long head of triceps brachii",
+   "organo": "Triceps"
+  },
+  "Triceps__Medial_head_of_triceps_brachii_Der": {
+   "nombre": "Cabeza medial del músculo tríceps braquial (lado derecho)",
+   "nombre_en": "Medial head of triceps brachii",
+   "organo": "Triceps"
+  },
+  "Triceps__Medial_head_of_triceps_brachii_Izq": {
+   "nombre": "Cabeza medial del músculo tríceps braquial (lado izquierdo)",
+   "nombre_en": "Medial head of triceps brachii",
+   "organo": "Triceps"
+  },
+  "VenaCava__Common_iliac_vein_Der": {
+   "nombre": "Vena iliaca común (lado derecho)",
+   "nombre_en": "Common iliac vein",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Common_iliac_vein_Izq": {
+   "nombre": "Vena iliaca común (lado izquierdo)",
+   "nombre_en": "Common iliac vein",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Inferior_vena_cava_abdominal_part": {
+   "nombre": "Vena cava inferior (parte abdominal)",
+   "nombre_en": "Inferior vena cava (abdominal part)",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Inferior_vena_cava_thoracic_part": {
+   "nombre": "Vena cava inferior (parte torácica)",
+   "nombre_en": "Inferior vena cava (thoracic part)",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Internal_jugular_vein_Der": {
+   "nombre": "Vena yugular interna (lado derecho)",
+   "nombre_en": "Internal jugular vein",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Internal_jugular_vein_Izq": {
+   "nombre": "Vena yugular interna (lado izquierdo)",
+   "nombre_en": "Internal jugular vein",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Left_brachiocephalic_vein": {
+   "nombre": "Vena braquiocefálica izquierda",
+   "nombre_en": "Left brachiocephalic vein",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Right_brachiocephalic_vein": {
+   "nombre": "Vena braquiocefálica derecha",
+   "nombre_en": "Right brachiocephalic vein",
+   "organo": "VenaCava"
+  },
+  "VenaCava__Superior_vena_cava": {
+   "nombre": "Vena cava superior",
+   "nombre_en": "Superior vena cava",
+   "organo": "VenaCava"
+  }
+ }
+}

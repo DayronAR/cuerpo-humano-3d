@@ -22,10 +22,16 @@ var _intentos_usados := 0
 var _puntaje := 0
 
 
-## ids_validos: órganos que existen en la escena (se ignoran preguntas de órganos que no estén)
-func configurar(datos: Dictionary, ids_validos: Array) -> void:
+## ids_validos: órganos que existen en la escena (se ignoran preguntas de órganos que no estén).
+## partes_validas: ids de partes del modelo; las preguntas por partes que no existan se ignoran
+## (p. ej. con el cuerpo procedural, que no tiene esas partes).
+func configurar(datos: Dictionary, ids_validos: Array, partes_validas: Array = []) -> void:
 	_config = datos
-	_preguntas = datos.get("preguntas", []).filter(func(p): return p.get("organo") in ids_validos)
+	_preguntas = datos.get("preguntas", []).filter(func(p):
+		if not p.get("organo") in ids_validos:
+			return false
+		var parte: String = p.get("parte", "")
+		return parte.is_empty() or partes_validas.any(func(x): return x.begins_with(parte)))
 
 
 func iniciar() -> void:
@@ -34,8 +40,9 @@ func iniciar() -> void:
 	_ronda.clear()
 	var usados := {}
 	for p in mezcladas:
-		if not usados.has(p["organo"]):
-			usados[p["organo"]] = true
+		var clave: String = p.get("parte", p["organo"])
+		if not usados.has(clave):
+			usados[clave] = true
 			_ronda.append(p)
 		if _ronda.size() >= int(_config.get("preguntas_por_ronda", 10)):
 			break
@@ -58,13 +65,18 @@ func siguiente() -> void:
 	pregunta_nueva.emit(_indice + 1, _ronda.size(), p.get("texto", ""), p.get("organo", ""))
 
 
-func responder(id_organo: String) -> void:
+## id_parte: parte en la que se hizo clic (las preguntas con "parte" la exigen; ambos lados valen).
+func responder(id_organo: String, id_parte := "") -> void:
 	if not esperando:
 		return
 	var correcto := organo_actual()
+	var parte_pedida: String = _ronda[_indice].get("parte", "")
 	_intentos_usados += 1
 	var maximos := int(_config.get("intentos", 2))
-	if id_organo == correcto:
+	var acierto := id_organo == correcto
+	if acierto and not parte_pedida.is_empty():
+		acierto = id_parte.begins_with(parte_pedida)
+	if acierto:
 		var tabla: Array = _config.get("puntos_por_intento", [10, 5])
 		var puntos := int(tabla[mini(_intentos_usados - 1, tabla.size() - 1)])
 		_puntaje += puntos
@@ -73,7 +85,8 @@ func responder(id_organo: String) -> void:
 	else:
 		var restantes := maxi(maximos - _intentos_usados, 0)
 		esperando = restantes > 0
-		respuesta_evaluada.emit(false, id_organo, correcto, 0, _puntaje, restantes)
+		respuesta_evaluada.emit(false, id_parte if not id_parte.is_empty() else id_organo, correcto, 0, _puntaje,
+				restantes)
 
 
 func saltar() -> void:
@@ -86,6 +99,13 @@ func saltar() -> void:
 func abandonar() -> void:
 	activo = false
 	esperando = false
+
+
+## Parte que pide la pregunta actual ("" si pregunta por el órgano completo).
+func parte_actual() -> String:
+	if _indice < 0 or _indice >= _ronda.size():
+		return ""
+	return _ronda[_indice].get("parte", "")
 
 
 func organo_actual() -> String:

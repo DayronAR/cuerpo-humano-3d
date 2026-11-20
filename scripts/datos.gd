@@ -8,6 +8,7 @@ const RUTA_CAMARA := "res://data/camara.json"
 const RUTA_ESCENARIOS := "res://data/escenarios.json"
 const RUTA_VISUALES := "res://data/visuales.json"
 const RUTA_CUESTIONARIO := "res://data/cuestionario.json"
+const RUTA_PARTES := "res://data/partes.json"
 
 var sistemas: Array = []          ## Lista ordenada de sistemas (cada uno es un Dictionary)
 var orden_capas: Array = []       ## ids de sistema de afuera hacia adentro
@@ -17,6 +18,7 @@ var camara: Dictionary = {}       ## Configuración de la cámara orbital
 var simulacion: Dictionary = {}   ## Modelo de simulación: variables, estados, escenarios
 var visuales: Dictionary = {}     ## Órganos, trayectorias y personaje de las visualizaciones
 var cuestionario: Dictionary = {} ## Preguntas y reglas del modo cuestionario
+var partes: Dictionary = {}       ## id de nodo de la parte -> {nombre, nombre_en, organo} (generado)
 
 var _sistemas_por_id: Dictionary = {}
 
@@ -31,6 +33,8 @@ func _init() -> void:
 	simulacion = _cargar_json(RUTA_ESCENARIOS)
 	visuales = _cargar_json(RUTA_VISUALES)
 	cuestionario = _cargar_json(RUTA_CUESTIONARIO)
+	if FileAccess.file_exists(RUTA_PARTES):
+		partes = _cargar_json(RUTA_PARTES).get("partes", {})
 	for s in sistemas:
 		_sistemas_por_id[s.get("id", "")] = s
 
@@ -50,6 +54,11 @@ func ficha_organo(id: String) -> Dictionary:
 		return organos[id]
 	push_warning("No hay ficha para el órgano '%s' en %s" % [id, RUTA_ORGANOS])
 	return {"nombre": id, "funcion": "Sin información disponible.", "datos_curiosos": []}
+
+
+## Nombre en español de una parte (p. ej. "Estribo (lado derecho)"); "" si no tiene ficha de parte.
+func nombre_parte(id_parte: String) -> String:
+	return partes.get(id_parte, {}).get("nombre", "")
 
 
 func sistema(id: String) -> Dictionary:

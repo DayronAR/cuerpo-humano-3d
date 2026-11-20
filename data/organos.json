@@ -385,6 +385,94 @@
         "Cada pie tiene 26 huesos; entre los dos pies hay casi una cuarta parte de los huesos del cuerpo.",
         "El calcáneo (talón) es el hueso más grande del pie."
       ]
+    },
+    "MusculosCabeza": {
+      "nombre": "Músculos de la cabeza",
+      "funcion": "Mueven la mandíbula para masticar, dan las expresiones de la cara, mueven los ojos y la lengua.",
+      "datos_curiosos": [
+        "Para sonreír se usan unos 12 músculos; para fruncir el ceño, todavía más.",
+        "El masetero, que cierra la mandíbula, es uno de los músculos más fuertes según su tamaño."
+      ]
+    },
+    "MusculosCuello": {
+      "nombre": "Músculos del cuello",
+      "funcion": "Sostienen y mueven la cabeza, y participan en tragar, hablar y respirar con esfuerzo.",
+      "datos_curiosos": [
+        "La cabeza de un adulto pesa unos 5 kg: el cuello la sostiene todo el día.",
+        "Los músculos alrededor de la laringe ajustan las cuerdas vocales al hablar."
+      ]
+    },
+    "MusculosTronco": {
+      "nombre": "Músculos del tronco",
+      "funcion": "Mantienen la postura, protegen los órganos, mueven la columna y ayudan a respirar (como los intercostales y el diafragma).",
+      "datos_curiosos": [
+        "El diafragma es el principal músculo de la respiración.",
+        "Los músculos profundos de la espalda trabajan sin parar para mantenernos erguidos."
+      ]
+    },
+    "MusculosMiembroSuperior": {
+      "nombre": "Músculos del miembro superior",
+      "funcion": "Mueven el hombro, el codo, la muñeca y los dedos; dan fuerza y precisión a la mano.",
+      "datos_curiosos": [
+        "La mano tiene músculos propios muy pequeños que permiten movimientos finos como escribir.",
+        "El manguito rotador estabiliza el hombro, la articulación más móvil del cuerpo."
+      ]
+    },
+    "MusculosMiembroInferior": {
+      "nombre": "Músculos del miembro inferior",
+      "funcion": "Sostienen el peso del cuerpo y permiten caminar, correr, saltar y mantener el equilibrio.",
+      "datos_curiosos": [
+        "El sartorio es el músculo más largo del cuerpo.",
+        "Los músculos de la pierna ayudan a bombear la sangre de vuelta al corazón."
+      ]
+    },
+    "OtrosHuesos": {
+      "nombre": "Otros huesos y cartílagos",
+      "funcion": "Huesos pequeños y estructuras como el hioides y los huesos sesamoideos, que completan el esqueleto.",
+      "datos_curiosos": [
+        "El hioides es el único hueso que no se articula con ningún otro.",
+        "Un adulto tiene 206 huesos; un recién nacido, cerca de 300 que luego se fusionan."
+      ]
+    },
+    "ArteriasPerifericas": {
+      "nombre": "Arterias",
+      "funcion": "Llevan la sangre rica en oxígeno desde el corazón hacia cada órgano, músculo y tejido.",
+      "datos_curiosos": [
+        "Si se unieran todos los vasos sanguíneos, darían más de dos vueltas a la Tierra.",
+        "El pulso que se toma en la muñeca es la onda de presión en la arteria radial."
+      ]
+    },
+    "VenasPerifericas": {
+      "nombre": "Venas",
+      "funcion": "Devuelven la sangre pobre en oxígeno desde los tejidos hacia el corazón.",
+      "datos_curiosos": [
+        "Las venas de las piernas tienen válvulas que impiden que la sangre baje.",
+        "En reposo, las venas contienen cerca del 70 % de toda la sangre."
+      ]
+    },
+    "Pancreas": {
+      "nombre": "Páncreas",
+      "funcion": "Produce jugos digestivos para el intestino y hormonas como la insulina y el glucagón, que controlan la glucosa en sangre.",
+      "datos_curiosos": [
+        "Es la glándula responsable de bajar la glucosa después de comer (escenario 'Comer').",
+        "Mide unos 15 cm y está detrás del estómago."
+      ]
+    },
+    "Nervios": {
+      "nombre": "Nervios periféricos",
+      "funcion": "Llevan las órdenes del encéfalo a los músculos y traen la información de los sentidos desde todo el cuerpo.",
+      "datos_curiosos": [
+        "El nervio ciático es el más largo y grueso del cuerpo.",
+        "Algunas señales nerviosas viajan a más de 100 metros por segundo."
+      ]
+    },
+    "EncefaloYSentidos": {
+      "nombre": "Estructuras del encéfalo y órganos de los sentidos",
+      "funcion": "Incluye estructuras profundas del encéfalo (tálamo, tronco encefálico...) y órganos como el ojo y el oído interno.",
+      "datos_curiosos": [
+        "El oído interno contiene el órgano del equilibrio, además del de la audición.",
+        "El ojo puede distinguir millones de colores."
+      ]
     }
   }
 }
