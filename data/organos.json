@@ -761,6 +761,14 @@
         "La mayor parte del volumen de la mama es grasa; el tejido glandular se desarrolla sobre todo en el embarazo y la lactancia.",
         "La areola tiene pequeñas glándulas (de Montgomery) que lubrican y protegen el pezón."
       ]
+    },
+    "Cabello": {
+      "nombre": "Cabello",
+      "funcion": "Anexo de la piel formado por queratina. Protege el cuero cabelludo del sol y del frío y ayuda a conservar el calor de la cabeza.",
+      "datos_curiosos": [
+        "Una persona tiene entre 100 000 y 150 000 cabellos en la cabeza.",
+        "Crece alrededor de 1 cm al mes, y es normal perder unos 50 a 100 cabellos al día."
+      ]
     }
   }
 }

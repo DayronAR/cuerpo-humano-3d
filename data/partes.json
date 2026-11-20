@@ -251,6 +251,21 @@
    "nombre_en": "Superior segmental bronchus of right lung (BVI)",
    "organo": "Bronquios"
   },
+  "Cabello__hair_scalp": {
+   "nombre": "Cabello",
+   "nombre_en": "hair scalp",
+   "organo": "Cabello"
+  },
+  "Cabello__hair_tie": {
+   "nombre": "Liga del cabello",
+   "nombre_en": "hair tie",
+   "organo": "Cabello"
+  },
+  "Cabello__ponytail": {
+   "nombre": "Cola de caballo",
+   "nombre_en": "ponytail",
+   "organo": "Cabello"
+  },
   "CajaToracica__Body_of_sternum": {
    "nombre": "Cuerpo del esternón",
    "nombre_en": "Body of sternum",

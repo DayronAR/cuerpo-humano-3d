@@ -47,13 +47,18 @@ PERFIL_GROSOR = [  # (z, grosor)
     (1.03, 0.016), (1.10, 0.012), (1.20, 0.013), (1.32, 0.016),    # cintura y abdomen
 ]
 Z_DESDE = (0.50, 0.62)       # Transición suave entre las piernas (sin cambio) y los muslos
-GROSOR_BRAZO = 0.010
+GROSOR_BRAZO = 0.005
 Z_SIN_CAMBIO = 1.42          # Cuello y cabeza quedan igual
 RADIO_MAMA = (0.08, 0.13)    # Alrededor del pezón: sin cambio hasta 8 cm, transición hasta 13 cm
 # Torso: cintura y vientre por franjas de altura (deformación suave, sin bordes)
 Z_TORSO = (0.92, 1.00, 1.12, 1.22)   # Entra entre 0,92-1,00 y sale entre 1,12-1,22 (bajo las mamas)
-MARGEN_FRENTE = 0.004        # El vientre queda 4 mm por delante del contorno delgado
-MARGEN_LADO = 0.006          # La cintura queda 6 mm por fuera del contorno delgado
+MARGEN_FRENTE = -0.006       # El vientre queda 6 mm por DETRÁS del contorno delgado de referencia
+MARGEN_LADO = -0.008         # La cintura queda 8 mm por dentro del contorno delgado
+K_ESPALDA = 0.90             # La mitad posterior del torso (espalda, flancos) se reduce al 90 %
+# Caderas y piernas: escala de la sección alrededor del eje (x, y) de cada pierna
+ESCALA_PIERNA = [(0.10, 1.00), (0.35, 0.95), (0.50, 0.89), (0.66, 0.88), (0.80, 0.97)]   # (z, factor)
+ESCALA_CADERA = 0.985        # Caderas (z 0,80-0,95): escala alrededor del eje del cuerpo
+Z_CADERA = (0.78, 0.82, 0.95, 1.02)
 
 
 def perfil_torso_delgado(escala):
@@ -114,7 +119,7 @@ def torso_por_franjas(pts, franjas, pezones):
         ancho = max(abs(p.x) for p in lado)
         f_obj = min(medio - 0.01, franjas[k][0] - MARGEN_FRENTE)
         a_obj = franjas[k][1] + MARGEN_LADO
-        ky = min(1.0, (medio - f_obj) / max(1e-4, medio - frente))
+        ky = min(1.0, (medio - f_obj) / max(1e-4, medio - frente)) * 0.97
         kx = min(1.0, a_obj / max(1e-4, ancho)) if franjas[k][1] > 0 else 1.0
         medida[k] = (medio, ky, kx)
     claves = sorted(medida)
@@ -146,9 +151,57 @@ def torso_por_franjas(pts, franjas, pezones):
             w *= suave(*RADIO_MAMA, (p - pz).length)
         medio, ky, kx = factores(p.z)
         nx = p.x * kx
-        ny = medio + (p.y - medio) * ky if p.y < medio else p.y
+        ny = medio + (p.y - medio) * (ky if p.y < medio else K_ESPALDA)
         resultado[i] = np.array([(nx - p.x) * w, (ny - p.y) * w, 0.0])
     print(f"[OK] Torso: cintura x{min(m[2] for m in medida.values()):.2f}, vientre x{min(m[1] for m in medida.values()):.2f}")
+    return resultado
+
+
+def interpolar(tabla, z):
+    if z <= tabla[0][0]:
+        return tabla[0][1]
+    for (z0, a), (z1, b) in zip(tabla, tabla[1:]):
+        if z0 <= z <= z1:
+            return a + (b - a) * (z - z0) / (z1 - z0)
+    return tabla[-1][1]
+
+
+def caderas_y_piernas(pts):
+    """Muslos y piernas: cada sección horizontal se escala hacia el eje de SU pierna (centro de
+    la franja en ese lado). Caderas: hacia el eje del cuerpo. Todo con pesos suaves en z."""
+    centros = {}
+    for p in pts:
+        if p.z > Z_CADERA[1] or es_brazo(p) or abs(p.x) < 0.005:
+            continue
+        clave = (round(p.z / 0.02), 1 if p.x > 0 else -1)
+        c = centros.setdefault(clave, [0.0, 0.0, 0])
+        c[0] += p.x
+        c[1] += p.y
+        c[2] += 1
+    # Centros suavizados entre franjas vecinas (evita bandas horizontales)
+    suavizados = {}
+    for (k, lado), c in centros.items():
+        vecinos = [centros[(k + d, lado)] for d in range(-4, 5) if (k + d, lado) in centros]
+        n = sum(v[2] for v in vecinos)
+        suavizados[(k, lado)] = [sum(v[0] for v in vecinos), sum(v[1] for v in vecinos), n]
+    centros = suavizados
+    resultado = np.zeros((len(pts), 3))
+    for i, p in enumerate(pts):
+        if es_brazo(p) or p.z > Z_CADERA[3]:
+            continue
+        # Pierna (hasta la ingle), mezclada con la cadera
+        k_pierna = interpolar(ESCALA_PIERNA, p.z)
+        c = centros.get((round(p.z / 0.02), 1 if p.x > 0 else -1))
+        destino = Vector(p)
+        w_cadera = suave(Z_CADERA[0], Z_CADERA[1], p.z) * (1.0 - suave(Z_CADERA[2], Z_CADERA[3], p.z))
+        if c and c[2] > 0 and p.z < Z_CADERA[1]:
+            cx, cy = c[0] / c[2], c[1] / c[2]
+            pierna = Vector((cx + (p.x - cx) * k_pierna, cy + (p.y - cy) * k_pierna, p.z))
+            destino = pierna
+        if w_cadera > 0:
+            cadera = Vector((p.x * ESCALA_CADERA, p.y * ESCALA_CADERA + 0.004, p.z))
+            destino = destino.lerp(cadera, w_cadera)
+        resultado[i] = np.array(destino - p)
     return resultado
 
 
@@ -214,7 +267,7 @@ def main():
         exceso = distancia - grosor_objetivo(p)
         if exceso <= 0 or not es_brazo(p):
             continue   # El primer paso solo adelgaza los brazos; el torso se hace por franjas
-        w = 1.0 - suave(Z_SIN_CAMBIO - 0.06, Z_SIN_CAMBIO + 0.04, p.z)
+        w = 1.0 - suave(1.27, 1.37, p.z)   # Hombros y cuello sin cambio (evita pliegues)
         if not es_brazo(p):
             w *= suave(*Z_DESDE, p.z)
         for pz in pezones:
@@ -224,7 +277,10 @@ def main():
         peso[i] = w
 
     # Segundo paso (después del suavizado, ver abajo): torso por franjas
-    # Suavizado del desplazamiento (promedio con los vecinos) para que no queden bultos
+    desplazamiento += torso_por_franjas(pts, franjas, pezones)
+    desplazamiento += caderas_y_piernas(pts)
+
+    # Suavizado del desplazamiento (promedio con los vecinos) para que no queden bultos ni bandas
     aristas = np.array([e.vertices[:] for e in malla.edges])
     grado = np.bincount(aristas.ravel(), minlength=n).astype(float)
     grado[grado == 0] = 1
@@ -234,7 +290,6 @@ def main():
         np.add.at(suma, aristas[:, 1], desplazamiento[aristas[:, 0]])
         desplazamiento = 0.5 * desplazamiento + 0.5 * suma / grado[:, None]
 
-    desplazamiento += torso_por_franjas(pts, franjas, pezones)
 
     for i, v in enumerate(malla.vertices):
         v.co += Vector(desplazamiento[i])

@@ -552,6 +552,7 @@ const DEF_MATERIALES := {
 	"glandula": {"color": Color(0.78, 0.48, 0.32), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
 	"linfatico": {"color": Color(0.55, 0.72, 0.36), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
 	"bazo": {"color": Color(0.42, 0.14, 0.25), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
+	"cabello": {"color": Color(0.17, 0.1, 0.06), "rugosidad": 0.68, "brillo": 0.08, "rim": 0.3, "relieve": [0.8, 140.0]},
 	"grasa": {"color": Color(0.98, 0.86, 0.52, 0.32), "rugosidad": 0.45, "brillo": 0.3, "rim": 0.35, "transparente": true},
 }
 

@@ -1,0 +1,28 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cpd54"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g5hk2"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_cpd54")
+seamless = true
+as_normal_map = true
+bump_strength = 6.0
+
+[resource]
+resource_name = "cabello"
+albedo_color = Color(0.17, 0.1, 0.06, 1)
+roughness = 0.68
+normal_enabled = true
+normal_scale = 0.8
+normal_texture = SubResource("NoiseTexture2D_g5hk2")
+rim_enabled = true
+rim = 0.3
+rim_tint = 0.6
+clearcoat_enabled = true
+clearcoat = 0.08
+clearcoat_roughness = 0.35
+uv1_scale = Vector3(140, 140, 140)
+uv1_triplanar = true
