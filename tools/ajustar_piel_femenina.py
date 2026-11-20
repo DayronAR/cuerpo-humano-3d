@@ -158,8 +158,8 @@ def torso_por_franjas(pts, franjas, pezones):
 
 
 # Tono muscular: la piel se acerca a los músculos en el abdomen y los brazos (definición ligera)
-TONO = {"abdomen": (0.0075, 0.55), "brazo": (0.0035, 0.4)}   # zona: (grosor objetivo, intensidad)
-ITERACIONES_TONO = 6         # Suavizado corto: conserva el relieve de los músculos
+TONO = {"abdomen": (0.0075, 0.0), "brazo": (0.0035, 0.4)}   # El abdomen se esculpe aparte   # zona: (grosor objetivo, intensidad)
+ITERACIONES_TONO = 3         # Suavizado corto: conserva el relieve de los músculos
 
 
 def tono_muscular(pts, desplazamiento, arbol, pezones):
@@ -183,6 +183,31 @@ def tono_muscular(pts, desplazamiento, arbol, pezones):
         exceso = distancia - grosor
         if exceso > 0:
             resultado[i] = np.array((cercano - p).normalized()) * exceso * intensidad * w
+    return resultado
+
+
+# Definición del abdomen esculpida (profundidades en m, hacia adentro)
+ABDOMEN_Z = (0.985, 1.015, 1.155, 1.185)   # Entra / sale suavemente (ombligo -> bajo las mamas)
+ALBA = (0.0042, 0.0095)          # Línea alba: profundidad, ancho (sigma en x)
+SEMILUNAR = (0.0030, 0.074, 0.015)   # Líneas semilunares: profundidad, |x| central, ancho
+INTERSECCIONES = [(1.065, 0.0022), (1.120, 0.0020)]   # (z, profundidad) de las líneas horizontales
+ANCHO_INTERSECCION = (0.0105, 0.062)  # sigma en z, mitad del ancho en x
+
+
+def definicion_abdomen(pts, desplazamiento, normales):
+    resultado = np.zeros((len(pts), 3))
+    for i, p0 in enumerate(pts):
+        p = p0 + Vector(desplazamiento[i])
+        if not ABDOMEN_Z[0] < p.z < ABDOMEN_Z[3] or abs(p.x) > 0.11 or normales[i].y > -0.55:
+            continue
+        w = suave(ABDOMEN_Z[0], ABDOMEN_Z[1], p.z) * (1.0 - suave(ABDOMEN_Z[2], ABDOMEN_Z[3], p.z))
+        x = abs(p.x)
+        prof = ALBA[0] * math.exp(-(p.x / ALBA[1]) ** 2)
+        prof += SEMILUNAR[0] * math.exp(-((x - SEMILUNAR[1]) / SEMILUNAR[2]) ** 2)
+        banda = 1.0 - suave(ANCHO_INTERSECCION[1] - 0.012, ANCHO_INTERSECCION[1], x)
+        for zi, di in INTERSECCIONES:
+            prof += di * banda * math.exp(-((p.z - zi) / ANCHO_INTERSECCION[0]) ** 2)
+        resultado[i] = np.array([0.0, prof * w, 0.0])   # Hacia adentro (+y: el frente está en -y)
     return resultado
 
 
@@ -328,6 +353,14 @@ def main():
         np.add.at(suma, aristas[:, 1], tono[aristas[:, 0]])
         tono = 0.5 * tono + 0.5 * suma / grado[:, None]
     desplazamiento += tono
+    normales = [v.normal.copy() for v in malla.vertices]
+    definicion = definicion_abdomen(pts, desplazamiento, normales)
+    for _ in range(4):   # Suaviza el relieve: músculos, no cortes
+        suma = np.zeros((n, 3))
+        np.add.at(suma, aristas[:, 0], definicion[aristas[:, 1]])
+        np.add.at(suma, aristas[:, 1], definicion[aristas[:, 0]])
+        definicion = 0.5 * definicion + 0.5 * suma / grado[:, None]
+    desplazamiento += definicion
 
     for i, v in enumerate(malla.vertices):
         v.co += Vector(desplazamiento[i])
