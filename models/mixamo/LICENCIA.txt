@@ -1,0 +1,12 @@
+Personaje y animaciones de Mixamo (Adobe)
+=========================================
+
+Personaje "Y Bot" y animaciones Breathing Idle, Standard Walk, Jogging y Running (y la de
+cansancio, si está), descargados de https://www.mixamo.com con la cuenta de un integrante.
+
+Según los términos de Mixamo, el personaje y las animaciones se pueden usar libremente dentro
+de proyectos (incluido este programa y su ejecutable), pero no se deben redistribuir como
+archivos sueltos ni revender. Por eso los FBX originales quedan en assets_fuente/mixamo/
+(fuera de git) y aquí solo se guarda el .glb combinado que usa la aplicación.
+
+Generado con tools/combinar_mixamo.py.

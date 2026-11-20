@@ -48,7 +48,7 @@
   },
   "personaje": {
     "_comentario": "Escena del personaje de la mini vista. Para usar Mixamo, cambiar 'escena' a res://scenes/personaje_mixamo.tscn y ajustar los nombres de las animaciones.",
-    "escena": "res://scenes/maniqui.tscn",
+    "escena": "res://scenes/personaje_mixamo.tscn",
     "animaciones": {
       "reposo": "Idle",
       "caminar": "Walking",

@@ -37,6 +37,10 @@ func fijar_actividad(actividad: String) -> void:
 		return
 	var nombre: String = _animaciones.get(actividad, "")
 	var disponible := _buscar_animacion(nombre)
+	if disponible.is_empty() and actividad != "reposo":
+		# Respaldo: si falta la animación pedida, se usa la de reposo
+		push_warning("personaje_mixamo: falta '%s' para '%s'; se usa la de reposo" % [nombre, actividad])
+		disponible = _buscar_animacion(_animaciones.get("reposo", ""))
 	if disponible.is_empty():
 		push_warning("personaje_mixamo: no hay animación para '%s' (buscada: '%s')" % [actividad, nombre])
 		return
