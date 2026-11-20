@@ -552,6 +552,7 @@ const DEF_MATERIALES := {
 	"glandula": {"color": Color(0.78, 0.48, 0.32), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
 	"linfatico": {"color": Color(0.55, 0.72, 0.36), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
 	"bazo": {"color": Color(0.42, 0.14, 0.25), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
+	"grasa": {"color": Color(0.98, 0.86, 0.52, 0.32), "rugosidad": 0.45, "brillo": 0.3, "rim": 0.35, "transparente": true},
 }
 
 
@@ -567,6 +568,10 @@ func _material(nombre: String) -> StandardMaterial3D:
 		m.clearcoat_enabled = true
 		m.clearcoat = d["brillo"]
 		m.clearcoat_roughness = 0.35
+	if d.get("transparente", false):
+		# Semitransparente (p. ej. la grasa de las mamas): deja ver lo que hay dentro
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		m.cull_mode = BaseMaterial3D.CULL_BACK
 	if d.has("rim"):
 		m.rim_enabled = true
 		m.rim = d["rim"]

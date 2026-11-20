@@ -9,7 +9,9 @@ Atlas, así que se construye de forma procedural DENTRO de esa piel:
   4. Se crean, orientados desde la pared torácica hacia el pezón:
        - lóbulos de la glándula mamaria (15 a 20, dispuestos en radios, como en la realidad),
        - conductos galactóforos (uno por lóbulo, con su seno antes del pezón),
-       - areola y pezón.
+       - areola y pezón,
+       - tejido adiposo: el volumen entre la pared torácica y la piel (envoltura convexa de la
+         piel de la mama, 2 mm hacia adentro, cerrada contra la pared del tórax).
 Uso:
     blender -b --factory-startup --python tools/generar_mamas.py
 Salida: assets_fuente/hra-femenino/Mamas_generadas.glb (en coordenadas finales del cuerpo).
@@ -79,7 +81,35 @@ def unir(nombre, mallas):
     return obj
 
 
-def construir_mama(pezon, normal, proyeccion, sufijo):
+def grasa(vertices, pezon, eje, proyeccion, radio, sufijo):
+    """Tejido adiposo: puntos de la piel de la mama (2 mm hacia adentro) más su proyección sobre
+    la pared torácica; la envoltura convexa de esos puntos es el volumen de la mama."""
+    base = pezon - eje * proyeccion
+    puntos = []
+    for p, n in vertices:
+        delante = (p - base).dot(eje)
+        lateral = ((p - base) - eje * delante).length
+        mismo_lado = p.x * math.copysign(1, pezon.x) > 0.02   # No cruza la línea media (escote)
+        if 0.0 < delante < proyeccion + 0.01 and lateral < radio and n.dot(eje) > 0.1 and mismo_lado:
+            interior = p - n * 0.002
+            puntos.append(interior)
+            puntos.append(interior - eje * (interior - base).dot(eje))   # Sobre la pared torácica
+    bm = bmesh.new()
+    for p in puntos:
+        bm.verts.new(p)
+    resultado = bmesh.ops.convex_hull(bm, input=bm.verts[:])
+    sobrantes = list({v for v in resultado["geom_interior"] + resultado["geom_unused"] if isinstance(v, bmesh.types.BMVert)})
+    bmesh.ops.delete(bm, geom=sobrantes, context="VERTS")
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    malla = bpy.data.meshes.new(f"VH_F_breast_fat_{sufijo}")
+    bm.to_mesh(malla)
+    bm.free()
+    obj = bpy.data.objects.new(malla.name, malla)
+    bpy.context.scene.collection.objects.link(obj)
+    return obj
+
+
+def construir_mama(vertices, pezon, normal, proyeccion, sufijo):
     # Eje de la mama: desde el centro de su base (en la pared torácica) hacia el pezón
     eje = (normal + Vector((0, -1, 0))).normalized()   # Hacia afuera (la normal de la piel) y al frente
     base = pezon - eje * proyeccion
@@ -125,7 +155,8 @@ def construir_mama(pezon, normal, proyeccion, sufijo):
     areola = elipsoide("areola", pezon - eje * 0.003, (0.019, 0.019, 0.0025), eje, 24)
     pezon_m = elipsoide("pezon", pezon - eje * 0.0005, (0.0055, 0.0055, 0.006), eje, 16)
     are = unir(f"VH_F_areola_and_nipple_{sufijo}", [areola, pezon_m])
-    return [lob, duc, are]
+    fat = grasa(vertices, pezon, eje, proyeccion, proyeccion * 1.3, sufijo)
+    return [lob, duc, are, fat]
 
 
 def main():
@@ -134,7 +165,7 @@ def main():
         bpy.data.objects.remove(o, do_unlink=True)
     objetos = []
     for signo, sufijo in [(1, "L"), (-1, "R")]:
-        objetos += construir_mama(*medir_mama(vertices, signo), sufijo)
+        objetos += construir_mama(vertices, *medir_mama(vertices, signo), sufijo)
     for o in objetos:
         o.select_set(True)
     bpy.ops.export_scene.gltf(filepath=os.path.abspath(SALIDA), export_format="GLB", use_selection=True,

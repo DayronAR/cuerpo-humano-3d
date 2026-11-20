@@ -416,8 +416,8 @@ func _indexar_cuerpo() -> void:
 func _crear_colisiones(organo: Node3D) -> Array:
 	var creados := []
 	for malla in mallas_de(organo):
-		if malla.mesh == null:
-			continue
+		if malla.mesh == null or _es_transparente(malla):
+			continue   # Lo semitransparente (grasa mamaria) no se elige con clic: dejaría pasar el clic a lo de adentro
 		var cuerpo_fisico := StaticBody3D.new()
 		cuerpo_fisico.name = "Colision"
 		cuerpo_fisico.set_meta("organo", organo)
@@ -429,6 +429,11 @@ func _crear_colisiones(organo: Node3D) -> Array:
 		malla.add_child(cuerpo_fisico)
 		creados.append(cuerpo_fisico)
 	return creados
+
+
+static func _es_transparente(malla: MeshInstance3D) -> bool:
+	var m := malla.get_active_material(0)
+	return m is BaseMaterial3D and m.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED
 
 
 func _caja_mundo(nodo: Node3D) -> AABB:

@@ -88,6 +88,9 @@ func _crear_nodo(estado: GLTFState, i: int, padre: Node3D, raiz: Node3D, sistema
 	# Material: el del órgano si está en la lista; si no, el heredado (sistema u órgano padre)
 	var nombre_organo := nombre.get_slice("__", 0)
 	var material_nombre: String = materiales.get(nombre_organo, material_heredado)
+	for clave in materiales:   # Material propio de una parte: clave "Organo__prefijo_de_parte"
+		if String(clave).contains("__") and nombre.begins_with(clave):
+			material_nombre = materiales[clave]
 	var nodo: Node3D
 	var tris := 0
 	if nodo_gltf.mesh >= 0:

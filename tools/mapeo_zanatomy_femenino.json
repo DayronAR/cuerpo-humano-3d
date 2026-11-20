@@ -164,7 +164,8 @@
     "urinary bladder neck smooth muscle": "Cuello de la vejiga",
     "mammary gland lobes": "Lóbulos de la glándula mamaria",
     "lactiferous ducts": "Conductos galactóforos",
-    "areola and nipple": "Areola y pezón"
+    "areola and nipple": "Areola y pezón",
+    "breast fat": "Tejido adiposo mamario"
   },
   "sistemas": {
     "Piel": {
@@ -332,7 +333,8 @@
         "fuentes": [
           "VH_F_mammary_gland_lobes*",
           "VH_F_lactiferous_ducts*",
-          "VH_F_areola_and_nipple*"
+          "VH_F_areola_and_nipple*",
+          "VH_F_breast_fat*"
         ],
         "partes": "individual"
       }
@@ -343,6 +345,7 @@
     "Ovarios": "reproductor",
     "TrompasUterinas": "reproductor",
     "Vejiga": "vejiga",
-    "Mamas": "glandula"
+    "Mamas": "glandula",
+    "Mamas__breast_fat": "grasa"
   }
 }

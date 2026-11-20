@@ -4111,6 +4111,16 @@
    "nombre_en": "areola and nipple",
    "organo": "Mamas"
   },
+  "Mamas__breast_fat_Der": {
+   "nombre": "Tejido adiposo mamario (lado derecho)",
+   "nombre_en": "breast fat",
+   "organo": "Mamas"
+  },
+  "Mamas__breast_fat_Izq": {
+   "nombre": "Tejido adiposo mamario (lado izquierdo)",
+   "nombre_en": "breast fat",
+   "organo": "Mamas"
+  },
   "Mamas__lactiferous_ducts_Der": {
    "nombre": "Conductos galactóforos (lado derecho)",
    "nombre_en": "lactiferous ducts",
