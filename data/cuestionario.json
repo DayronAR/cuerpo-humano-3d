@@ -235,6 +235,46 @@
       "organo": "Cerebro",
       "parte": "Cerebro__Precentral_gyrus",
       "texto": "Selecciona el giro precentral (área motora del cerebro)"
+    },
+    {
+      "organo": "Rinones",
+      "texto": "¿Qué órganos filtran la sangre y producen la orina?"
+    },
+    {
+      "organo": "Vejiga",
+      "texto": "Selecciona la vejiga urinaria"
+    },
+    {
+      "organo": "Tiroides",
+      "texto": "Selecciona la glándula tiroides"
+    },
+    {
+      "organo": "Suprarrenales",
+      "texto": "¿Qué glándulas producen la adrenalina?"
+    },
+    {
+      "organo": "Bazo",
+      "texto": "Selecciona el bazo"
+    },
+    {
+      "organo": "Laringe",
+      "texto": "Selecciona la laringe (donde están las cuerdas vocales)"
+    },
+    {
+      "organo": "Boca",
+      "texto": "Selecciona la lengua"
+    },
+    {
+      "organo": "DiscosIntervertebrales",
+      "texto": "Selecciona los discos intervertebrales"
+    },
+    {
+      "organo": "Prostata",
+      "texto": "Selecciona la próstata"
+    },
+    {
+      "organo": "Timo",
+      "texto": "Selecciona el timo"
     }
   ],
   "_partes": "Preguntas con 'parte': hay que hacer clic en esa parte exacta (id de nodo o su comienzo; ambos lados valen). Solo aparecen si el modelo 3D tiene esa parte (Z-Anatomy)."

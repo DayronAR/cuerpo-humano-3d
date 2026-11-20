@@ -11,6 +11,16 @@
    "nombre_en": "Rectus abdominis muscle",
    "organo": "Abdominales"
   },
+  "Amigdalas__Palatine_tonsil_Der": {
+   "nombre": "Tonsila palatina (lado derecho)",
+   "nombre_en": "Palatine tonsil",
+   "organo": "Amigdalas"
+  },
+  "Amigdalas__Palatine_tonsil_Izq": {
+   "nombre": "Tonsila palatina (lado izquierdo)",
+   "nombre_en": "Palatine tonsil",
+   "organo": "Amigdalas"
+  },
   "Aorta__Abdominal_aorta": {
    "nombre": "Aorta abdominal",
    "nombre_en": "Abdominal aorta",
@@ -66,6 +76,11 @@
    "nombre_en": "Thoracic aorta",
    "organo": "Aorta"
   },
+  "Bazo__Spleen": {
+   "nombre": "Bazo",
+   "nombre_en": "Spleen",
+   "organo": "Bazo"
+  },
   "BicepsDer__Long_head_of_biceps_brachii_Der": {
    "nombre": "Cabeza larga del músculo bíceps braquial (lado derecho)",
    "nombre_en": "Long head of biceps brachii",
@@ -85,6 +100,156 @@
    "nombre": "Cabeza corta músculo del bíceps braquial (lado izquierdo)",
    "nombre_en": "Short head of biceps brachii",
    "organo": "BicepsIzq"
+  },
+  "Boca__Gingiva": {
+   "nombre": "Gingiva",
+   "nombre_en": "Gingiva",
+   "organo": "Boca"
+  },
+  "Boca__Soft_palate": {
+   "nombre": "Paladar blando",
+   "nombre_en": "Soft palate",
+   "organo": "Boca"
+  },
+  "Boca__Tongue": {
+   "nombre": "Lengua",
+   "nombre_en": "Tongue",
+   "organo": "Boca"
+  },
+  "Boca__Uvula_of_palate": {
+   "nombre": "Úvula palatina",
+   "nombre_en": "Uvula of palate",
+   "organo": "Boca"
+  },
+  "Bronquios__Anterior_basal_segmental_bronchus_of_left_lung_BVIII": {
+   "nombre": "Bronquio segmentario basal anterior-pulmón izquierdo (BVIII)",
+   "nombre_en": "Anterior basal segmental bronchus of left lung (BVIII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Anterior_basal_segmental_bronchus_of_right_lung_BVIII": {
+   "nombre": "Bronquio segmentario basal ant. del pulmón derecho (BVIII)",
+   "nombre_en": "Anterior basal segmental bronchus of right lung (BVIII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Anterior_segmental_bronchus_of_left_lung_BIII": {
+   "nombre": "Bronquio segmentario anterior del pulmón izquierdo (BIII)",
+   "nombre_en": "Anterior segmental bronchus of left lung (BIII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Anterior_segmental_bronchus_of_right_lung_BIII": {
+   "nombre": "Bronquio segmentario anterior del pulmón derecho (BIII)",
+   "nombre_en": "Anterior segmental bronchus of right lung (BIII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Anteromedial_basal_segmental_bronchus_of_left_lung": {
+   "nombre": "(Bronquio segmentario basal anteromedial-pulmón izquierdo)",
+   "nombre_en": "(Anteromedial basal segmental bronchus of left lung)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Apical_segmental_bronchus_of_right_lung_BI": {
+   "nombre": "Bronquio segmentario apical del pulmón derecho (BI)",
+   "nombre_en": "Apical segmental bronchus of right lung (BI)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Apicoposterior_segmental_bronchus_of_left_lung_BI_BII": {
+   "nombre": "Bronquio segm. apicoposterior-pulmón izquierdo (BI + BII)",
+   "nombre_en": "Apicoposterior segmental bronchus of left lung (BI+BII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Inferior_lingular_segmental_bronchus_of_left_lung_BV": {
+   "nombre": "Bronquio segmentario lingular inf. del pulmón izquierdo (BV)",
+   "nombre_en": "Inferior lingular segmental bronchus of left lung (BV)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Intermediate_bronchus_Der": {
+   "nombre": "Bronquio intermedio (lado derecho)",
+   "nombre_en": "Intermediate bronchus",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Lateral_basal_segmental_bronchus_of_left_lung_BIX": {
+   "nombre": "Bronquio segmentario basal lateral del pulmón izquierdo (BIX)",
+   "nombre_en": "Lateral basal segmental bronchus of left lung (BIX)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Lateral_basal_segmental_bronchus_of_right_lung_BIX": {
+   "nombre": "Bronquio segmentario basal lateral del pulmón derecho (BIX)",
+   "nombre_en": "Lateral basal segmental bronchus of right lung (BIX)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Lateral_segmental_bronchus_of_right_lung_BIV": {
+   "nombre": "Bronquio segmentario lateral del pulmón derecho (BIV)",
+   "nombre_en": "Lateral segmental bronchus of right lung (BIV)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Left_inferior_lobar_bronchus": {
+   "nombre": "Bronquio lobar inferior izquierdo",
+   "nombre_en": "Left inferior lobar bronchus",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Left_superior_lobar_bronchus": {
+   "nombre": "Bronquio lobar superior izquierdo",
+   "nombre_en": "Left superior lobar bronchus",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Medial_basal_segmental_bronchus_of_left_lung_BVII": {
+   "nombre": "Bronquio segmentario basal medial del pulmón izquierdo (BVII)",
+   "nombre_en": "Medial basal segmental bronchus of left lung (BVII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Medial_basal_segmental_bronchus_of_right_lung_BVII": {
+   "nombre": "Bronquio segmentario basal medial del pulmón derecho (BVII)",
+   "nombre_en": "Medial basal segmental bronchus of right lung (BVII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Medial_segmental_bronchus_of_right_lung_BV": {
+   "nombre": "Bronquio segmentario medial del pulmón derecho (BV)",
+   "nombre_en": "Medial segmental bronchus of right lung (BV)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Middle_lobar_bronchus_Der": {
+   "nombre": "Bronquio lobar medio (lado derecho)",
+   "nombre_en": "Middle lobar bronchus",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Posterior_basal_segmental_bronchus_of_left_lung_BX": {
+   "nombre": "Bronquio segmentario basal posterior-pulmón izquierdo (BX)",
+   "nombre_en": "Posterior basal segmental bronchus of left lung (BX)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Posterior_basal_segmental_bronchus_of_right_lung_BX": {
+   "nombre": "Bronquio segmentario basal posterior del pulmón derecho (BX)",
+   "nombre_en": "Posterior basal segmental bronchus of right lung (BX)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Posterior_segmental_bronchus_of_right_lung_BII": {
+   "nombre": "Bronquio segmentario posterior del pulmón derecho (BII)",
+   "nombre_en": "Posterior segmental bronchus of right lung (BII)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Right_inferior_lobar_bronchus": {
+   "nombre": "Bronquio lobar inferior derecho",
+   "nombre_en": "Right inferior lobar bronchus",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Right_superior_lobar_bronchus": {
+   "nombre": "Bronquio lobar superior derecho",
+   "nombre_en": "Right superior lobar bronchus",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Superior_lingular_segmental_bronchus_of_left_lung_BIV": {
+   "nombre": "Bronquio segm. lingular sup. del pulmón izquierdo (BIV)",
+   "nombre_en": "Superior lingular segmental bronchus of left lung (BIV)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Superior_segmental_bronchus_of_left_lung_BVI": {
+   "nombre": "Bronquio segmentario superior del pulmón izquierdo (BVI)",
+   "nombre_en": "Superior segmental bronchus of left lung (BVI)",
+   "organo": "Bronquios"
+  },
+  "Bronquios__Superior_segmental_bronchus_of_right_lung_BVI": {
+   "nombre": "Bronquio segmentario superior del pulmón derecho (BVI)",
+   "nombre_en": "Superior segmental bronchus of right lung (BVI)",
+   "organo": "Bronquios"
   },
   "CajaToracica__Body_of_sternum": {
    "nombre": "Cuerpo del esternón",
@@ -320,6 +485,36 @@
    "nombre": "Proceso xifoides",
    "nombre_en": "Xiphoid process",
    "organo": "CajaToracica"
+  },
+  "CavidadNasal__Lateral_process_of_nasal_septal_cartilage_Der": {
+   "nombre": "Proceso lateral del cartílago septal nasal (lado derecho)",
+   "nombre_en": "Lateral process of nasal septal cartilage",
+   "organo": "CavidadNasal"
+  },
+  "CavidadNasal__Lateral_process_of_nasal_septal_cartilage_Izq": {
+   "nombre": "Proceso lateral del cartílago septal nasal (lado izquierdo)",
+   "nombre_en": "Lateral process of nasal septal cartilage",
+   "organo": "CavidadNasal"
+  },
+  "CavidadNasal__Major_alar_cartilage_Der": {
+   "nombre": "Cartílago alar mayor (lado derecho)",
+   "nombre_en": "Major alar cartilage",
+   "organo": "CavidadNasal"
+  },
+  "CavidadNasal__Major_alar_cartilage_Izq": {
+   "nombre": "Cartílago alar mayor (lado izquierdo)",
+   "nombre_en": "Major alar cartilage",
+   "organo": "CavidadNasal"
+  },
+  "CavidadNasal__Mucosa_of_nasal_cavity": {
+   "nombre": "Capa mucosa de la cavidad nasal",
+   "nombre_en": "Mucosa of nasal cavity",
+   "organo": "CavidadNasal"
+  },
+  "CavidadNasal__Nasal_septal_cartilage": {
+   "nombre": "Cartílago del septo nasal",
+   "nombre_en": "Nasal septal cartilage",
+   "organo": "CavidadNasal"
   },
   "Cerebelo__Anterior_quadrangular_lobule": {
    "nombre": "Lóbulo cuadrangular anterior",
@@ -1001,6 +1196,36 @@
    "nombre_en": "Vertebra T9",
    "organo": "ColumnaVertebral"
   },
+  "ConductosSeminales__Ductus_deferens_Der": {
+   "nombre": "Conducto deferente (lado derecho)",
+   "nombre_en": "Ductus deferens",
+   "organo": "ConductosSeminales"
+  },
+  "ConductosSeminales__Ductus_deferens_Izq": {
+   "nombre": "Conducto deferente (lado izquierdo)",
+   "nombre_en": "Ductus deferens",
+   "organo": "ConductosSeminales"
+  },
+  "ConductosSeminales__Ejaculatory_duct_Der": {
+   "nombre": "Conducto eyaculador (lado derecho)",
+   "nombre_en": "Ejaculatory duct",
+   "organo": "ConductosSeminales"
+  },
+  "ConductosSeminales__Ejaculatory_duct_Izq": {
+   "nombre": "Conducto eyaculador (lado izquierdo)",
+   "nombre_en": "Ejaculatory duct",
+   "organo": "ConductosSeminales"
+  },
+  "ConductosSeminales__Seminal_gland_Der": {
+   "nombre": "Glándula seminal (lado derecho)",
+   "nombre_en": "Seminal gland",
+   "organo": "ConductosSeminales"
+  },
+  "ConductosSeminales__Seminal_gland_Izq": {
+   "nombre": "Glándula seminal (lado izquierdo)",
+   "nombre_en": "Seminal gland",
+   "organo": "ConductosSeminales"
+  },
   "Corazon__Anterior_papillary_muscle_of_right_ventricle": {
    "nombre": "Músculo papilar anterior del ventrículo derecho",
    "nombre_en": "Anterior papillary muscle of right ventricle",
@@ -1415,6 +1640,121 @@
    "nombre": "Porción espinal escapular del músculo deltoides (lado izquierdo)",
    "nombre_en": "Scapular spinal part of deltoid muscle",
    "organo": "Deltoides"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_C2_C3": {
+   "nombre": "Disco intervertebral C2-C3",
+   "nombre_en": "Intervertebral disc C2-C3",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_C3_C4": {
+   "nombre": "Disco intervertebral C3-C4",
+   "nombre_en": "Intervertebral disc C3-C4",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_C4_C5": {
+   "nombre": "Disco intervertebral C4-C5",
+   "nombre_en": "Intervertebral disc C4-C5",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_C5_C6": {
+   "nombre": "Disco intervertebral C5-C6",
+   "nombre_en": "Intervertebral disc C5-C6",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_C6_C7": {
+   "nombre": "Disco intervertebral C6-C7",
+   "nombre_en": "Intervertebral disc C6-C7",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_C7_T1": {
+   "nombre": "Disco intervertebral C7-T1",
+   "nombre_en": "Intervertebral disc C7-T1",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_L1_L2": {
+   "nombre": "Disco intervertebral L1-L2",
+   "nombre_en": "Intervertebral disc L1-L2",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_L2_L3": {
+   "nombre": "Disco intervertebral L2-L3",
+   "nombre_en": "Intervertebral disc L2-L3",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_L3_L4": {
+   "nombre": "Disco intervertebral L3-L4",
+   "nombre_en": "Intervertebral disc L3-L4",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_L4_L5": {
+   "nombre": "Disco intervertebral L4-L5",
+   "nombre_en": "Intervertebral disc L4-L5",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_L5_S1": {
+   "nombre": "Disco intervertebral L5-S1",
+   "nombre_en": "Intervertebral disc L5-S1",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T10_T11": {
+   "nombre": "Disco intervertebral T10-T11",
+   "nombre_en": "Intervertebral disc T10-T11",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T11_T12": {
+   "nombre": "Disco intervertebral T11-T12",
+   "nombre_en": "Intervertebral disc T11-T12",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T12_L1": {
+   "nombre": "Disco intervertebral T12-L1",
+   "nombre_en": "Intervertebral disc T12-L1",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T1_T2": {
+   "nombre": "Disco intervertebral T1-T2",
+   "nombre_en": "Intervertebral disc T1-T2",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T2_T3": {
+   "nombre": "Disco intervertebral T2-T3",
+   "nombre_en": "Intervertebral disc T2-T3",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T3_T4": {
+   "nombre": "Disco intervertebral T3-T4",
+   "nombre_en": "Intervertebral disc T3-T4",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T4_T5": {
+   "nombre": "Disco intervertebral T4-T5",
+   "nombre_en": "Intervertebral disc T4-T5",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T5_T6": {
+   "nombre": "Disco intervertebral T5-T6",
+   "nombre_en": "Intervertebral disc T5-T6",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T6_T7": {
+   "nombre": "Disco intervertebral T6-T7",
+   "nombre_en": "Intervertebral disc T6-T7",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T7_T8": {
+   "nombre": "Disco intervertebral T7-T8",
+   "nombre_en": "Intervertebral disc T7-T8",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T8_T9": {
+   "nombre": "Disco intervertebral T8-T9",
+   "nombre_en": "Intervertebral disc T8-T9",
+   "organo": "DiscosIntervertebrales"
+  },
+  "DiscosIntervertebrales__Intervertebral_disc_T9_T10": {
+   "nombre": "Disco intervertebral T9-T10",
+   "nombre_en": "Intervertebral disc T9-T10",
+   "organo": "DiscosIntervertebrales"
   },
   "Dorsal__Latissimus_dorsi_muscle_Der": {
    "nombre": "Músculo latísimo del dorso (lado derecho)",
@@ -1926,6 +2266,21 @@
    "nombre_en": "Sternocleidomastoid muscle",
    "organo": "Esternocleidomastoideo"
   },
+  "Faringe__Laryngopharynx": {
+   "nombre": "Porción laríngea de la farínge",
+   "nombre_en": "Laryngopharynx",
+   "organo": "Faringe"
+  },
+  "Faringe__Nasopharynx": {
+   "nombre": "Porción nasal de la faringe",
+   "nombre_en": "Nasopharynx",
+   "organo": "Faringe"
+  },
+  "Faringe__Oropharynx": {
+   "nombre": "Porción oral de la faringe",
+   "nombre_en": "Oropharynx",
+   "organo": "Faringe"
+  },
   "FemurDer__Femur_Der": {
    "nombre": "Fémur (lado derecho)",
    "nombre_en": "Femur",
@@ -1966,6 +2321,71 @@
    "nombre_en": "Medial head of gastrocnemius",
    "organo": "GemeloIzq"
   },
+  "GlandulaPineal__Pineal_gland": {
+   "nombre": "Glándula pineal",
+   "nombre_en": "Pineal gland",
+   "organo": "GlandulaPineal"
+  },
+  "GlandulasSalivales__Accessory_parotid_gland_Der": {
+   "nombre": "(Glándula parótida accesoria) (lado derecho)",
+   "nombre_en": "(Accessory parotid gland)",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Accessory_parotid_gland_Izq": {
+   "nombre": "(Glándula parótida accesoria) (lado izquierdo)",
+   "nombre_en": "(Accessory parotid gland)",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Parotid_duct_Der": {
+   "nombre": "Conducto parotídeo (lado derecho)",
+   "nombre_en": "Parotid duct",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Parotid_duct_Izq": {
+   "nombre": "Conducto parotídeo (lado izquierdo)",
+   "nombre_en": "Parotid duct",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Parotid_gland_Der": {
+   "nombre": "Glándula parótida (lado derecho)",
+   "nombre_en": "Parotid gland",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Parotid_gland_Izq": {
+   "nombre": "Glándula parótida (lado izquierdo)",
+   "nombre_en": "Parotid gland",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Sublingual_gland_Der": {
+   "nombre": "Glándula sublingual (lado derecho)",
+   "nombre_en": "Sublingual gland",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Sublingual_gland_Izq": {
+   "nombre": "Glándula sublingual (lado izquierdo)",
+   "nombre_en": "Sublingual gland",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Submandibular_duct_Der": {
+   "nombre": "Conducto submandibular (lado derecho)",
+   "nombre_en": "Submandibular duct",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Submandibular_duct_Izq": {
+   "nombre": "Conducto submandibular (lado izquierdo)",
+   "nombre_en": "Submandibular duct",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Submandibular_gland_Der": {
+   "nombre": "Glándula submandibular (lado derecho)",
+   "nombre_en": "Submandibular gland",
+   "organo": "GlandulasSalivales"
+  },
+  "GlandulasSalivales__Submandibular_gland_Izq": {
+   "nombre": "Glándula submandibular (lado izquierdo)",
+   "nombre_en": "Submandibular gland",
+   "organo": "GlandulasSalivales"
+  },
   "Gluteos__Gluteus_maximus_muscle_Der": {
    "nombre": "Músculo glúteo máximo (lado derecho)",
    "nombre_en": "Gluteus maximus muscle",
@@ -1986,6 +2406,11 @@
    "nombre_en": "Gluteus medius muscle",
    "organo": "Gluteos"
   },
+  "Higado__Bile_duct": {
+   "nombre": "Conducto biliar",
+   "nombre_en": "Bile duct",
+   "organo": "Higado"
+  },
   "Higado__Gallbladder": {
    "nombre": "Vesícula biliar",
    "nombre_en": "Gallbladder",
@@ -1995,6 +2420,16 @@
    "nombre": "Hígado",
    "nombre_en": "Liver",
    "organo": "Higado"
+  },
+  "Hipofisis__Adenohypophysis": {
+   "nombre": "Adenohipófisis",
+   "nombre_en": "Adenohypophysis",
+   "organo": "Hipofisis"
+  },
+  "Hipofisis__Neurohypophysis": {
+   "nombre": "Neurohipófisis",
+   "nombre_en": "Neurohypophysis",
+   "organo": "Hipofisis"
   },
   "HuesosMano__Capitate_bone_Der": {
    "nombre": "Hueso capitado (lado derecho)",
@@ -2686,6 +3121,21 @@
    "nombre_en": "Descending colon",
    "organo": "IntestinoGrueso"
   },
+  "IntestinoGrueso__Free_taenia": {
+   "nombre": "Tenia libre",
+   "nombre_en": "Free taenia",
+   "organo": "IntestinoGrueso"
+  },
+  "IntestinoGrueso__Mesocolic_taenia": {
+   "nombre": "Tenia mesocólica",
+   "nombre_en": "Mesocolic taenia",
+   "organo": "IntestinoGrueso"
+  },
+  "IntestinoGrueso__Omental_taenia": {
+   "nombre": "Tenia omental",
+   "nombre_en": "Omental taenia",
+   "organo": "IntestinoGrueso"
+  },
   "IntestinoGrueso__Sigmoid_colon": {
    "nombre": "Colon sigmoideo",
    "nombre_en": "Sigmoid colon",
@@ -2740,6 +3190,936 @@
    "nombre": "Cabeza corta del músculo bíceps femoral (lado izquierdo)",
    "nombre_en": "Short head of biceps femoris",
    "organo": "Isquiotibiales"
+  },
+  "Laringe__Arytenoid_cartilage_Der": {
+   "nombre": "Cartílago aritenoides (lado derecho)",
+   "nombre_en": "Arytenoid cartilage",
+   "organo": "Laringe"
+  },
+  "Laringe__Arytenoid_cartilage_Izq": {
+   "nombre": "Cartílago aritenoides (lado izquierdo)",
+   "nombre_en": "Arytenoid cartilage",
+   "organo": "Laringe"
+  },
+  "Laringe__Corniculate_cartilage_Der": {
+   "nombre": "Cartílago corniculado (lado derecho)",
+   "nombre_en": "Corniculate cartilage",
+   "organo": "Laringe"
+  },
+  "Laringe__Corniculate_cartilage_Izq": {
+   "nombre": "Cartílago corniculado (lado izquierdo)",
+   "nombre_en": "Corniculate cartilage",
+   "organo": "Laringe"
+  },
+  "Laringe__Cricoid_cartilage": {
+   "nombre": "Cartílago cricoides",
+   "nombre_en": "Cricoid cartilage",
+   "organo": "Laringe"
+  },
+  "Laringe__Epiglottis": {
+   "nombre": "Epiglotis",
+   "nombre_en": "Epiglottis",
+   "organo": "Laringe"
+  },
+  "Laringe__Thyroid_cartilage": {
+   "nombre": "Cartílago tiroideo",
+   "nombre_en": "Thyroid cartilage",
+   "organo": "Laringe"
+  },
+  "LigamentosMiembroInferior__Anterior_cruciate_ligament": {
+   "nombre": "Ligamento cruzado anterior",
+   "nombre_en": "Anterior cruciate ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Anterior_ligament_of_fibular_head": {
+   "nombre": "Ligamento anterior de la cabeza de la fibula",
+   "nombre_en": "Anterior ligament of fibular head",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Anterior_meniscotibial_ligament_Lateral_meniscus": {
+   "nombre": "Ligamento meniscotibial anterior (Menisco lateral)",
+   "nombre_en": "Anterior meniscotibial ligament (Lateral meniscus)",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Anterior_meniscotibial_ligament_Medial_meniscus": {
+   "nombre": "Ligamento meniscotibial anterior (Menisco medial)",
+   "nombre_en": "Anterior meniscotibial ligament (Medial meniscus)",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Anterior_talocalcaneal_ligament": {
+   "nombre": "Ligamento talocalcáneo anterior",
+   "nombre_en": "Anterior talocalcaneal ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Anterior_talofibular_ligament": {
+   "nombre": "Ligamento talofibular anterior",
+   "nombre_en": "Anterior talofibular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Anterior_tibiofibular_ligament": {
+   "nombre": "Ligamento tibiofibular anterior",
+   "nombre_en": "Anterior tibiofibular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Arcuate_popliteal_ligament": {
+   "nombre": "Ligamento poplíteo arqueado",
+   "nombre_en": "Arcuate popliteal ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Calcaneocuboid_ligament": {
+   "nombre": "Ligamento calcáneo-cuboideo",
+   "nombre_en": "Calcaneocuboid ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Calcaneofibular_ligament": {
+   "nombre": "Ligamento calcáneofibular",
+   "nombre_en": "Calcaneofibular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Calcaneonavicular_ligament": {
+   "nombre": "Ligamento calcaneonavicular",
+   "nombre_en": "Calcaneonavicular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Collateral_interphalangeal_ligaments_of_foot": {
+   "nombre": "Ligamentos interfalángicos colaterales del pie",
+   "nombre_en": "Collateral interphalangeal ligaments of foot",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Collateral_metatarsophalangeal_ligaments": {
+   "nombre": "Ligamentos metatarsofalángicos colaterales",
+   "nombre_en": "Collateral metatarsophalangeal ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Cuneocuboid_interosseous_ligament": {
+   "nombre": "Ligamento interóseo cuneocuboideo",
+   "nombre_en": "Cuneocuboid interosseous ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Deep_part_of_tibial_collateral_ligament": {
+   "nombre": "Parte profunda del ligamento colateral tibial",
+   "nombre_en": "Deep part of tibial collateral ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Descending_part_of_iliofemoral_ligament": {
+   "nombre": "Parte descendente del ligamento iliofemoral",
+   "nombre_en": "Descending part of iliofemoral ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Dorsal_calcaneocuboid_ligament": {
+   "nombre": "Ligamento calcáneocuboideo dorsal",
+   "nombre_en": "Dorsal calcaneocuboid ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Dorsal_cuboideonavicular_ligament": {
+   "nombre": "Ligamento cuboideonavicular dorsal",
+   "nombre_en": "Dorsal cuboideonavicular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Dorsal_cuneocuboid_ligament": {
+   "nombre": "Ligamento cuneocuboideo dorsal",
+   "nombre_en": "Dorsal cuneocuboid ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Dorsal_cuneonavicular_ligaments": {
+   "nombre": "Ligamentos cuneonaviculares dorsales",
+   "nombre_en": "Dorsal cuneonavicular ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Dorsal_intercuneiform_ligaments": {
+   "nombre": "Ligamentos intercuneiformes dorsales",
+   "nombre_en": "Dorsal intercuneiform ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Fibular_collateral_ligament": {
+   "nombre": "Ligamento colateral fibular",
+   "nombre_en": "Fibular collateral ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Inferior_pubic_ligament": {
+   "nombre": "Ligamento púbico inferior",
+   "nombre_en": "Inferior pubic ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Intercuneiform_interosseous_ligaments": {
+   "nombre": "Ligamentos intercuneiformes interóseos",
+   "nombre_en": "Intercuneiform interosseous ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Interosseous_membrane_of_leg": {
+   "nombre": "Membrana interósea de la pierna",
+   "nombre_en": "Interosseous membrane of leg",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Interpubic_disc": {
+   "nombre": "Disco interpúbico",
+   "nombre_en": "Interpubic disc",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Intersesamoid_ligament": {
+   "nombre": "Ligamento intersesamoideo",
+   "nombre_en": "Intersesamoid ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Ischiofemoral_ligament": {
+   "nombre": "Ligamento isquiofemoral",
+   "nombre_en": "Ischiofemoral ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Lateral_talocalcaneal_ligament": {
+   "nombre": "Ligamento talocalcáneo lateral",
+   "nombre_en": "Lateral talocalcaneal ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Ligament_of_head_of_femur": {
+   "nombre": "Ligamento de la cabeza del fémur",
+   "nombre_en": "Ligament of head of femur",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Long_plantar_ligament": {
+   "nombre": "Ligamento plantar largo",
+   "nombre_en": "Long plantar ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Medial_talocalcaneal_ligament": {
+   "nombre": "Ligamento talocalcáneo medial",
+   "nombre_en": "Medial talocalcaneal ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Meniscopatellar_ligament": {
+   "nombre": "Ligamento meniscopatelar",
+   "nombre_en": "Meniscopatellar ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Oblique_popliteal_ligament": {
+   "nombre": "Ligamento poplíteo oblicuo",
+   "nombre_en": "Oblique popliteal ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Obturator_membrane": {
+   "nombre": "Membrana obturadora",
+   "nombre_en": "Obturator membrane",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_calcaneocuboid_ligament": {
+   "nombre": "Ligamento calcáneocuboideo plantar",
+   "nombre_en": "Plantar calcaneocuboid ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_calcaneonavicular_ligament": {
+   "nombre": "Ligamento calcaneonavicular plantar",
+   "nombre_en": "Plantar calcaneonavicular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_cuboideonavicular_ligament": {
+   "nombre": "Ligamento cuboideonavicular plantar",
+   "nombre_en": "Plantar cuboideonavicular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_cuneocuboid_ligament": {
+   "nombre": "Ligamento cuneocuboideo plantar",
+   "nombre_en": "Plantar cuneocuboid ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_cuneonavicular_ligaments": {
+   "nombre": "Ligamentos cuneonaviculares plantares",
+   "nombre_en": "Plantar cuneonavicular ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_intercuneiform_ligaments": {
+   "nombre": "Ligamentos intercuneiformes plantares",
+   "nombre_en": "Plantar intercuneiform ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_interphalangeal_ligaments": {
+   "nombre": "Ligamentos interfalángicos plantares",
+   "nombre_en": "Plantar interphalangeal ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Plantar_metatarsophalangeal_ligaments": {
+   "nombre": "Ligamentos metatarsofalángicos plantares",
+   "nombre_en": "Plantar metatarsophalangeal ligaments",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Popliteofibular_ligament": {
+   "nombre": "Ligamento poplíteofibular",
+   "nombre_en": "Popliteofibular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_cruciate_ligament": {
+   "nombre": "Ligamento cruzado posterior",
+   "nombre_en": "Posterior cruciate ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_ligament_of_fibular_head": {
+   "nombre": "Ligamento posterior de la cabeza de la fibula",
+   "nombre_en": "Posterior ligament of fibular head",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_meniscotibial_ligament_Lateral_meniscus": {
+   "nombre": "Ligamento meniscotibial posterior (Menisco lateral)",
+   "nombre_en": "Posterior meniscotibial ligament (Lateral meniscus)",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_meniscotibial_ligament_Medial_meniscus": {
+   "nombre": "Ligamento meniscotibial posterior (Menisco medial)",
+   "nombre_en": "Posterior meniscotibial ligament (Medial meniscus)",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_talocalcaneal_ligament": {
+   "nombre": "Ligamento talocalcáneo posterior",
+   "nombre_en": "Posterior talocalcaneal ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_talofibular_ligament": {
+   "nombre": "Ligamento talofibular posterior",
+   "nombre_en": "Posterior talofibular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_tibiofibular_ligament": {
+   "nombre": "Ligamento tibiofibular posterior",
+   "nombre_en": "Posterior tibiofibular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Posterior_tibiotalar_ligament": {
+   "nombre": "Ligamento tibiotalar posterior",
+   "nombre_en": "Posterior tibiotalar ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Pubic_symphysis": {
+   "nombre": "Sínfisis púbica",
+   "nombre_en": "Pubic symphysis",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Pubofemoral_ligament": {
+   "nombre": "Ligamento pubofemoral",
+   "nombre_en": "Pubofemoral ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Sacrotuberous_ligament": {
+   "nombre": "Ligamento sacrotuberoso",
+   "nombre_en": "Sacrotuberous ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Superficial_part_of_tibial_collateral_ligament": {
+   "nombre": "Parte superficial del ligamento colateral tibial",
+   "nombre_en": "Superficial part of tibial collateral ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Superior_pubic_ligament": {
+   "nombre": "Ligamento púbico superior",
+   "nombre_en": "Superior pubic ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Talocalcaneal_interosseous_ligament": {
+   "nombre": "Ligamento talocalcáneo interóseo",
+   "nombre_en": "Talocalcaneal interosseous ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Talonavicular_ligament": {
+   "nombre": "Ligamento talonavicular",
+   "nombre_en": "Talonavicular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Tibiocalcaneal_ligament": {
+   "nombre": "Ligamento calcáneotibial",
+   "nombre_en": "Tibiocalcaneal ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Tibionavicular_ligament": {
+   "nombre": "Ligamento tibionavicular",
+   "nombre_en": "Tibionavicular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Transverse_acetabular_ligament": {
+   "nombre": "Ligamento acetabular transverso",
+   "nombre_en": "Transverse acetabular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Transverse_ligament_of_knee": {
+   "nombre": "Ligamento transverso de la rodilla",
+   "nombre_en": "Transverse ligament of knee",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Transverse_tibiofibular_ligament": {
+   "nombre": "Ligamento tibiofibular transverso",
+   "nombre_en": "Transverse tibiofibular ligament",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroInferior__Zona_orbicularis": {
+   "nombre": "Zona orbicular",
+   "nombre_en": "Zona orbicularis",
+   "organo": "LigamentosMiembroInferior"
+  },
+  "LigamentosMiembroSuperior__Annular_ligament_of_radius": {
+   "nombre": "Ligamento anular del radio",
+   "nombre_en": "Annular ligament of radius",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Articular_disc_of_distal_radio_ulnar_joint": {
+   "nombre": "Disco articular de la articulación radio-ulnar distal",
+   "nombre_en": "Articular disc of distal radio-ulnar joint",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Capitohamate_interosseous_ligament": {
+   "nombre": "Ligamento capitohamatal interóseo",
+   "nombre_en": "Capitohamate interosseous ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Collateral_interphalangeal_ligaments_of_hand": {
+   "nombre": "Ligamentos interfalángicos colaterales de la mano",
+   "nombre_en": "Collateral interphalangeal ligaments of hand",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Collateral_metacarpophalangeal_ligaments": {
+   "nombre": "Ligamentos metacarpofalángicos colaterales",
+   "nombre_en": "Collateral metacarpophalangeal ligaments",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Coracohumeral_ligament": {
+   "nombre": "Ligamento coracohumeral",
+   "nombre_en": "Coracohumeral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Dorsal_intercarpal_ligaments": {
+   "nombre": "Ligamentos intercarpianos dorsales",
+   "nombre_en": "Dorsal intercarpal ligaments",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Dorsal_radio_ulnar_ligament": {
+   "nombre": "Ligamento radioulnar dorsal",
+   "nombre_en": "Dorsal radio-ulnar ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Dorsal_radiocarpal_ligament": {
+   "nombre": "Ligamento radiocarpiano dorsal",
+   "nombre_en": "Dorsal radiocarpal ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Dorsal_scaphotriquetral_ligament": {
+   "nombre": "Ligamento escafotriquetral dorsal",
+   "nombre_en": "Dorsal scaphotriquetral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Dorsal_ulnocarpal_ligament": {
+   "nombre": "Ligamento ulnocarpiano dorsal",
+   "nombre_en": "Dorsal ulnocarpal ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Interosseous_membrane_of_forearm": {
+   "nombre": "Membrana interósea del antebrazo",
+   "nombre_en": "Interosseous membrane of forearm",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Lunotriquetral_interosseous_ligament": {
+   "nombre": "Ligamento lunotriquetral interóseo",
+   "nombre_en": "Lunotriquetral interosseous ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Oblique_cord": {
+   "nombre": "Cordón oblicuo",
+   "nombre_en": "Oblique cord",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Palmar_capitohamate_ligament": {
+   "nombre": "Ligamento capitohamatal palmar",
+   "nombre_en": "Palmar capitohamate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Palmar_interphalangeal_ligaments": {
+   "nombre": "Ligamentos interfalángicos palmares",
+   "nombre_en": "Palmar interphalangeal ligaments",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Palmar_lunotriquetral_ligament": {
+   "nombre": "Ligamento lunotriquetral palmar",
+   "nombre_en": "Palmar lunotriquetral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Palmar_radio_ulnar_ligament": {
+   "nombre": "Ligamento radioulnar palmar",
+   "nombre_en": "Palmar radio-ulnar ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Palmar_scaphotriquetral_ligament": {
+   "nombre": "Ligamento escafotriquetral palmar",
+   "nombre_en": "Palmar scaphotriquetral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Palmar_trapezoideocapitate_ligament": {
+   "nombre": "Ligamento trapezoideocapitado palmar",
+   "nombre_en": "Palmar trapezoideocapitate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Pisohamate_ligament": {
+   "nombre": "Ligamento pisohamatal",
+   "nombre_en": "Pisohamate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Pisotriquetral_ligament": {
+   "nombre": "Ligamento pisotriquetral",
+   "nombre_en": "Pisotriquetral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Quadrate_ligament": {
+   "nombre": "Ligamento cuadrado",
+   "nombre_en": "Quadrate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Radial_collateral_ligament": {
+   "nombre": "Ligamento colateral radial cubital",
+   "nombre_en": "Radial collateral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Radial_collateral_ligament_of_wrist_joint": {
+   "nombre": "Ligamento colateral radial del carpo",
+   "nombre_en": "Radial collateral ligament of wrist joint",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Radiate_carpal_ligament": {
+   "nombre": "Ligamento radiado del carpo",
+   "nombre_en": "Radiate carpal ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Radiocapitate_ligament": {
+   "nombre": "Ligamento radiocapitado",
+   "nombre_en": "Radiocapitate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Radioscaphocapitate_ligament": {
+   "nombre": "Ligamento radioescafocapitado",
+   "nombre_en": "Radioscaphocapitate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Scaphocapitate_ligament": {
+   "nombre": "Ligamento escafocapitado",
+   "nombre_en": "Scaphocapitate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Scapholunate_interosseous_ligament": {
+   "nombre": "Ligamento escafolunado interóseo",
+   "nombre_en": "Scapholunate interosseous ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Scaphotrapeziotrapezoidal_ligament": {
+   "nombre": "Ligamento escafotrapeciotrapezoidal",
+   "nombre_en": "Scaphotrapeziotrapezoidal ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Transverse_humeral_ligament": {
+   "nombre": "Ligamento transverso del humero",
+   "nombre_en": "Transverse humeral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Trapeziotrapezoidal_interosseous_ligament": {
+   "nombre": "Ligamento trapeciotrapezoidal interóseo",
+   "nombre_en": "Trapeziotrapezoidal interosseous ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Ulnar_collateral_ligament": {
+   "nombre": "Ligamento colateral ulnar cubital",
+   "nombre_en": "Ulnar collateral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Ulnar_collateral_ligament_of_wrist_joint": {
+   "nombre": "Ligamento colateral ulnar del carpo",
+   "nombre_en": "Ulnar collateral ligament of wrist joint",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Ulnocapitate_ligament": {
+   "nombre": "Ligamento ulnocapitado",
+   "nombre_en": "Ulnocapitate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Ulnolunate_ligament": {
+   "nombre": "Ligamento ulnolunado",
+   "nombre_en": "Ulnolunate ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Ulnopisiform_ligament": {
+   "nombre": "Ligamento ulnopisiforme",
+   "nombre_en": "Ulnopisiform ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosMiembroSuperior__Ulnotriquetral_ligament": {
+   "nombre": "Ligamento ulnotriquetral",
+   "nombre_en": "Ulnotriquetral ligament",
+   "organo": "LigamentosMiembroSuperior"
+  },
+  "LigamentosTronco__Acetabular_labrum": {
+   "nombre": "Labro acetabular",
+   "nombre_en": "Acetabular labrum",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Acromioclavicular_ligament": {
+   "nombre": "Ligamento acromioclavicular",
+   "nombre_en": "Acromioclavicular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Anterior_longitudinal_ligament": {
+   "nombre": "Ligamento longitudinal anterior",
+   "nombre_en": "Anterior longitudinal ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Anterior_sacro_iliac_ligament": {
+   "nombre": "Ligamento sacroilíaco anterior",
+   "nombre_en": "Anterior sacro-iliac ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Anterior_sternoclavicular_ligament": {
+   "nombre": "Ligamento esternoclavicular anterior",
+   "nombre_en": "Anterior sternoclavicular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Articular_disc_of_acromioclavicular_joint": {
+   "nombre": "Disco articular de la articulación acromioclavicular",
+   "nombre_en": "Articular disc of acromioclavicular joint",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Articular_disc_of_sternoclavicular_joint": {
+   "nombre": "Disco articular de la articulación esternoclavicular",
+   "nombre_en": "Articular disc of sternoclavicular joint",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Articular_disc_of_temporomandibular_joint": {
+   "nombre": "Disco articular de la articulación temporomandibular",
+   "nombre_en": "Articular disc of temporomandibular joint",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Conoid_ligament": {
+   "nombre": "Ligamento conoide",
+   "nombre_en": "Conoid ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Coraco_acromial_ligament": {
+   "nombre": "Ligamento coraco-acromial",
+   "nombre_en": "Coraco-acromial ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Costoclavicular_ligament": {
+   "nombre": "Ligamento costoclavicular",
+   "nombre_en": "Costoclavicular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Costotransverse_ligament": {
+   "nombre": "Ligamento costotransverso",
+   "nombre_en": "Costotransverse ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Cricopharyngeal_ligament": {
+   "nombre": "Ligamento cricofaríngeo",
+   "nombre_en": "Cricopharyngeal ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__External_intercostal_membrane": {
+   "nombre": "Membrana intercostal externa",
+   "nombre_en": "External intercostal membrane",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Glenoid_labrum": {
+   "nombre": "Labro glenoideo",
+   "nombre_en": "Glenoid labrum",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Iliolumbar_ligament": {
+   "nombre": "Ligamento iliolumbar",
+   "nombre_en": "Iliolumbar ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Inferior_glenohumeral_ligament": {
+   "nombre": "Ligamento glenohumeral inferior",
+   "nombre_en": "Inferior glenohumeral ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Inferior_transverse_scapular_ligament": {
+   "nombre": "Ligamento transverso inferior de la escáupula",
+   "nombre_en": "Inferior transverse scapular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Interclavicular_ligament": {
+   "nombre": "Ligamento interclavicular",
+   "nombre_en": "Interclavicular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Intercornual_ligament": {
+   "nombre": "Ligamento intercornual",
+   "nombre_en": "Intercornual ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Internal_intercostal_membrane": {
+   "nombre": "Membrana intercostal interna",
+   "nombre_en": "Internal intercostal membrane",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Interosseous_sacro_iliac_ligament": {
+   "nombre": "Ligamento sacroilíaco interóseo",
+   "nombre_en": "Interosseous sacro-iliac ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Interspinous_ligaments": {
+   "nombre": "Ligamentos interespinosos",
+   "nombre_en": "Interspinous ligaments",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Intertransverse_ligaments": {
+   "nombre": "Ligamentos intertransversos",
+   "nombre_en": "Intertransverse ligaments",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Intra_articular_ligament_of_head_of_rib": {
+   "nombre": "Ligamento intra-articular de la cabeza de la costilla",
+   "nombre_en": "Intra-articular ligament of head of rib",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Lateral_temporomandibular_ligament": {
+   "nombre": "Ligamento temporomandibular lateral",
+   "nombre_en": "Lateral temporomandibular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Lateral_thyrohyoid_ligament": {
+   "nombre": "Ligamento tirohioideo lateral",
+   "nombre_en": "Lateral thyrohyoid ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Ligamenta_flava": {
+   "nombre": "Ligamento amarillo",
+   "nombre_en": "Ligamenta flava",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Median_cricothyroid_ligament": {
+   "nombre": "Ligamento cricotiroideo mediano",
+   "nombre_en": "Median cricothyroid ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Median_thyrohyoid_ligament": {
+   "nombre": "Ligamento tirohioideo mediano",
+   "nombre_en": "Median thyrohyoid ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Middle_glenohumeral_ligament": {
+   "nombre": "Ligamento glenohumeral medio",
+   "nombre_en": "Middle glenohumeral ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nuchal_ligament": {
+   "nombre": "Ligamento nucal",
+   "nombre_en": "Nuchal ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_C2_C3": {
+   "nombre": "Núcleo pulposo C2-C3",
+   "nombre_en": "Nucleus pulposus C2-C3",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_C3_C4": {
+   "nombre": "Núcleo pulposo C3-C4",
+   "nombre_en": "Nucleus pulposus C3-C4",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_C4_C5": {
+   "nombre": "Núcleo pulposo C4-C5",
+   "nombre_en": "Nucleus pulposus C4-C5",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_C5_C6": {
+   "nombre": "Núcleo pulposo C5-C6",
+   "nombre_en": "Nucleus pulposus C5-C6",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_C6_C7": {
+   "nombre": "Núcleo pulposo C6-C7",
+   "nombre_en": "Nucleus pulposus C6-C7",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_C7_T1": {
+   "nombre": "Núcleo pulposo C7-T1",
+   "nombre_en": "Nucleus pulposus C7-T1",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_L1_L2": {
+   "nombre": "Núcleo pulposo L1-L2",
+   "nombre_en": "Nucleus pulposus L1-L2",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_L2_L3": {
+   "nombre": "Núcleo pulposo L2-L3",
+   "nombre_en": "Nucleus pulposus L2-L3",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_L3_L4": {
+   "nombre": "Núcleo pulposo L3-L4",
+   "nombre_en": "Nucleus pulposus L3-L4",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_L4_L5": {
+   "nombre": "Núcleo pulposo L4-L5",
+   "nombre_en": "Nucleus pulposus L4-L5",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_L5_S1": {
+   "nombre": "Núcleo pulposo L5-S1",
+   "nombre_en": "Nucleus pulposus L5-S1",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T10_T11": {
+   "nombre": "Núcleo pulposo T10-T11",
+   "nombre_en": "Nucleus pulposus T10-T11",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T11_T12": {
+   "nombre": "Núcleo pulposo T11-T12",
+   "nombre_en": "Nucleus pulposus T11-T12",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T12_L1": {
+   "nombre": "Núcleo pulposo T12-L1",
+   "nombre_en": "Nucleus pulposus T12-L1",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T1_T2": {
+   "nombre": "Núcleo pulposo T1-T2",
+   "nombre_en": "Nucleus pulposus T1-T2",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T2_T3": {
+   "nombre": "Núcleo pulposo T2-T3",
+   "nombre_en": "Nucleus pulposus T2-T3",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T3_T4": {
+   "nombre": "Núcleo pulposo T3-T4",
+   "nombre_en": "Nucleus pulposus T3-T4",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T4_T5": {
+   "nombre": "Núcleo pulposo T4-T5",
+   "nombre_en": "Nucleus pulposus T4-T5",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T5_T6": {
+   "nombre": "Núcleo pulposo T5-T6",
+   "nombre_en": "Nucleus pulposus T5-T6",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T6_T7": {
+   "nombre": "Núcleo pulposo T6-T7",
+   "nombre_en": "Nucleus pulposus T6-T7",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T7_T8": {
+   "nombre": "Núcleo pulposo T7-T8",
+   "nombre_en": "Nucleus pulposus T7-T8",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T8_T9": {
+   "nombre": "Núcleo pulposo T8-T9",
+   "nombre_en": "Nucleus pulposus T8-T9",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Nucleus_pulposus_T9_T10": {
+   "nombre": "Núcleo pulposo T9-T10",
+   "nombre_en": "Nucleus pulposus T9-T10",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Posterior_longitudinal_ligament": {
+   "nombre": "Ligamento longitudinal posterior",
+   "nombre_en": "Posterior longitudinal ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Posterior_sacro_iliac_ligament": {
+   "nombre": "Ligamento sacroilíaco posterior",
+   "nombre_en": "Posterior sacro-iliac ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Posterior_sternoclavicular_ligament": {
+   "nombre": "Ligamento esternoclavicular posterior",
+   "nombre_en": "Posterior sternoclavicular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Pterygospinous_ligament": {
+   "nombre": "Ligamento pterigo-espinoso",
+   "nombre_en": "Pterygospinous ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Quadrangular_membrane": {
+   "nombre": "Membrana cuadrangular",
+   "nombre_en": "Quadrangular membrane",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Radiate_ligament_of_head_of_rib": {
+   "nombre": "Ligamento radiado de la cabeza de la costilla",
+   "nombre_en": "Radiate ligament of head of rib",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Sacrococcygeal_symphysis": {
+   "nombre": "Sínfisis sacrococcígea",
+   "nombre_en": "Sacrococcygeal symphysis",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Sacrospinous_ligament": {
+   "nombre": "Ligamento sacroespinoso",
+   "nombre_en": "Sacrospinous ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Sphenomandibular_ligament": {
+   "nombre": "Ligamento esfenomandibular",
+   "nombre_en": "Sphenomandibular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Stylohyoid_ligament": {
+   "nombre": "Ligamento estilohioideo",
+   "nombre_en": "Stylohyoid ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Stylomandibular_ligament": {
+   "nombre": "Ligamento estilomandibular",
+   "nombre_en": "Stylomandibular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Superior_glenohumeral_ligament": {
+   "nombre": "Ligamento glenohumeral superior",
+   "nombre_en": "Superior glenohumeral ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Superior_transverse_scapular_ligament": {
+   "nombre": "Ligamento transverso superior de la escápula",
+   "nombre_en": "Superior transverse scapular ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Supraspinous_ligament": {
+   "nombre": "Ligamento supra-espinoso",
+   "nombre_en": "Supraspinous ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Transverse_part_of_iliofemoral_ligament": {
+   "nombre": "Parte transversal del ligamento iliofemoral",
+   "nombre_en": "Transverse part of iliofemoral ligament",
+   "organo": "LigamentosTronco"
+  },
+  "LigamentosTronco__Triradiate_cartilage": {
+   "nombre": "Cartílago trirradiado",
+   "nombre_en": "Triradiate cartilage",
+   "organo": "LigamentosTronco"
+  },
+  "Meniscos__Lateral_meniscus_Der": {
+   "nombre": "Menisco lateral (lado derecho)",
+   "nombre_en": "Lateral meniscus",
+   "organo": "Meniscos"
+  },
+  "Meniscos__Lateral_meniscus_Izq": {
+   "nombre": "Menisco lateral (lado izquierdo)",
+   "nombre_en": "Lateral meniscus",
+   "organo": "Meniscos"
+  },
+  "Meniscos__Medial_meniscus_Der": {
+   "nombre": "Menisco medial (lado derecho)",
+   "nombre_en": "Medial meniscus",
+   "organo": "Meniscos"
+  },
+  "Meniscos__Medial_meniscus_Izq": {
+   "nombre": "Menisco medial (lado izquierdo)",
+   "nombre_en": "Medial meniscus",
+   "organo": "Meniscos"
   },
   "MusculosAntebrazo__Brachioradialis_muscle_Der": {
    "nombre": "Músculo braquiorradial (lado derecho)",
@@ -3811,21 +5191,6 @@
    "nombre_en": "Anterior cells of ethmoid bone",
    "organo": "OtrosHuesos"
   },
-  "OtrosHuesos__Arytenoid_cartilage": {
-   "nombre": "Cartílago aritenoides",
-   "nombre_en": "Arytenoid cartilage",
-   "organo": "OtrosHuesos"
-  },
-  "OtrosHuesos__Corniculate_cartilage": {
-   "nombre": "Cartílago corniculado",
-   "nombre_en": "Corniculate cartilage",
-   "organo": "OtrosHuesos"
-  },
-  "OtrosHuesos__Cricoid_cartilage": {
-   "nombre": "Cartílago cricoides",
-   "nombre_en": "Cricoid cartilage",
-   "organo": "OtrosHuesos"
-  },
   "OtrosHuesos__Distal_phalanx_of_fifth_finger_of_hand": {
    "nombre": "Falange distal del quinto dedo de la mano",
    "nombre_en": "Distal phalanx of fifth finger of hand",
@@ -3951,11 +5316,6 @@
    "nombre_en": "Sesamoid bones of foot",
    "organo": "OtrosHuesos"
   },
-  "OtrosHuesos__Thyroid_cartilage": {
-   "nombre": "Cartílago tiroideo",
-   "nombre_en": "Thyroid cartilage",
-   "organo": "OtrosHuesos"
-  },
   "Pancreas__Accessory_pancreatic_duct": {
    "nombre": "Conducto pancreático accesorio",
    "nombre_en": "Accessory pancreatic duct",
@@ -3970,6 +5330,26 @@
    "nombre": "Conducto pancreático",
    "nombre_en": "Pancreatic duct",
    "organo": "Pancreas"
+  },
+  "Paratiroides__Inferior_parathyroid_gland_Der": {
+   "nombre": "Glándula paratiroidea inferior (lado derecho)",
+   "nombre_en": "Inferior parathyroid gland",
+   "organo": "Paratiroides"
+  },
+  "Paratiroides__Inferior_parathyroid_gland_Izq": {
+   "nombre": "Glándula paratiroidea inferior (lado izquierdo)",
+   "nombre_en": "Inferior parathyroid gland",
+   "organo": "Paratiroides"
+  },
+  "Paratiroides__Superior_parathyroid_gland_Der": {
+   "nombre": "Glándula paratiroidea superior (lado derecho)",
+   "nombre_en": "Superior parathyroid gland",
+   "organo": "Paratiroides"
+  },
+  "Paratiroides__Superior_parathyroid_gland_Izq": {
+   "nombre": "Glándula paratiroidea superior (lado izquierdo)",
+   "nombre_en": "Superior parathyroid gland",
+   "organo": "Paratiroides"
   },
   "Pectorales__Abdominal_part_of_pectoralis_major_muscle_Der": {
    "nombre": "(Porción abdominal del músculo pectoral mayor) (lado derecho)",
@@ -4021,6 +5401,26 @@
    "nombre_en": "Sacrum",
    "organo": "Pelvis"
   },
+  "Pene__Corpus_cavernosum_of_penis": {
+   "nombre": "Cuerpo cavernoso del pene",
+   "nombre_en": "Corpus cavernosum of penis",
+   "organo": "Pene"
+  },
+  "Pene__Corpus_spongiosum_of_penis": {
+   "nombre": "Cuerpo esponjoso del pene",
+   "nombre_en": "Corpus spongiosum of penis",
+   "organo": "Pene"
+  },
+  "Pene__Glans_penis": {
+   "nombre": "Glande del pene",
+   "nombre_en": "Glans penis",
+   "organo": "Pene"
+  },
+  "Prostata__Prostate": {
+   "nombre": "Próstata",
+   "nombre_en": "Prostate",
+   "organo": "Prostata"
+  },
   "PulmonDer__Inferior_lobe_of_right_lung": {
    "nombre": "Lóbulo inferior del pulmón derecho",
    "nombre_en": "Inferior lobe of right lung",
@@ -4066,6 +5466,56 @@
    "nombre_en": "Ulna",
    "organo": "RadioCubito"
   },
+  "Rinones__Kidney_Der": {
+   "nombre": "Riñón (lado derecho)",
+   "nombre_en": "Kidney",
+   "organo": "Rinones"
+  },
+  "Rinones__Kidney_Izq": {
+   "nombre": "Riñón (lado izquierdo)",
+   "nombre_en": "Kidney",
+   "organo": "Rinones"
+  },
+  "Rinones__Renal_pelvis_Der": {
+   "nombre": "Pelvis renal (lado derecho)",
+   "nombre_en": "Renal pelvis",
+   "organo": "Rinones"
+  },
+  "Rinones__Renal_pelvis_Izq": {
+   "nombre": "Pelvis renal (lado izquierdo)",
+   "nombre_en": "Renal pelvis",
+   "organo": "Rinones"
+  },
+  "Suprarrenales__Suprarenal_gland_Der": {
+   "nombre": "Glándula suprarrenal (lado derecho)",
+   "nombre_en": "Suprarenal gland",
+   "organo": "Suprarrenales"
+  },
+  "Suprarrenales__Suprarenal_gland_Izq": {
+   "nombre": "Glándula suprarrenal (lado izquierdo)",
+   "nombre_en": "Suprarenal gland",
+   "organo": "Suprarrenales"
+  },
+  "Testiculos__Epididymis_Der": {
+   "nombre": "Epidídimo (lado derecho)",
+   "nombre_en": "Epididymis",
+   "organo": "Testiculos"
+  },
+  "Testiculos__Epididymis_Izq": {
+   "nombre": "Epidídimo (lado izquierdo)",
+   "nombre_en": "Epididymis",
+   "organo": "Testiculos"
+  },
+  "Testiculos__Testis_Der": {
+   "nombre": "Testículo (lado derecho)",
+   "nombre_en": "Testis",
+   "organo": "Testiculos"
+  },
+  "Testiculos__Testis_Izq": {
+   "nombre": "Testículo (lado izquierdo)",
+   "nombre_en": "Testis",
+   "organo": "Testiculos"
+  },
   "TibiaDer__Fibula_Der": {
    "nombre": "Peroné (lado derecho)",
    "nombre_en": "Fibula",
@@ -4095,6 +5545,21 @@
    "nombre": "Músculo tibial anterior (lado izquierdo)",
    "nombre_en": "Tibialis anterior muscle",
    "organo": "TibialAnterior"
+  },
+  "Timo__Left_lobe_of_thymus": {
+   "nombre": "Lóbulo izquierdo del timo",
+   "nombre_en": "Left lobe of thymus",
+   "organo": "Timo"
+  },
+  "Timo__Right_lobe_of_thymus": {
+   "nombre": "Lóbulo derecho del timo",
+   "nombre_en": "Right lobe of thymus",
+   "organo": "Timo"
+  },
+  "Tiroides__Thyroid_gland": {
+   "nombre": "Glándula tiroides",
+   "nombre_en": "Thyroid gland",
+   "organo": "Tiroides"
   },
   "Trapecio__Ascending_part_of_trapezius_muscle_Der": {
    "nombre": "Porción ascendente del músculo trapecio (lado derecho)",
@@ -4170,6 +5635,26 @@
    "nombre": "Cabeza medial del músculo tríceps braquial (lado izquierdo)",
    "nombre_en": "Medial head of triceps brachii",
    "organo": "Triceps"
+  },
+  "Ureteres__Ureter_Der": {
+   "nombre": "Uréter (lado derecho)",
+   "nombre_en": "Ureter",
+   "organo": "Ureteres"
+  },
+  "Ureteres__Ureter_Izq": {
+   "nombre": "Uréter (lado izquierdo)",
+   "nombre_en": "Ureter",
+   "organo": "Ureteres"
+  },
+  "Uretra__Urethra": {
+   "nombre": "Uretra",
+   "nombre_en": "Urethra",
+   "organo": "Uretra"
+  },
+  "Vejiga__Urinary_bladder": {
+   "nombre": "Vejiga urinaria",
+   "nombre_en": "Urinary bladder",
+   "organo": "Vejiga"
   },
   "VenaCava__Common_iliac_vein_Der": {
    "nombre": "Vena iliaca común (lado derecho)",

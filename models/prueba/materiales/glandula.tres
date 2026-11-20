@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+resource_name = "glandula"
+albedo_color = Color(0.78, 0.48, 0.32, 1)
+roughness = 0.45
+rim_enabled = true
+rim = 0.2
+rim_tint = 0.6
+clearcoat_enabled = true
+clearcoat = 0.4
+clearcoat_roughness = 0.35

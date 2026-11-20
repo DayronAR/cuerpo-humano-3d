@@ -197,9 +197,8 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
         # Decimate casi no puede reducirlos después. Solo cambia la copia en memoria.
         if f.type == "CURVE" and RESOLUCION_CURVAS:
             f.data.resolution_u = min(f.data.resolution_u, RESOLUCION_CURVAS)
-            f.data.bevel_resolution = min(f.data.bevel_resolution, 1)
-            if f.data.bevel_object is None and f.data.bevel_depth > 0:
-                f.data.bevel_resolution = 0
+            # Al menos resolución 1 en el bisel: con 0 los tubos finos quedan como cintas planas
+            f.data.bevel_resolution = max(1, min(f.data.bevel_resolution, 2))
         # Asegurar que la fuente se evalúe (la plantilla de Z-Anatomy oculta muchos objetos)
         f.hide_viewport = False
         if f.name not in bpy.context.view_layer.objects:
@@ -579,6 +578,17 @@ def main():
     faltantes = []    # (sistema, destino, patrones)
     nombres_partes = {}
     usados = set()    # Objetos fuente ya asignados (para el "resto" de cada sistema)
+
+    # Todo lo que usan los órganos explícitos de CUALQUIER sistema queda reservado: así el "resto"
+    # de un sistema no se queda con estructuras que otro sistema pidió por nombre.
+    for organos in sistemas.values():
+        for clave, d in organos.items():
+            if clave.startswith("_") or clave == "resto":
+                continue
+            pats = d.get("fuentes", []) if isinstance(d, dict) else d
+            usados.update(o.name for o in buscar_fuentes(pats if isinstance(pats, list) else [pats]))
+            for g in (d.get("grupos", {}).values() if isinstance(d, dict) else []):
+                usados.update(o.name for o in buscar_fuentes(g.get("fuentes", [])))
 
     for sistema, organos in sistemas.items():
         exportables = []

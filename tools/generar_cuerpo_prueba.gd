@@ -41,6 +41,10 @@ func _init() -> void:
 	_ruido.frequency = 55.0
 	_ruido.seed = 7
 
+	# Toda la paleta se guarda en disco (también la usa tools/ensamblar_cuerpo_glb.gd)
+	for nombre in DEF_MATERIALES:
+		_material(nombre)
+
 	_raiz = Node3D.new()
 	_raiz.name = "Cuerpo"
 	# Los músculos (y algunos huesos superficiales) se construyen ANTES que la piel: cada uno
@@ -541,6 +545,13 @@ const DEF_MATERIALES := {
 	"cerebro": {"color": Color(0.93, 0.74, 0.72), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2},
 	"cerebelo": {"color": Color(0.86, 0.65, 0.64), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2},
 	"medula": {"color": Color(0.95, 0.88, 0.72), "rugosidad": 0.5, "brillo": 0.3, "rim": 0.15},
+	"ligamento": {"color": Color(0.85, 0.87, 0.8), "rugosidad": 0.4, "brillo": 0.4, "rim": 0.15},
+	"rinon": {"color": Color(0.55, 0.18, 0.16), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
+	"vejiga": {"color": Color(0.86, 0.62, 0.55), "rugosidad": 0.4, "brillo": 0.45, "rim": 0.2},
+	"reproductor": {"color": Color(0.82, 0.55, 0.52), "rugosidad": 0.4, "brillo": 0.4, "rim": 0.2},
+	"glandula": {"color": Color(0.78, 0.48, 0.32), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
+	"linfatico": {"color": Color(0.55, 0.72, 0.36), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
+	"bazo": {"color": Color(0.42, 0.14, 0.25), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
 }
 
 

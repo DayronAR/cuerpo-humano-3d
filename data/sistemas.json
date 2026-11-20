@@ -1,6 +1,6 @@
 {
   "_comentario": "Sistemas del cuerpo. El 'id' debe coincidir EXACTAMENTE con el nombre del nodo Node3D del sistema en la escena del cuerpo. 'orden_capas' va de afuera hacia adentro; 'cubierto_por' lista las capas que se retiran para ver el sistema.",
-  "orden_capas": ["Piel", "Muscular", "Oseo", "Respiratorio", "Digestivo", "Circulatorio", "Nervioso"],
+  "orden_capas": ["Piel", "Muscular", "Oseo", "Respiratorio", "Digestivo", "Circulatorio", "Linfatico", "Endocrino", "Urinario", "Reproductor", "Nervioso"],
   "animacion_capas": {
     "_comentario": "Duración en segundos por capa; desplazamiento en metros; escala_final y transparencia_fantasma entre 0 y 1.",
     "duracion": 0.45,
@@ -52,6 +52,34 @@
       "nombre": "Sistema digestivo",
       "color": "#d4885f",
       "descripcion": "Tubo y glándulas que transforman los alimentos en nutrientes absorbibles.",
+      "cubierto_por": ["Piel", "Muscular", "Oseo"]
+    },
+    {
+      "id": "Linfatico",
+      "nombre": "Sistema linfático e inmune",
+      "color": "#7cae4a",
+      "descripcion": "Bazo, timo, amígdalas y ganglios que filtran la linfa y defienden contra infecciones.",
+      "cubierto_por": ["Piel", "Muscular", "Oseo"]
+    },
+    {
+      "id": "Endocrino",
+      "nombre": "Sistema endocrino",
+      "color": "#c9803c",
+      "descripcion": "Glándulas que liberan hormonas a la sangre para regular el crecimiento, el metabolismo y el estrés.",
+      "cubierto_por": ["Piel", "Muscular", "Oseo"]
+    },
+    {
+      "id": "Urinario",
+      "nombre": "Sistema urinario",
+      "color": "#c7a23a",
+      "descripcion": "Riñones, uréteres, vejiga y uretra: filtran la sangre y eliminan los desechos en la orina.",
+      "cubierto_por": ["Piel", "Muscular", "Oseo", "Digestivo"]
+    },
+    {
+      "id": "Reproductor",
+      "nombre": "Sistema reproductor (masculino)",
+      "color": "#b9677a",
+      "descripcion": "Órganos que producen los gametos y hormonas sexuales. El modelo 3D disponible es masculino.",
       "cubierto_por": ["Piel", "Muscular", "Oseo"]
     },
     {

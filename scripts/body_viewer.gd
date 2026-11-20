@@ -25,6 +25,7 @@ const UMBRAL_CLIC := 6.0
 const LARGO_RAYO := 100.0
 const CAPA_CERRADA := "Piel"   ## Capa que envuelve todo el cuerpo (ver _mostrar_interior)
 const CAPA_RENDER_AISLADA := 2  ## Capa de dibujo (bit) para lo aislado: la cámara solo ve esa capa
+const TRANSPARENCIA_CONTEXTO := 0.9  ## Sistemas de contexto al mostrar uno (0 = opaco, 1 = invisible)
 const SHADER_RESALTADO := preload("res://shaders/resaltado.gdshader")
 const SHADER_TINTE := preload("res://shaders/tinte.gdshader")
 
@@ -146,24 +147,23 @@ func esta_aislado() -> bool:
 	return not _aislado.is_empty()
 
 
-## Retira las capas que cubren el sistema (según sistemas.json) y lo encuadra con la cámara.
+## Muestra un sistema y lo encuadra con la cámara:
+##   - se retiran las capas que lo cubren (sistemas.json -> cubierto_por),
+##   - se ocultan los sistemas que quedan DENTRO de él (p. ej. los órganos en la vista muscular),
+##   - el resto queda como fantasma muy tenue: da contexto sin tapar y no se puede seleccionar.
 func mostrar_sistema(id: String) -> void:
+	enfocar_sistema(id, TRANSPARENCIA_CONTEXTO)
+
+
+func enfocar_sistema(id: String, transparencia := TRANSPARENCIA_CONTEXTO) -> void:
 	if not _sistemas.has(id):
 		push_warning("Sistema desconocido: %s" % id)
 		return
 	_sistema_actual = id
-	capas.retirar_solo(Datos.cubierto_por(id))
-	_encuadrar(_cajas_sistemas[id])
-	sistema_mostrado.emit(id)
-
-
-## Muestra un sistema dejando todos los demás sistemas internos como fantasma, para que nada
-## tape a sus órganos (lo usa el cuestionario). Los fantasmas no se pueden seleccionar.
-func enfocar_sistema(id: String, transparencia := 0.85) -> void:
-	if not _sistemas.has(id):
-		return
-	_sistema_actual = id
-	var retirar: Array = Datos.cubierto_por(id)
+	var retirar: Array = Datos.cubierto_por(id).duplicate()
+	for otro in _sistemas:
+		if otro != id and id in Datos.cubierto_por(otro) and not otro in retirar:
+			retirar.append(otro)   # Está dentro del sistema elegido: no se vería y costaría dibujarlo
 	var fantasmas := {}
 	for otro in _sistemas:
 		if otro != id and not otro in retirar:

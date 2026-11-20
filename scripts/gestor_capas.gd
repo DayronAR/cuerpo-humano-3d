@@ -115,12 +115,23 @@ func retirar_solo(ids_retirar: Array, fantasmas: Dictionary = {}) -> void:
 	# Luego retirar, de afuera hacia adentro
 	var retirar := _ordenados(ids.filter(func(id): return _capas.has(id) and _capas[id].destino < 1.0))
 
-	for id in restaurar + retirar:
+	# Las capas que se retiran de verdad van una por una; las de contexto (fantasma) se
+	# desvanecen todas juntas al final, para no alargar la secuencia.
+	var de_contexto := retirar.filter(func(id): return fantasmas.has(id))
+	var en_orden := restaurar + retirar.filter(func(id): return not fantasmas.has(id))
+	for id in en_orden:
 		var destino := 0.0 if id in restaurar else 1.0
 		var duracion := _animar(_capas[id], destino)
 		await get_tree().create_timer(duracion + _pausa).timeout
 		if generacion != _generacion:
 			return   # Otra secuencia empezó mientras tanto: esta se abandona
+	var mayor := 0.0
+	for id in de_contexto:
+		mayor = maxf(mayor, _animar(_capas[id], 1.0))
+	if mayor > 0.0:
+		await get_tree().create_timer(mayor).timeout
+		if generacion != _generacion:
+			return
 	secuencia_terminada.emit()
 
 

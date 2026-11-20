@@ -10,7 +10,7 @@
     0.0,
     0.0
   ],
-  "resolucion_curvas": 2,
+  "resolucion_curvas": 4,
   "excluir_regex": "\\.(g|j|i|t|o\\d*[lr]?|e\\d*[lr]?)$",
   "_excluir": "Sufijos de Z-Anatomy que no son anatomía: .g/.j/.i/.t (títulos y etiquetas de texto), .o/.e (orígenes e inserciones musculares).",
   "terminologia": "assets_fuente/z-anatomy/TA2.csv",
@@ -58,7 +58,26 @@
     "MedulaEspinal": "medula",
     "VenasPerifericas": "vena",
     "Nervios": "medula",
-    "EncefaloYSentidos": "cerebro"
+    "EncefaloYSentidos": "cerebro",
+    "Linfatico": "linfatico",
+    "Endocrino": "glandula",
+    "Urinario": "rinon",
+    "Reproductor": "reproductor",
+    "Bazo": "bazo",
+    "Vejiga": "vejiga",
+    "Uretra": "vejiga",
+    "Ureteres": "vejiga",
+    "DiscosIntervertebrales": "ligamento",
+    "Meniscos": "ligamento",
+    "LigamentosMiembroSuperior": "ligamento",
+    "LigamentosMiembroInferior": "ligamento",
+    "LigamentosTronco": "ligamento",
+    "Laringe": "traquea",
+    "Bronquios": "traquea",
+    "CavidadNasal": "esofago",
+    "Boca": "esofago",
+    "GlandulasSalivales": "glandula",
+    "Faringe": "esofago"
   },
   "sistemas": {
     "Piel": {
@@ -584,15 +603,61 @@
         "partes": "individual",
         "soldar": 5e-05
       },
-      "resto": {
-        "coleccion": "1: Skeletal system",
-        "partes": "bilateral",
-        "max_triangulos": 8000,
-        "regiones": [
-          {
-            "organo": "OtrosHuesos"
-          }
-        ]
+      "resto": [
+        {
+          "coleccion": "1: Skeletal system",
+          "partes": "bilateral",
+          "max_triangulos": 8000,
+          "regiones": [
+            {
+              "organo": "OtrosHuesos"
+            }
+          ]
+        },
+        {
+          "_nota": "Cápsulas articulares y almohadillas de grasa: envuelven las articulaciones y taparían los huesos.",
+          "coleccion": "3: Joints",
+          "incluir_regex": "capsul|fat pad|frenula",
+          "descartar": true,
+          "regiones": [
+            {
+              "organo": "_"
+            }
+          ]
+        },
+        {
+          "coleccion": "3: Joints",
+          "partes": "bilateral",
+          "max_triangulos": 14000,
+          "regiones": [
+            {
+              "organo": "LigamentosMiembroSuperior",
+              "x_min": 0.16,
+              "z_min": 0.65
+            },
+            {
+              "organo": "LigamentosMiembroInferior",
+              "z_max": 0.86
+            },
+            {
+              "organo": "LigamentosTronco"
+            }
+          ]
+        }
+      ],
+      "DiscosIntervertebrales": {
+        "fuentes": [
+          "Intervertebral disc *"
+        ],
+        "partes": "individual",
+        "max_triangulos": 12000
+      },
+      "Meniscos": {
+        "fuentes": [
+          "Lateral meniscus.[lr]",
+          "Medial meniscus.[lr]"
+        ],
+        "partes": "individual"
       }
     },
     "Circulatorio": {
@@ -635,7 +700,7 @@
         {
           "coleccion": "5: Cardiovascular system",
           "incluir_regex": "vein|venous|sinus|vena",
-          "max_triangulos": 8000,
+          "max_triangulos": 16000,
           "regiones": [
             {
               "organo": "VenasPerifericas"
@@ -644,7 +709,7 @@
         },
         {
           "coleccion": "5: Cardiovascular system",
-          "max_triangulos": 10000,
+          "max_triangulos": 16000,
           "regiones": [
             {
               "organo": "ArteriasPerifericas"
@@ -678,6 +743,34 @@
         ],
         "max_triangulos": 10000,
         "partes": "individual"
+      },
+      "Laringe": {
+        "fuentes": [
+          "Thyroid cartilage",
+          "Cricoid cartilage",
+          "Arytenoid cartilage.[lr]",
+          "Corniculate cartilage.[lr]",
+          "Epiglottis"
+        ],
+        "partes": "individual"
+      },
+      "Bronquios": {
+        "fuentes": [
+          "Intermediate bronchus*",
+          "*lobar bronchus*",
+          "*segmental bronchus*"
+        ],
+        "partes": "individual",
+        "max_triangulos": 8000
+      },
+      "CavidadNasal": {
+        "fuentes": [
+          "Mucosa of nasal cavity",
+          "Nasal septal cartilage",
+          "Lateral process of nasal septal cartilage.[lr]",
+          "Major alar cartilage.[lr]"
+        ],
+        "partes": "individual"
       }
     },
     "Digestivo": {
@@ -694,7 +787,8 @@
       "Higado": {
         "fuentes": [
           "Liver",
-          "Gallbladder"
+          "Gallbladder",
+          "Bile duct"
         ],
         "partes": "individual"
       },
@@ -711,7 +805,10 @@
           "Transverse colon",
           "Descending colon",
           "Sigmoid colon",
-          "Vermiform appendix"
+          "Vermiform appendix",
+          "Free taenia",
+          "Mesocolic taenia",
+          "Omental taenia"
         ],
         "partes": "individual"
       },
@@ -720,6 +817,174 @@
           "Pancreas",
           "Pancreatic duct",
           "Accessory pancreatic duct"
+        ],
+        "partes": "individual"
+      },
+      "Boca": {
+        "fuentes": [
+          "Tongue",
+          "Gingiva",
+          "Soft palate",
+          "Uvula of palate"
+        ],
+        "partes": "individual"
+      },
+      "GlandulasSalivales": {
+        "fuentes": [
+          "Parotid gland.[lr]",
+          "(Accessory parotid gland).[lr]",
+          "Submandibular gland.[lr]",
+          "Sublingual gland.[lr]",
+          "Parotid duct.[lr]",
+          "Submandibular duct.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "Faringe": {
+        "fuentes": [
+          "Nasopharynx",
+          "Oropharynx",
+          "Laryngopharynx"
+        ],
+        "partes": "individual"
+      }
+    },
+    "Linfatico": {
+      "Bazo": {
+        "fuentes": [
+          "Spleen"
+        ],
+        "partes": "individual"
+      },
+      "Timo": {
+        "fuentes": [
+          "Left lobe of thymus",
+          "Right lobe of thymus"
+        ],
+        "partes": "individual"
+      },
+      "Amigdalas": {
+        "fuentes": [
+          "Palatine tonsil.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "resto": [
+        {
+          "coleccion": "6: Lymphoid organs",
+          "max_triangulos": 6000,
+          "regiones": [
+            {
+              "organo": "GangliosCabezaCuello",
+              "z_min": 1.38
+            },
+            {
+              "organo": "GangliosMiembroSuperior",
+              "x_min": 0.14,
+              "z_min": 0.65
+            },
+            {
+              "organo": "GangliosTorax",
+              "z_min": 1.15
+            },
+            {
+              "organo": "GangliosAbdomenPelvis",
+              "z_min": 0.78
+            },
+            {
+              "organo": "GangliosMiembroInferior"
+            }
+          ]
+        }
+      ]
+    },
+    "Endocrino": {
+      "Tiroides": {
+        "fuentes": [
+          "Thyroid gland"
+        ],
+        "partes": "individual"
+      },
+      "Paratiroides": {
+        "fuentes": [
+          "*parathyroid gland.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "Suprarrenales": {
+        "fuentes": [
+          "Suprarenal gland.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "Hipofisis": {
+        "fuentes": [
+          "Adenohypophysis",
+          "Neurohypophysis"
+        ],
+        "partes": "individual"
+      },
+      "GlandulaPineal": {
+        "fuentes": [
+          "Pineal gland"
+        ],
+        "partes": "individual"
+      }
+    },
+    "Urinario": {
+      "Rinones": {
+        "fuentes": [
+          "Kidney.[lr]",
+          "Renal pelvis.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "Ureteres": {
+        "fuentes": [
+          "Ureter.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "Vejiga": {
+        "fuentes": [
+          "Urinary bladder"
+        ],
+        "partes": "individual"
+      },
+      "Uretra": {
+        "fuentes": [
+          "Urethra"
+        ],
+        "partes": "individual"
+      }
+    },
+    "Reproductor": {
+      "Testiculos": {
+        "fuentes": [
+          "Testis.[lr]",
+          "Epididymis.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "ConductosSeminales": {
+        "fuentes": [
+          "Ductus deferens.[lr]",
+          "Ejaculatory duct.[lr]",
+          "Seminal gland.[lr]"
+        ],
+        "partes": "individual"
+      },
+      "Prostata": {
+        "fuentes": [
+          "Prostate"
+        ],
+        "partes": "individual"
+      },
+      "Pene": {
+        "fuentes": [
+          "Corpus cavernosum of penis",
+          "Corpus spongiosum of penis",
+          "Glans penis"
         ],
         "partes": "individual"
       }
@@ -749,7 +1014,7 @@
         {
           "coleccion": "7: Nervous system & Sense organs",
           "incluir_regex": "nerve|plexus|ganglion|branch|ramus|rami|nervus|trunk",
-          "max_triangulos": 10000,
+          "max_triangulos": 16000,
           "regiones": [
             {
               "organo": "Nervios"

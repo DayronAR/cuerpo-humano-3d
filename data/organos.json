@@ -473,6 +473,262 @@
         "El oído interno contiene el órgano del equilibrio, además del de la audición.",
         "El ojo puede distinguir millones de colores."
       ]
+    },
+    "Bazo": {
+      "nombre": "Bazo",
+      "funcion": "Filtra la sangre, elimina glóbulos rojos viejos y produce defensas contra las infecciones.",
+      "datos_curiosos": [
+        "Está a la izquierda del estómago, protegido por las costillas.",
+        "Se puede vivir sin bazo, aunque aumenta el riesgo de algunas infecciones."
+      ]
+    },
+    "Timo": {
+      "nombre": "Timo",
+      "funcion": "Entrena a los linfocitos T, células clave de las defensas, sobre todo en la infancia.",
+      "datos_curiosos": [
+        "Es más grande en niños y se va reemplazando por grasa con la edad.",
+        "Está detrás del esternón, delante del corazón."
+      ]
+    },
+    "Amigdalas": {
+      "nombre": "Amígdalas palatinas",
+      "funcion": "Forman una primera barrera de defensa contra los microbios que entran por la boca.",
+      "datos_curiosos": [
+        "Se inflaman durante la amigdalitis.",
+        "Forman parte de un anillo de tejido linfático alrededor de la garganta."
+      ]
+    },
+    "GangliosCabezaCuello": {
+      "nombre": "Ganglios linfáticos de la cabeza y el cuello",
+      "funcion": "Filtran la linfa de la cabeza y el cuello y retienen microbios.",
+      "datos_curiosos": [
+        "Son los 'ganglios' que se inflaman y se palpan con un resfriado.",
+        "El cuerpo tiene entre 500 y 700 ganglios linfáticos."
+      ]
+    },
+    "GangliosMiembroSuperior": {
+      "nombre": "Ganglios linfáticos del miembro superior",
+      "funcion": "Filtran la linfa del brazo; los más importantes están en la axila.",
+      "datos_curiosos": [
+        "Los ganglios axilares reciben también la linfa de la mama.",
+        "La linfa no tiene una bomba: se mueve gracias a los músculos."
+      ]
+    },
+    "GangliosTorax": {
+      "nombre": "Ganglios linfáticos del tórax",
+      "funcion": "Filtran la linfa de los pulmones, el corazón y el esófago.",
+      "datos_curiosos": [
+        "Rodean la tráquea y los bronquios.",
+        "Ayudan a contener infecciones respiratorias."
+      ]
+    },
+    "GangliosAbdomenPelvis": {
+      "nombre": "Ganglios linfáticos del abdomen y la pelvis",
+      "funcion": "Filtran la linfa de los intestinos y órganos abdominales, incluida la grasa absorbida en la digestión.",
+      "datos_curiosos": [
+        "Hay cientos de ganglios en el mesenterio del intestino.",
+        "La linfa intestinal se ve blanquecina después de una comida grasa."
+      ]
+    },
+    "GangliosMiembroInferior": {
+      "nombre": "Ganglios linfáticos del miembro inferior",
+      "funcion": "Filtran la linfa de la pierna; los principales están en la ingle y detrás de la rodilla.",
+      "datos_curiosos": [
+        "Los ganglios inguinales se pueden palpar en la ingle.",
+        "Si la linfa no circula bien, la pierna se hincha (linfedema)."
+      ]
+    },
+    "Tiroides": {
+      "nombre": "Glándula tiroides",
+      "funcion": "Produce hormonas que regulan el metabolismo, la temperatura y el crecimiento.",
+      "datos_curiosos": [
+        "Tiene forma de mariposa y está delante de la tráquea.",
+        "Necesita yodo para fabricar sus hormonas."
+      ]
+    },
+    "Paratiroides": {
+      "nombre": "Glándulas paratiroides",
+      "funcion": "Controlan el nivel de calcio en la sangre y los huesos.",
+      "datos_curiosos": [
+        "Son cuatro glándulas del tamaño de un grano de arroz.",
+        "Están pegadas a la parte posterior de la tiroides."
+      ]
+    },
+    "Suprarrenales": {
+      "nombre": "Glándulas suprarrenales",
+      "funcion": "Producen adrenalina y cortisol, hormonas de la respuesta al estrés, y otras que regulan la sal y el agua.",
+      "datos_curiosos": [
+        "Están sobre cada riñón, como un sombrero.",
+        "La adrenalina acelera el corazón en segundos (lo ves en el escenario 'Correr')."
+      ]
+    },
+    "Hipofisis": {
+      "nombre": "Hipófisis",
+      "funcion": "Glándula 'maestra': controla a otras glándulas y regula el crecimiento, el agua del cuerpo y la reproducción.",
+      "datos_curiosos": [
+        "Tiene el tamaño de un garbanzo.",
+        "Está alojada en un hueco del hueso esfenoides llamado silla turca."
+      ]
+    },
+    "GlandulaPineal": {
+      "nombre": "Glándula pineal",
+      "funcion": "Produce melatonina, la hormona que regula el ciclo de sueño y vigilia.",
+      "datos_curiosos": [
+        "La luz de las pantallas por la noche reduce la melatonina.",
+        "Está en el centro del encéfalo."
+      ]
+    },
+    "Rinones": {
+      "nombre": "Riñones",
+      "funcion": "Filtran la sangre, eliminan los desechos en la orina y regulan el agua, las sales y la presión arterial.",
+      "datos_curiosos": [
+        "Filtran unos 180 litros de sangre al día.",
+        "Cada riñón tiene alrededor de un millón de nefronas, sus filtros."
+      ]
+    },
+    "Ureteres": {
+      "nombre": "Uréteres",
+      "funcion": "Llevan la orina desde cada riñón hasta la vejiga mediante contracciones.",
+      "datos_curiosos": [
+        "Miden unos 25 a 30 cm.",
+        "Un cálculo renal atascado en el uréter causa un dolor muy intenso."
+      ]
+    },
+    "Vejiga": {
+      "nombre": "Vejiga urinaria",
+      "funcion": "Almacena la orina hasta que se elimina.",
+      "datos_curiosos": [
+        "Puede contener alrededor de medio litro.",
+        "Sus paredes son elásticas y se estiran al llenarse."
+      ]
+    },
+    "Uretra": {
+      "nombre": "Uretra",
+      "funcion": "Conduce la orina desde la vejiga hacia el exterior; en el hombre también el semen.",
+      "datos_curiosos": [
+        "En el hombre mide unos 20 cm; en la mujer, unos 4 cm.",
+        "Un esfínter muscular controla cuándo sale la orina."
+      ]
+    },
+    "Testiculos": {
+      "nombre": "Testículos y epidídimo",
+      "funcion": "Producen los espermatozoides y la testosterona; el epidídimo los almacena y madura.",
+      "datos_curiosos": [
+        "Están fuera del abdomen porque los espermatozoides necesitan una temperatura algo menor.",
+        "Se producen millones de espermatozoides cada día."
+      ]
+    },
+    "ConductosSeminales": {
+      "nombre": "Conductos deferentes y vesículas seminales",
+      "funcion": "Transportan los espermatozoides y aportan el líquido que forma la mayor parte del semen.",
+      "datos_curiosos": [
+        "Cada conducto deferente mide unos 30 cm.",
+        "La vasectomía consiste en cortar los conductos deferentes."
+      ]
+    },
+    "Prostata": {
+      "nombre": "Próstata",
+      "funcion": "Glándula que produce parte del líquido seminal y rodea el inicio de la uretra.",
+      "datos_curiosos": [
+        "Tiene el tamaño de una nuez.",
+        "Suele crecer con la edad y puede dificultar la salida de la orina."
+      ]
+    },
+    "Pene": {
+      "nombre": "Pene",
+      "funcion": "Órgano por el que salen la orina y el semen; sus cuerpos cavernosos se llenan de sangre en la erección.",
+      "datos_curiosos": [
+        "Contiene tres cuerpos de tejido eréctil.",
+        "La uretra lo recorre por el cuerpo esponjoso."
+      ]
+    },
+    "DiscosIntervertebrales": {
+      "nombre": "Discos intervertebrales",
+      "funcion": "Amortiguan los golpes entre vértebras y permiten que la columna se doble.",
+      "datos_curiosos": [
+        "Tienen un centro gelatinoso rodeado de anillos fibrosos.",
+        "Una hernia de disco ocurre cuando el centro sale y presiona un nervio."
+      ]
+    },
+    "Meniscos": {
+      "nombre": "Meniscos de la rodilla",
+      "funcion": "Cartílagos en forma de media luna que reparten el peso y estabilizan la rodilla.",
+      "datos_curiosos": [
+        "Cada rodilla tiene un menisco medial y uno lateral.",
+        "Sus roturas son lesiones comunes en el fútbol."
+      ]
+    },
+    "LigamentosMiembroSuperior": {
+      "nombre": "Ligamentos del miembro superior",
+      "funcion": "Unen los huesos del hombro, el codo, la muñeca y la mano, y dan estabilidad a sus articulaciones.",
+      "datos_curiosos": [
+        "El hombro es tan móvil porque sus ligamentos son flexibles.",
+        "Los ligamentos casi no tienen vasos sanguíneos: sanan lento."
+      ]
+    },
+    "LigamentosMiembroInferior": {
+      "nombre": "Ligamentos del miembro inferior",
+      "funcion": "Unen los huesos de la cadera, la rodilla, el tobillo y el pie; incluyen los ligamentos cruzados.",
+      "datos_curiosos": [
+        "El ligamento cruzado anterior es de los que más se lesionan en deportistas.",
+        "Un esguince de tobillo es una lesión de sus ligamentos."
+      ]
+    },
+    "LigamentosTronco": {
+      "nombre": "Ligamentos del tronco y la cabeza",
+      "funcion": "Mantienen unidas las vértebras, las costillas, la pelvis y la mandíbula.",
+      "datos_curiosos": [
+        "Los ligamentos amarillos de la columna son de los más elásticos del cuerpo.",
+        "La articulación de la mandíbula también tiene un disco propio."
+      ]
+    },
+    "Laringe": {
+      "nombre": "Laringe",
+      "funcion": "Conduce el aire hacia la tráquea, contiene las cuerdas vocales y, con la epiglotis, evita que el alimento entre a las vías respiratorias.",
+      "datos_curiosos": [
+        "La 'manzana de Adán' es el cartílago tiroides.",
+        "La epiglotis se cierra como una tapa cada vez que tragamos."
+      ]
+    },
+    "Bronquios": {
+      "nombre": "Bronquios",
+      "funcion": "Se ramifican desde la tráquea como un árbol para llevar el aire a cada zona del pulmón.",
+      "datos_curiosos": [
+        "Se dividen más de 20 veces hasta llegar a los alvéolos.",
+        "En el asma, los bronquios se estrechan y cuesta respirar."
+      ]
+    },
+    "CavidadNasal": {
+      "nombre": "Cavidad nasal",
+      "funcion": "Calienta, humedece y filtra el aire, y contiene el sentido del olfato.",
+      "datos_curiosos": [
+        "Los vellos y el moco de la nariz atrapan polvo y microbios.",
+        "El tabique nasal la divide en dos lados."
+      ]
+    },
+    "Boca": {
+      "nombre": "Boca: lengua, encías y paladar",
+      "funcion": "Inicia la digestión: mastica, mezcla el alimento con saliva y lo empuja hacia la faringe.",
+      "datos_curiosos": [
+        "La lengua tiene ocho músculos y miles de papilas gustativas.",
+        "La úvula ayuda a cerrar el paso hacia la nariz al tragar."
+      ]
+    },
+    "GlandulasSalivales": {
+      "nombre": "Glándulas salivales",
+      "funcion": "Producen la saliva, que humedece el alimento y empieza a digerir los almidones.",
+      "datos_curiosos": [
+        "Producen entre 1 y 1,5 litros de saliva al día.",
+        "La parótida es la que se inflama en las paperas."
+      ]
+    },
+    "Faringe": {
+      "nombre": "Faringe",
+      "funcion": "Conducto compartido por el aire y el alimento, entre la boca y nariz y el esófago o la laringe.",
+      "datos_curiosos": [
+        "Tiene tres partes: nasofaringe, orofaringe y laringofaringe.",
+        "Al tragar, se coordina para que el alimento no vaya a los pulmones."
+      ]
     }
   }
 }
