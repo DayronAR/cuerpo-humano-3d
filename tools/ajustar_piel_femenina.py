@@ -241,6 +241,37 @@ def aplanar_vientre(pts, desplazamiento, normales):
     return resultado
 
 
+# Alisado de la pared del abdomen (quita pliegues heredados de la piel original, p. ej. en el
+# costado derecho) ANTES de esculpir la definición, para no borrar el relieve muscular
+ALISADO_Z = (0.94, 0.98, 1.17, 1.21)
+ALISADO_X = (0.03, 0.06, 0.15, 0.18)
+ITERACIONES_ALISADO = 40
+
+
+def alisar_abdomen(pts, desplazamiento, normales, aristas, grado, pezones):
+    n = len(pts)
+    peso = np.zeros(n)
+    for i, p in enumerate(pts):
+        if normales[i].y > -0.15:
+            continue
+        x = abs(p.x)
+        w = suave(ALISADO_Z[0], ALISADO_Z[1], p.z) * (1.0 - suave(ALISADO_Z[2], ALISADO_Z[3], p.z))
+        w *= suave(ALISADO_X[0], ALISADO_X[1], x) * (1.0 - suave(ALISADO_X[2], ALISADO_X[3], x))
+        for pz in pezones:
+            w *= suave(*RADIO_MAMA, (p - pz).length)
+        peso[i] = w
+    pos = np.array([list(p) for p in pts]) + desplazamiento
+    for _ in range(ITERACIONES_ALISADO):
+        suma = np.zeros((n, 3))
+        np.add.at(suma, aristas[:, 0], pos[aristas[:, 1]])
+        np.add.at(suma, aristas[:, 1], pos[aristas[:, 0]])
+        media = suma / grado[:, None]
+        pos += (media - pos) * (0.6 * peso)[:, None]
+    nuevo = pos - np.array([list(p) for p in pts])
+    print(f"[OK] Abdomen alisado: hasta {np.abs(nuevo - desplazamiento).max() * 1000:.1f} mm")
+    return nuevo
+
+
 def interpolar(tabla, z):
     if z <= tabla[0][0]:
         return tabla[0][1]
@@ -384,6 +415,7 @@ def main():
         tono = 0.5 * tono + 0.5 * suma / grado[:, None]
     desplazamiento += tono
     normales = [v.normal.copy() for v in malla.vertices]
+    desplazamiento = alisar_abdomen(pts, desplazamiento, normales, aristas, grado, pezones)
     definicion = definicion_abdomen(pts, desplazamiento, normales)
     for _ in range(4):   # Suaviza el relieve: músculos, no cortes
         suma = np.zeros((n, 3))
