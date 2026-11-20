@@ -16,14 +16,15 @@
   "_importar": "Modelos del Human Reference Atlas. La piel se baja 0,795 m (pies en 0) y se centra; los órganos pélvicos comparten el marco de su pelvis, alineada con la pelvis de Z-Anatomy escalada.",
   "importar": [
     {
-      "archivo": "assets_fuente/hra-femenino/VH_F_Skin.glb",
+      "archivo": "assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb",
       "transformacion": {
         "desplazamiento": [
-          0.0,
-          -0.058,
-          0.795
+          0,
+          0,
+          0
         ]
-      }
+      },
+      "_nota": "Piel del Visible Human Female con complexión delgada (tools/ajustar_piel_femenina.py), ya en coordenadas finales."
     },
     {
       "archivo": "assets_fuente/hra-femenino/VH_F_Pelvis.glb",

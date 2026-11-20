@@ -24,8 +24,8 @@ import bmesh
 import bpy
 from mathutils import Matrix, Vector
 
-PIEL = "assets_fuente/hra-femenino/VH_F_Skin.glb"
-DESPLAZAMIENTO_PIEL = Vector((0.0, -0.058, 0.795))   # Igual que en el mapeo femenino
+PIEL = "assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb"   # Ya en coordenadas finales
+DESPLAZAMIENTO_PIEL = Vector((0.0, 0.0, 0.0))
 SALIDA = "assets_fuente/hra-femenino/Mamas_generadas.glb"
 LOBULOS = 16
 
