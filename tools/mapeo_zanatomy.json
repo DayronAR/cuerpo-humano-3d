@@ -1,0 +1,91 @@
+{
+  "_comentario": "Mapeo Z-Anatomy (Startup.blend) -> órganos del proyecto. Patrones: nombre exacto, 'coleccion:Nombre' o comodines (sin distinguir mayúsculas). '[lr]' toma ambos lados. Z-Anatomy está en metros, Z arriba, frente en -Y y el lado izquierdo del paciente en +X (igual que el proyecto tras exportar a glTF).",
+  "_licencia": "Modelos de Z-Anatomy (CC BY-SA 4.0), derivados de BodyParts3D. Hay que citarlo en los créditos.",
+  "max_triangulos": 8000,
+  "escala": 1.0,
+  "desplazamiento": [0.0, 0.0, 0.0],
+  "excluir_regex": "\\.(g|j|i|t|o\\d*[lr]?|e\\d*[lr]?)$",
+  "_excluir": "Sufijos de Z-Anatomy que no son anatomía: .g/.j/.i/.t (títulos y etiquetas de texto), .o/.e (orígenes e inserciones musculares).",
+  "_materiales": "Material de la paleta del proyecto (models/prueba/materiales/<nombre>.tres) por sistema u órgano. Lo usa tools/ensamblar_cuerpo_glb.gd.",
+  "materiales": {
+    "Piel": "piel", "Muscular": "musculo", "Oseo": "hueso", "Circulatorio": "arteria", "Respiratorio": "pulmon",
+    "Digestivo": "intestino_delgado", "Nervioso": "cerebro",
+    "Corazon": "corazon", "VenaCava": "vena", "Traquea": "traquea", "Esofago": "esofago", "Estomago": "estomago",
+    "Higado": "higado", "IntestinoGrueso": "intestino_grueso", "Cerebelo": "cerebelo", "MedulaEspinal": "medula"
+  },
+  "sistemas": {
+    "Piel": {
+      "Epidermis": { "fuentes": ["coleccion:9: Regions of human body"], "max_triangulos": 50000, "soldar": 0.0015, "simetria": true,
+        "_nota": "Las regiones del lado izquierdo tienen otra teselación y dejan costuras: se usa el lado derecho reflejado." }
+    },
+    "Muscular": {
+      "Pectorales": ["*pectoralis major*.[lr]"],
+      "Abdominales": ["Rectus abdominis muscle.[lr]"],
+      "BicepsIzq": ["*head of biceps brachii.l"],
+      "BicepsDer": ["*head of biceps brachii.r"],
+      "CuadricepsIzq": ["Rectus femoris muscle.l", "Vastus * muscle.l"],
+      "CuadricepsDer": ["Rectus femoris muscle.r", "Vastus * muscle.r"],
+      "GemeloIzq": ["*head of gastrocnemius.l"],
+      "GemeloDer": ["*head of gastrocnemius.r"],
+      "Deltoides": ["*part of deltoid muscle.[lr]"],
+      "Triceps": ["*head of triceps brachii.[lr]"],
+      "MusculosAntebrazo": { "fuentes": ["Brachioradialis muscle.[lr]", "Pronator teres muscle.[lr]", "Flexor carpi * muscle.[lr]",
+          "Extensor carpi * muscle.[lr]", "Palmaris longus muscle.[lr]", "Flexor digitorum superficialis muscle.[lr]",
+          "Extensor digitorum muscle.[lr]"], "max_triangulos": 12000 },
+      "Gluteos": ["Gluteus maximus muscle.[lr]", "Gluteus medius muscle.[lr]"],
+      "Isquiotibiales": ["*head of biceps femoris*.[lr]", "Semitendinosus muscle.[lr]", "Semimembranosus muscle.[lr]"],
+      "TibialAnterior": ["Tibialis anterior muscle.[lr]"],
+      "Trapecio": ["*part of trapezius muscle.[lr]"],
+      "Dorsal": ["Latissimus dorsi muscle.[lr]"],
+      "Oblicuos": ["External abdominal oblique muscle.[lr]"],
+      "Esternocleidomastoideo": ["Sternocleidomastoid muscle.[lr]"]
+    },
+    "Oseo": {
+      "Craneo": { "fuentes": ["coleccion:Cranium", "Mandible"], "max_triangulos": 25000 },
+      "ColumnaVertebral": { "fuentes": ["coleccion:Bones of vertebral column"], "max_triangulos": 16000 },
+      "CajaToracica": { "fuentes": ["coleccion:Ribs", "coleccion:Sternum", "Costal cartilage of *.[lr]"], "max_triangulos": 20000 },
+      "Pelvis": { "fuentes": ["coleccion:Bony pelvis"], "max_triangulos": 10000 },
+      "HumeroIzq": ["Humerus.l"],
+      "HumeroDer": ["Humerus.r"],
+      "FemurIzq": ["Femur.l", "Patella.l"],
+      "FemurDer": ["Femur.r", "Patella.r"],
+      "TibiaIzq": ["Tibia.l", "Fibula.l"],
+      "TibiaDer": ["Tibia.r", "Fibula.r"],
+      "Claviculas": ["Clavicle.[lr]"],
+      "Escapulas": ["Scapula.[lr]"],
+      "RadioCubito": ["Radius.[lr]", "Ulna.[lr]"],
+      "HuesosMano": { "fuentes": ["Scaphoid bone.[lr]", "Lunate bone.[lr]", "Triquetr*.[lr]", "Pisiform bone.[lr]",
+          "Trapezium*.[lr]", "Trapezoid*.[lr]", "Capitate bone.[lr]", "Hamate bone.[lr]", "*metacarpal*.[lr]",
+          "*phalanx of *finger.[lr]", "*phalanx of thumb.[lr]"], "max_triangulos": 10000 },
+      "HuesosPie": { "fuentes": ["Calcaneus.[lr]", "Talus.[lr]", "Navicular bone.[lr]", "Cuboid bone.[lr]",
+          "* cuneiform bone.[lr]", "*metatarsal*.[lr]", "*phalanx of *of foot.[lr]", "*phalanx of great toe.[lr]"],
+          "max_triangulos": 10000 }
+    },
+    "Circulatorio": {
+      "Corazon": { "fuentes": ["coleccion:Heart", "Pulmonary trunk", "Left pulmonary artery", "Right pulmonary artery"], "max_triangulos": 14000 },
+      "Aorta": ["Ascending aorta", "Aortic arch", "Thoracic aorta", "Abdominal aorta", "Common iliac artery.[lr]",
+          "Brachiocephalic trunk", "Left common carotid artery", "Right common carotid artery",
+          "Left subclavian artery", "Right subclavian artery"],
+      "VenaCava": ["Superior vena cava", "Inferior vena cava (*", "*brachiocephalic vein", "Common iliac vein.[lr]",
+          "Internal jugular vein.[lr]"]
+    },
+    "Respiratorio": {
+      "Traquea": ["Trachea", "Left main bronchus", "Right main bronchus"],
+      "PulmonIzq": { "fuentes": ["Superior lobe of left lung", "Inferior lobe of left lung"], "max_triangulos": 10000 },
+      "PulmonDer": { "fuentes": ["Superior lobe of right lung", "Middle lobe of right lung", "Inferior lobe of right lung"],
+          "max_triangulos": 10000 }
+    },
+    "Digestivo": {
+      "Esofago": ["Oesophagus"],
+      "Estomago": ["Stomach"],
+      "Higado": ["Liver", "Gallbladder"],
+      "IntestinoDelgado": { "fuentes": ["Duodenum", "Jejunum"], "max_triangulos": 12000 },
+      "IntestinoGrueso": ["Ascending colon", "Transverse colon", "Descending colon", "Sigmoid colon", "Vermiform appendix"]
+    },
+    "Nervioso": {
+      "Cerebro": { "fuentes": ["coleccion:Cerebrum"], "max_triangulos": 40000 },
+      "Cerebelo": { "fuentes": ["coleccion:Cerebellum"], "max_triangulos": 14000 },
+      "MedulaEspinal": { "fuentes": ["Spinal dura"], "max_triangulos": 6000 }
+    }
+  }
+}

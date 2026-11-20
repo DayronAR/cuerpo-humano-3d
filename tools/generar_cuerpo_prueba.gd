@@ -625,7 +625,8 @@ func _parte(padre: Node3D, nombre: String, malla: ArrayMesh, material: Material)
 		n = n.get_parent()
 	var recentrada := _con_lods(_trasladar(malla, -centro), material, nombre)
 	var ruta := "%s/%s.res" % [CARPETA, _ruta_nodo(padre) + nombre]
-	ResourceSaver.save(recentrada, ruta, ResourceSaver.FLAG_CHANGE_PATH | ResourceSaver.FLAG_COMPRESS)
+	ResourceSaver.save(recentrada, ruta, ResourceSaver.FLAG_COMPRESS)
+	recentrada = ResourceLoader.load(ruta, "", ResourceLoader.CACHE_MODE_REPLACE)   # referenciar, no incrustar
 	var mi := MeshInstance3D.new()
 	mi.name = nombre
 	mi.mesh = recentrada

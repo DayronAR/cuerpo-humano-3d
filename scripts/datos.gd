@@ -36,6 +36,15 @@ func _init() -> void:
 
 
 ## Ficha de un órgano. Si no existe, devuelve una ficha mínima para no romper la interfaz.
+## Modelo 3D activo (data/visuales.json → cuerpos[cuerpo_activo]): escena, créditos y trayectorias.
+func cuerpo_activo() -> Dictionary:
+	var cuerpos: Dictionary = visuales.get("cuerpos", {})
+	var activo: String = visuales.get("cuerpo_activo", "")
+	if cuerpos.has(activo):
+		return cuerpos[activo]
+	return cuerpos.values()[0] if not cuerpos.is_empty() else {}
+
+
 func ficha_organo(id: String) -> Dictionary:
 	if organos.has(id):
 		return organos[id]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/body_viewer.gd" id="1_visor"]
 [ext_resource type="Script" path="res://scripts/camara_orbital.gd" id="2_camara"]
-[ext_resource type="PackedScene" path="res://scenes/cuerpo_prueba.tscn" id="3_cuerpo"]
 [ext_resource type="Script" path="res://scripts/gestor_capas.gd" id="4_capas"]
 [ext_resource type="Script" path="res://scripts/visuales/visuales_fisiologia.gd" id="5_visuales"]
 
@@ -66,8 +65,6 @@ light_energy = 0.6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.015, 0)
 mesh = SubResource("CylinderMesh_base")
 surface_material_override/0 = SubResource("Material_base")
-
-[node name="Cuerpo" parent="." instance=ExtResource("3_cuerpo")]
 
 [node name="Camara" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.6)

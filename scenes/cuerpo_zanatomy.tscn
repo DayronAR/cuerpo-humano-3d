@@ -1,0 +1,272 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Piel_Epidermis.res" id="1_d3v2j"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Abdominales.res" id="2_hn4de"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_BicepsDer.res" id="3_x54p3"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_BicepsIzq.res" id="4_fuyeq"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_CuadricepsDer.res" id="5_he5oa"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_CuadricepsIzq.res" id="6_5vlmj"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Deltoides.res" id="7_k37gu"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Dorsal.res" id="8_8j1n8"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Esternocleidomastoideo.res" id="9_8rkx4"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_GemeloDer.res" id="10_50hc8"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_GemeloIzq.res" id="11_kxm6o"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Gluteos.res" id="12_aile3"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Isquiotibiales.res" id="13_cxbof"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_MusculosAntebrazo.res" id="14_1g43b"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Oblicuos.res" id="15_2i326"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Pectorales.res" id="16_y45ua"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_TibialAnterior.res" id="17_usgpr"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Trapecio.res" id="18_43cr7"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Muscular_Triceps.res" id="19_77aiw"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_CajaToracica.res" id="20_xcsgf"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_Claviculas.res" id="21_0vpx7"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_ColumnaVertebral.res" id="22_5gsra"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_Craneo.res" id="23_8e5eo"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_Escapulas.res" id="24_tfqpt"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_FemurDer.res" id="25_aoyfp"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_FemurIzq.res" id="26_flpku"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_HuesosMano.res" id="27_ilbg5"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_HuesosPie.res" id="28_lfy5t"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_HumeroDer.res" id="29_kvp6v"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_HumeroIzq.res" id="30_sj7c6"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_Pelvis.res" id="31_imv4w"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_RadioCubito.res" id="32_fuy7o"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_TibiaDer.res" id="33_v4pi4"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Oseo_TibiaIzq.res" id="34_c4e7m"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Circulatorio_Aorta.res" id="35_xftcu"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Circulatorio_Corazon.res" id="36_b7jhv"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Circulatorio_VenaCava.res" id="37_8gvnj"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Respiratorio_PulmonDer.res" id="38_mp5l7"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Respiratorio_PulmonIzq.res" id="39_5ausa"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Respiratorio_Traquea.res" id="40_ixfj4"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Digestivo_Esofago.res" id="41_uk748"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Digestivo_Estomago.res" id="42_5a3p8"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Digestivo_Higado.res" id="43_y661o"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Digestivo_IntestinoDelgado.res" id="44_j7xgs"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Digestivo_IntestinoGrueso.res" id="45_dbhcb"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Nervioso_Cerebelo.res" id="46_e8wcg"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Nervioso_Cerebro.res" id="47_04j7l"]
+[ext_resource type="ArrayMesh" path="res://models/zanatomy/Nervioso_MedulaEspinal.res" id="48_f1tv2"]
+
+[node name="Cuerpo" type="Node3D" unique_id=407471637]
+
+[node name="Piel" type="Node3D" parent="." unique_id=211286769]
+
+[node name="Epidermis" type="MeshInstance3D" parent="Piel" unique_id=725992953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.660819e-06, 0.87111706, -0.0013774335)
+mesh = ExtResource("1_d3v2j")
+
+[node name="Muscular" type="Node3D" parent="." unique_id=1541740112]
+
+[node name="Abdominales" type="MeshInstance3D" parent="Muscular" unique_id=1611925240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0544918, 0.08234946)
+mesh = ExtResource("2_hn4de")
+
+[node name="BicepsDer" type="MeshInstance3D" parent="Muscular" unique_id=1529808339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18783438, 1.2293717, -0.016440233)
+mesh = ExtResource("3_x54p3")
+
+[node name="BicepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=277710736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18783437, 1.2293713, -0.016440233)
+mesh = ExtResource("4_fuyeq")
+
+[node name="CuadricepsDer" type="MeshInstance3D" parent="Muscular" unique_id=778881755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09626421, 0.6430732, 0.012151245)
+mesh = ExtResource("5_he5oa")
+
+[node name="CuadricepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=1606447156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09626425, 0.6430732, 0.012151241)
+mesh = ExtResource("6_5vlmj")
+
+[node name="Deltoides" type="MeshInstance3D" parent="Muscular" unique_id=1727862313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3370656, -0.041341905)
+mesh = ExtResource("7_k37gu")
+
+[node name="Dorsal" type="MeshInstance3D" parent="Muscular" unique_id=1467041531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1366969, -0.06930389)
+mesh = ExtResource("8_8j1n8")
+
+[node name="Esternocleidomastoideo" type="MeshInstance3D" parent="Muscular" unique_id=519818854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.990267e-06, 1.478575, 0.0075585935)
+mesh = ExtResource("9_8rkx4")
+
+[node name="GemeloDer" type="MeshInstance3D" parent="Muscular" unique_id=717773722]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08471438, 0.35625413, -0.062272877)
+mesh = ExtResource("10_50hc8")
+
+[node name="GemeloIzq" type="MeshInstance3D" parent="Muscular" unique_id=2114672679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08471441, 0.35630208, -0.06225273)
+mesh = ExtResource("11_kxm6o")
+
+[node name="Gluteos" type="MeshInstance3D" parent="Muscular" unique_id=1959282875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8533788, -0.045015074)
+mesh = ExtResource("12_aile3")
+
+[node name="Isquiotibiales" type="MeshInstance3D" parent="Muscular" unique_id=1217088067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5861837, -0.04515129)
+mesh = ExtResource("13_cxbof")
+
+[node name="MusculosAntebrazo" type="MeshInstance3D" parent="Muscular" unique_id=790007706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6226044e-05, 0.9952832, 0.0011681784)
+mesh = ExtResource("14_1g43b")
+
+[node name="Oblicuos" type="MeshInstance3D" parent="Muscular" unique_id=1671903720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0706453, 0.035158463)
+mesh = ExtResource("15_2i326")
+
+[node name="Pectorales" type="MeshInstance3D" parent="Muscular" unique_id=1196457383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2904823, 0.054766715)
+mesh = ExtResource("16_y45ua")
+
+[node name="TibialAnterior" type="MeshInstance3D" parent="Muscular" unique_id=1805774483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22668788, 0.0019583907)
+mesh = ExtResource("17_usgpr")
+
+[node name="Trapecio" type="MeshInstance3D" parent="Muscular" unique_id=1814525044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.347239, -0.06481463)
+mesh = ExtResource("18_43cr7")
+
+[node name="Triceps" type="MeshInstance3D" parent="Muscular" unique_id=1060281633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2262499, -0.058168504)
+mesh = ExtResource("19_77aiw")
+
+[node name="Oseo" type="Node3D" parent="." unique_id=711008571]
+
+[node name="CajaToracica" type="MeshInstance3D" parent="Oseo" unique_id=339852040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2515428, 0.016759884)
+mesh = ExtResource("20_xcsgf")
+
+[node name="Claviculas" type="MeshInstance3D" parent="Oseo" unique_id=1901626592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4071637, -0.0008759443)
+mesh = ExtResource("21_0vpx7")
+
+[node name="ColumnaVertebral" type="MeshInstance3D" parent="Oseo" unique_id=1623509220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2551805, -0.040820763)
+mesh = ExtResource("22_5gsra")
+
+[node name="Craneo" type="MeshInstance3D" parent="Oseo" unique_id=2082763766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000102199614, 1.6010513, 0.006008055)
+mesh = ExtResource("23_8e5eo")
+
+[node name="Escapulas" type="MeshInstance3D" parent="Oseo" unique_id=1895923849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3360478, -0.05577377)
+mesh = ExtResource("24_tfqpt")
+
+[node name="FemurDer" type="MeshInstance3D" parent="Oseo" unique_id=790854151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0902346, 0.6540555, -0.020297356)
+mesh = ExtResource("25_aoyfp")
+
+[node name="FemurIzq" type="MeshInstance3D" parent="Oseo" unique_id=36277453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0902346, 0.6540555, -0.020297356)
+mesh = ExtResource("26_flpku")
+
+[node name="HuesosMano" type="MeshInstance3D" parent="Oseo" unique_id=2048444064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09305, 0.014006374)
+mesh = ExtResource("27_ilbg5")
+
+[node name="HuesosPie" type="MeshInstance3D" parent="Oseo" unique_id=984653101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8849494e-05, 0.04586383, 0.022592824)
+mesh = ExtResource("28_lfy5t")
+
+[node name="HumeroDer" type="MeshInstance3D" parent="Oseo" unique_id=1487241860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19671966, 1.2458134, -0.027442679)
+mesh = ExtResource("29_kvp6v")
+
+[node name="HumeroIzq" type="MeshInstance3D" parent="Oseo" unique_id=588284665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19671969, 1.2458134, -0.027442679)
+mesh = ExtResource("30_sj7c6")
+
+[node name="Pelvis" type="MeshInstance3D" parent="Oseo" unique_id=172887690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90464, -0.01946694)
+mesh = ExtResource("31_imv4w")
+
+[node name="RadioCubito" type="MeshInstance3D" parent="Oseo" unique_id=1154608796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9833, -0.016828857)
+mesh = ExtResource("32_fuy7o")
+
+[node name="TibiaDer" type="MeshInstance3D" parent="Oseo" unique_id=412401142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08109465, 0.2441962, -0.028948102)
+mesh = ExtResource("33_v4pi4")
+
+[node name="TibiaIzq" type="MeshInstance3D" parent="Oseo" unique_id=1785059827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08109465, 0.2441962, -0.028948102)
+mesh = ExtResource("34_c4e7m")
+
+[node name="Circulatorio" type="Node3D" parent="." unique_id=176555088]
+
+[node name="Aorta" type="MeshInstance3D" parent="Circulatorio" unique_id=932588193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9488077e-06, 1.2326677, -0.0026093703)
+cast_shadow = 0
+mesh = ExtResource("35_xftcu")
+
+[node name="Corazon" type="MeshInstance3D" parent="Circulatorio" unique_id=489431465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02578051, 1.29778, 0.020727143)
+cast_shadow = 0
+mesh = ExtResource("36_b7jhv")
+
+[node name="VenaCava" type="MeshInstance3D" parent="Circulatorio" unique_id=99650248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2756457, 0.00780477)
+cast_shadow = 0
+mesh = ExtResource("37_8gvnj")
+
+[node name="Respiratorio" type="Node3D" parent="." unique_id=1305329376]
+
+[node name="PulmonDer" type="MeshInstance3D" parent="Respiratorio" unique_id=1364004138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06690672, 1.2996922, 0.009620879)
+cast_shadow = 0
+mesh = ExtResource("38_mp5l7")
+
+[node name="PulmonIzq" type="MeshInstance3D" parent="Respiratorio" unique_id=647169194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06934491, 1.2989959, 0.009352874)
+cast_shadow = 0
+mesh = ExtResource("39_5ausa")
+
+[node name="Traquea" type="MeshInstance3D" parent="Respiratorio" unique_id=1660771868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013824212, 1.3879292, -0.005211572)
+cast_shadow = 0
+mesh = ExtResource("40_ixfj4")
+
+[node name="Digestivo" type="Node3D" parent="." unique_id=1502397014]
+
+[node name="Esofago" type="MeshInstance3D" parent="Digestivo" unique_id=1818147113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0046562487, 1.3348, -0.0076872343)
+cast_shadow = 0
+mesh = ExtResource("41_uk748")
+
+[node name="Estomago" type="MeshInstance3D" parent="Digestivo" unique_id=1321298215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038335558, 1.1664102, 0.036164626)
+cast_shadow = 0
+mesh = ExtResource("42_5a3p8")
+
+[node name="Higado" type="MeshInstance3D" parent="Digestivo" unique_id=653106075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01137276, 1.1745276, 0.02285109)
+cast_shadow = 0
+mesh = ExtResource("43_y661o")
+
+[node name="IntestinoDelgado" type="MeshInstance3D" parent="Digestivo" unique_id=1943202730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008878615, 1.0121251, 0.04337094)
+cast_shadow = 0
+mesh = ExtResource("44_j7xgs")
+
+[node name="IntestinoGrueso" type="MeshInstance3D" parent="Digestivo" unique_id=414990721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0003841631, 0.9696107, 0.004517786)
+cast_shadow = 0
+mesh = ExtResource("45_dbhcb")
+
+[node name="Nervioso" type="Node3D" parent="." unique_id=1983949616]
+
+[node name="Cerebelo" type="MeshInstance3D" parent="Nervioso" unique_id=1187182397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5888426, -0.03480047)
+cast_shadow = 0
+mesh = ExtResource("46_e8wcg")
+
+[node name="Cerebro" type="MeshInstance3D" parent="Nervioso" unique_id=125169686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0882657e-06, 1.4240451, -0.008718755)
+cast_shadow = 0
+mesh = ExtResource("47_04j7l")
+
+[node name="MedulaEspinal" type="MeshInstance3D" parent="Nervioso" unique_id=1369311590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3000133, -0.04615714)
+cast_shadow = 0
+mesh = ExtResource("48_f1tv2")

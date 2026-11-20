@@ -1,0 +1,15 @@
+Modelos anatómicos derivados de Z-Anatomy
+==========================================
+
+Las mallas de esta carpeta se generaron a partir de la plantilla de Blender de Z-Anatomy
+(https://github.com/Z-Anatomy/The-blend), creada por Gauthier Kervyn y Marcin Zielinski,
+que a su vez incluye modelos derivados de BodyParts3D.
+
+Licencia: Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Cambios realizados: selección de estructuras, unión por órgano, reducción de polígonos,
+simetría de la piel, reorientación a ejes de Godot y materiales propios.
+(Ver tools/procesar_modelo.py, tools/mapeo_zanatomy.json y tools/ensamblar_cuerpo_glb.gd.)
+
+Por la cláusula CompartirIgual, estas mallas derivadas se distribuyen bajo la misma licencia.

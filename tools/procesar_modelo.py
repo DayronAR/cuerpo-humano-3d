@@ -47,9 +47,15 @@ Formato del JSON de mapeo (ver tools/mapeo_ejemplo.json):
 import fnmatch
 import json
 import os
+import re
 import sys
 
+import bmesh
 import bpy
+from mathutils import Matrix, Vector
+
+TIPOS_GEOMETRIA = ("MESH", "CURVE")   # Las curvas con grosor (vasos, esófago...) se convierten a malla
+EXCLUIR = None                        # Expresión regular de nombres a ignorar (del JSON: "excluir_regex")
 
 # Raíz del proyecto Godot = carpeta padre de tools/
 RAIZ_PROYECTO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -125,11 +131,15 @@ def importar_entrada(ruta):
     print(f"[OK] Entrada cargada: {ruta}")
 
 
+def es_geometria(o):
+    return o.type in TIPOS_GEOMETRIA and not (EXCLUIR and EXCLUIR.search(o.name))
+
+
 def mallas_de_coleccion(nombre):
     col = bpy.data.collections.get(nombre)
     if col is None:
         return []
-    return [o for o in col.all_objects if o.type == "MESH"]
+    return [o for o in col.all_objects if es_geometria(o)]
 
 
 def buscar_fuentes(patrones):
@@ -140,10 +150,10 @@ def buscar_fuentes(patrones):
             encontrados += mallas_de_coleccion(patron.split(":", 1)[1])
         elif any(c in patron for c in "*?["):
             encontrados += [o for o in bpy.data.objects
-                            if o.type == "MESH" and fnmatch.fnmatch(o.name.lower(), patron.lower())]
+                            if es_geometria(o) and fnmatch.fnmatchcase(o.name.lower(), patron.lower())]
         else:
             o = bpy.data.objects.get(patron)
-            if o is not None and o.type == "MESH":
+            if o is not None and es_geometria(o):
                 encontrados.append(o)
             elif o is None:
                 # Si no es objeto, se intenta como colección con ese nombre.
@@ -171,60 +181,115 @@ def listar_escena():
 # Procesamiento de un órgano
 # ---------------------------------------------------------------------------
 
-def preparar_organo(destino, fuentes, max_tris, escala, centrar_origen):
-    """Une las fuentes, aplica transformaciones, decima y renombra. Devuelve (obj, tris_antes)."""
-    # Copias independientes para no tocar el original (un mismo objeto podría usarse dos veces)
-    copias = []
+def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_origen, remallado=0.0,
+                    soldar=0.0004, simetria=False):
+    """Une las fuentes en un objeto nuevo, decima y renombra. Devuelve (obj, tris_antes).
+
+    No usa operadores de Blender (fallan con objetos ocultos o fuera de la capa de vista):
+    toma la malla EVALUADA de cada fuente (con modificadores y el grosor de las curvas ya
+    aplicados), la lleva a coordenadas de mundo y la agrega a un bmesh común. El archivo
+    fuente nunca se modifica en disco.
+    """
+    escena = bpy.context.scene
     for f in fuentes:
-        c = f.copy()
-        c.data = f.data.copy()
-        bpy.context.scene.collection.objects.link(c)
-        copias.append(c)
+        # Asegurar que la fuente se evalúe (la plantilla de Z-Anatomy oculta muchos objetos)
+        f.hide_viewport = False
+        if f.name not in bpy.context.view_layer.objects:
+            escena.collection.objects.link(f)
+    dg = bpy.context.evaluated_depsgraph_get()
+    dg.update()
 
-    # Quitar padres conservando la posición final y luego aplicar transformaciones
-    for c in copias:
-        mundo = c.matrix_world.copy()
-        c.parent = None
-        c.matrix_world = mundo
-    # Aplicar modificadores existentes (espejo, subdivisión, etc.) convirtiendo a malla
-    with contexto_objeto(copias[0], copias):
-        bpy.ops.object.convert(target="MESH")
-    with contexto_objeto(copias[0], copias):
-        bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+    ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
+    bm = bmesh.new()
+    for f in fuentes:
+        evaluado = f.evaluated_get(dg)
+        malla = bpy.data.meshes.new_from_object(evaluado, preserve_all_data_layers=False, depsgraph=dg)
+        malla.transform(ajuste @ f.matrix_world)
+        bm.from_mesh(malla)
+        bpy.data.meshes.remove(malla)
+    # Soldar vértices coincidentes: elimina las costuras entre piezas vecinas (p. ej. las
+    # regiones de la piel) y ayuda a que el Decimate no abra grietas
+    if simetria:
+        # Simetría: conservar solo el lado derecho del paciente (x <= 0), cortado exactamente en
+        # la línea media, y completarlo con su reflejo. Elimina las diferencias entre lados.
+        bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], dist=0.0001,
+                               plane_co=(0, 0, 0), plane_no=(1, 0, 0), clear_outer=True)
+        reflejo = bmesh.ops.duplicate(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:])
+        verts_reflejo = [e for e in reflejo["geom"] if isinstance(e, bmesh.types.BMVert)]
+        bmesh.ops.scale(bm, vec=(-1, 1, 1), verts=verts_reflejo)
+        caras_reflejo = [e for e in reflejo["geom"] if isinstance(e, bmesh.types.BMFace)]
+        bmesh.ops.reverse_faces(bm, faces=caras_reflejo)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=soldar)
+    # Caras repetidas (piezas superpuestas que quedaron con los mismos vértices tras soldar)
+    vistas = set()
+    repetidas = []
+    for cara in bm.faces:
+        clave = tuple(sorted(v.index for v in cara.verts))
+        if clave in vistas:
+            repetidas.append(cara)
+        else:
+            vistas.add(clave)
+    if repetidas:
+        bmesh.ops.delete(bm, geom=repetidas, context="FACES_ONLY")
+    malla = bpy.data.meshes.new(destino + "_malla")
+    bm.to_mesh(malla)
+    bm.free()
+    for poligono in malla.polygons:
+        poligono.material_index = 0
+    malla.materials.clear()
 
-    obj = copias[0]
-    if len(copias) > 1:
-        with contexto_objeto(obj, copias):
-            bpy.ops.object.join()
+    anterior = bpy.data.objects.get(destino)
+    if anterior is not None:
+        anterior.name = destino + "_original"
+    obj = bpy.data.objects.new(destino, malla)
+    escena.collection.objects.link(obj)
+    tris_antes = sum(len(p.vertices) - 2 for p in malla.polygons)
 
-    if escala != 1.0:
-        obj.scale = (escala, escala, escala)
-        with contexto_objeto(obj):
-            bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    # Remallado por vóxeles (opcional): convierte piezas solapadas en UNA superficie continua.
+    # Útil para la piel de Z-Anatomy, que viene dividida en regiones con costuras.
+    if remallado > 0.0:
+        aplicar_modificador(obj, "REMESH", lambda m: (setattr(m, "mode", "VOXEL"), setattr(m, "voxel_size", remallado),
+                                                      setattr(m, "adaptivity", 0.0)))
 
-    tris_antes = contar_triangulos(obj)
-
-    # Reducción de polígonos
-    if max_tris and tris_antes > max_tris:
+    # Reducción de polígonos: modificador Decimate y malla evaluada (sin operadores)
+    tris_actuales = sum(len(p.vertices) - 2 for p in obj.data.polygons)
+    if max_tris and tris_actuales > max_tris:
         mod = obj.modifiers.new(name="Decimate", type="DECIMATE")
         mod.decimate_type = "COLLAPSE"
-        mod.ratio = max(0.001, max_tris / tris_antes)
+        mod.ratio = max(0.001, max_tris / tris_actuales)
         mod.use_collapse_triangulate = True
-        with contexto_objeto(obj):
-            bpy.ops.object.modifier_apply(modifier=mod.name)
+        dg = bpy.context.evaluated_depsgraph_get()
+        dg.update()
+        reducida = bpy.data.meshes.new_from_object(obj.evaluated_get(dg), depsgraph=dg)
+        obj.modifiers.remove(mod)
+        vieja = obj.data
+        obj.data = reducida
+        reducida.name = destino + "_malla"
+        bpy.data.meshes.remove(vieja)
 
-    # Origen en el centro de la geometría: necesario para animaciones como el latido del corazón
-    if centrar_origen:
-        with contexto_objeto(obj):
-            bpy.ops.object.origin_set(type="ORIGIN_GEOMETRY", center="BOUNDS")
-
-    # Renombrar objeto y malla (Godot usa el nombre del objeto como nombre del nodo)
-    anterior = bpy.data.objects.get(destino)
-    if anterior is not None and anterior is not obj:
-        anterior.name = destino + "_original"
-    obj.name = destino
-    obj.data.name = destino + "_malla"
+    obj.data.shade_smooth()
+    # Origen en el centro de la geometría: necesario para el latido, la respiración y las capas
+    if centrar_origen and len(obj.data.vertices) > 0:
+        mn = Vector((min(v.co[i] for v in obj.data.vertices) for i in range(3)))
+        mx = Vector((max(v.co[i] for v in obj.data.vertices) for i in range(3)))
+        centro = (mn + mx) / 2
+        obj.data.transform(Matrix.Translation(-centro))
+        obj.location = centro
     return obj, tris_antes
+
+
+def aplicar_modificador(obj, tipo, configurar):
+    """Aplica un modificador tomando la malla evaluada (sin operadores de Blender)."""
+    mod = obj.modifiers.new(name=tipo, type=tipo)
+    configurar(mod)
+    dg = bpy.context.evaluated_depsgraph_get()
+    dg.update()
+    nueva = bpy.data.meshes.new_from_object(obj.evaluated_get(dg), depsgraph=dg)
+    obj.modifiers.remove(mod)
+    vieja = obj.data
+    obj.data = nueva
+    nueva.name = vieja.name
+    bpy.data.meshes.remove(vieja)
 
 
 def exportar_glb(objetos, ruta):
@@ -274,6 +339,10 @@ def main():
 
     max_tris = args.max_tris if args.max_tris is not None else int(mapeo.get("max_triangulos", 15000))
     escala = args.escala if args.escala is not None else float(mapeo.get("escala", 1.0))
+    desplazamiento = mapeo.get("desplazamiento", [0.0, 0.0, 0.0])
+    global EXCLUIR
+    if mapeo.get("excluir_regex"):
+        EXCLUIR = re.compile(mapeo["excluir_regex"])
     sistemas = mapeo.get("sistemas", {})
     if args.sistemas:
         pedidos = [s.strip() for s in args.sistemas.split(",")]
@@ -288,12 +357,26 @@ def main():
 
     for sistema, organos in sistemas.items():
         procesados = []
-        for destino, patrones in organos.items():
+        for destino, definicion in organos.items():
+            if destino.startswith("_"):
+                continue   # Comentarios
+            # Formatos: lista de patrones, o {"fuentes": [...], "max_triangulos": N}
+            limite = max_tris
+            remallado = 0.0
+            soldar = 0.0004
+            simetria = False
+            patrones = definicion
+            if isinstance(definicion, dict):
+                patrones = definicion.get("fuentes", [])
+                limite = int(definicion.get("max_triangulos", max_tris))
+                remallado = float(definicion.get("remallado_voxel", 0.0))
+                soldar = float(definicion.get("soldar", 0.0004))
+                simetria = bool(definicion.get("simetria", False))
             fuentes = buscar_fuentes(patrones if isinstance(patrones, list) else [patrones])
             if not fuentes:
                 faltantes.append((sistema, destino, patrones))
                 continue
-            obj, antes = preparar_organo(destino, fuentes, max_tris, escala, not args.sin_origen)
+            obj, antes = preparar_organo(destino, fuentes, limite, escala, desplazamiento, not args.sin_origen, remallado, soldar, simetria)
             procesados.append(obj)
             reporte.append((sistema, destino, len(fuentes), antes, contar_triangulos(obj)))
 
@@ -302,7 +385,7 @@ def main():
             continue
 
         # Altura del sistema (ayuda a comprobar la escala: un cuerpo adulto mide ~1.7 m)
-        zs = [(o.matrix_world @ v.co).z for o in procesados for v in o.data.vertices]
+        zs = [(o.matrix_world @ v.co).z for o in procesados for v in o.data.vertices] or [0.0]
         print(f"[INFO] {sistema}: altura {max(zs) - min(zs):.3f} m (Z de {min(zs):.3f} a {max(zs):.3f})")
 
         ruta = os.path.join(args.salida, f"{sistema}.glb")

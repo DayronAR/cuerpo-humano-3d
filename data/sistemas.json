@@ -38,7 +38,7 @@
       "nombre": "Sistema circulatorio",
       "color": "#d62839",
       "descripcion": "Corazón y vasos que transportan oxígeno, nutrientes y desechos por la sangre.",
-      "cubierto_por": ["Piel", "Muscular", "Oseo"]
+      "cubierto_por": ["Piel", "Muscular", "Oseo", "Respiratorio"]
     },
     {
       "id": "Respiratorio",

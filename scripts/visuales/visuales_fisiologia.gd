@@ -34,7 +34,7 @@ func configurar(visor: BodyViewer, cfg: Dictionary) -> void:
 	_cfg = cfg
 	var musculos: Dictionary = cfg.get("musculos", {})
 	_musculos = musculos.get("organos", visor.organos_de_sistema(musculos.get("sistema", "")))
-	var tray: Dictionary = cfg.get("trayectorias", {})
+	var tray: Dictionary = Datos.cuerpo_activo().get("trayectorias", {})
 
 	var g: Dictionary = cfg.get("globulos", {})
 	_globulos = _crear_flujo("Globulos", tray.get("circulacion", []), true, g)

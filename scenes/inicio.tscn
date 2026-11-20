@@ -1,7 +1,6 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/inicio.gd" id="1_inicio"]
-[ext_resource type="PackedScene" path="res://scenes/cuerpo_prueba.tscn" id="2_cuerpo"]
 [ext_resource type="Texture2D" path="res://icon.svg" id="3_icono"]
 
 [sub_resource type="Environment" id="Entorno"]
@@ -38,8 +37,6 @@ transform = Transform3D(0.8480, -0.3158, 0.4256, 0.0000, 0.8031, 0.5959, -0.5300
 light_energy = 0.9
 
 [node name="Giro" type="Node3D" parent="Fondo"]
-
-[node name="Cuerpo" parent="Fondo/Giro" instance=ExtResource("2_cuerpo")]
 
 [node name="Camara" type="Camera3D" parent="Fondo"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.95, 3.2)
@@ -138,6 +135,23 @@ layout_mode = 2
 tooltip_text = "Cerrar la aplicación"
 focus_mode = 0
 text = "Salir"
+
+[node name="Creditos" type="Label" parent="UI"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -60.0
+offset_right = 300.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.4, 0.48, 0.53, 1)
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
 
 [node name="Aviso" type="Label" parent="UI"]
 anchors_preset = 7

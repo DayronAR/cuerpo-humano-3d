@@ -24,7 +24,7 @@ const SHADER_RESALTADO := preload("res://shaders/resaltado.gdshader")
 const SHADER_TINTE := preload("res://shaders/tinte.gdshader")
 
 @onready var camara: CamaraOrbital = $Camara
-@onready var cuerpo: Node3D = $Cuerpo
+var cuerpo: Node3D   ## Se carga en _ready según data/visuales.json (cuerpo_activo)
 @onready var capas: GestorCapas = $GestorCapas
 @onready var visuales: VisualesFisiologia = $Visuales
 
@@ -46,6 +46,8 @@ func _ready() -> void:
 	_material_resaltado = ShaderMaterial.new()
 	_material_resaltado.shader = SHADER_RESALTADO
 	camara.configurar(Datos.camara)
+	cuerpo = BodyViewer.instanciar_cuerpo()
+	add_child(cuerpo)
 	_indexar_cuerpo()
 	capas.configurar(_sistemas, Datos.orden_capas, Datos.animacion_capas, camara, _caja_cuerpo.get_center())
 	capas.capa_retirada.connect(_on_capa_retirada)
@@ -194,6 +196,18 @@ func sistema_de(id_organo: String) -> String:
 
 func ids_organos() -> Array:
 	return _organos.keys()
+
+
+## Crea el cuerpo del modelo activo (Z-Anatomy o procedural), con el nombre de nodo "Cuerpo".
+static func instanciar_cuerpo() -> Node3D:
+	var ruta: String = Datos.cuerpo_activo().get("escena", "res://scenes/cuerpo_prueba.tscn")
+	var escena := load(ruta) as PackedScene
+	if escena == null:
+		push_error("No se pudo cargar el cuerpo %s; se usa el procedural" % ruta)
+		escena = load("res://scenes/cuerpo_prueba.tscn")
+	var nodo: Node3D = escena.instantiate()
+	nodo.name = "Cuerpo"
+	return nodo
 
 
 ## Todas las MeshInstance3D de un órgano (él mismo si es una malla, y sus descendientes).

@@ -9,6 +9,8 @@ const VELOCIDAD_GIRO := 0.25   ## Radianes por segundo
 
 
 func _ready() -> void:
+	_giro.add_child(BodyViewer.instanciar_cuerpo())
+	%Creditos.text = Datos.cuerpo_activo().get("creditos", "")
 	for sistema in ["Piel", "Muscular"]:
 		var nodo := _giro.get_node_or_null("Cuerpo/" + sistema)
 		if nodo:
