@@ -69,29 +69,36 @@ func _process(delta: float) -> void:
 
 # --- Construcción con primitivas -----------------------------------------------------
 
+## Mallas suaves generadas por tools/generar_cuerpo_prueba.gd (si no existen, se usan cápsulas)
+const CARPETA_MALLAS := "res://models/prueba/maniqui/"
+
+
 func _construir() -> void:
-	var piel := _material(Color(0.36, 0.6, 0.72))
-	var ropa := _material(Color(0.2, 0.3, 0.4))
+	var piel := _material(Color(0.8, 0.58, 0.47))
+	var ropa := _material(Color(0.2, 0.32, 0.42))
 	_pelvis = _pivote(self, Vector3(0, 0.95, 0))
-	_parte(_pelvis, _capsula(0.13, 0.26), Vector3(0, 0.0, 0), ropa, Vector3(1.0, 1.0, 0.7), Vector3(0, 0, 90))
+	_parte(_pelvis, _malla("pelvis", _capsula(0.13, 0.26)), Vector3.ZERO, ropa)
 	_torso = _pivote(_pelvis, Vector3(0, 0.05, 0))
-	_parte(_torso, _capsula(0.16, 0.5), Vector3(0, 0.25, 0), piel, Vector3(1.0, 1.0, 0.65))
-	_parte(_torso, _esfera(0.11), Vector3(0, 0.63, 0.01), piel)
+	_parte(_torso, _malla("torso", _capsula(0.16, 0.5)), Vector3.ZERO, piel)
 	for lado in 2:
 		var x := 0.1 if lado == 0 else -0.1
-		var cadera := _pivote(_pelvis, Vector3(x, -0.02, 0))
-		_parte(cadera, _capsula(0.06, 0.45), Vector3(0, -0.22, 0), ropa)
-		var rodilla := _pivote(cadera, Vector3(0, -0.44, 0))
-		_parte(rodilla, _capsula(0.05, 0.45), Vector3(0, -0.22, 0), piel)
-		_parte(rodilla, _caja(Vector3(0.09, 0.05, 0.2)), Vector3(0, -0.46, 0.05), ropa)
+		var cadera := _pivote(_pelvis, Vector3(x * 0.92, -0.02, 0))
+		_parte(cadera, _malla("muslo", _capsula(0.06, 0.45)), Vector3.ZERO, ropa)
+		var rodilla := _pivote(cadera, Vector3(0, -0.44, 0.006))
+		_parte(rodilla, _malla("pierna", _capsula(0.05, 0.45)), Vector3.ZERO, piel)
 		_caderas.append(cadera)
 		_rodillas.append(rodilla)
-		var hombro := _pivote(_torso, Vector3(x * 2.0, 0.44, 0))
-		_parte(hombro, _capsula(0.045, 0.32), Vector3(0, -0.15, 0), piel)
-		var codo := _pivote(hombro, Vector3(0, -0.3, 0))
-		_parte(codo, _capsula(0.04, 0.3), Vector3(0, -0.14, 0), piel)
+		var hombro := _pivote(_torso, Vector3(x * 2.0, 0.415, -0.008))
+		_parte(hombro, _malla("brazo", _capsula(0.045, 0.32)), Vector3.ZERO, piel)
+		var codo := _pivote(hombro, Vector3(0, -0.29, 0))
+		_parte(codo, _malla("antebrazo", _capsula(0.04, 0.3)), Vector3.ZERO, piel)
 		_hombros.append(hombro)
 		_codos.append(codo)
+
+
+func _malla(nombre: String, alternativa: Mesh) -> Mesh:
+	var ruta := CARPETA_MALLAS + nombre + ".res"
+	return load(ruta) if ResourceLoader.exists(ruta) else alternativa
 
 
 func _pivote(padre: Node3D, posicion: Vector3) -> Node3D:

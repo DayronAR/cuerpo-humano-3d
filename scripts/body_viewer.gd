@@ -19,6 +19,7 @@ signal organo_bajo_cursor(id_organo: String)  ## "" = ninguno (para mostrar su n
 ## Distancia máxima (en píxeles) entre presionar y soltar para considerar que fue un clic
 const UMBRAL_CLIC := 6.0
 const LARGO_RAYO := 100.0
+const CAPA_CERRADA := "Piel"   ## Capa que envuelve todo el cuerpo (ver _mostrar_interior)
 const SHADER_RESALTADO := preload("res://shaders/resaltado.gdshader")
 const SHADER_TINTE := preload("res://shaders/tinte.gdshader")
 
@@ -50,6 +51,7 @@ func _ready() -> void:
 	capas.capa_retirada.connect(_on_capa_retirada)
 	capas.capa_restaurada.connect(_on_capa_restaurada)
 	visuales.configurar(self, Datos.visuales)
+	_mostrar_interior(false)
 
 
 # --- API pública --------------------------------------------------------------
@@ -267,6 +269,8 @@ func _encuadrar(caja: AABB, margen_extra := 1.0, subir_en_pantalla := 0.0) -> vo
 func _on_capa_retirada(id_sistema: String) -> void:
 	for cuerpo_fisico in _colisiones.get(id_sistema, []):
 		cuerpo_fisico.collision_layer = 0   # El rayo de selección ya no lo encuentra
+	if id_sistema == CAPA_CERRADA:
+		_mostrar_interior(true)
 	if _organo_actual and _organo_actual.get_meta("sistema") == id_sistema:
 		limpiar_seleccion()
 
@@ -274,6 +278,16 @@ func _on_capa_retirada(id_sistema: String) -> void:
 func _on_capa_restaurada(id_sistema: String) -> void:
 	for cuerpo_fisico in _colisiones.get(id_sistema, []):
 		cuerpo_fisico.collision_layer = 1
+	if id_sistema == CAPA_CERRADA:
+		_mostrar_interior(false)
+
+
+## Optimización: mientras la piel (superficie cerrada y opaca) está completa, nada de su interior
+## se ve, así que no se dibuja. Reduce mucho los triángulos por cuadro en GPU integradas.
+func _mostrar_interior(visible_: bool) -> void:
+	for id in _sistemas:
+		if id != CAPA_CERRADA:
+			_sistemas[id].visible = visible_
 
 
 # --- Entrada -------------------------------------------------------------------

@@ -9,7 +9,6 @@
         "La capa más externa se renueva aproximadamente cada 4 semanas."
       ]
     },
-
     "Pectorales": {
       "nombre": "Pectorales",
       "funcion": "Llevan el brazo hacia adelante y hacia el centro del cuerpo, y ayudan a elevar las costillas durante la respiración forzada.",
@@ -74,7 +73,6 @@
         "Los calambres en la pantorrilla suelen ocurrir en este músculo."
       ]
     },
-
     "Craneo": {
       "nombre": "Cráneo",
       "funcion": "Protege el encéfalo y forma la estructura de la cara, donde se alojan los ojos, la nariz y la boca.",
@@ -155,7 +153,6 @@
         "En los corredores puede sufrir pequeñas fisuras por estrés si se entrena en exceso."
       ]
     },
-
     "Corazon": {
       "nombre": "Corazón",
       "funcion": "Bomba muscular que impulsa la sangre: el lado derecho la envía a los pulmones para oxigenarse y el lado izquierdo la envía al resto del cuerpo.",
@@ -181,7 +178,6 @@
         "La vena cava inferior es la vena más grande del cuerpo."
       ]
     },
-
     "Traquea": {
       "nombre": "Tráquea",
       "funcion": "Conduce el aire desde la laringe hasta los bronquios, que entran a los pulmones.",
@@ -206,7 +202,6 @@
         "Entre ambos pulmones hay cientos de millones de alvéolos, con una superficie de unos 70 m²."
       ]
     },
-
     "Esofago": {
       "nombre": "Esófago",
       "funcion": "Tubo muscular de unos 25 cm que lleva el alimento desde la faringe hasta el estómago mediante ondas de contracción (peristalsis).",
@@ -247,7 +242,6 @@
         "Sus bacterias producen vitaminas como la K y algunas del grupo B."
       ]
     },
-
     "Cerebro": {
       "nombre": "Cerebro",
       "funcion": "Centro de control del cuerpo: procesa la información de los sentidos, ordena los movimientos voluntarios y es la sede del pensamiento, la memoria y las emociones.",
@@ -270,6 +264,126 @@
       "datos_curiosos": [
         "Mide unos 45 cm en un adulto y es más corta que la columna que la protege.",
         "El reflejo de retirar la mano de algo caliente se resuelve en la médula, antes de sentir el dolor."
+      ]
+    },
+    "Deltoides": {
+      "nombre": "Deltoides",
+      "funcion": "Cubre el hombro y levanta el brazo hacia adelante, hacia el lado y hacia atrás.",
+      "datos_curiosos": [
+        "Da la forma redondeada al hombro.",
+        "Es uno de los lugares más usados para aplicar vacunas e inyecciones."
+      ]
+    },
+    "Triceps": {
+      "nombre": "Tríceps braquial",
+      "funcion": "Extiende el codo: estira el brazo, por ejemplo al empujar o al lanzar.",
+      "datos_curiosos": [
+        "Tiene tres cabezas, de ahí su nombre.",
+        "Ocupa cerca de dos tercios del volumen de la parte superior del brazo."
+      ]
+    },
+    "MusculosAntebrazo": {
+      "nombre": "Músculos del antebrazo",
+      "funcion": "Flexionan y extienden la muñeca y los dedos, y permiten girar la mano.",
+      "datos_curiosos": [
+        "Mueven los dedos a distancia mediante largos tendones: los dedos casi no tienen músculos propios.",
+        "Son los que se cansan al escribir o usar el ratón mucho tiempo."
+      ]
+    },
+    "Gluteos": {
+      "nombre": "Glúteos",
+      "funcion": "Extienden y estabilizan la cadera; son clave para ponerse de pie, subir escaleras y correr.",
+      "datos_curiosos": [
+        "El glúteo mayor es el músculo más grande del cuerpo.",
+        "Mantienen la pelvis nivelada al caminar sobre una sola pierna."
+      ]
+    },
+    "Isquiotibiales": {
+      "nombre": "Isquiotibiales",
+      "funcion": "Flexionan la rodilla y extienden la cadera; frenan la pierna en cada zancada al correr.",
+      "datos_curiosos": [
+        "Son tres músculos en la parte posterior del muslo.",
+        "Sus desgarros son de las lesiones más frecuentes en deportistas de velocidad."
+      ]
+    },
+    "TibialAnterior": {
+      "nombre": "Tibial anterior",
+      "funcion": "Levanta la punta del pie (flexión dorsal) para que no tropiece al caminar.",
+      "datos_curiosos": [
+        "Se nota justo al lado de la espinilla al levantar los dedos del pie.",
+        "Su sobrecarga produce la conocida 'periostitis' de los corredores."
+      ]
+    },
+    "Trapecio": {
+      "nombre": "Trapecio",
+      "funcion": "Mueve y sostiene los omóplatos y ayuda a extender el cuello y encoger los hombros.",
+      "datos_curiosos": [
+        "Su forma de rombo, al unir ambos lados, le da el nombre.",
+        "Se tensa con el estrés y la mala postura frente a pantallas."
+      ]
+    },
+    "Dorsal": {
+      "nombre": "Dorsal ancho",
+      "funcion": "Lleva el brazo hacia abajo y hacia atrás, como al remar o al trepar.",
+      "datos_curiosos": [
+        "Es el músculo más ancho del cuerpo.",
+        "Ayuda en la respiración forzada y en la tos."
+      ]
+    },
+    "Oblicuos": {
+      "nombre": "Oblicuos del abdomen",
+      "funcion": "Giran e inclinan el tronco y comprimen el abdomen junto al recto abdominal.",
+      "datos_curiosos": [
+        "Sus fibras van en diagonal, como las manos en los bolsillos.",
+        "Trabajan al toser, al reír y al girar el tronco para lanzar."
+      ]
+    },
+    "Esternocleidomastoideo": {
+      "nombre": "Esternocleidomastoideo",
+      "funcion": "Gira e inclina la cabeza y ayuda a flexionar el cuello.",
+      "datos_curiosos": [
+        "Su nombre indica sus inserciones: esternón, clavícula y apófisis mastoides del cráneo.",
+        "Se marca claramente al girar la cabeza hacia un lado."
+      ]
+    },
+    "Claviculas": {
+      "nombre": "Clavículas",
+      "funcion": "Unen el esternón con el omóplato y mantienen el hombro separado del tronco.",
+      "datos_curiosos": [
+        "Es el único hueso largo que se coloca en posición horizontal.",
+        "Es uno de los huesos que más se fractura en caídas sobre el brazo."
+      ]
+    },
+    "Escapulas": {
+      "nombre": "Escápulas (omóplatos)",
+      "funcion": "Sirven de base al hombro y anclan músculos como el deltoides, el trapecio y el manguito rotador.",
+      "datos_curiosos": [
+        "Se deslizan sobre las costillas sin estar unidas a ellas por una articulación.",
+        "Su 'espina' es la cresta que se palpa en la parte alta de la espalda."
+      ]
+    },
+    "RadioCubito": {
+      "nombre": "Radio y cúbito",
+      "funcion": "Son los dos huesos del antebrazo; al cruzarse permiten girar la palma hacia arriba o hacia abajo.",
+      "datos_curiosos": [
+        "El radio está del lado del pulgar y el cúbito del lado del meñique.",
+        "La fractura de radio en la muñeca es muy común al caer con la mano extendida."
+      ]
+    },
+    "HuesosMano": {
+      "nombre": "Huesos de la mano",
+      "funcion": "Forman la muñeca (carpo), la palma (metacarpo) y los dedos (falanges), dando precisión y fuerza al agarre.",
+      "datos_curiosos": [
+        "Cada mano tiene 27 huesos.",
+        "El pulgar oponible permite la pinza fina, clave en la evolución humana."
+      ]
+    },
+    "HuesosPie": {
+      "nombre": "Huesos del pie",
+      "funcion": "Soportan el peso del cuerpo y forman arcos que amortiguan cada paso.",
+      "datos_curiosos": [
+        "Cada pie tiene 26 huesos; entre los dos pies hay casi una cuarta parte de los huesos del cuerpo.",
+        "El calcáneo (talón) es el hueso más grande del pie."
       ]
     }
   }
