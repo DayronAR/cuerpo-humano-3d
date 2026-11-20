@@ -211,6 +211,36 @@ def definicion_abdomen(pts, desplazamiento, normales):
     return resultado
 
 
+# Vientre bajo (entre el ombligo y el pubis): no puede sobresalir por delante del abdomen de arriba
+VIENTRE_Z = (0.86, 0.91, 1.00, 1.03)   # Entra / sale suavemente
+Z_REFERENCIA = (1.025, 1.06)            # Franja sobre el ombligo que da el plano de referencia
+INCLINACION = 0.12                      # Hacia abajo el plano se inclina hacia atrás (m por m)
+
+
+def aplanar_vientre(pts, desplazamiento, normales):
+    actual = [p + Vector(desplazamiento[i]) for i, p in enumerate(pts)]
+    referencia = {}   # Columna de 1 cm en x -> frente (y mínima) sobre el ombligo
+    for p, nrm in zip(actual, normales):
+        if Z_REFERENCIA[0] < p.z < Z_REFERENCIA[1] and abs(p.x) < 0.15 and nrm.y < -0.3:
+            k = round(p.x / 0.01)
+            referencia[k] = min(referencia.get(k, 1.0), p.y)
+    resultado = np.zeros((len(pts), 3))
+    for i, p in enumerate(actual):
+        if not VIENTRE_Z[0] < p.z < VIENTRE_Z[3] or abs(p.x) > 0.15 or normales[i].y > -0.2:
+            continue
+        k = round(p.x / 0.01)
+        refs = [referencia[j] for j in (k - 1, k, k + 1) if j in referencia]
+        if not refs:
+            continue
+        plano = sum(refs) / len(refs) + (Z_REFERENCIA[0] - p.z) * INCLINACION
+        if p.y >= plano:
+            continue   # Ya está por detrás del plano
+        w = suave(VIENTRE_Z[0], VIENTRE_Z[1], p.z) * (1.0 - suave(VIENTRE_Z[2], VIENTRE_Z[3], p.z))
+        w *= 1.0 - suave(0.05, 0.15, abs(p.x))   # Transición ancha hacia los costados
+        resultado[i] = np.array([0.0, (plano - p.y) * w, 0.0])
+    return resultado
+
+
 def interpolar(tabla, z):
     if z <= tabla[0][0]:
         return tabla[0][1]
@@ -361,6 +391,14 @@ def main():
         np.add.at(suma, aristas[:, 1], definicion[aristas[:, 0]])
         definicion = 0.5 * definicion + 0.5 * suma / grado[:, None]
     desplazamiento += definicion
+    vientre = aplanar_vientre(pts, desplazamiento, normales)
+    for _ in range(10):
+        suma = np.zeros((n, 3))
+        np.add.at(suma, aristas[:, 0], vientre[aristas[:, 1]])
+        np.add.at(suma, aristas[:, 1], vientre[aristas[:, 0]])
+        vientre = 0.5 * vientre + 0.5 * suma / grado[:, None]
+    desplazamiento += vientre
+    print(f"[OK] Vientre bajo: hasta {np.abs(vientre[:, 1]).max() * 100:.1f} cm hacia adentro")
 
     for i, v in enumerate(malla.vertices):
         v.co += Vector(desplazamiento[i])
