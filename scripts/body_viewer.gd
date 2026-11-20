@@ -28,6 +28,10 @@ const CAPA_RENDER_AISLADA := 2  ## Capa de dibujo (bit) para lo aislado: la cám
 const TRANSPARENCIA_CONTEXTO := 0.9  ## Sistemas de contexto al mostrar uno (0 = opaco, 1 = invisible)
 const SHADER_RESALTADO := preload("res://shaders/resaltado.gdshader")
 const SHADER_TINTE := preload("res://shaders/tinte.gdshader")
+const SHADER_RAYOS_X := preload("res://shaders/resaltado_rayos_x.gdshader")
+const RADIO_MINIMO_CONTEXTO := 0.12   ## Al marcar una parte pequeña se encuadra al menos esta zona (m)
+const RADIO_PARTE_PEQUENA := 0.03     ## Partes más pequeñas que esto llevan un marcador visible
+const COLOR_MARCADOR := Color(1.0, 0.82, 0.15)
 
 @onready var camara: CamaraOrbital = $Camara
 var cuerpo: Node3D   ## Se carga en _ready según data/visuales.json (cuerpo_activo)
@@ -48,6 +52,8 @@ var _colisiones_aisladas: Dictionary = {}  ## StaticBody3D -> collision_layer or
 var _parte_bajo_cursor := ""
 var _vista_antes_de_aislar: Array = []     ## [yaw, pitch, distancia, objetivo] para volver al salir
 var _material_resaltado: ShaderMaterial
+var _material_rayos_x: ShaderMaterial   ## Para partes: se ve a través de lo que las tapa
+var _marcador: MeshInstance3D           ## Esfera que pulsa alrededor de partes diminutas (huesecillos...)
 var _pos_presion := Vector2.INF
 var _pos_cursor_pendiente := Vector2.INF   ## Última posición del mouse aún sin consultar
 var _organo_bajo_cursor := ""
@@ -56,6 +62,10 @@ var _organo_bajo_cursor := ""
 func _ready() -> void:
 	_material_resaltado = ShaderMaterial.new()
 	_material_resaltado.shader = SHADER_RESALTADO
+	_material_rayos_x = ShaderMaterial.new()
+	_material_rayos_x.shader = SHADER_RAYOS_X
+	_material_rayos_x.render_priority = 100   # Encima de todo lo demás, incluidos los fantasmas
+	_crear_marcador()
 	camara.configurar(Datos.camara)
 	cuerpo = BodyViewer.instanciar_cuerpo()
 	add_child(cuerpo)
@@ -85,6 +95,7 @@ func seleccionar_organo(id: String, emitir := true, parte: Node3D = null) -> voi
 	_parte_actual = parte
 	_actualizar_overlay_si(anterior)
 	_actualizar_overlay(organo)
+	_actualizar_marcador()
 	if emitir:
 		organo_seleccionado.emit(id, organo.get_meta("sistema"), String(parte.name) if parte else "")
 
@@ -98,12 +109,14 @@ func limpiar_seleccion() -> void:
 	_organo_actual = null
 	_parte_actual = null
 	_actualizar_overlay(anterior)
+	_actualizar_marcador()
 	seleccion_limpiada.emit()
 
 
-## Lleva a una estructura aunque esté escondida (p. ej. el estribo, dentro del temporal):
-## muestra su sistema, la selecciona, la aísla y acerca la cámara.
-func ir_a_estructura(id_organo: String, id_parte := "") -> void:
+## Marca una estructura DENTRO de su sistema, aunque esté escondida (p. ej. el estribo,
+## dentro del temporal): muestra el sistema (si no se está viendo ya), la selecciona con el
+## resaltado de rayos X y acerca la cámara dejando ver lo que la rodea.
+func ir_a_estructura(id_organo: String, id_parte := "", aislar_ := false) -> void:
 	var organo: Node3D = _organos.get(id_organo)
 	if organo == null:
 		return
@@ -111,14 +124,65 @@ func ir_a_estructura(id_organo: String, id_parte := "") -> void:
 		aislar(false)
 	var sistema: String = organo.get_meta("sistema")
 	if sistema == CAPA_CERRADA:
-		mostrar_cuerpo_completo()
-	else:
+		if not _sistema_actual.is_empty():
+			mostrar_cuerpo_completo()
+	elif _sistema_actual != sistema:
 		mostrar_sistema(sistema)
 	var parte: Node3D = null
 	if not id_parte.is_empty():
 		parte = organo.find_child(id_parte, true, false)
 	seleccionar_organo(id_organo, true, parte)
-	aislar(true)
+	if aislar_:
+		aislar(true)
+	else:
+		var caja := _caja_de_mallas(mallas_de(parte if parte else organo))
+		var radio := maxf(caja.size.length() * 0.5, RADIO_MINIMO_CONTEXTO)
+		_encuadrar(AABB(caja.get_center() - Vector3.ONE * radio, Vector3.ONE * radio * 2.0), 0.75)
+
+
+func _crear_marcador() -> void:
+	var esfera := SphereMesh.new()
+	esfera.radius = 1.0
+	esfera.height = 2.0
+	esfera.radial_segments = 24
+	esfera.rings = 12
+	var material := ShaderMaterial.new()
+	material.shader = SHADER_RAYOS_X
+	material.set_shader_parameter("color_resaltado", COLOR_MARCADOR)
+	material.render_priority = 101
+	esfera.material = material
+	_marcador = MeshInstance3D.new()
+	_marcador.name = "MarcadorParte"
+	_marcador.mesh = esfera
+	_marcador.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_marcador.visible = false
+	add_child(_marcador)
+
+
+## Coloca el marcador alrededor de la parte seleccionada si es muy pequeña para verla de lejos.
+func _actualizar_marcador() -> void:
+	if _parte_actual == null or not _aislado.is_empty():
+		_marcador.visible = false
+		return
+	var caja := _caja_de_mallas(mallas_de(_parte_actual))
+	var radio := caja.size.length() * 0.5
+	_marcador.visible = radio < RADIO_PARTE_PEQUENA
+	_marcador.global_position = caja.get_center()
+	_marcador.scale = Vector3.ONE * maxf(radio * 3.0, 0.012)
+
+
+## Partes de un órgano: [[id_parte, nombre], ...] ordenadas por nombre ([] si no tiene partes).
+func partes_de(id_organo: String) -> Array:
+	var organo: Node3D = _organos.get(id_organo)
+	if organo == null or organo is MeshInstance3D:
+		return []
+	var lista := []
+	for malla in mallas_de(organo):
+		var id := String(malla.name)
+		var nombre := Datos.nombre_parte(id)
+		lista.append([id, nombre if not nombre.is_empty() else id])
+	lista.sort_custom(func(a, b): return a[1].naturalnocasecmp_to(b[1]) < 0)
+	return lista
 
 
 ## Muestra SOLO la parte (u órgano) seleccionada y la encuadra; activo = false vuelve a mostrar todo.
@@ -160,6 +224,7 @@ func aislar(activo: bool) -> void:
 			var v := _vista_antes_de_aislar
 			camara.animar_a(v[0], v[1], v[2], v[3])
 			_vista_antes_de_aislar = []
+	_actualizar_marcador()
 	aislamiento_cambiado.emit(activo)
 
 
@@ -181,14 +246,15 @@ func enfocar_sistema(id: String, transparencia := TRANSPARENCIA_CONTEXTO) -> voi
 		return
 	_sistema_actual = id
 	var retirar: Array = Datos.cubierto_por(id).duplicate()
+	var dentro := []
 	for otro in _sistemas:
 		if otro != id and id in Datos.cubierto_por(otro) and not otro in retirar:
-			retirar.append(otro)   # Está dentro del sistema elegido: no se vería y costaría dibujarlo
+			dentro.append(otro)   # Está dentro del sistema elegido: no se vería y costaría dibujarlo
 	var fantasmas := {}
 	for otro in _sistemas:
-		if otro != id and not otro in retirar:
+		if otro != id and not otro in retirar and not otro in dentro:
 			fantasmas[otro] = transparencia
-	capas.retirar_solo(retirar, fantasmas)
+	capas.retirar_solo(retirar + dentro, fantasmas, dentro)
 	_encuadrar(_cajas_sistemas[id])
 	sistema_mostrado.emit(id)
 
@@ -496,8 +562,9 @@ func _actualizar_overlay(organo: Node3D) -> void:
 	var resaltadas: Array[MeshInstance3D] = []
 	if organo == _organo_actual:
 		resaltadas = mallas_de(_parte_actual if _parte_actual else organo)
+	var resaltado: Material = _material_rayos_x if _parte_actual else _material_resaltado
 	for malla in mallas_de(organo):
 		if malla in resaltadas:
-			malla.material_overlay = _material_resaltado
+			malla.material_overlay = resaltado
 		else:
 			malla.material_overlay = tinte

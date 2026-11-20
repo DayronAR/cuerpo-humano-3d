@@ -93,7 +93,9 @@ func configurar(sistemas: Dictionary, orden: Array, cfg: Dictionary, camara: Cam
 ## Deja retiradas exactamente las capas indicadas (y restaura las demás), con animación en secuencia.
 ## fantasmas: id -> transparencia (0-1) de capas que quedan semitransparentes en su sitio
 ## aunque el modo fantasma global esté apagado (lo usan los escenarios).
-func retirar_solo(ids_retirar: Array, fantasmas: Dictionary = {}) -> void:
+## simultaneas: capas que se retiran todas juntas al final (sin ir una por una), p. ej. los
+## sistemas que quedan dentro del sistema elegido.
+func retirar_solo(ids_retirar: Array, fantasmas: Dictionary = {}, simultaneas: Array = []) -> void:
 	_generacion += 1
 	var generacion := _generacion
 	var ids := ids_retirar.duplicate()
@@ -117,8 +119,8 @@ func retirar_solo(ids_retirar: Array, fantasmas: Dictionary = {}) -> void:
 
 	# Las capas que se retiran de verdad van una por una; las de contexto (fantasma) se
 	# desvanecen todas juntas al final, para no alargar la secuencia.
-	var de_contexto := retirar.filter(func(id): return fantasmas.has(id))
-	var en_orden := restaurar + retirar.filter(func(id): return not fantasmas.has(id))
+	var de_contexto := retirar.filter(func(id): return fantasmas.has(id) or id in simultaneas)
+	var en_orden := restaurar + retirar.filter(func(id): return not de_contexto.has(id))
 	for id in en_orden:
 		var destino := 0.0 if id in restaurar else 1.0
 		var duracion := _animar(_capas[id], destino)

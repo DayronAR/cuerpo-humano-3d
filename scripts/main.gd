@@ -19,6 +19,7 @@ const PESTANA_SISTEMAS := 0
 const PESTANA_SIMULACION := 1
 const PESTANA_CUESTIONARIO := 2
 var _puntaje_actual := 0
+var _organo_en_ficha := ""   ## Órgano mostrado en la ficha (para su lista de partes)
 
 const MODOS := {"explorar": PESTANA_SISTEMAS, "simular": PESTANA_SIMULACION, "cuestionario": PESTANA_CUESTIONARIO}
 
@@ -63,6 +64,7 @@ func _conectar_atlas() -> void:
 	_visor.seleccion_limpiada.connect(_panel_ficha.ocultar)
 	_panel_ficha.cerrado.connect(_visor.limpiar_seleccion)
 	_panel_ficha.aislar_cambiado.connect(_visor.aislar)
+	_panel_ficha.parte_elegida.connect(func(id_parte): _visor.ir_a_estructura(_organo_en_ficha, id_parte))
 	_visor.aislamiento_cambiado.connect(_panel_ficha.mostrar_aislado)
 
 	_barra_sistemas.configurar(Datos.sistemas)
@@ -91,6 +93,8 @@ func _on_organo_seleccionado(id_organo: String, id_sistema: String, id_parte: St
 		return
 	_panel_ficha.mostrar(Datos.ficha_organo(id_organo), Datos.nombre_sistema(id_sistema),
 			Datos.color_sistema(id_sistema), Datos.nombre_parte(id_parte), Datos.ficha_parte(id_parte))
+	_organo_en_ficha = id_organo
+	_panel_ficha.mostrar_partes(_visor.partes_de(id_organo), id_parte)
 
 
 func _on_sistema_solicitado(id_sistema: String) -> void:
