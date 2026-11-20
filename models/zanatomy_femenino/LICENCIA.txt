@@ -1,0 +1,17 @@
+Cuerpo femenino: fuentes y licencias
+====================================
+
+1) Human Reference Atlas (HRA), HuBMAP / NIH Common Fund — 3D Reference Object Library v1.2
+   https://hubmapconsortium.github.io/ccf/pages/ccf-3d-reference-library.html
+   Modelos derivados del Visible Human Female (National Library of Medicine).
+   Licencia: Creative Commons Atribución 4.0 (CC BY 4.0).
+   Usados: piel (VH_F_Skin), pelvis, vejiga urinaria, útero, ovarios y trompas uterinas.
+
+2) Z-Anatomy (https://github.com/Z-Anatomy/The-blend), basado en BodyParts3D.
+   Licencia: CC BY-SA 4.0. Usado para el resto de los sistemas, escalado a la estatura del
+   cuerpo femenino y con los brazos rotados para coincidir con la pose de la piel.
+
+Cambios: alineación, reducción de polígonos, división de la piel en regiones, nombres en
+español y materiales propios (tools/procesar_modelo.py, tools/mapeo_zanatomy_femenino.json,
+tools/ensamblar_cuerpo_glb.gd). Por la cláusula CompartirIgual de Z-Anatomy, este conjunto
+derivado se distribuye bajo CC BY-SA 4.0.

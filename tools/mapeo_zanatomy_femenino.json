@@ -1,0 +1,325 @@
+{
+  "_comentario": "Versión FEMENINA: hereda tools/mapeo_zanatomy.json y cambia solo lo necesario. Piel, pelvis, vejiga y aparato reproductor femeninos del Human Reference Atlas (HuBMAP/NIH, CC BY 4.0, derivados del Visible Human Female). El resto es Z-Anatomy escalado a la estatura femenina (1,67 m) y con los brazos rotados para la pose de la piel femenina.",
+  "hereda": "tools/mapeo_zanatomy.json",
+  "escala": 0.956,
+  "_brazos": "Medido: brazo femenino a 19,3° de la vertical, masculino a 3,7°. Pivote = cabeza del húmero de Z-Anatomy.",
+  "brazos": {
+    "pivote": [
+      0.169,
+      0.027,
+      1.405
+    ],
+    "angulo": 15.6,
+    "x_min": 0.19,
+    "z_min": 0.6
+  },
+  "_importar": "Modelos del Human Reference Atlas. La piel se baja 0,795 m (pies en 0) y se centra; los órganos pélvicos comparten el marco de su pelvis, alineada con la pelvis de Z-Anatomy escalada.",
+  "importar": [
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Skin.glb",
+      "transformacion": {
+        "desplazamiento": [
+          0.0,
+          -0.058,
+          0.795
+        ]
+      }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Pelvis.glb",
+      "transformacion": {
+        "escala": 1.0,
+        "desplazamiento": [
+          0.008,
+          -0.076,
+          0.809
+        ]
+      }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Urinary_Bladder.glb",
+      "transformacion": {
+        "escala": 1.0,
+        "desplazamiento": [
+          0.008,
+          -0.076,
+          0.809
+        ]
+      }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Uterus.glb",
+      "transformacion": {
+        "escala": 1.0,
+        "desplazamiento": [
+          0.008,
+          -0.076,
+          0.809
+        ]
+      }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Ovary_L.glb",
+      "transformacion": {
+        "escala": 1.0,
+        "desplazamiento": [
+          0.008,
+          -0.076,
+          0.809
+        ]
+      }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Ovary_R.glb",
+      "transformacion": {
+        "escala": 1.0,
+        "desplazamiento": [
+          0.008,
+          -0.076,
+          0.809
+        ]
+      }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Fallopian_Tube_L.glb",
+      "transformacion": {
+        "escala": 1.0,
+        "desplazamiento": [
+          0.008,
+          -0.076,
+          0.809
+        ]
+      }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/VH_F_Fallopian_Tube_R.glb",
+      "transformacion": {
+        "escala": 1.0,
+        "desplazamiento": [
+          0.008,
+          -0.076,
+          0.809
+        ]
+      }
+    }
+  ],
+  "salida_nombres": "data/partes.json",
+  "nombres_es": {
+    "Malleus": "Martillo",
+    "Incus": "Yunque",
+    "Stapes": "Estribo",
+    "Femur": "Fémur",
+    "Patella": "Rótula",
+    "Tibia": "Tibia",
+    "Fibula": "Peroné",
+    "Ulna": "Cúbito",
+    "Radius": "Radio",
+    "Humerus": "Húmero",
+    "Scapula": "Escápula (omóplato)",
+    "Atlas (C1)": "Atlas (C1)",
+    "Axis (C2)": "Axis (C2)",
+    "Coccyx": "Cóccix",
+    "Eyeball": "Globo ocular",
+    "Oesophagus": "Esófago",
+    "Trachea": "Tráquea",
+    "Spinal dura": "Duramadre espinal",
+    "Jejunum": "Yeyuno e íleon",
+    "Vermiform appendix": "Apéndice vermiforme",
+    "ilium compact bone": "Ilion",
+    "ischium compact bone": "Isquion",
+    "pubis compact bone": "Pubis",
+    "sacrum": "Sacro",
+    "coccyx": "Cóccix",
+    "left ovary": "Ovario izquierdo",
+    "right ovary": "Ovario derecho",
+    "ampulla of uterine tube": "Ampolla de la trompa uterina",
+    "fibria of uterine tube": "Fimbrias de la trompa uterina",
+    "isthmus of fallopian tube": "Istmo de la trompa uterina",
+    "uterine tube infundibulum": "Infundíbulo de la trompa uterina",
+    "abdominal ostium of uterine tube": "Orificio abdominal de la trompa uterina",
+    "anterior wall of uterus": "Pared anterior del útero",
+    "posterior wall of uterus": "Pared posterior del útero",
+    "body of uterus": "Cuerpo del útero",
+    "cervix": "Cuello del útero (cérvix)",
+    "cornua": "Cuernos uterinos",
+    "external cervical os": "Orificio cervical externo",
+    "internal cervical os": "Orificio cervical interno",
+    "fundus of uterus": "Fondo del útero",
+    "lower uterine segment": "Segmento uterino inferior",
+    "fundus of urinary bladder base": "Base de la vejiga",
+    "fundus of urinary bladder dome": "Cúpula de la vejiga",
+    "trigone of urinary bladder": "Trígono vesical",
+    "ureteral orifice": "Orificio ureteral",
+    "urinary bladder neck smooth muscle": "Cuello de la vejiga"
+  },
+  "sistemas": {
+    "Piel": {
+      "Epidermis": {
+        "superficie": [
+          "VH_F_skin"
+        ],
+        "max_triangulos": 60000
+      }
+    },
+    "Muscular": {
+      "resto": [
+        {
+          "coleccion": "4: Muscular system",
+          "incluir_regex": "fascia|aponeuros|retinacul|sheath|bursa|septum|tendinous|ligament|Bulbospongiosus|Ischiocavernosus|Cremaster",
+          "descartar": true,
+          "regiones": [
+            {
+              "organo": "_"
+            }
+          ]
+        },
+        {
+          "coleccion": "4: Muscular system",
+          "partes": "bilateral",
+          "max_triangulos": 20000,
+          "regiones": [
+            {
+              "organo": "MusculosCabeza",
+              "z_min": 1.5
+            },
+            {
+              "organo": "MusculosCuello",
+              "z_min": 1.39,
+              "x_max": 0.1
+            },
+            {
+              "organo": "MusculosMiembroSuperior",
+              "x_min": 0.16,
+              "z_min": 0.65
+            },
+            {
+              "organo": "MusculosTronco",
+              "z_min": 0.86
+            },
+            {
+              "organo": "MusculosMiembroInferior"
+            }
+          ]
+        }
+      ]
+    },
+    "Oseo": {
+      "Pelvis": {
+        "fuentes": [
+          "VH_F_*compact_bone*",
+          "VH_F_sacrum",
+          "VH_F_coccyx"
+        ],
+        "partes": "individual",
+        "max_triangulos": 14000
+      },
+      "resto": [
+        {
+          "_nota": "La pelvis masculina se reemplaza por la femenina.",
+          "coleccion": "1: Skeletal system",
+          "incluir_regex": "^(Hip bone|Sacrum|Coccyx)",
+          "descartar": true,
+          "regiones": [
+            {
+              "organo": "_"
+            }
+          ]
+        },
+        {
+          "coleccion": "1: Skeletal system",
+          "partes": "bilateral",
+          "max_triangulos": 8000,
+          "regiones": [
+            {
+              "organo": "OtrosHuesos"
+            }
+          ]
+        },
+        {
+          "coleccion": "3: Joints",
+          "incluir_regex": "capsul|fat pad|frenula",
+          "descartar": true,
+          "regiones": [
+            {
+              "organo": "_"
+            }
+          ]
+        },
+        {
+          "coleccion": "3: Joints",
+          "partes": "bilateral",
+          "max_triangulos": 14000,
+          "regiones": [
+            {
+              "organo": "LigamentosMiembroSuperior",
+              "x_min": 0.16,
+              "z_min": 0.65
+            },
+            {
+              "organo": "LigamentosMiembroInferior",
+              "z_max": 0.86
+            },
+            {
+              "organo": "LigamentosTronco"
+            }
+          ]
+        }
+      ]
+    },
+    "Urinario": {
+      "Vejiga": {
+        "fuentes": [
+          "VH_F_*urinary_bladder*",
+          "VH_F_trigone*",
+          "VH_F_ureteral_orifice*"
+        ],
+        "partes": "individual",
+        "max_triangulos": 8000
+      },
+      "Uretra": null
+    },
+    "Reproductor": {
+      "Testiculos": null,
+      "ConductosSeminales": null,
+      "Prostata": null,
+      "Pene": null,
+      "Utero": {
+        "fuentes": [
+          "VH_F_*wall_of_uterus",
+          "VH_F_body_of_uterus",
+          "VH_F_fundus_of_uterus",
+          "VH_F_cervix",
+          "VH_F_cornua",
+          "VH_F_*cervical_os",
+          "VH_F_lower_uterine_segment",
+          "VH_F_abdominal_ostium*"
+        ],
+        "partes": "individual",
+        "max_triangulos": 12000
+      },
+      "Ovarios": {
+        "fuentes": [
+          "VH_F_left_ovary",
+          "VH_F_right_ovary"
+        ],
+        "partes": "individual"
+      },
+      "TrompasUterinas": {
+        "fuentes": [
+          "VH_F_ampulla*",
+          "VH_F_fibria*",
+          "VH_F_isthmus*",
+          "VH_F_uterine_tube_infundibulum*"
+        ],
+        "partes": "individual",
+        "max_triangulos": 8000
+      }
+    }
+  },
+  "materiales": {
+    "Utero": "reproductor",
+    "Ovarios": "reproductor",
+    "TrompasUterinas": "reproductor",
+    "Vejiga": "vejiga"
+  }
+}

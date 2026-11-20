@@ -5316,6 +5316,16 @@
    "nombre_en": "Sesamoid bones of foot",
    "organo": "OtrosHuesos"
   },
+  "Ovarios__left_ovary": {
+   "nombre": "Ovario izquierdo",
+   "nombre_en": "left ovary",
+   "organo": "Ovarios"
+  },
+  "Ovarios__right_ovary": {
+   "nombre": "Ovario derecho",
+   "nombre_en": "right ovary",
+   "organo": "Ovarios"
+  },
   "Pancreas__Accessory_pancreatic_duct": {
    "nombre": "Conducto pancreático accesorio",
    "nombre_en": "Accessory pancreatic duct",
@@ -5399,6 +5409,46 @@
   "Pelvis__Sacrum": {
    "nombre": "Hueso sacro",
    "nombre_en": "Sacrum",
+   "organo": "Pelvis"
+  },
+  "Pelvis__coccyx": {
+   "nombre": "Cóccix",
+   "nombre_en": "coccyx",
+   "organo": "Pelvis"
+  },
+  "Pelvis__ilium_compact_bone_Der": {
+   "nombre": "Ilion (lado derecho)",
+   "nombre_en": "ilium compact bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__ilium_compact_bone_Izq": {
+   "nombre": "Ilion (lado izquierdo)",
+   "nombre_en": "ilium compact bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__ischium_compact_bone_Der": {
+   "nombre": "Isquion (lado derecho)",
+   "nombre_en": "ischium compact bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__ischium_compact_bone_Izq": {
+   "nombre": "Isquion (lado izquierdo)",
+   "nombre_en": "ischium compact bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__pubis_compact_bone_Der": {
+   "nombre": "Pubis (lado derecho)",
+   "nombre_en": "pubis compact bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__pubis_compact_bone_Izq": {
+   "nombre": "Pubis (lado izquierdo)",
+   "nombre_en": "pubis compact bone",
+   "organo": "Pelvis"
+  },
+  "Pelvis__sacrum": {
+   "nombre": "Sacro",
+   "nombre_en": "sacrum",
    "organo": "Pelvis"
   },
   "Pene__Corpus_cavernosum_of_penis": {
@@ -5636,6 +5686,46 @@
    "nombre_en": "Medial head of triceps brachii",
    "organo": "Triceps"
   },
+  "TrompasUterinas__ampulla_of_uterine_tube_Der": {
+   "nombre": "Ampolla de la trompa uterina (lado derecho)",
+   "nombre_en": "ampulla of uterine tube",
+   "organo": "TrompasUterinas"
+  },
+  "TrompasUterinas__ampulla_of_uterine_tube_Izq": {
+   "nombre": "Ampolla de la trompa uterina (lado izquierdo)",
+   "nombre_en": "ampulla of uterine tube",
+   "organo": "TrompasUterinas"
+  },
+  "TrompasUterinas__fibria_of_uterine_tube_Der": {
+   "nombre": "Fimbrias de la trompa uterina (lado derecho)",
+   "nombre_en": "fibria of uterine tube",
+   "organo": "TrompasUterinas"
+  },
+  "TrompasUterinas__fibria_of_uterine_tube_Izq": {
+   "nombre": "Fimbrias de la trompa uterina (lado izquierdo)",
+   "nombre_en": "fibria of uterine tube",
+   "organo": "TrompasUterinas"
+  },
+  "TrompasUterinas__isthmus_of_fallopian_tube_Der": {
+   "nombre": "Istmo de la trompa uterina (lado derecho)",
+   "nombre_en": "isthmus of fallopian tube",
+   "organo": "TrompasUterinas"
+  },
+  "TrompasUterinas__isthmus_of_fallopian_tube_Izq": {
+   "nombre": "Istmo de la trompa uterina (lado izquierdo)",
+   "nombre_en": "isthmus of fallopian tube",
+   "organo": "TrompasUterinas"
+  },
+  "TrompasUterinas__uterine_tube_infundibulum_Der": {
+   "nombre": "Infundíbulo de la trompa uterina (lado derecho)",
+   "nombre_en": "uterine tube infundibulum",
+   "organo": "TrompasUterinas"
+  },
+  "TrompasUterinas__uterine_tube_infundibulum_Izq": {
+   "nombre": "Infundíbulo de la trompa uterina (lado izquierdo)",
+   "nombre_en": "uterine tube infundibulum",
+   "organo": "TrompasUterinas"
+  },
   "Ureteres__Ureter_Der": {
    "nombre": "Uréter (lado derecho)",
    "nombre_en": "Ureter",
@@ -5651,9 +5741,89 @@
    "nombre_en": "Urethra",
    "organo": "Uretra"
   },
+  "Utero__abdominal_ostium_of_uterine_tube": {
+   "nombre": "Orificio abdominal de la trompa uterina",
+   "nombre_en": "abdominal ostium of uterine tube",
+   "organo": "Utero"
+  },
+  "Utero__anterior_wall_of_uterus": {
+   "nombre": "Pared anterior del útero",
+   "nombre_en": "anterior wall of uterus",
+   "organo": "Utero"
+  },
+  "Utero__body_of_uterus": {
+   "nombre": "Cuerpo del útero",
+   "nombre_en": "body of uterus",
+   "organo": "Utero"
+  },
+  "Utero__cervix": {
+   "nombre": "Cuello del útero (cérvix)",
+   "nombre_en": "cervix",
+   "organo": "Utero"
+  },
+  "Utero__cornua": {
+   "nombre": "Cuernos uterinos",
+   "nombre_en": "cornua",
+   "organo": "Utero"
+  },
+  "Utero__external_cervical_os": {
+   "nombre": "Orificio cervical externo",
+   "nombre_en": "external cervical os",
+   "organo": "Utero"
+  },
+  "Utero__fundus_of_uterus": {
+   "nombre": "Fondo del útero",
+   "nombre_en": "fundus of uterus",
+   "organo": "Utero"
+  },
+  "Utero__internal_cervical_os": {
+   "nombre": "Orificio cervical interno",
+   "nombre_en": "internal cervical os",
+   "organo": "Utero"
+  },
+  "Utero__lower_uterine_segment": {
+   "nombre": "Segmento uterino inferior",
+   "nombre_en": "lower uterine segment",
+   "organo": "Utero"
+  },
+  "Utero__posterior_wall_of_uterus": {
+   "nombre": "Pared posterior del útero",
+   "nombre_en": "posterior wall of uterus",
+   "organo": "Utero"
+  },
   "Vejiga__Urinary_bladder": {
    "nombre": "Vejiga urinaria",
    "nombre_en": "Urinary bladder",
+   "organo": "Vejiga"
+  },
+  "Vejiga__fundus_of_urinary_bladder_base": {
+   "nombre": "Base de la vejiga",
+   "nombre_en": "fundus of urinary bladder base",
+   "organo": "Vejiga"
+  },
+  "Vejiga__fundus_of_urinary_bladder_dome": {
+   "nombre": "Cúpula de la vejiga",
+   "nombre_en": "fundus of urinary bladder dome",
+   "organo": "Vejiga"
+  },
+  "Vejiga__trigone_of_urinary_bladder": {
+   "nombre": "Trígono vesical",
+   "nombre_en": "trigone of urinary bladder",
+   "organo": "Vejiga"
+  },
+  "Vejiga__ureteral_orifice_Der": {
+   "nombre": "Orificio ureteral (lado derecho)",
+   "nombre_en": "ureteral orifice",
+   "organo": "Vejiga"
+  },
+  "Vejiga__ureteral_orifice_Izq": {
+   "nombre": "Orificio ureteral (lado izquierdo)",
+   "nombre_en": "ureteral orifice",
+   "organo": "Vejiga"
+  },
+  "Vejiga__urinary_bladder_neck_smooth_muscle": {
+   "nombre": "Cuello de la vejiga",
+   "nombre_en": "urinary bladder neck smooth muscle",
    "organo": "Vejiga"
   },
   "VenaCava__Common_iliac_vein_Der": {

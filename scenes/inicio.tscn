@@ -89,6 +89,35 @@ text = "Atlas interactivo y simulaciones fisiológicas"
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
+[node name="Selector" type="HBoxContainer" parent="UI/Tarjeta/Contenido"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Etiqueta" type="Label" parent="UI/Tarjeta/Contenido/Selector"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.36, 0.45, 0.5, 1)
+text = "Cuerpo:"
+
+[node name="BotonMasculino" type="Button" parent="UI/Tarjeta/Contenido/Selector"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Anatomía masculina (Z-Anatomy)"
+focus_mode = 0
+toggle_mode = true
+text = "Masculino"
+
+[node name="BotonFemenino" type="Button" parent="UI/Tarjeta/Contenido/Selector"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Anatomía femenina (Human Reference Atlas + Z-Anatomy)"
+focus_mode = 0
+toggle_mode = true
+text = "Femenino"
+
 [node name="BotonExplorar" type="Button" parent="UI/Tarjeta/Contenido"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)

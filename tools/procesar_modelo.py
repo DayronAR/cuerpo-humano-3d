@@ -46,6 +46,7 @@ Formato del JSON de mapeo (ver tools/mapeo_ejemplo.json):
 
 import fnmatch
 import json
+import math
 import os
 import re
 import sys
@@ -57,6 +58,67 @@ from mathutils import Matrix, Vector
 TIPOS_GEOMETRIA = ("MESH", "CURVE")   # Las curvas con grosor (vasos, esófago...) se convierten a malla
 EXCLUIR = None                        # Expresión regular de nombres a ignorar (del JSON: "excluir_regex")
 RESOLUCION_CURVAS = 0                 # Resolución máxima de las curvas al convertirlas (0 = sin cambio)
+BRAZOS = None                         # Rotación de los brazos alrededor del hombro (del JSON: "brazos")
+
+
+def centro_original(o):
+    return sum((o.matrix_world @ Vector(c) for c in o.bound_box), Vector()) / 8
+
+
+def ajuste_de(f, base):
+    """Transformación que se aplica a un objeto fuente antes de unirlo:
+    - objetos importados ya ubicados ("sin_ajuste"): ninguna,
+    - el resto: la global (escala + desplazamiento) y, si es del miembro superior, la rotación
+      del brazo alrededor del hombro (para adaptar la pose a otro cuerpo, p. ej. el femenino)."""
+    if f.get("sin_ajuste"):
+        return Matrix.Identity(4)
+    if BRAZOS:
+        c = centro_original(f)
+        if abs(c.x) > BRAZOS.get("x_min", 0.19) and c.z > BRAZOS.get("z_min", 0.6):
+            signo = 1.0 if c.x > 0 else -1.0
+            px, py, pz = BRAZOS["pivote"]
+            pivote = Vector((px * signo, py, pz))
+            rot = Matrix.Rotation(math.radians(-BRAZOS["angulo"] * signo), 4, "Y")
+            return base @ Matrix.Translation(pivote) @ rot @ Matrix.Translation(-pivote)
+    return base
+
+
+def importar_glb_ubicado(definicion):
+    """Importa un .glb externo (p. ej. del Human Reference Atlas) y lo ubica con la transformación
+    indicada. Sus objetos se marcan para que no reciban la transformación global."""
+    antes = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=os.path.abspath(definicion["archivo"]))
+    nuevos = [o for o in bpy.data.objects if o not in antes]
+    t = definicion.get("transformacion", {})
+    m = Matrix.Translation(Vector(t.get("desplazamiento", [0, 0, 0]))) @ Matrix.Scale(t.get("escala", 1.0), 4)
+    for o in nuevos:
+        if o.parent is None:
+            o.matrix_world = m @ o.matrix_world
+    bpy.context.view_layer.update()
+    # El importador deja los objetos en la colección activa (en Z-Anatomy, una del esqueleto):
+    # se pasan a una colección propia para que ninguna regla de "resto" los tome.
+    destino = bpy.data.collections.get("Importados") or bpy.data.collections.new("Importados")
+    if destino.name not in bpy.context.scene.collection.children:
+        bpy.context.scene.collection.children.link(destino)
+    for o in nuevos:
+        o["sin_ajuste"] = True
+        for c in list(o.users_collection):
+            c.objects.unlink(o)
+        destino.objects.link(o)
+    print(f"[OK] Importado {definicion['archivo']} ({len([o for o in nuevos if o.type == 'MESH'])} mallas)")
+
+
+def mezclar(base, cambios):
+    """Combina un mapeo base con cambios: diccionarios se combinan, null elimina la clave."""
+    resultado = dict(base)
+    for k, v in cambios.items():
+        if v is None:
+            resultado.pop(k, None)
+        elif isinstance(v, dict) and isinstance(resultado.get(k), dict) and not k.startswith("_"):
+            resultado[k] = mezclar(resultado[k], v)
+        else:
+            resultado[k] = v
+    return resultado
 
 # Raíz del proyecto Godot = carpeta padre de tools/
 RAIZ_PROYECTO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -211,7 +273,7 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
     for f in fuentes:
         evaluado = f.evaluated_get(dg)
         malla = bpy.data.meshes.new_from_object(evaluado, preserve_all_data_layers=False, depsgraph=dg)
-        malla.transform(ajuste @ f.matrix_world)
+        malla.transform(ajuste_de(f, ajuste) @ f.matrix_world)
         bm.from_mesh(malla)
         bpy.data.meshes.remove(malla)
     # Soldar vértices coincidentes: elimina las costuras entre piezas vecinas (p. ej. las
@@ -338,12 +400,21 @@ def exportar_glb(objetos, ruta):
 # ---------------------------------------------------------------------------
 
 LADO = re.compile(r"\.([lr])$")
+LADO_GUION = re.compile(r"_([LR])$")
 
 
 def separar_lado(nombre):
-    """'Stapes.r' -> ('Stapes', 'r'); 'Sacrum' -> ('Sacrum', '')."""
+    """'Stapes.r' -> ('Stapes', 'r'); 'VH_F_left_ovary' -> ('left ovary', ''); 'X_L' -> ('X', 'l')."""
     m = LADO.search(nombre)
-    return (nombre[:m.start()], m.group(1)) if m else (nombre, "")
+    if m:
+        return nombre[:m.start()], m.group(1)
+    if nombre.startswith("VH_F_") or nombre.startswith("VH_M_"):
+        base = nombre[5:]
+        m = LADO_GUION.search(base)
+        lado = m.group(1).lower() if m else ""
+        base = base[:m.start()] if m else base
+        return base.replace("_", " "), lado
+    return nombre, ""
 
 
 def id_valido(texto):
@@ -431,7 +502,7 @@ def construir_organo_con_partes(destino, partes, max_tris, min_tris_parte, escal
     return vacio, objetos
 
 
-def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar):
+def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar, superficie=None):
     """Piel sin costuras: construye la superficie COMPLETA (simétrica y soldada), la reduce, y
     después la corta en partes asignando cada cara a la región fuente más cercana. Las partes
     comparten exactamente los bordes y conservan las normales de la superficie completa, así
@@ -442,8 +513,13 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
         for f in p["fuentes"]:
             if f not in todas:
                 todas.append(f)
-    completa, _ = preparar_organo(destino + "__completa", todas, max_tris, escala, desplazamiento, False,
-                                  soldar=soldar, simetria=True)
+    if superficie:
+        # Superficie de otro modelo (p. ej. la piel femenina): las regiones solo dan los nombres
+        completa, _ = preparar_organo(destino + "__completa", superficie, max_tris, escala, desplazamiento, False,
+                                      soldar=soldar)
+    else:
+        completa, _ = preparar_organo(destino + "__completa", todas, max_tris, escala, desplazamiento, False,
+                                      soldar=soldar, simetria=True)
     # Centros de las caras de cada región fuente (el lado izquierdo es el reflejo del derecho)
     dg = bpy.context.evaluated_depsgraph_get()
     ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
@@ -451,7 +527,7 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
     for clave, p in partes.items():
         for f in p["fuentes"]:
             malla = bpy.data.meshes.new_from_object(f.evaluated_get(dg), depsgraph=dg)
-            malla.transform(ajuste @ f.matrix_world)
+            malla.transform(ajuste_de(f, ajuste) @ f.matrix_world)
             for poligono in malla.polygons:
                 c = poligono.center.copy()
                 if c.x > 0.0005:
@@ -557,6 +633,13 @@ def main():
 
     with open(args.mapeo, encoding="utf-8") as f:
         mapeo = json.load(f)
+    if mapeo.get("hereda"):
+        with open(mapeo["hereda"], encoding="utf-8") as f:
+            mapeo = mezclar(json.load(f), {k: v for k, v in mapeo.items() if k != "hereda"})
+    global BRAZOS
+    BRAZOS = mapeo.get("brazos")
+    for extra in mapeo.get("importar", []):
+        importar_glb_ubicado(extra)
 
     max_tris = args.max_tris if args.max_tris is not None else int(mapeo.get("max_triangulos", 15000))
     min_tris_parte = int(mapeo.get("min_triangulos_parte", 150))
@@ -670,7 +753,8 @@ def main():
                 continue
 
             if modo == "grupos" and definicion.get("dividir_superficie"):
-                vacio, objetos = dividir_superficie(destino, partes, limite, escala, desplazamiento, soldar)
+                superficie = buscar_fuentes(definicion["superficie"]) if definicion.get("superficie") else None
+                vacio, objetos = dividir_superficie(destino, partes, limite, escala, desplazamiento, soldar, superficie)
             else:
                 sin_reducir = re.compile(definicion["sin_reducir_regex"]) if definicion.get("sin_reducir_regex") else None
                 vacio, objetos = construir_organo_con_partes(destino, partes, limite, min_tris_parte, escala,
@@ -705,7 +789,7 @@ def main():
     if mapeo.get("salida_nombres") and not args.simular:
         ruta_nombres = mapeo["salida_nombres"]
         existentes = {}
-        if os.path.exists(ruta_nombres) and args.sistemas:
+        if os.path.exists(ruta_nombres):
             existentes = json.load(open(ruta_nombres, encoding="utf-8")).get("partes", {})
         existentes.update(nombres_partes)
         with open(ruta_nombres, "w", encoding="utf-8") as f:

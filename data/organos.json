@@ -729,6 +729,30 @@
         "Tiene tres partes: nasofaringe, orofaringe y laringofaringe.",
         "Al tragar, se coordina para que el alimento no vaya a los pulmones."
       ]
+    },
+    "Utero": {
+      "nombre": "Útero",
+      "funcion": "Órgano muscular hueco donde se implanta el embrión y se desarrolla el feto durante el embarazo; su capa interna se desprende en cada menstruación.",
+      "datos_curiosos": [
+        "Tiene el tamaño de una pera, pero en el embarazo puede crecer unas 500 veces su volumen.",
+        "Su pared (miometrio) es uno de los músculos más fuertes del cuerpo durante el parto."
+      ]
+    },
+    "Ovarios": {
+      "nombre": "Ovarios",
+      "funcion": "Producen los óvulos y las hormonas sexuales femeninas (estrógenos y progesterona).",
+      "datos_curiosos": [
+        "Al nacer contienen cerca de un millón de folículos, de los que solo unos 400 llegarán a liberar un óvulo.",
+        "Normalmente liberan un óvulo al mes, alternando de lado."
+      ]
+    },
+    "TrompasUterinas": {
+      "nombre": "Trompas uterinas (de Falopio)",
+      "funcion": "Captan el óvulo liberado por el ovario y lo llevan hacia el útero; allí suele ocurrir la fecundación.",
+      "datos_curiosos": [
+        "Sus fimbrias, en forma de dedos, 'barren' la superficie del ovario para atrapar el óvulo.",
+        "Miden unos 10 a 12 cm de largo."
+      ]
     }
   }
 }

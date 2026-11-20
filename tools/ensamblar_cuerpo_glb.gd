@@ -4,7 +4,7 @@ extends SceneTree
 ##
 ## Uso (desde la raíz del proyecto):
 ##     godot --headless --path . --script res://tools/ensamblar_cuerpo_glb.gd
-##     godot --headless --path . --script res://tools/ensamblar_cuerpo_glb.gd -- <carpeta_glb> <mapeo.json> <salida.tscn>
+##     godot --headless --path . --script res://tools/ensamblar_cuerpo_glb.gd -- <carpeta_glb> <mapeo.json> <salida.tscn> <carpeta_mallas>
 ##
 ## Por defecto:
 ##     carpeta_glb = res://assets_fuente/z-anatomy/glb   (fuera de la importación de Godot: .gdignore)
@@ -18,7 +18,7 @@ extends SceneTree
 ##   - Guarda las mallas en res://models/zanatomy/ y la escena final.
 ##   - Solo piel, músculos y huesos proyectan sombra (rendimiento).
 
-const CARPETA_MALLAS := "res://models/zanatomy"
+var CARPETA_MALLAS := "res://models/zanatomy"
 const CARPETA_MATERIALES := "res://models/prueba/materiales"
 const SISTEMAS_CON_SOMBRA := ["Piel"]   ## Con cientos de partes, solo la piel proyecta sombra
 
@@ -28,12 +28,16 @@ func _init() -> void:
 	var carpeta_glb: String = args[0] if args.size() > 0 else "res://assets_fuente/z-anatomy/glb"
 	var ruta_mapeo: String = args[1] if args.size() > 1 else "res://tools/mapeo_zanatomy.json"
 	var salida: String = args[2] if args.size() > 2 else "res://scenes/cuerpo_zanatomy.tscn"
+	if args.size() > 3:
+		CARPETA_MALLAS = args[3]
 
 	var mapeo = JSON.parse_string(FileAccess.get_file_as_string(ruta_mapeo))
 	if not mapeo is Dictionary:
 		push_error("No se pudo leer el mapeo " + ruta_mapeo)
 		quit(1)
 		return
+	if mapeo.has("hereda"):   # Mapeo derivado (p. ej. el femenino): se combina con su base
+		mapeo = _mezclar(JSON.parse_string(FileAccess.get_file_as_string("res://" + mapeo["hereda"])), mapeo)
 	var materiales: Dictionary = mapeo.get("materiales", {})
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(CARPETA_MALLAS))
 
@@ -115,6 +119,19 @@ func _crear_nodo(estado: GLTFState, i: int, padre: Node3D, raiz: Node3D, sistema
 	if padre.get_parent() == raiz:
 		print("  %-14s %-26s %4d partes %8d triángulos" % [sistema, nombre, nodo_gltf.children.size(), tris])
 	return tris
+
+
+## Igual que mezclar() de tools/procesar_modelo.py: diccionarios se combinan, null elimina la clave.
+func _mezclar(base: Dictionary, cambios: Dictionary) -> Dictionary:
+	var resultado := base.duplicate()
+	for k in cambios:
+		if cambios[k] == null:
+			resultado.erase(k)
+		elif cambios[k] is Dictionary and resultado.get(k) is Dictionary and not String(k).begins_with("_"):
+			resultado[k] = _mezclar(resultado[k], cambios[k])
+		else:
+			resultado[k] = cambios[k]
+	return resultado
 
 
 func _material(nombre: String) -> Material:

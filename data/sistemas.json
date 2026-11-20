@@ -77,9 +77,9 @@
     },
     {
       "id": "Reproductor",
-      "nombre": "Sistema reproductor (masculino)",
+      "nombre": "Sistema reproductor",
       "color": "#b9677a",
-      "descripcion": "Órganos que producen los gametos y hormonas sexuales. El modelo 3D disponible es masculino.",
+      "descripcion": "Órganos que producen los gametos y las hormonas sexuales; en el cuerpo femenino, también donde se desarrolla el embarazo.",
       "cubierto_por": ["Piel", "Muscular", "Oseo"]
     },
     {

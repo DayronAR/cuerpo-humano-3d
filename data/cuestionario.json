@@ -275,6 +275,18 @@
     {
       "organo": "Timo",
       "texto": "Selecciona el timo"
+    },
+    {
+      "organo": "Utero",
+      "texto": "Selecciona el útero"
+    },
+    {
+      "organo": "Ovarios",
+      "texto": "¿Qué órganos producen los óvulos?"
+    },
+    {
+      "organo": "TrompasUterinas",
+      "texto": "¿Dónde suele ocurrir la fecundación? Selecciona las trompas uterinas"
     }
   ],
   "_partes": "Preguntas con 'parte': hay que hacer clic en esa parte exacta (id de nodo o su comienzo; ambos lados valen). Solo aparecen si el modelo 3D tiene esa parte (Z-Anatomy)."
