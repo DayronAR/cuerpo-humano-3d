@@ -19,10 +19,12 @@ signal sistema_mostrado(id_sistema: String)   ## "" = cuerpo completo
 const UMBRAL_CLIC := 6.0
 const LARGO_RAYO := 100.0
 const SHADER_RESALTADO := preload("res://shaders/resaltado.gdshader")
+const SHADER_TINTE := preload("res://shaders/tinte.gdshader")
 
 @onready var camara: CamaraOrbital = $Camara
 @onready var cuerpo: Node3D = $Cuerpo
 @onready var capas: GestorCapas = $GestorCapas
+@onready var visuales: VisualesFisiologia = $Visuales
 
 var _organos: Dictionary = {}       ## id -> Node3D del órgano
 var _sistemas: Dictionary = {}      ## id -> Node3D del sistema
@@ -30,6 +32,7 @@ var _colisiones: Dictionary = {}    ## id de sistema -> Array[StaticBody3D]
 var _cajas_sistemas: Dictionary = {}  ## id de sistema -> AABB en el mundo (posición original)
 var _caja_cuerpo := AABB()
 var _sistema_actual := ""
+var _tintes: Dictionary = {}          ## Node3D del órgano -> ShaderMaterial de tinte
 var _organo_actual: Node3D = null
 var _material_resaltado: ShaderMaterial
 var _pos_presion := Vector2.INF
@@ -43,6 +46,7 @@ func _ready() -> void:
 	capas.configurar(_sistemas, Datos.orden_capas, Datos.animacion_capas, camara, _caja_cuerpo.get_center())
 	capas.capa_retirada.connect(_on_capa_retirada)
 	capas.capa_restaurada.connect(_on_capa_restaurada)
+	visuales.configurar(self, Datos.visuales)
 
 
 # --- API pública --------------------------------------------------------------
@@ -54,17 +58,19 @@ func seleccionar_organo(id: String) -> void:
 		return
 	if organo == _organo_actual:
 		return
-	_resaltar(_organo_actual, false)
+	var anterior := _organo_actual
 	_organo_actual = organo
-	_resaltar(organo, true)
+	_actualizar_overlay_si(anterior)
+	_actualizar_overlay(organo)
 	organo_seleccionado.emit(id, organo.get_meta("sistema"))
 
 
 func limpiar_seleccion() -> void:
 	if _organo_actual == null:
 		return
-	_resaltar(_organo_actual, false)
+	var anterior := _organo_actual
 	_organo_actual = null
+	_actualizar_overlay(anterior)
 	seleccion_limpiada.emit()
 
 
@@ -85,6 +91,61 @@ func mostrar_cuerpo_completo() -> void:
 	capas.restaurar_todo()
 	camara.encuadrar(camara.objetivo_inicial(), camara.distancia_inicial())
 	sistema_mostrado.emit("")
+
+
+## Desarma el cuerpo según la "vista" de un escenario (ver data/escenarios.json):
+## {capas_retiradas: [...], capas_fantasma: {id: transparencia}, encuadre: "cuerpo" | id de sistema}
+func mostrar_vista(vista: Dictionary) -> void:
+	_sistema_actual = ""
+	capas.retirar_solo(vista.get("capas_retiradas", []), vista.get("capas_fantasma", {}))
+	var encuadre: String = vista.get("encuadre", "cuerpo")
+	var caja: AABB = _cajas_sistemas.get(encuadre, _caja_cuerpo)
+	# El panel del gráfico ocupa la parte baja de la pantalla: se aleja un poco y se baja el
+	# objetivo para que el sistema quede en la zona visible de arriba.
+	_encuadrar(caja, vista.get("margen", 1.4), vista.get("subir_en_pantalla", 0.12))
+	sistema_mostrado.emit("")
+
+
+## Escala adicional de un órgano (latido, respiración). Se combina con la animación de capas.
+func escalar_organo(id: String, escala: Vector3) -> void:
+	var organo: Node3D = _organos.get(id)
+	if organo == null:
+		return
+	if organo is MeshInstance3D:
+		capas.fijar_escala_extra(organo, escala)
+	else:
+		for parte in organo.get_children():
+			if parte is Node3D:
+				capas.fijar_escala_extra(parte, escala)
+
+
+## Tiñe un órgano con un color semitransparente encima de su material (cantidad 0 = sin tinte).
+func tenir_organo(id: String, color: Color, cantidad: float) -> void:
+	var organo: Node3D = _organos.get(id)
+	if organo == null:
+		return
+	var tinte: ShaderMaterial = _tintes.get(organo)
+	if cantidad <= 0.001:
+		if tinte != null:
+			_tintes.erase(organo)
+			_actualizar_overlay(organo)
+		return
+	if tinte == null:
+		tinte = ShaderMaterial.new()
+		tinte.shader = SHADER_TINTE
+		_tintes[organo] = tinte
+		_actualizar_overlay(organo)
+	tinte.set_shader_parameter("color_tinte", color)
+	tinte.set_shader_parameter("cantidad", clampf(cantidad, 0.0, 1.0))
+
+
+## ids de los órganos de un sistema.
+func organos_de_sistema(id_sistema: String) -> Array:
+	var sistema: Node3D = _sistemas.get(id_sistema)
+	if sistema == null:
+		return []
+	return sistema.get_children().filter(func(n): return _organos.has(String(n.name))) \
+			.map(func(n): return String(n.name))
 
 
 func establecer_modo_fantasma(activo: bool) -> void:
@@ -166,11 +227,13 @@ func _caja_mundo(nodo: Node3D) -> AABB:
 
 
 ## Mueve la cámara para que la caja quepa en pantalla, manteniendo el ángulo actual.
-func _encuadrar(caja: AABB) -> void:
+## margen_extra multiplica la distancia; subir_en_pantalla (fracción de la distancia) baja el
+## punto de mira para que el contenido se vea más arriba en la pantalla.
+func _encuadrar(caja: AABB, margen_extra := 1.0, subir_en_pantalla := 0.0) -> void:
 	var radio := caja.size.length() * 0.5
-	var margen: float = Datos.animacion_capas.get("margen_encuadre", 0.9)
+	var margen: float = Datos.animacion_capas.get("margen_encuadre", 0.9) * margen_extra
 	var distancia := radio / sin(deg_to_rad(camara.fov * 0.5)) * margen
-	camara.encuadrar(caja.get_center(), distancia)
+	camara.encuadrar(caja.get_center() - Vector3(0, distancia * subir_en_pantalla, 0), distancia)
 
 
 # --- Reacción a las capas ----------------------------------------------------------
@@ -211,8 +274,21 @@ func _seleccionar_en_pantalla(pos: Vector2) -> void:
 	seleccionar_organo(String(organo.name))
 
 
-func _resaltar(organo: Node3D, activo: bool) -> void:
-	if organo == null:
-		return
+func _actualizar_overlay_si(organo: Node3D) -> void:
+	if organo != null:
+		_actualizar_overlay(organo)
+
+
+## Compone la capa superior de un órgano: tinte de simulación y/o resaltado de selección.
+## Si hay ambos, el resaltado se encadena como "next_pass" del tinte.
+func _actualizar_overlay(organo: Node3D) -> void:
+	var tinte: ShaderMaterial = _tintes.get(organo)
+	var seleccionado := organo == _organo_actual
+	var overlay: Material = null
+	if tinte != null:
+		tinte.next_pass = _material_resaltado if seleccionado else null
+		overlay = tinte
+	elif seleccionado:
+		overlay = _material_resaltado
 	for malla in mallas_de(organo):
-		malla.material_overlay = _material_resaltado if activo else null
+		malla.material_overlay = overlay

@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/mini_vista.gd" id="1_mini"]
+
+[sub_resource type="StyleBoxFlat" id="Estilo_panel"]
+bg_color = Color(1, 1, 1, 0.94)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+shadow_color = Color(0, 0.1, 0.2, 0.15)
+shadow_size = 6
+
+[sub_resource type="Environment" id="Entorno_mini"]
+background_mode = 1
+background_color = Color(0.9, 0.94, 0.96, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.85, 0.9, 1, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="PlaneMesh" id="Suelo"]
+size = Vector2(3, 3)
+
+[sub_resource type="StandardMaterial3D" id="MaterialSuelo"]
+albedo_color = Color(0.78, 0.84, 0.88, 1)
+
+[node name="MiniVista" type="PanelContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -216.0
+offset_top = -276.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Estilo_panel")
+script = ExtResource("1_mini")
+
+[node name="Contenido" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="EtiquetaActividad" type="Label" parent="Contenido"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+text = "En reposo"
+horizontal_alignment = 1
+
+[node name="Marco" type="SubViewportContainer" parent="Contenido"]
+custom_minimum_size = Vector2(184, 220)
+layout_mode = 2
+mouse_filter = 2
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="Contenido/Marco"]
+own_world_3d = true
+handle_input_locally = false
+msaa_3d = 1
+size = Vector2i(184, 220)
+render_target_update_mode = 4
+
+[node name="Entorno" type="WorldEnvironment" parent="Contenido/Marco/Viewport"]
+environment = SubResource("Entorno_mini")
+
+[node name="Luz" type="DirectionalLight3D" parent="Contenido/Marco/Viewport"]
+transform = Transform3D(0.7809, -0.4877, 0.3904, 0.0000, 0.6249, 0.7807, -0.6247, -0.6096, 0.4880, 0, 3, 0)
+shadow_enabled = true
+
+[node name="Suelo" type="MeshInstance3D" parent="Contenido/Marco/Viewport"]
+mesh = SubResource("Suelo")
+surface_material_override/0 = SubResource("MaterialSuelo")
+
+[node name="Personaje" type="Node3D" parent="Contenido/Marco/Viewport"]
+unique_name_in_owner = true
+
+[node name="Camara" type="Camera3D" parent="Contenido/Marco/Viewport"]
+transform = Transform3D(0.5241, -0.0750, 0.8483, 0.0000, 0.9961, 0.0881, -0.8517, -0.0462, 0.5221, 2.6, 1.15, 1.6)
+fov = 45.0

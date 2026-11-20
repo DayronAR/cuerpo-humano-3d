@@ -28,10 +28,15 @@ class Capa:
 	var destino := 0.0      ## Valor hacia el que se está animando
 	var retirada := false   ## Último estado avisado por señal
 	var tween: Tween
+	var fantasma_propio := -1.0     ## >= 0: esta capa queda fantasma con esa transparencia (la pide un escenario)
+	var desplazamiento_actual := 0.0
+	var escala_actual := 1.0
 
 ## Una parte que se mueve como bloque: un órgano o una parte de un órgano compuesto
 class Pieza:
 	var nodo: Node3D
+	var id_capa := ""                    ## (id y no referencia: evita un ciclo Capa <-> Pieza que no se libera)
+	var escala_extra := Vector3.ONE      ## Escala adicional (latido, respiración) que piden las visualizaciones
 	var transform_original: Transform3D
 	var pivote := Vector3.ZERO           ## Centro de la pieza en el espacio del padre
 	var direccion := Vector3.ZERO        ## Hacia dónde se aleja, en el espacio del padre
@@ -42,6 +47,7 @@ class Pieza:
 	var materiales_transparentes: Array = [] ## Por malla: Array de copias transparentes (o vacío)
 
 var _capas: Dictionary = {}       ## id -> Capa
+var _piezas_por_nodo: Dictionary = {}   ## Node3D -> Pieza
 var _orden: Array = []            ## ids de afuera hacia adentro
 var _camara: Camera3D
 var _generacion := 0              ## Se incrementa en cada secuencia nueva para cancelar la anterior
@@ -71,19 +77,38 @@ func configurar(sistemas: Dictionary, orden: Array, cfg: Dictionary, camara: Cam
 		var capa := Capa.new()
 		capa.id = id
 		for organo in sistemas[id].get_children():
+			var nodos := []
 			if organo is MeshInstance3D:
-				capa.piezas.append(_crear_pieza(organo, eje))
+				nodos = [organo]
 			elif organo is Node3D:
-				for parte in organo.get_children():
-					if parte is Node3D:
-						capa.piezas.append(_crear_pieza(parte, eje))
+				nodos = organo.get_children().filter(func(n): return n is Node3D)
+			for n in nodos:
+				var pieza := _crear_pieza(n, eje)
+				pieza.id_capa = id
+				capa.piezas.append(pieza)
+				_piezas_por_nodo[n] = pieza
 		_capas[id] = capa
 
 
 ## Deja retiradas exactamente las capas indicadas (y restaura las demás), con animación en secuencia.
-func retirar_solo(ids: Array) -> void:
+## fantasmas: id -> transparencia (0-1) de capas que quedan semitransparentes en su sitio
+## aunque el modo fantasma global esté apagado (lo usan los escenarios).
+func retirar_solo(ids_retirar: Array, fantasmas: Dictionary = {}) -> void:
 	_generacion += 1
 	var generacion := _generacion
+	var ids := ids_retirar.duplicate()
+	for id in fantasmas:
+		if _capas.has(id) and not id in ids:
+			ids.append(id)
+	for id in ids:
+		if not _capas.has(id):
+			continue
+		var capa: Capa = _capas[id]
+		var nuevo: float = fantasmas.get(id, -1.0)
+		if nuevo != capa.fantasma_propio:
+			capa.fantasma_propio = nuevo
+			if capa.progreso > 0.0:
+				_aplicar(capa.progreso, capa)   # Cambio de modo en una capa ya retirada
 	# Restaurar primero, de adentro hacia afuera
 	var restaurar := _ordenados(_capas.keys().filter(func(id): return _capas[id].destino > 0.0 and not id in ids))
 	restaurar.reverse()
@@ -101,6 +126,15 @@ func retirar_solo(ids: Array) -> void:
 
 func restaurar_todo() -> void:
 	retirar_solo([])
+
+
+## Escala adicional de una pieza (en su espacio local), compatible con la animación de capas.
+func fijar_escala_extra(nodo: Node3D, escala: Vector3) -> void:
+	var pieza: Pieza = _piezas_por_nodo.get(nodo)
+	if pieza == null:
+		return
+	pieza.escala_extra = escala
+	_transformar(pieza)
 
 
 func capas_retiradas() -> Array:
@@ -141,20 +175,16 @@ func _cambiar_mezcla_fantasma(valor: float) -> void:
 ## Traduce el progreso de una capa a transformaciones y transparencia de sus piezas.
 func _aplicar(progreso: float, capa: Capa) -> void:
 	capa.progreso = progreso
-	var normal := 1.0 - _mezcla_fantasma
-	var desplazamiento := progreso * _desplazamiento * normal
-	var escala := lerpf(1.0, _escala_final, progreso * normal)
-	var transparencia := lerpf(progreso, progreso * _transparencia_fantasma, _mezcla_fantasma)
+	var mezcla := 1.0 if capa.fantasma_propio >= 0.0 else _mezcla_fantasma
+	var transparencia_fantasma := capa.fantasma_propio if capa.fantasma_propio >= 0.0 else _transparencia_fantasma
+	var normal := 1.0 - mezcla
+	capa.desplazamiento_actual = progreso * _desplazamiento * normal
+	capa.escala_actual = lerpf(1.0, _escala_final, progreso * normal)
+	var transparencia := lerpf(progreso, progreso * transparencia_fantasma, mezcla)
 	var oculta := progreso >= 0.999 and normal >= 0.999
 
 	for pieza in capa.piezas:
-		var direccion := pieza.direccion
-		if pieza.usar_vista and _camara:
-			direccion = _direccion_vista(pieza)
-		# Escalar alrededor del centro de la pieza y desplazarla hacia afuera
-		var ajuste := Transform3D(Basis.from_scale(Vector3.ONE * escala),
-				pieza.pivote - pieza.pivote * escala + direccion * desplazamiento)
-		pieza.nodo.transform = ajuste * pieza.transform_original
+		_transformar(pieza)
 		pieza.nodo.visible = not oculta
 		for i in pieza.mallas.size():
 			_fijar_transparencia(pieza, i, transparencia)
@@ -169,6 +199,19 @@ func _aplicar(progreso: float, capa: Capa) -> void:
 			capa_retirada.emit(capa.id)
 		else:
 			capa_restaurada.emit(capa.id)
+
+
+## Posición final de una pieza: transform original (con su escala extra), encogida alrededor de
+## su centro y desplazada hacia afuera según el estado de su capa.
+func _transformar(pieza: Pieza) -> void:
+	var capa: Capa = _capas[pieza.id_capa]
+	var escala := capa.escala_actual
+	var direccion := pieza.direccion
+	if pieza.usar_vista and _camara:
+		direccion = _direccion_vista(pieza)
+	var ajuste := Transform3D(Basis.from_scale(Vector3.ONE * escala),
+			pieza.pivote - pieza.pivote * escala + direccion * capa.desplazamiento_actual)
+	pieza.nodo.transform = ajuste * pieza.transform_original.scaled_local(pieza.escala_extra)
 
 
 ## Aplica la transparencia (0 = opaco, 1 = invisible) a todas las superficies de una malla.

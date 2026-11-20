@@ -141,13 +141,19 @@ Main (Node)                         scenes/main.tscn · scripts/main.gd
 │   ├── Entorno, LuzPrincipal, LuzRelleno, Plataforma
 │   ├── Cuerpo  ← instancia de scenes/cuerpo_prueba.tscn (luego, del cuerpo con .glb)
 │   ├── Camara (Camera3D)           scripts/camara_orbital.gd
-│   └── GestorCapas (Node)          scripts/gestor_capas.gd
+│   ├── GestorCapas (Node)          scripts/gestor_capas.gd
+│   └── Visuales (Node3D)           scripts/visuales/visuales_fisiologia.gd (+ flujo_particulas.gd)
 └── UI (CanvasLayer)
-    ├── Aviso, Ayuda (Label)
-    ├── BarraSistemas               scenes/ui/barra_sistemas.tscn · scripts/ui/barra_sistemas.gd
+    ├── Aviso (Label)
+    ├── PanelIzquierdo (TabContainer)
+    │   ├── BarraSistemas           scenes/ui/barra_sistemas.tscn · scripts/ui/barra_sistemas.gd
+    │   └── Simulacion/PanelSimulacion  scenes/ui/panel_simulacion.tscn · scripts/ui/panel_simulacion.gd
+    ├── PanelGrafico/Grafico        scripts/ui/grafico_vivo.gd
+    ├── MiniVista (SubViewport)     scenes/ui/mini_vista.tscn · scripts/ui/mini_vista.gd
     ├── PanelFicha                  scenes/ui/panel_ficha.tscn · scripts/ui/panel_ficha.gd
     └── BarraVistas                 scenes/ui/barra_vistas.tscn · scripts/ui/barra_vistas.gd
-Autoload: Datos                     scripts/datos.gd
+Autoloads: Datos                    scripts/datos.gd
+           SimulationEngine         scripts/simulation_engine.gd
 ```
 
 | Componente | Responsabilidad | Señales que emite |
@@ -157,6 +163,11 @@ Autoload: Datos                     scripts/datos.gd
 | `BodyViewer` | Indexa el cuerpo, crea colisiones, detecta clics, resalta el órgano, muestra sistemas y encuadra | `organo_seleccionado(id, sistema)`, `seleccion_limpiada`, `sistema_mostrado(id)` |
 | `GestorCapas` | Retira/restaura capas una por una con animación interrumpible; modo fantasma | `capa_retirada(id)`, `capa_restaurada(id)`, `secuencia_terminada` |
 | `BarraSistemas` | Lista de sistemas desde JSON, "Cuerpo completo", interruptor de modo fantasma | `sistema_solicitado(id)`, `modo_fantasma_cambiado(activo)` |
+| `SimulationEngine` | Modelo fisiológico: interpreta `escenarios.json` | `estado_actualizado(estado)`, `escenario_cambiado(id, activo)`, `estados_cambiados(ids)`, `pausa_cambiada`, `velocidad_cambiada`, `intensidad_cambiada`, `simulacion_reiniciada` |
+| `VisualesFisiologia` | Latido, respiración, tintes, bolo, humo y glóbulos (solo escucha) | — |
+| `PanelSimulacion` | Escenario, iniciar/pausar/reiniciar, velocidad, intensidad, valores | `escenario_elegido`, `iniciar_pulsado`, `pausar_pulsado`, `reiniciar_pulsado`, `velocidad_elegida`, `intensidad_elegida` |
+| `GraficoVivo` | Dibuja con `_draw()` los últimos 60 s simulados | — |
+| `MiniVista` | Personaje que camina/corre según la actividad | — |
 | `PanelFicha` | Muestra la ficha que recibe | `cerrado` |
 | `BarraVistas` | Crea un botón por vista definida en JSON | `vista_solicitada(id)` |
 | `Main` | Conecta las señales anteriores | — |
@@ -207,6 +218,59 @@ progreso en que quedó cada capa.
   encogen y quedan al 18 % de opacidad.
 - Las capas retiradas (también en modo fantasma) **no se pueden seleccionar**: sus colisiones
   pasan a `collision_layer = 0`, y así el clic llega a los órganos internos.
+
+### Simulación (Fase 3)
+
+**Principio**: el motor no contiene números fisiológicos. Todo el modelo está en
+`data/escenarios.json` y `SimulationEngine` solo lo interpreta. La vista solo escucha señales.
+
+```
+PanelSimulacion ──iniciar_pulsado──▶ Main ──▶ SimulationEngine.iniciar()
+SimulationEngine._process: integra el modelo ──estado_actualizado(estado)──▶ Main reparte a:
+    PanelSimulacion.mostrar_estado · GraficoVivo.agregar · VisualesFisiologia · MiniVista
+SimulationEngine ──escenario_cambiado(id, true)──▶ Main ──▶ BodyViewer.mostrar_vista(vista del escenario)
+```
+
+Modelo matemático (cada paso de ≤ 0,1 s simulados):
+
+- Cada variable tiene un **valor base** (reposo) y una **constante de tiempo** `tau`.
+- **Objetivo** = base + acoplamientos + efectos del escenario (× intensidad) + efectos de estados.
+- **Convergencia exponencial** exacta: `valor = objetivo + (valor − objetivo)·e^(−dt/tau)`.
+  Es la solución de `dv/dt = (objetivo − v)/tau`, estable aunque se acelere a x4.
+- Tipos de efecto: `objetivo` (desplaza el objetivo), `tasa` (acumula por segundo: glucógeno,
+  daño pulmonar), `curva` (sube y baja sola: glucosa tras comer, `pico·x·e^(1−x)` con
+  `x = t/tiempo_pico`) y `rampa` (avance del bolo de 0 a 1).
+- `exponente` permite respuestas no lineales a la intensidad (el lactato se dispara al correr).
+- **Estados** con histéresis (`entrar` / `salir`): "cansado" (lactato > 6, sale < 4,5),
+  "sin energía", "oxigenación baja", "glucosa alta". Pueden sumar efectos y cambiar la actividad
+  del personaje.
+- El tiempo está **comprimido** (una comida se digiere en ~45 s simulados) para que se aprecie
+  en clase. Velocidad x1/x2/x4 multiplica el tiempo simulado; la pausa lo detiene.
+
+| Escenario | Qué cambia | Vista |
+|---|---|---|
+| Correr (caminar/trotar/correr) | ↑FC, ↑FR, ↑lactato, ↓energía, ↑temperatura | sin piel ni hueso; músculos semitransparentes; glóbulos rojos |
+| Fumar | ↓SpO₂, ↑FC, daño pulmonar acumulativo (no se recupera) | tórax; humo de la boca a los pulmones |
+| Comer | glucosa sube y baja (insulina), bolo por el tubo digestivo | digestivo; pulmones y corazón fantasma |
+
+Visualizaciones (`VisualesFisiologia`, configuradas en `data/visuales.json`):
+
+- **Latido**: escala con forma "lub-dub" cuya fase avanza a `FC/60` ciclos por segundo.
+- **Respiración**: pulmones se expanden con `FR/60` ciclos por segundo.
+- **Tintes**: `shaders/tinte.gdshader` como `material_overlay` (pulmón oscuro según daño, músculo
+  rojo según lactato). Si el órgano además está seleccionado, el resaltado se encadena con `next_pass`.
+- La escala del latido/respiración se pasa a `GestorCapas.fijar_escala_extra()` para combinarse
+  con la animación de capas sin pelearse por la misma propiedad.
+- **Partículas** (`FlujoParticulas`): un `MultiMesh` que recorre una curva suave; una sola llamada
+  de dibujo, ideal para GPU integradas. Sin prueba de profundidad para verse dentro del cuerpo.
+- **Bolo**: esfera que sigue la trayectoria `bolo` según la variable `progreso_bolo`.
+- Las trayectorias (`trayectorias` en `visuales.json`) son puntos en metros del cuerpo: al cambiar
+  a modelos .glb hay que ajustarlas.
+
+**Mini vista**: `SubViewport` con mundo 3D propio. La escena del personaje se lee de
+`visuales.json → personaje.escena`. Todo personaje debe tener `fijar_actividad(actividad)` y
+`fijar_factor_tiempo(factor)`. Hoy es `scenes/maniqui.tscn` (animado por código); ver la sección
+"Personaje de Mixamo" para el reemplazo.
 
 ### Convención del cuerpo (obligatoria)
 
@@ -316,7 +380,24 @@ Formato del mapeo:
 Los nombres fuente de `tools/mapeo_ejemplo.json` son orientativos: confírmalos con `--listar`.
 El script no modifica el archivo fuente (no guarda el `.blend`).
 
-## 8. Dónde colocar los modelos externos
+## 8. Personaje de Mixamo (mini vista)
+
+El código ya está listo (`scripts/personajes/personaje_mixamo.gd`). Pasos:
+
+1. En Mixamo, descargar el personaje (*FBX Binary, With Skin*) y animaciones de reposo,
+   caminar, trotar, correr y respirar cansado (por ejemplo *Idle*, *Walking*, *Jogging*,
+   *Running* y *Out Of Breath*; los nombres en Mixamo pueden variar) como *FBX, Without Skin,
+   In Place*. Guardarlas en `assets_fuente/mixamo/`.
+2. En Blender: importar el personaje y cada animación, renombrar cada acción
+   (Idle, Walking, Jogging, Running, Breathing), asignarlas al mismo armature (NLA → *Push Down*)
+   y exportar `models/Personaje.glb` con *Animation* activado (modo *NLA Tracks* o *Actions*).
+3. En Godot: crear `scenes/personaje_mixamo.tscn` con un `Node3D` raíz con el script
+   `personaje_mixamo.gd` y, como hijo, `models/Personaje.glb`.
+4. En `data/visuales.json`: `"escena": "res://scenes/personaje_mixamo.tscn"` y revisar los nombres
+   en `animaciones`. El script acepta nombres como `Running` o `Armature|Running`, pone las
+   animaciones en bucle y hace transiciones suaves (`transicion`).
+
+## 9. Dónde colocar los modelos externos
 
 Estos recursos requieren cuenta o navegador, así que se descargan a mano:
 
@@ -326,6 +407,6 @@ Estos recursos requieren cuenta o navegador, así que se descargan a mano:
   (*FBX Binary*, personaje *With Skin*; las animaciones de caminar/correr/respirar cansado
   pueden ir *Without Skin* y *In Place*) y colocarlas en `assets_fuente/mixamo/`.
 
-## 9. Guía para reemplazar primitivas por modelos .glb
+## 10. Guía para reemplazar primitivas por modelos .glb
 
 _Se completa en la Fase 4._

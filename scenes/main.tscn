@@ -5,6 +5,24 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/panel_ficha.tscn" id="3_panel"]
 [ext_resource type="PackedScene" path="res://scenes/ui/barra_vistas.tscn" id="4_barra"]
 [ext_resource type="PackedScene" path="res://scenes/ui/barra_sistemas.tscn" id="5_sistemas"]
+[ext_resource type="PackedScene" path="res://scenes/ui/panel_simulacion.tscn" id="6_simulacion"]
+[ext_resource type="Script" path="res://scripts/ui/grafico_vivo.gd" id="7_grafico"]
+[ext_resource type="PackedScene" path="res://scenes/ui/mini_vista.tscn" id="8_mini"]
+
+[sub_resource type="StyleBoxFlat" id="Estilo_panel"]
+bg_color = Color(1, 1, 1, 0.94)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+shadow_color = Color(0, 0.1, 0.2, 0.15)
+shadow_size = 6
+
+[sub_resource type="StyleBoxEmpty" id="Vacio"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -22,29 +40,61 @@ theme_override_colors/font_color = Color(0.3, 0.4, 0.45, 1)
 theme_override_font_sizes/font_size = 13
 text = "Simulación educativa con valores aproximados"
 
-[node name="Ayuda" type="Label" parent="UI"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
+[node name="PanelIzquierdo" type="TabContainer" parent="UI"]
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = -340.0
-offset_top = -96.0
-offset_right = -16.0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 306.0
 offset_bottom = -16.0
-grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Estilo_panel")
+current_tab = 0
+
+[node name="BarraSistemas" parent="UI/PanelIzquierdo" instance=ExtResource("5_sistemas")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Vacio")
+metadata/_tab_index = 0
+
+[node name="Simulacion" type="ScrollContainer" parent="UI/PanelIzquierdo"]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 1
+
+[node name="PanelSimulacion" parent="UI/PanelIzquierdo/Simulacion" instance=ExtResource("6_simulacion")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelGrafico" type="PanelContainer" parent="UI"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -196.0
+offset_right = 310.0
+offset_bottom = -16.0
+grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.35, 0.45, 0.5, 1)
-theme_override_font_sizes/font_size = 12
-horizontal_alignment = 2
-text = "Clic: seleccionar órgano
-Arrastrar: girar
-Rueda o pellizco: zoom
-Clic derecho, Mayús+arrastrar o dos dedos: desplazar"
-vertical_alignment = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Estilo_panel")
+
+[node name="Grafico" type="Control" parent="UI/PanelGrafico"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("7_grafico")
+
+[node name="MiniVista" parent="UI" instance=ExtResource("8_mini")]
 
 [node name="PanelFicha" parent="UI" instance=ExtResource("3_panel")]
 
 [node name="BarraVistas" parent="UI" instance=ExtResource("4_barra")]
-
-[node name="BarraSistemas" parent="UI" instance=ExtResource("5_sistemas")]
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 12.0
+offset_bottom = 46.0
+grow_vertical = 1

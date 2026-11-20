@@ -60,6 +60,28 @@ func _init() -> void:
 			print("  AVISO: la ficha '%s' no corresponde a ningún nodo de la escena" % id_o)
 			avisos += 1
 
+	# Nombres usados por la simulación y las visualizaciones
+	var visuales := _json("res://data/visuales.json")
+	for clave in ["corazon", "pulmones"]:
+		for id_o in visuales.get(clave, {}).get("organos", []):
+			if not vistos_organos.has(id_o):
+				printerr("  ERROR: visuales.json/%s usa el órgano '%s', que no existe" % [clave, id_o])
+				errores += 1
+	var sistema_musculos: String = visuales.get("musculos", {}).get("sistema", "")
+	if not sistema_musculos.is_empty() and not vistos_sistemas.has(sistema_musculos):
+		printerr("  ERROR: visuales.json/musculos usa el sistema '%s', que no existe" % sistema_musculos)
+		errores += 1
+	var simulacion := _json("res://data/escenarios.json")
+	for esc in simulacion.get("escenarios", []):
+		var vista: Dictionary = esc.get("vista", {})
+		var usados: Array = vista.get("capas_retiradas", []) + vista.get("capas_fantasma", {}).keys()
+		if vista.get("encuadre", "cuerpo") != "cuerpo":
+			usados.append(vista["encuadre"])
+		for id_s in usados:
+			if not vistos_sistemas.has(id_s):
+				printerr("  ERROR: escenario '%s' usa el sistema '%s', que no existe" % [esc.get("id"), id_s])
+				errores += 1
+
 	print("Sistemas: %d · Órganos: %d · Errores: %d · Avisos: %d" % [vistos_sistemas.size(), vistos_organos.size(), errores, avisos])
 	cuerpo.free()
 	quit(1 if errores > 0 else 0)

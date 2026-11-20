@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/personajes/maniqui.gd" id="1_maniqui"]
+
+[node name="Maniqui" type="Node3D"]
+script = ExtResource("1_maniqui")

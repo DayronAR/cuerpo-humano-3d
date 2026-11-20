@@ -1,0 +1,103 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/panel_simulacion.gd" id="1_panel"]
+
+[node name="PanelSimulacion" type="VBoxContainer"]
+theme_override_constants/separation = 8
+script = ExtResource("1_panel")
+
+[node name="TituloEscenario" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+text = "ESCENARIO"
+
+[node name="Escenarios" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Descripcion" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.38, 0.44, 1)
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="FilaIntensidad" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TituloIntensidad" type="Label" parent="FilaIntensidad"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+text = "INTENSIDAD"
+
+[node name="Intensidades" type="HBoxContainer" parent="FilaIntensidad"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TituloControles" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+text = "CONTROLES"
+
+[node name="Controles" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BotonIniciar" type="Button" parent="Controles"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Iniciar o reanudar el escenario"
+focus_mode = 0
+text = "▶  Iniciar"
+
+[node name="BotonPausar" type="Button" parent="Controles"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Detener el tiempo de la simulación"
+focus_mode = 0
+text = "⏸  Pausar"
+
+[node name="BotonReiniciar" type="Button" parent="Controles"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+tooltip_text = "Reiniciar: volver a los valores de reposo"
+focus_mode = 0
+text = "↺"
+
+[node name="Velocidades" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Separador" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="Estados" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 15
+text = "Estado: normal"
+autowrap_mode = 3
+
+[node name="Actividad" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.38, 0.44, 1)
+theme_override_font_sizes/font_size = 12
+text = "Actividad: En reposo"
+
+[node name="Valores" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 2
+columns = 3

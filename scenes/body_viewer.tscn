@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/camara_orbital.gd" id="2_camara"]
 [ext_resource type="PackedScene" path="res://scenes/cuerpo_prueba.tscn" id="3_cuerpo"]
 [ext_resource type="Script" path="res://scripts/gestor_capas.gd" id="4_capas"]
+[ext_resource type="Script" path="res://scripts/visuales/visuales_fisiologia.gd" id="5_visuales"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -56,3 +57,6 @@ script = ExtResource("2_camara")
 
 [node name="GestorCapas" type="Node" parent="."]
 script = ExtResource("4_capas")
+
+[node name="Visuales" type="Node3D" parent="."]
+script = ExtResource("5_visuales")

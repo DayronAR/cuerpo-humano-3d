@@ -5,6 +5,8 @@ extends HBoxContainer
 
 signal vista_solicitada(id_vista: String)
 
+const AYUDA := "Clic: seleccionar órgano\nArrastrar: girar\nRueda o pellizco: zoom\nClic derecho, Mayús+arrastrar o dos dedos: desplazar"
+
 
 func configurar(vistas: Array) -> void:
 	for hijo in get_children():
@@ -17,3 +19,9 @@ func configurar(vistas: Array) -> void:
 		boton.custom_minimum_size = Vector2(86, 34)
 		boton.pressed.connect(vista_solicitada.emit.bind(v.get("id", "")))
 		add_child(boton)
+	var ayuda := Button.new()
+	ayuda.text = "?"
+	ayuda.tooltip_text = AYUDA
+	ayuda.focus_mode = Control.FOCUS_NONE
+	ayuda.custom_minimum_size = Vector2(34, 34)
+	add_child(ayuda)

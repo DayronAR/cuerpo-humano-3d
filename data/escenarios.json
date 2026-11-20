@@ -1,0 +1,174 @@
+{
+  "_comentario": "Modelo de simulación. Todo el comportamiento fisiológico está aquí; SimulationEngine solo interpreta estas reglas. Tiempo en segundos SIMULADOS (comprimido: no es tiempo real). Valores aproximados con fines educativos.",
+
+  "_ayuda_modelo": {
+    "variables": "Cada variable converge exponencialmente hacia su OBJETIVO con constante de tiempo 'tau' (s). tau = null: no converge (solo cambia con efectos 'tasa'). objetivo = base + acoplamientos + efectos del escenario + efectos de los estados activos.",
+    "objetivo": "{tipo: objetivo, variable, delta, exponente?}: suma delta * factor_intensidad^exponente al objetivo.",
+    "tasa": "{tipo: tasa, variable, por_segundo, exponente?}: suma por_segundo * factor^exponente cada segundo simulado (acumula).",
+    "curva": "{tipo: curva, variable, pico, tiempo_pico}: suma al objetivo pico * (t/tp) * e^(1 - t/tp): sube hasta el pico y luego baja sola (p. ej. glucosa tras comer, por la insulina).",
+    "rampa": "{tipo: rampa, variable, duracion}: fija la variable a t/duracion (0 a 1). Se usa para el avance del bolo alimenticio.",
+    "acoplamientos": "objetivo de 'variable' += factor * valor de 'desde'.",
+    "vista": "Cómo se desarma el cuerpo al iniciar: capas_retiradas, capas_fantasma {sistema: transparencia}, encuadre ('cuerpo' o un sistema), margen (zoom: mayor = más lejos) y subir_en_pantalla (para dejar libre la zona del gráfico).",
+    "estados": "Se activan cuando se cumple 'entrar' y se desactivan con 'salir' (histéresis). Pueden añadir efectos y cambiar la actividad del personaje."
+  },
+
+  "variables": {
+    "frecuencia_cardiaca": {
+      "nombre": "Frecuencia cardiaca", "abreviatura": "FC", "unidad": "lpm",
+      "base": 70, "min": 40, "max": 200, "tau": 6, "decimales": 0, "color": "#d62839", "grafico": true
+    },
+    "frecuencia_respiratoria": {
+      "nombre": "Frecuencia respiratoria", "abreviatura": "FR", "unidad": "rpm",
+      "base": 14, "min": 8, "max": 50, "tau": 5, "decimales": 0, "color": "#3a86ff", "grafico": false
+    },
+    "saturacion_o2": {
+      "nombre": "Saturación de O₂", "abreviatura": "SpO₂", "unidad": "%",
+      "base": 98, "min": 80, "max": 100, "tau": 10, "decimales": 0, "color": "#2a9d8f", "grafico": true
+    },
+    "glucosa": {
+      "nombre": "Glucosa en sangre", "abreviatura": "Glucosa", "unidad": "mg/dL",
+      "base": 90, "min": 50, "max": 200, "tau": 10, "decimales": 0, "color": "#e9a23b", "grafico": true
+    },
+    "acido_lactico": {
+      "nombre": "Ácido láctico", "abreviatura": "Lactato", "unidad": "mmol/L",
+      "base": 1.0, "min": 0, "max": 15, "tau": 25, "decimales": 1, "color": "#8338ec", "grafico": true
+    },
+    "energia": {
+      "nombre": "Energía (glucógeno)", "abreviatura": "Energía", "unidad": "%",
+      "base": 100, "min": 0, "max": 100, "tau": 150, "decimales": 0, "color": "#43aa8b", "grafico": false
+    },
+    "temperatura": {
+      "nombre": "Temperatura", "abreviatura": "Temp.", "unidad": "°C",
+      "base": 36.8, "min": 35, "max": 41, "tau": 30, "decimales": 1, "color": "#f3722c", "grafico": false
+    },
+    "dano_pulmonar": {
+      "nombre": "Daño pulmonar", "abreviatura": "Daño pulm.", "unidad": "%",
+      "base": 0, "min": 0, "max": 100, "tau": null, "decimales": 0, "color": "#6c584c", "grafico": false
+    },
+    "progreso_bolo": {
+      "nombre": "Avance del bolo", "abreviatura": "Bolo", "unidad": "",
+      "base": 0, "min": 0, "max": 1, "tau": null, "decimales": 2, "interna": true
+    }
+  },
+
+  "acoplamientos": [
+    { "variable": "saturacion_o2", "desde": "dano_pulmonar", "factor": -0.06, "_comentario": "Un pulmón dañado oxigena peor la sangre" },
+    { "variable": "frecuencia_respiratoria", "desde": "dano_pulmonar", "factor": 0.05, "_comentario": "Se respira más rápido para compensar" },
+    { "variable": "frecuencia_cardiaca", "desde": "dano_pulmonar", "factor": 0.1 }
+  ],
+
+  "estados": [
+    {
+      "id": "cansado", "nombre": "Cansado", "color": "#e07a1f",
+      "descripcion": "El ácido láctico supera el umbral: los músculos se fatigan.",
+      "entrar": { "variable": "acido_lactico", "mayor_que": 6.0 },
+      "salir": { "variable": "acido_lactico", "menor_que": 4.5 },
+      "actividad": "cansado",
+      "efectos": [ { "tipo": "objetivo", "variable": "frecuencia_respiratoria", "delta": 6 } ]
+    },
+    {
+      "id": "agotado", "nombre": "Sin energía", "color": "#bc4749",
+      "descripcion": "Las reservas de glucógeno se agotaron.",
+      "entrar": { "variable": "energia", "menor_que": 15 },
+      "salir": { "variable": "energia", "mayor_que": 25 },
+      "actividad": "cansado",
+      "efectos": [ { "tipo": "objetivo", "variable": "glucosa", "delta": -10 } ]
+    },
+    {
+      "id": "hipoxemia", "nombre": "Oxigenación baja", "color": "#577590",
+      "descripcion": "La saturación de oxígeno está por debajo de lo normal.",
+      "entrar": { "variable": "saturacion_o2", "menor_que": 93 },
+      "salir": { "variable": "saturacion_o2", "mayor_que": 94.5 },
+      "efectos": []
+    },
+    {
+      "id": "hiperglucemia", "nombre": "Glucosa alta tras comer", "color": "#e9a23b",
+      "descripcion": "Pico de glucosa posprandial; la insulina la hará bajar.",
+      "entrar": { "variable": "glucosa", "mayor_que": 140 },
+      "salir": { "variable": "glucosa", "menor_que": 130 },
+      "efectos": []
+    }
+  ],
+
+  "actividades": {
+    "reposo": "En reposo",
+    "caminar": "Caminando",
+    "trotar": "Trotando",
+    "correr": "Corriendo",
+    "cansado": "Cansado, respirando agitado"
+  },
+
+  "escenarios": [
+    {
+      "id": "correr",
+      "nombre": "Correr",
+      "descripcion": "El ejercicio aumenta la frecuencia cardiaca y respiratoria, consume glucógeno y produce ácido láctico en los músculos. Al superar el umbral de lactato aparece el cansancio.",
+      "intensidades": [
+        { "id": "caminar", "nombre": "Caminar", "factor": 0.3, "actividad": "caminar" },
+        { "id": "trotar", "nombre": "Trotar", "factor": 0.6, "actividad": "trotar" },
+        { "id": "correr", "nombre": "Correr", "factor": 1.0, "actividad": "correr" }
+      ],
+      "intensidad_inicial": "trotar",
+      "vista": {
+        "capas_retiradas": ["Piel", "Oseo"],
+        "capas_fantasma": { "Muscular": 0.45 },
+        "encuadre": "cuerpo",
+        "margen": 1.4,
+        "subir_en_pantalla": 0.1
+      },
+      "visuales": { "globulos": true },
+      "efectos": [
+        { "tipo": "objetivo", "variable": "frecuencia_cardiaca", "delta": 105 },
+        { "tipo": "objetivo", "variable": "frecuencia_respiratoria", "delta": 26 },
+        { "tipo": "objetivo", "variable": "acido_lactico", "delta": 10, "exponente": 2.5 },
+        { "tipo": "tasa", "variable": "energia", "por_segundo": -1.4, "exponente": 1.5 },
+        { "tipo": "objetivo", "variable": "temperatura", "delta": 1.4 },
+        { "tipo": "objetivo", "variable": "glucosa", "delta": -12 },
+        { "tipo": "objetivo", "variable": "saturacion_o2", "delta": -1 }
+      ]
+    },
+    {
+      "id": "fumar",
+      "nombre": "Fumar",
+      "descripcion": "El monóxido de carbono del humo ocupa el lugar del oxígeno en la sangre y la nicotina acelera el corazón. Con cada cigarrillo el daño pulmonar se acumula y ya no se recupera.",
+      "intensidades": [],
+      "vista": {
+        "capas_retiradas": ["Piel", "Muscular"],
+        "capas_fantasma": { "Oseo": 0.7 },
+        "encuadre": "Respiratorio",
+        "margen": 2.2,
+        "subir_en_pantalla": 0.12
+      },
+      "visuales": { "humo": true },
+      "actividad": "reposo",
+      "efectos": [
+        { "tipo": "objetivo", "variable": "saturacion_o2", "delta": -5 },
+        { "tipo": "objetivo", "variable": "frecuencia_cardiaca", "delta": 18 },
+        { "tipo": "objetivo", "variable": "frecuencia_respiratoria", "delta": 2 },
+        { "tipo": "tasa", "variable": "dano_pulmonar", "por_segundo": 0.35 }
+      ]
+    },
+    {
+      "id": "comer",
+      "nombre": "Comer",
+      "descripcion": "El alimento baja por el esófago, se mezcla en el estómago y se absorbe en el intestino. La glucosa sube y luego baja gracias a la insulina del páncreas.",
+      "intensidades": [],
+      "vista": {
+        "capas_retiradas": ["Piel", "Muscular", "Oseo"],
+        "capas_fantasma": { "Respiratorio": 0.8, "Circulatorio": 0.8 },
+        "encuadre": "Digestivo",
+        "margen": 1.7,
+        "subir_en_pantalla": 0.16
+      },
+      "visuales": { "bolo": true },
+      "actividad": "reposo",
+      "efectos": [
+        { "tipo": "curva", "variable": "glucosa", "pico": 75, "tiempo_pico": 25 },
+        { "tipo": "rampa", "variable": "progreso_bolo", "duracion": 45 },
+        { "tipo": "curva", "variable": "frecuencia_cardiaca", "pico": 8, "tiempo_pico": 20 },
+        { "tipo": "tasa", "variable": "energia", "por_segundo": 0.5 },
+        { "tipo": "curva", "variable": "temperatura", "pico": 0.2, "tiempo_pico": 30 }
+      ]
+    }
+  ]
+}
