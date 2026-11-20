@@ -7,6 +7,8 @@ const RUTA_ORGANOS := "res://data/organos.json"
 const RUTA_CAMARA := "res://data/camara.json"
 
 var sistemas: Array = []          ## Lista ordenada de sistemas (cada uno es un Dictionary)
+var orden_capas: Array = []       ## ids de sistema de afuera hacia adentro
+var animacion_capas: Dictionary = {}
 var organos: Dictionary = {}      ## id de nodo del órgano -> ficha
 var camara: Dictionary = {}       ## Configuración de la cámara orbital
 
@@ -14,7 +16,10 @@ var _sistemas_por_id: Dictionary = {}
 
 
 func _init() -> void:
-	sistemas = _cargar_json(RUTA_SISTEMAS).get("sistemas", [])
+	var datos_sistemas := _cargar_json(RUTA_SISTEMAS)
+	sistemas = datos_sistemas.get("sistemas", [])
+	orden_capas = datos_sistemas.get("orden_capas", [])
+	animacion_capas = datos_sistemas.get("animacion_capas", {})
 	organos = _cargar_json(RUTA_ORGANOS).get("organos", {})
 	camara = _cargar_json(RUTA_CAMARA)
 	for s in sistemas:
@@ -35,6 +40,11 @@ func sistema(id: String) -> Dictionary:
 
 func nombre_sistema(id: String) -> String:
 	return sistema(id).get("nombre", id)
+
+
+## Capas (ids de sistema) que hay que retirar para ver el sistema indicado.
+func cubierto_por(id: String) -> Array:
+	return sistema(id).get("cubierto_por", [])
 
 
 func color_sistema(id: String) -> Color:

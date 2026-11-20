@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/barra_sistemas.gd" id="1_barra"]
+
+[sub_resource type="StyleBoxFlat" id="Estilo_panel"]
+bg_color = Color(1, 1, 1, 0.92)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+shadow_color = Color(0, 0.1, 0.2, 0.15)
+shadow_size = 6
+
+[node name="BarraSistemas" type="PanelContainer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 286.0
+offset_bottom = -16.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Estilo_panel")
+script = ExtResource("1_barra")
+
+[node name="Contenido" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Titulo" type="Label" parent="Contenido"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
+theme_override_font_sizes/font_size = 20
+text = "Sistemas del cuerpo"
+
+[node name="BotonCompleto" type="Button" parent="Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+tooltip_text = "Rearmar todas las capas y ver el cuerpo entero"
+focus_mode = 0
+text = "Cuerpo completo"
+
+[node name="Separador" type="HSeparator" parent="Contenido"]
+layout_mode = 2
+
+[node name="Desplazable" type="ScrollContainer" parent="Contenido"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Lista" type="VBoxContainer" parent="Contenido/Desplazable"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Separador2" type="HSeparator" parent="Contenido"]
+layout_mode = 2
+
+[node name="Fantasma" type="CheckButton" parent="Contenido"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Las capas retiradas quedan semitransparentes en vez de ocultarse"
+focus_mode = 0
+theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
+theme_override_colors/font_pressed_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_hover_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.06, 0.43, 0.55, 1)
+text = "Modo fantasma"

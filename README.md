@@ -140,9 +140,11 @@ Main (Node)                         scenes/main.tscn · scripts/main.gd
 ├── BodyViewer (Node3D)             scenes/body_viewer.tscn · scripts/body_viewer.gd
 │   ├── Entorno, LuzPrincipal, LuzRelleno, Plataforma
 │   ├── Cuerpo  ← instancia de scenes/cuerpo_prueba.tscn (luego, del cuerpo con .glb)
-│   └── Camara (Camera3D)           scripts/camara_orbital.gd
+│   ├── Camara (Camera3D)           scripts/camara_orbital.gd
+│   └── GestorCapas (Node)          scripts/gestor_capas.gd
 └── UI (CanvasLayer)
     ├── Aviso, Ayuda (Label)
+    ├── BarraSistemas               scenes/ui/barra_sistemas.tscn · scripts/ui/barra_sistemas.gd
     ├── PanelFicha                  scenes/ui/panel_ficha.tscn · scripts/ui/panel_ficha.gd
     └── BarraVistas                 scenes/ui/barra_vistas.tscn · scripts/ui/barra_vistas.gd
 Autoload: Datos                     scripts/datos.gd
@@ -152,7 +154,9 @@ Autoload: Datos                     scripts/datos.gd
 |---|---|---|
 | `Datos` | Carga y expone `sistemas.json`, `organos.json`, `camara.json` | — |
 | `CamaraOrbital` | Girar, zoom, desplazar (mouse y trackpad), vistas rápidas con Tween | `transicion_terminada` |
-| `BodyViewer` | Indexa el cuerpo, crea colisiones, detecta clics, resalta el órgano | `organo_seleccionado(id, sistema)`, `seleccion_limpiada` |
+| `BodyViewer` | Indexa el cuerpo, crea colisiones, detecta clics, resalta el órgano, muestra sistemas y encuadra | `organo_seleccionado(id, sistema)`, `seleccion_limpiada`, `sistema_mostrado(id)` |
+| `GestorCapas` | Retira/restaura capas una por una con animación interrumpible; modo fantasma | `capa_retirada(id)`, `capa_restaurada(id)`, `secuencia_terminada` |
+| `BarraSistemas` | Lista de sistemas desde JSON, "Cuerpo completo", interruptor de modo fantasma | `sistema_solicitado(id)`, `modo_fantasma_cambiado(activo)` |
 | `PanelFicha` | Muestra la ficha que recibe | `cerrado` |
 | `BarraVistas` | Crea un botón por vista definida en JSON | `vista_solicitada(id)` |
 | `Main` | Conecta las señales anteriores | — |
@@ -164,6 +168,45 @@ clic → BodyViewer (rayo físico → órgano) ──organo_seleccionado──�
 Main → Datos.ficha_organo(id) → PanelFicha.mostrar(ficha)
 PanelFicha ──cerrado──▶ BodyViewer.limpiar_seleccion() ──seleccion_limpiada──▶ PanelFicha.ocultar()
 ```
+
+Flujo al elegir un sistema:
+
+```
+BarraSistemas ──sistema_solicitado("Circulatorio")──▶ Main → BodyViewer.mostrar_sistema()
+BodyViewer → GestorCapas.retirar_solo(Datos.cubierto_por(id))   + Camara.encuadrar(caja del sistema)
+GestorCapas ──capa_retirada("Piel")──▶ BodyViewer: desactiva colisiones de esa capa (y deselecciona)
+BodyViewer ──sistema_mostrado(id)──▶ BarraSistemas.marcar(id)
+```
+
+### Capas (Fase 2)
+
+Definidas en `data/sistemas.json`:
+
+- `orden_capas`: todos los sistemas de **afuera hacia adentro** (Piel > Muscular > Oseo > …).
+- `cubierto_por` (en cada sistema): las capas que hay que retirar para verlo.
+- `animacion_capas`: duración, pausa entre capas, desplazamiento, escala final, transparencia del
+  modo fantasma y margen de encuadre.
+
+Algoritmo de `GestorCapas.retirar_solo(capas_objetivo)`:
+
+1. **Restaurar** las capas retiradas que ya no están en el objetivo, de **adentro hacia afuera**.
+2. **Retirar** las del objetivo que aún no lo están, de **afuera hacia adentro**.
+3. Cada capa se anima completa antes de la siguiente (una por una).
+
+Así, al pasar de Circulatorio (retira Piel, Muscular, Oseo) a Óseo (retira Piel, Muscular) solo
+se restaura el Óseo. Cada capa guarda un `progreso` de 0 (en su sitio) a 1 (retirada) que anima
+un `Tween`; una función traduce el progreso a posición (se aleja del eje del cuerpo), escala
+(se encoge alrededor de su centro) y transparencia. Si el usuario cambia de sistema a mitad de
+una secuencia, la anterior se abandona (contador de generación) y la nueva continúa desde el
+progreso en que quedó cada capa.
+
+- **Transparencia**: al empezar a desvanecerse, cada superficie recibe una *copia* de su material
+  con `TRANSPARENCY_ALPHA_DEPTH_PRE_PASS`; al restaurarse vuelve el material original opaco.
+  (Se probó `GeometryInstance3D.transparency`, pero no tuvo efecto visible con este renderer.)
+- **Modo fantasma**: un valor de mezcla 0–1 animado: con 1 las capas retiradas no se mueven ni
+  encogen y quedan al 18 % de opacidad.
+- Las capas retiradas (también en modo fantasma) **no se pueden seleccionar**: sus colisiones
+  pasan a `collision_layer = 0`, y así el clic llega a los órganos internos.
 
 ### Convención del cuerpo (obligatoria)
 

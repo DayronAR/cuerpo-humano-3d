@@ -1,47 +1,65 @@
 {
-  "_comentario": "Sistemas del cuerpo. El 'id' debe coincidir EXACTAMENTE con el nombre del nodo Node3D del sistema en la escena del cuerpo.",
+  "_comentario": "Sistemas del cuerpo. El 'id' debe coincidir EXACTAMENTE con el nombre del nodo Node3D del sistema en la escena del cuerpo. 'orden_capas' va de afuera hacia adentro; 'cubierto_por' lista las capas que se retiran para ver el sistema.",
+  "orden_capas": ["Piel", "Muscular", "Oseo", "Respiratorio", "Digestivo", "Circulatorio", "Nervioso"],
+  "animacion_capas": {
+    "_comentario": "Duración en segundos por capa; desplazamiento en metros; escala_final y transparencia_fantasma entre 0 y 1.",
+    "duracion": 0.45,
+    "pausa_entre_capas": 0.06,
+    "desplazamiento": 0.12,
+    "escala_final": 0.82,
+    "transparencia_fantasma": 0.82,
+    "duracion_cambio_fantasma": 0.3,
+    "margen_encuadre": 1.1
+  },
   "sistemas": [
     {
       "id": "Piel",
       "nombre": "Piel (tegumentario)",
       "color": "#e8b796",
-      "descripcion": "Cubre y protege el cuerpo, regula la temperatura y percibe el tacto."
+      "descripcion": "Cubre y protege el cuerpo, regula la temperatura y percibe el tacto.",
+      "cubierto_por": []
     },
     {
       "id": "Muscular",
       "nombre": "Sistema muscular",
       "color": "#c0393b",
-      "descripcion": "Músculos que mueven el esqueleto, mantienen la postura y generan calor."
+      "descripcion": "Músculos que mueven el esqueleto, mantienen la postura y generan calor.",
+      "cubierto_por": ["Piel"]
     },
     {
       "id": "Oseo",
       "nombre": "Sistema óseo",
       "color": "#d9d2bd",
-      "descripcion": "Huesos que sostienen el cuerpo, protegen órganos y producen células sanguíneas."
+      "descripcion": "Huesos que sostienen el cuerpo, protegen órganos y producen células sanguíneas.",
+      "cubierto_por": ["Piel", "Muscular"]
     },
     {
       "id": "Circulatorio",
       "nombre": "Sistema circulatorio",
       "color": "#d62839",
-      "descripcion": "Corazón y vasos que transportan oxígeno, nutrientes y desechos por la sangre."
+      "descripcion": "Corazón y vasos que transportan oxígeno, nutrientes y desechos por la sangre.",
+      "cubierto_por": ["Piel", "Muscular", "Oseo"]
     },
     {
       "id": "Respiratorio",
       "nombre": "Sistema respiratorio",
       "color": "#ef8fa0",
-      "descripcion": "Vías aéreas y pulmones que llevan oxígeno a la sangre y eliminan CO₂."
+      "descripcion": "Vías aéreas y pulmones que llevan oxígeno a la sangre y eliminan CO₂.",
+      "cubierto_por": ["Piel", "Muscular", "Oseo"]
     },
     {
       "id": "Digestivo",
       "nombre": "Sistema digestivo",
       "color": "#d4885f",
-      "descripcion": "Tubo y glándulas que transforman los alimentos en nutrientes absorbibles."
+      "descripcion": "Tubo y glándulas que transforman los alimentos en nutrientes absorbibles.",
+      "cubierto_por": ["Piel", "Muscular", "Oseo"]
     },
     {
       "id": "Nervioso",
       "nombre": "Sistema nervioso",
       "color": "#e6c35c",
-      "descripcion": "Encéfalo, médula y nervios que reciben información y coordinan el cuerpo."
+      "descripcion": "Encéfalo, médula y nervios que reciben información y coordinan el cuerpo.",
+      "cubierto_por": ["Piel", "Oseo"]
     }
   ]
 }

@@ -7,10 +7,13 @@ extends Node3D
 ##   - Crear colisiones en tiempo de ejecución para poder seleccionar con un rayo
 ##     (funciona igual con primitivas que con modelos .glb).
 ##   - Detectar clics (sin confundirlos con arrastres de cámara) y resaltar el órgano elegido.
+##   - Mostrar un sistema: pedir al GestorCapas que retire las capas que lo cubren, desactivar
+##     la selección de las capas retiradas y encuadrar el sistema con la cámara.
 ## No sabe nada de la interfaz: solo emite señales que escucha la escena principal.
 
 signal organo_seleccionado(id_organo: String, id_sistema: String)
 signal seleccion_limpiada
+signal sistema_mostrado(id_sistema: String)   ## "" = cuerpo completo
 
 ## Distancia máxima (en píxeles) entre presionar y soltar para considerar que fue un clic
 const UMBRAL_CLIC := 6.0
@@ -19,9 +22,14 @@ const SHADER_RESALTADO := preload("res://shaders/resaltado.gdshader")
 
 @onready var camara: CamaraOrbital = $Camara
 @onready var cuerpo: Node3D = $Cuerpo
+@onready var capas: GestorCapas = $GestorCapas
 
 var _organos: Dictionary = {}       ## id -> Node3D del órgano
 var _sistemas: Dictionary = {}      ## id -> Node3D del sistema
+var _colisiones: Dictionary = {}    ## id de sistema -> Array[StaticBody3D]
+var _cajas_sistemas: Dictionary = {}  ## id de sistema -> AABB en el mundo (posición original)
+var _caja_cuerpo := AABB()
+var _sistema_actual := ""
 var _organo_actual: Node3D = null
 var _material_resaltado: ShaderMaterial
 var _pos_presion := Vector2.INF
@@ -32,6 +40,9 @@ func _ready() -> void:
 	_material_resaltado.shader = SHADER_RESALTADO
 	camara.configurar(Datos.camara)
 	_indexar_cuerpo()
+	capas.configurar(_sistemas, Datos.orden_capas, Datos.animacion_capas, camara, _caja_cuerpo.get_center())
+	capas.capa_retirada.connect(_on_capa_retirada)
+	capas.capa_restaurada.connect(_on_capa_restaurada)
 
 
 # --- API pública --------------------------------------------------------------
@@ -55,6 +66,33 @@ func limpiar_seleccion() -> void:
 	_resaltar(_organo_actual, false)
 	_organo_actual = null
 	seleccion_limpiada.emit()
+
+
+## Retira las capas que cubren el sistema (según sistemas.json) y lo encuadra con la cámara.
+func mostrar_sistema(id: String) -> void:
+	if not _sistemas.has(id):
+		push_warning("Sistema desconocido: %s" % id)
+		return
+	_sistema_actual = id
+	capas.retirar_solo(Datos.cubierto_por(id))
+	_encuadrar(_cajas_sistemas[id])
+	sistema_mostrado.emit(id)
+
+
+## Restaura todas las capas y vuelve a encuadrar el cuerpo entero.
+func mostrar_cuerpo_completo() -> void:
+	_sistema_actual = ""
+	capas.restaurar_todo()
+	camara.encuadrar(camara.objetivo_inicial(), camara.distancia_inicial())
+	sistema_mostrado.emit("")
+
+
+func establecer_modo_fantasma(activo: bool) -> void:
+	capas.establecer_modo_fantasma(activo)
+
+
+func sistema_actual() -> String:
+	return _sistema_actual
 
 
 func obtener_organo(id: String) -> Node3D:
@@ -87,16 +125,22 @@ func _indexar_cuerpo() -> void:
 			continue
 		if Datos.sistema(sistema.name).is_empty():
 			push_warning("El nodo '%s' no está declarado en sistemas.json" % sistema.name)
-		_sistemas[String(sistema.name)] = sistema
+		var id_sistema := String(sistema.name)
+		_sistemas[id_sistema] = sistema
+		_colisiones[id_sistema] = []
 		for organo in sistema.get_children():
 			if not organo is Node3D:
 				continue
-			organo.set_meta("sistema", String(sistema.name))
+			organo.set_meta("sistema", id_sistema)
 			_organos[String(organo.name)] = organo
-			_crear_colisiones(organo)
+			_colisiones[id_sistema].append_array(_crear_colisiones(organo))
+		_cajas_sistemas[id_sistema] = _caja_mundo(sistema)
+		_caja_cuerpo = _cajas_sistemas[id_sistema] if _caja_cuerpo.size == Vector3.ZERO \
+				else _caja_cuerpo.merge(_cajas_sistemas[id_sistema])
 
 
-func _crear_colisiones(organo: Node3D) -> void:
+func _crear_colisiones(organo: Node3D) -> Array:
+	var creados := []
 	for malla in mallas_de(organo):
 		if malla.mesh == null:
 			continue
@@ -107,6 +151,40 @@ func _crear_colisiones(organo: Node3D) -> void:
 		forma.shape = malla.mesh.create_trimesh_shape()
 		cuerpo_fisico.add_child(forma)
 		malla.add_child(cuerpo_fisico)
+		creados.append(cuerpo_fisico)
+	return creados
+
+
+func _caja_mundo(nodo: Node3D) -> AABB:
+	var resultado := AABB()
+	var primero := true
+	for malla in mallas_de(nodo):
+		var caja: AABB = malla.global_transform * malla.get_aabb()
+		resultado = caja if primero else resultado.merge(caja)
+		primero = false
+	return resultado
+
+
+## Mueve la cámara para que la caja quepa en pantalla, manteniendo el ángulo actual.
+func _encuadrar(caja: AABB) -> void:
+	var radio := caja.size.length() * 0.5
+	var margen: float = Datos.animacion_capas.get("margen_encuadre", 0.9)
+	var distancia := radio / sin(deg_to_rad(camara.fov * 0.5)) * margen
+	camara.encuadrar(caja.get_center(), distancia)
+
+
+# --- Reacción a las capas ----------------------------------------------------------
+
+func _on_capa_retirada(id_sistema: String) -> void:
+	for cuerpo_fisico in _colisiones.get(id_sistema, []):
+		cuerpo_fisico.collision_layer = 0   # El rayo de selección ya no lo encuentra
+	if _organo_actual and _organo_actual.get_meta("sistema") == id_sistema:
+		limpiar_seleccion()
+
+
+func _on_capa_restaurada(id_sistema: String) -> void:
+	for cuerpo_fisico in _colisiones.get(id_sistema, []):
+		cuerpo_fisico.collision_layer = 1
 
 
 # --- Entrada -------------------------------------------------------------------

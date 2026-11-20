@@ -75,6 +75,14 @@ func configurar(cfg: Dictionary) -> void:
 	_saltar_a_deseado()
 
 
+func objetivo_inicial() -> Vector3:
+	return _objetivo_inicial
+
+
+func distancia_inicial() -> float:
+	return _distancia_inicial
+
+
 ## Devuelve la definición de una vista rápida por su id (o {} si no existe).
 func obtener_vista(id: String) -> Dictionary:
 	for v in _cfg.get("vistas", []):

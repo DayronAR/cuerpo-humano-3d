@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://scenes/body_viewer.tscn" id="2_visor"]
 [ext_resource type="PackedScene" path="res://scenes/ui/panel_ficha.tscn" id="3_panel"]
 [ext_resource type="PackedScene" path="res://scenes/ui/barra_vistas.tscn" id="4_barra"]
+[ext_resource type="PackedScene" path="res://scenes/ui/barra_sistemas.tscn" id="5_sistemas"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -22,16 +23,20 @@ theme_override_font_sizes/font_size = 13
 text = "Simulación educativa con valores aproximados"
 
 [node name="Ayuda" type="Label" parent="UI"]
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
+offset_left = -340.0
 offset_top = -96.0
-offset_right = 340.0
+offset_right = -16.0
 offset_bottom = -16.0
+grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.35, 0.45, 0.5, 1)
 theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
 text = "Clic: seleccionar órgano
 Arrastrar: girar
 Rueda o pellizco: zoom
@@ -41,3 +46,5 @@ vertical_alignment = 2
 [node name="PanelFicha" parent="UI" instance=ExtResource("3_panel")]
 
 [node name="BarraVistas" parent="UI" instance=ExtResource("4_barra")]
+
+[node name="BarraSistemas" parent="UI" instance=ExtResource("5_sistemas")]
