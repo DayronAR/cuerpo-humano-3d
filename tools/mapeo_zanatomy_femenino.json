@@ -180,7 +180,8 @@
     "breast fat": "Tejido adiposo mamario",
     "hair scalp": "Cabello",
     "ponytail": "Cola de caballo",
-    "hair tie": "Liga del cabello"
+    "hair tie": "Liga del cabello",
+    "hair loose": "Melena"
   },
   "sistemas": {
     "Piel": {
@@ -193,8 +194,7 @@
       "Cabello": {
         "fuentes": [
           "VH_F_hair_scalp",
-          "VH_F_ponytail",
-          "VH_F_hair_tie"
+          "VH_F_hair_loose"
         ],
         "partes": "individual"
       }
@@ -370,7 +370,6 @@
     "Vejiga": "vejiga",
     "Mamas": "glandula",
     "Mamas__breast_fat": "grasa",
-    "Cabello": "cabello",
-    "Cabello__hair_tie": "intestino_grueso"
+    "Cabello": "cabello"
   }
 }

@@ -5,7 +5,8 @@ generar_cabello.py — Genera el cabello del cuerpo femenino sobre su cuero cabe
   2. Elige los vértices del cuero cabelludo con una línea de nacimiento del pelo: más alta en la
      frente, bajando por los lados (por encima de las orejas) hasta la nuca.
   3. Crea una capa de pelo desplazada hacia afuera (más gruesa arriba, fina en el borde).
-  4. Agrega una cola de caballo desde la parte posterior de la cabeza, con su liga.
+  4. Agrega una melena suelta que cae por detrás de las orejas hasta media espalda y se apoya
+     sobre los hombros y la espalda (detecta la piel para no atravesarla).
 Uso:
     blender -b --factory-startup --python tools/generar_cabello.py
 Salida: assets_fuente/hra-femenino/Cabello_generado.glb
@@ -22,6 +23,12 @@ PIEL = "assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb"
 SALIDA = "assets_fuente/hra-femenino/Cabello_generado.glb"
 GROSOR = 0.013          # Volumen del pelo en la coronilla (m)
 GROSOR_BORDE = 0.0015   # En la línea de nacimiento
+COLUMNAS = 120          # Resolución de la melena alrededor de la cabeza
+ABERTURA = 95          # Grados a cada lado desde la nuca (cubre por detrás de las orejas)
+LARGO_ATRAS = 1.15      # Altura (m) a la que llegan las puntas en la espalda
+LARGO_LADOS = 1.24      # ... y a los lados, sobre los hombros
+PASO = 0.006            # Distancia entre filas
+SEPARACION = 0.006      # Distancia mínima entre el pelo y la piel
 
 
 def suave(a, b, x):
@@ -94,44 +101,65 @@ def main():
     bpy.context.scene.collection.objects.link(capa)
     print(f"  cuero cabelludo: {len(caras)} caras")
 
-    # Cola de caballo: tubo que nace atrás de la cabeza y cae sobre la espalda
-    inicio = Vector((0.0, y_atras + 0.006, z_top - 0.085))
-    puntos = [inicio, inicio + Vector((0, 0.03, -0.035)), inicio + Vector((0, 0.048, -0.09)),
-              inicio + Vector((0.006, 0.05, -0.16)), inicio + Vector((-0.004, 0.044, -0.22)),
-              inicio + Vector((0, 0.036, -0.26))]
-    radios = [0.026, 0.034, 0.033, 0.027, 0.018, 0.004]   # Cola llena que se afina al final
-    curva = bpy.data.curves.new("cola", "CURVE")
-    curva.dimensions = "3D"
-    curva.bevel_depth = 1.0
-    curva.bevel_resolution = 4
-    curva.resolution_u = 10
-    tramo = curva.splines.new("BEZIER")
-    tramo.bezier_points.add(len(puntos) - 1)
-    for bp, p, r in zip(tramo.bezier_points, puntos, radios):
-        bp.co = p
-        bp.radius = r
-        bp.handle_left_type = bp.handle_right_type = "AUTO"
-    temporal = bpy.data.objects.new("temporal", curva)
-    bpy.context.scene.collection.objects.link(temporal)
-    dg = bpy.context.evaluated_depsgraph_get()
-    cola = bpy.data.objects.new("VH_F_ponytail", bpy.data.meshes.new_from_object(temporal.evaluated_get(dg), depsgraph=dg))
-    bpy.context.scene.collection.objects.link(cola)
-    bpy.data.objects.remove(temporal, do_unlink=True)
-
-    # Liga del pelo
-    lb = bmesh.new()
-    bmesh.ops.create_cone(lb, cap_ends=True, segments=20, radius1=0.029, radius2=0.029, depth=0.012)
-    eje = (puntos[1] - puntos[0]).normalized()
-    rot = eje.to_track_quat("Z", "Y").to_matrix().to_4x4()
-    bmesh.ops.transform(lb, matrix=Matrix.Translation(inicio + eje * 0.012) @ rot, verts=lb.verts[:])
-    ml = bpy.data.meshes.new("VH_F_hair_tie")
-    lb.to_mesh(ml)
-    lb.free()
-    liga = bpy.data.objects.new("VH_F_hair_tie", ml)
-    bpy.context.scene.collection.objects.link(liga)
+    # Melena suelta: columnas que bajan desde la parte más ancha de la cabeza (por detrás de las
+    # orejas) y se apoyan sobre los hombros y la espalda sin atravesar la piel
+    from mathutils.bvhtree import BVHTree
+    arbol = BVHTree.FromBMesh(bm)
+    z_ecuador = z_top - 0.035   # Nace cerca de la coronilla y baja abrazando la cabeza
+    centro = Vector((0.0, cy, z_ecuador))
+    columnas = []
+    for c in range(COLUMNAS):
+        theta = math.radians(-ABERTURA + 2 * ABERTURA * c / (COLUMNAS - 1))   # 0 = atrás
+        d = Vector((math.sin(theta), math.cos(theta), 0.0))
+        golpe, _, _, _ = arbol.ray_cast(centro + d * 0.3, -d, 0.4)
+        if golpe is None:
+            continue
+        mechon = 0.0012 * math.sin(theta * 47.0) + 0.0008 * math.sin(theta * 113.0)   # Relieve de mechones
+        punto = golpe + d * (GROSOR + 0.003 + mechon)
+        # Más largo atrás que a los lados; puntas irregulares
+        z_fin = LARGO_ATRAS + (LARGO_LADOS - LARGO_ATRAS) * abs(math.sin(theta)) ** 2 + 0.006 * math.sin(theta * 9.0)
+        columna = [punto.copy()]
+        pasos = 0
+        siguiendo = True   # Sobre la cabeza: la sigue mientras se ensancha; después cae recto
+        while punto.z > z_fin and pasos < 400:
+            pasos += 1
+            punto = punto + Vector((0, 0, -PASO))
+            radial = Vector((punto.x, punto.y - cy, 0.0))
+            cercano, normal, _, _ = arbol.find_nearest(punto)
+            if cercano is None:
+                columna.append(punto.copy())
+                continue
+            if siguiendo:
+                propuesto = cercano + normal * (GROSOR + 0.003)
+                r_nuevo = Vector((propuesto.x, propuesto.y - cy, 0.0)).length
+                if r_nuevo >= radial.length - 0.0015 or (punto - cercano).dot(normal) < GROSOR:
+                    punto = Vector((propuesto.x, propuesto.y, punto.z))
+                else:
+                    siguiendo = False   # La cabeza se estrecha (nuca, mandíbula): el pelo cae libre
+            else:
+                # Al caer, el pelo se junta un poco detrás de la cabeza (no se abre como capa)
+                punto.x *= 0.996
+                falta = SEPARACION - (punto - cercano).dot(normal)
+                if falta > 0:   # Apoyado en hombros o espalda: resbala hacia atrás
+                    punto = punto + Vector((0.0, 1.0, 0.0)) * falta * 1.6
+            columna.append(punto.copy())
+        columnas.append(columna)
+    filas = min(len(c) for c in columnas)
+    mb = bmesh.new()
+    vert = [[mb.verts.new(c[min(k, len(c) - 1)]) for k in range(max(len(c) for c in columnas))] for c in columnas]
+    for a, b in zip(vert, vert[1:]):
+        for k in range(min(len(a), len(b)) - 1):
+            mb.faces.new([a[k], b[k], b[k + 1], a[k + 1]])
+    bmesh.ops.remove_doubles(mb, verts=mb.verts[:], dist=1e-5)
+    mm = bpy.data.meshes.new("VH_F_hair_loose")
+    mb.to_mesh(mm)
+    mb.free()
+    melena_obj = bpy.data.objects.new("VH_F_hair_loose", mm)
+    bpy.context.scene.collection.objects.link(melena_obj)
+    print(f"  melena: {len(columnas)} columnas, hasta {filas} filas")
 
     bpy.data.objects.remove(piel, do_unlink=True)
-    for o in (capa, cola, liga):
+    for o in (capa, melena_obj):
         o.select_set(True)
     bpy.ops.export_scene.gltf(filepath=os.path.abspath(SALIDA), export_format="GLB", use_selection=True,
                               export_yup=True)

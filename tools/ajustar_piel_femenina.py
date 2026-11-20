@@ -47,16 +47,16 @@ PERFIL_GROSOR = [  # (z, grosor)
     (1.03, 0.016), (1.10, 0.012), (1.20, 0.013), (1.32, 0.016),    # cintura y abdomen
 ]
 Z_DESDE = (0.50, 0.62)       # Transición suave entre las piernas (sin cambio) y los muslos
-GROSOR_BRAZO = 0.005
+GROSOR_BRAZO = 0.003
 Z_SIN_CAMBIO = 1.42          # Cuello y cabeza quedan igual
 RADIO_MAMA = (0.08, 0.13)    # Alrededor del pezón: sin cambio hasta 8 cm, transición hasta 13 cm
 # Torso: cintura y vientre por franjas de altura (deformación suave, sin bordes)
 Z_TORSO = (0.92, 1.00, 1.12, 1.22)   # Entra entre 0,92-1,00 y sale entre 1,12-1,22 (bajo las mamas)
-MARGEN_FRENTE = -0.006       # El vientre queda 6 mm por DETRÁS del contorno delgado de referencia
-MARGEN_LADO = -0.008         # La cintura queda 8 mm por dentro del contorno delgado
-K_ESPALDA = 0.90             # La mitad posterior del torso (espalda, flancos) se reduce al 90 %
+MARGEN_FRENTE = -0.012       # El vientre queda 6 mm por DETRÁS del contorno delgado de referencia
+MARGEN_LADO = -0.014         # La cintura queda 8 mm por dentro del contorno delgado
+K_ESPALDA = 0.86             # La mitad posterior del torso (espalda, flancos) se reduce al 90 %
 # Caderas y piernas: escala de la sección alrededor del eje (x, y) de cada pierna
-ESCALA_PIERNA = [(0.10, 1.00), (0.35, 0.95), (0.50, 0.89), (0.66, 0.88), (0.80, 0.97)]   # (z, factor)
+ESCALA_PIERNA = [(0.10, 1.00), (0.30, 0.93), (0.50, 0.86), (0.66, 0.85), (0.80, 0.96)]   # (z, factor)
 ESCALA_CADERA = 0.985        # Caderas (z 0,80-0,95): escala alrededor del eje del cuerpo
 Z_CADERA = (0.78, 0.82, 0.95, 1.02)
 
@@ -154,6 +154,35 @@ def torso_por_franjas(pts, franjas, pezones):
         ny = medio + (p.y - medio) * (ky if p.y < medio else K_ESPALDA)
         resultado[i] = np.array([(nx - p.x) * w, (ny - p.y) * w, 0.0])
     print(f"[OK] Torso: cintura x{min(m[2] for m in medida.values()):.2f}, vientre x{min(m[1] for m in medida.values()):.2f}")
+    return resultado
+
+
+# Tono muscular: la piel se acerca a los músculos en el abdomen y los brazos (definición ligera)
+TONO = {"abdomen": (0.0075, 0.55), "brazo": (0.0035, 0.4)}   # zona: (grosor objetivo, intensidad)
+ITERACIONES_TONO = 6         # Suavizado corto: conserva el relieve de los músculos
+
+
+def tono_muscular(pts, desplazamiento, arbol, pezones):
+    resultado = np.zeros((len(pts), 3))
+    for i, p0 in enumerate(pts):
+        p = p0 + Vector(desplazamiento[i])
+        if es_brazo(p0) and p0.z < 1.28:
+            zona = "brazo"
+            w = 1.0 - suave(1.02, 1.24, p0.z)   # Transición larga hacia el hombro (sin escalón)
+        elif 0.96 < p0.z < 1.20 and abs(p0.x) < 0.13 and p0.y < 0.0:
+            zona = "abdomen"
+            w = suave(0.96, 1.00, p0.z) * (1.0 - suave(1.14, 1.20, p0.z)) * (1.0 - suave(0.10, 0.13, abs(p0.x)))
+            for pz in pezones:
+                w *= suave(*RADIO_MAMA, (p0 - pz).length)
+        else:
+            continue
+        cercano, normal, _, distancia = arbol.find_nearest(p)
+        if cercano is None or (p - cercano).dot(normal) < 0:
+            continue
+        grosor, intensidad = TONO[zona]
+        exceso = distancia - grosor
+        if exceso > 0:
+            resultado[i] = np.array((cercano - p).normalized()) * exceso * intensidad * w
     return resultado
 
 
@@ -290,6 +319,15 @@ def main():
         np.add.at(suma, aristas[:, 1], desplazamiento[aristas[:, 0]])
         desplazamiento = 0.5 * desplazamiento + 0.5 * suma / grado[:, None]
 
+
+    # Tono muscular sobre la forma ya adelgazada, con un suavizado corto
+    tono = tono_muscular(pts, desplazamiento, arbol, pezones)
+    for _ in range(ITERACIONES_TONO):
+        suma = np.zeros((n, 3))
+        np.add.at(suma, aristas[:, 0], tono[aristas[:, 1]])
+        np.add.at(suma, aristas[:, 1], tono[aristas[:, 0]])
+        tono = 0.5 * tono + 0.5 * suma / grado[:, None]
+    desplazamiento += tono
 
     for i, v in enumerate(malla.vertices):
         v.co += Vector(desplazamiento[i])
