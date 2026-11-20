@@ -753,6 +753,14 @@
         "Sus fimbrias, en forma de dedos, 'barren' la superficie del ovario para atrapar el óvulo.",
         "Miden unos 10 a 12 cm de largo."
       ]
+    },
+    "Mamas": {
+      "nombre": "Mamas (glándulas mamarias)",
+      "funcion": "Glándulas que producen la leche después del parto. Cada una tiene entre 15 y 20 lóbulos glandulares cuyos conductos galactóforos desembocan en el pezón.",
+      "datos_curiosos": [
+        "La mayor parte del volumen de la mama es grasa; el tejido glandular se desarrolla sobre todo en el embarazo y la lactancia.",
+        "La areola tiene pequeñas glándulas (de Montgomery) que lubrican y protegen el pezón."
+      ]
     }
   }
 }

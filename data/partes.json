@@ -4101,6 +4101,36 @@
    "nombre_en": "Triradiate cartilage",
    "organo": "LigamentosTronco"
   },
+  "Mamas__areola_and_nipple_Der": {
+   "nombre": "Areola y pezón (lado derecho)",
+   "nombre_en": "areola and nipple",
+   "organo": "Mamas"
+  },
+  "Mamas__areola_and_nipple_Izq": {
+   "nombre": "Areola y pezón (lado izquierdo)",
+   "nombre_en": "areola and nipple",
+   "organo": "Mamas"
+  },
+  "Mamas__lactiferous_ducts_Der": {
+   "nombre": "Conductos galactóforos (lado derecho)",
+   "nombre_en": "lactiferous ducts",
+   "organo": "Mamas"
+  },
+  "Mamas__lactiferous_ducts_Izq": {
+   "nombre": "Conductos galactóforos (lado izquierdo)",
+   "nombre_en": "lactiferous ducts",
+   "organo": "Mamas"
+  },
+  "Mamas__mammary_gland_lobes_Der": {
+   "nombre": "Lóbulos de la glándula mamaria (lado derecho)",
+   "nombre_en": "mammary gland lobes",
+   "organo": "Mamas"
+  },
+  "Mamas__mammary_gland_lobes_Izq": {
+   "nombre": "Lóbulos de la glándula mamaria (lado izquierdo)",
+   "nombre_en": "mammary gland lobes",
+   "organo": "Mamas"
+  },
   "Meniscos__Lateral_meniscus_Der": {
    "nombre": "Menisco lateral (lado derecho)",
    "nombre_en": "Lateral meniscus",

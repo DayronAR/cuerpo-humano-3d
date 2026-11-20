@@ -101,6 +101,17 @@
           0.809
         ]
       }
+    },
+    {
+      "archivo": "assets_fuente/hra-femenino/Mamas_generadas.glb",
+      "transformacion": {
+        "desplazamiento": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_nota": "Generadas con tools/generar_mamas.py dentro de la piel femenina (ya en coordenadas finales)."
     }
   ],
   "salida_nombres": "data/partes.json",
@@ -150,7 +161,10 @@
     "fundus of urinary bladder dome": "Cúpula de la vejiga",
     "trigone of urinary bladder": "Trígono vesical",
     "ureteral orifice": "Orificio ureteral",
-    "urinary bladder neck smooth muscle": "Cuello de la vejiga"
+    "urinary bladder neck smooth muscle": "Cuello de la vejiga",
+    "mammary gland lobes": "Lóbulos de la glándula mamaria",
+    "lactiferous ducts": "Conductos galactóforos",
+    "areola and nipple": "Areola y pezón"
   },
   "sistemas": {
     "Piel": {
@@ -313,6 +327,14 @@
         ],
         "partes": "individual",
         "max_triangulos": 8000
+      },
+      "Mamas": {
+        "fuentes": [
+          "VH_F_mammary_gland_lobes*",
+          "VH_F_lactiferous_ducts*",
+          "VH_F_areola_and_nipple*"
+        ],
+        "partes": "individual"
       }
     }
   },
@@ -320,6 +342,7 @@
     "Utero": "reproductor",
     "Ovarios": "reproductor",
     "TrompasUterinas": "reproductor",
-    "Vejiga": "vejiga"
+    "Vejiga": "vejiga",
+    "Mamas": "glandula"
   }
 }
