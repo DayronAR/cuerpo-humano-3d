@@ -319,6 +319,7 @@ func _preparar_piel(estado: GLTFState) -> void:
 				triangulos.append(ids[ind[k]])
 	var n := _piel_ids.size()
 	print("  piel unida: %d vértices, %d triángulos" % [n, triangulos.size() / 3])
+	_medir_piernas()
 	# Pecho de la infancia: la mama se rellena como una membrana tensa entre el tórax de alrededor
 	var plano := _pecho_plano(triangulos, frente) if _femenino else _piel_ids
 	for forma in FORMAS_PIEL:
@@ -527,6 +528,34 @@ func _jacobiana(p: Vector3, forma: String) -> Basis:
 	return Basis(cols[0], cols[1], cols[2])
 
 
+var _piernas := []                 ## Eje de cada pierna (|x| y z) por altura, medido en la piel
+var _piernas_x := []
+var _piernas_z := []
+
+
+## Mide el eje de las piernas en la piel (para engrosarlas en la forma "Bebe").
+func _medir_piernas() -> void:
+	var bins := {}
+	for p: Vector3 in _piel_ids:
+		var t: float = p.y / _altura
+		if t > 0.5 or absf(p.x) < 0.005 or absf(p.x) > 0.2 * _altura / ALTURA_BASE:
+			continue
+		var b := int(t / 0.02)
+		if not bins.has(b):
+			bins[b] = [INF, -INF, INF, -INF]
+		var c: Array = bins[b]
+		c[0] = minf(c[0], absf(p.x)); c[1] = maxf(c[1], absf(p.x))
+		c[2] = minf(c[2], p.z); c[3] = maxf(c[3], p.z)
+	var claves := bins.keys()
+	claves.sort()
+	for b in claves:
+		var c: Array = bins[b]
+		var t: float = (b + 0.5) * 0.02
+		_piernas.append(t)
+		_piernas_x.append([t, (c[0] + c[1]) * 0.5])
+		_piernas_z.append([t, (c[2] + c[3]) * 0.5])
+
+
 func _deformar(p: Vector3, forma: String) -> Vector3:
 	var t := p.y / _altura
 	if forma == "sin_mamas":
@@ -536,7 +565,23 @@ func _deformar(p: Vector3, forma: String) -> Vector3:
 		if _femenino and forma == "bebe":   # Una niña no tiene mamas desarrolladas: se aplana el pecho
 			p = _aplanar_pecho(p)
 		var ancho := _interpolar(d.get("ancho", [[0, 1], [1, 1]]), t)
-		return Vector3(p.x * ancho, _interpolar(d.get("t", [[0, 0], [1, 1]]), t) * _altura, p.z * ancho)
+		var x := p.x * ancho
+		var z := p.z * ancho
+		# Piernas: se engruesan alrededor de su propio eje (no solo se separan)
+		if not _piernas.is_empty() and t < 0.52:
+			var cx := _interpolar(_piernas_x, t) * signf(p.x)
+			var cz := _interpolar(_piernas_z, t)
+			var en_pierna := (1.0 - smoothstep(0.40, 0.50, t)) * (1.0 - smoothstep(0.08, 0.12, absf(p.x - cx)))
+			var k := _interpolar(d.get("grosor_piernas", [[0, 1], [1, 1]]), t)
+			x = lerpf(x, cx * ancho + (p.x - cx) * k, en_pierna)
+			z = lerpf(z, cz + (p.z - cz) * k, en_pierna)
+		# Cara más plana y pequeña: lo que está delante del centro de la cabeza se acerca a él
+		if t > 0.86 and p.z > 0.0:
+			z = p.z * ancho * _interpolar(d.get("cara", [[0, 1], [1, 1]]), t)
+		# Barriga redonda: el frente del abdomen sobresale
+		if p.z > -0.02:
+			z += maxf(0.0, p.z) * _interpolar(d.get("vientre", [[0, 0], [1, 0]]), t) * smoothstep(-0.02, 0.05, p.z)
+		return Vector3(x, _interpolar(d.get("t", [[0, 0], [1, 1]]), t) * _altura, z)
 	var a: Dictionary = _edad.get("anciano", {})
 	var s1 := pow(smoothstep(a.get("t_inicio", 0.6), a.get("t_hombro", 0.83), t), 1.5)
 	var s2 := smoothstep(0.84, 0.93, t)

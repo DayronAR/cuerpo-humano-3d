@@ -223,6 +223,12 @@ func fijar_edad(anios: float, final := false) -> void:
 	if _material_cabello:
 		var gris := Color.from_string(Datos.edad.get("color_canas", "#cfcfcc"), Color.GRAY)
 		_material_cabello.albedo_color = _color_cabello.lerp(gris, Datos.curva_edad("canas", anios))
+	# Un recién nacido casi no tiene pelo: la melena larga aparece con la edad
+	var cabello: Node3D = _organos.get("Cabello")
+	if cabello:
+		for malla in mallas_de(cabello):
+			if String(malla.name).contains("hair_loose"):
+				malla.visible = anios >= float(Datos.edad.get("melena_desde", 3))
 	var mamas: Node3D = _organos.get("Mamas")
 	if mamas:
 		mamas.visible = anios >= float(Datos.edad.get("mamas_desde", 11))
