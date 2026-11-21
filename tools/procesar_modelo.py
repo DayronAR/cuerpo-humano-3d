@@ -559,6 +559,34 @@ def desplegar(malla, rondas=8):
     bm.free()
 
 
+def cerrar_huecos(malla):
+    """Último paso de la piel remallada: suelda bordes casi juntos (p. ej. en la línea media,
+    donde se unen las dos mitades), quita las aristas compartidas por más de dos caras y tapa
+    los agujeros pequeños que queden. Sin esto se ven puntitos (agujeros) en el esternón."""
+    bm = bmesh.new()
+    bm.from_mesh(malla)
+    antes = sum(1 for e in bm.edges if e.is_boundary)
+    for _ in range(3):
+        bmesh.ops.remove_doubles(bm, verts=[v for v in bm.verts if v.is_boundary], dist=0.002)
+        raras = {f for e in bm.edges if len(e.link_faces) > 2 for f in e.link_faces}
+        if raras:
+            bmesh.ops.delete(bm, geom=list(raras), context="FACES")
+        sueltos = [v for v in bm.verts if not v.link_faces]
+        bmesh.ops.delete(bm, geom=sueltos, context="VERTS")
+        bordes = [e for e in bm.edges if e.is_boundary]
+        if not bordes:
+            break
+        nuevas = bmesh.ops.holes_fill(bm, edges=bordes, sides=300)["faces"]
+        bmesh.ops.triangulate(bm, faces=nuevas)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    bm.normal_update()
+    if sum(f.calc_area() * f.normal.dot(f.calc_center_median()) for f in bm.faces) < 0:
+        bmesh.ops.reverse_faces(bm, faces=bm.faces[:])
+    print(f"  huecos: {antes} aristas de borde -> {sum(1 for e in bm.edges if e.is_boundary)}")
+    bm.to_mesh(malla)
+    bm.free()
+
+
 def solo_exterior(obj):
     """La piel de Z-Anatomy son parches superpuestos (no un sólido), así que el remallado da una
     lámina doble: una capa mira hacia afuera y otra hacia adentro, casi en el mismo lugar. Se
@@ -678,6 +706,9 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
         completa.data.shade_smooth()
     if remallar or subdividir:
         desplegar(completa.data)
+    if remallar:
+        cerrar_huecos(completa.data)
+        completa.data.shade_smooth()
     # Centros de las caras de cada región fuente (el lado izquierdo es el reflejo del derecho)
     dg = bpy.context.evaluated_depsgraph_get()
     ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
