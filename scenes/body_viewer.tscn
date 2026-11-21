@@ -49,7 +49,10 @@ environment = SubResource("Environment_1")
 transform = Transform3D(0.8480, -0.3158, 0.4256, 0.0000, 0.8031, 0.5959, -0.5300, -0.5053, 0.6810, 0, 3, 3)
 light_energy = 1.0
 shadow_enabled = true
+shadow_bias = 0.06
+shadow_normal_bias = 3.0
 shadow_blur = 1.5
+directional_shadow_max_distance = 8.0
 
 [node name="LuzRelleno" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8000, 0.2228, -0.5571, 0.0000, 0.9285, 0.3714, 0.6000, 0.2971, -0.7428, 0, 3, -3)

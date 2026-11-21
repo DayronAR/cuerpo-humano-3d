@@ -333,12 +333,15 @@ func _preparar_piel(estado: GLTFState) -> void:
 	_marcar_brazos(triangulos)
 	# Pecho de la infancia: la mama se rellena como una membrana tensa entre el tórax de alrededor
 	var plano := _pecho_plano(triangulos, frente) if _femenino else _piel_ids
+	if not _femenino:   # Pelo del niño: el cabello en mechones de la piel se alisa en el bebé
+		plano = _pelo_liso(triangulos, frente)
+	var vecinos := _vecinos_piel(triangulos)
 	for forma in FORMAS_PIEL:
 		var pos := PackedVector3Array()
 		if forma == "liso":
 			pos = _abdomen_liso(triangulos, frente)
 		elif forma == "sin_mamas":
-			pos = plano
+			pos = plano if _femenino else _piel_ids   # (en el niño "plano" lleva el pelo alisado)
 		else:
 			pos.resize(n)
 			for k in n:
@@ -357,6 +360,9 @@ func _preparar_piel(estado: GLTFState) -> void:
 				for k in n:
 					pos[k].y -= suelo
 				print("  encogido: el bebé se apoya %.3f m más abajo" % suelo)
+				pos = _relajar_estirado(pos, _piel_pos["bebe"], vecinos)
+			if forma == "bebe" or forma == "encogido":   # Piel de bebé: más suave en todo el cuerpo
+				pos = _taubin_ids(pos, vecinos, 6)
 		_piel_pos[forma] = pos
 		_piel_normal[forma] = _normales_ids(pos, triangulos)
 		if _piel_peso.has(forma):   # Zona alisada: normales suaves (sin ondas de triángulos plegados)
@@ -506,6 +512,92 @@ func _suavizar_normales(nn: PackedVector3Array, tri: PackedInt32Array, w: Packed
 			if w[k] > 0.0 and suma[k].length_squared() > 0.0:
 				res[k] = res[k].lerp(suma[k].normalized(), minf(1.0, w[k] * 1.5)).normalized()
 	return res
+
+
+func _vecinos_piel(tri: PackedInt32Array) -> Array:
+	var conj := []
+	conj.resize(_piel_ids.size())
+	for k in conj.size():
+		conj[k] = {}
+	for k in range(0, tri.size(), 3):
+		for e in 3:
+			var a := tri[k + e]
+			var b := tri[k + (e + 1) % 3]
+			conj[a][b] = true
+			conj[b][a] = true
+	var lista := []
+	lista.resize(conj.size())
+	for k in conj.size():
+		lista[k] = PackedInt32Array(conj[k].keys())
+	return lista
+
+
+## Alisado de Taubin (no encoge la forma) sobre toda la piel unida.
+func _taubin_ids(pos: PackedVector3Array, vecinos: Array, iteraciones: int) -> PackedVector3Array:
+	for _i in iteraciones:
+		for factor in [0.5, -0.53]:
+			var nueva := pos.duplicate()
+			for k in pos.size():
+				var lista: PackedInt32Array = vecinos[k]
+				if lista.is_empty():
+					continue
+				var media := Vector3.ZERO
+				for v in lista:
+					media += pos[v]
+				nueva[k] = pos[k] + (media / lista.size() - pos[k]) * factor
+			pos = nueva
+	return pos
+
+
+## Donde la postura fetal estira la piel (axilas, costados del tórax) los triángulos quedan
+## largos y se ve a través: esa zona se alisa en proporción a cuánto se estiró.
+func _relajar_estirado(pos: PackedVector3Array, ref: PackedVector3Array, vecinos: Array) -> PackedVector3Array:
+	var n := pos.size()
+	var peso := PackedFloat32Array()
+	peso.resize(n)
+	var estirados := 0
+	for k in n:
+		var lista: PackedInt32Array = vecinos[k]
+		var mayor := 0.0
+		for v in lista:
+			var l0 := ref[k].distance_to(ref[v])
+			if l0 > 1e-6:
+				mayor = maxf(mayor, pos[k].distance_to(pos[v]) / l0)
+		peso[k] = clampf((mayor - 1.12) / 0.6, 0.0, 1.0)
+		if peso[k] > 0.0:
+			estirados += 1
+	for _i in 5:   # La zona se extiende unos anillos para que el cambio sea gradual
+		var w := peso.duplicate()
+		for k in n:
+			for v in vecinos[k]:
+				w[k] = maxf(w[k], peso[v] * 0.7)
+		peso = w
+	for _i in 80:
+		var nueva := pos.duplicate()
+		for k in n:
+			if peso[k] <= 0.0:
+				continue
+			var lista: PackedInt32Array = vecinos[k]
+			var media := Vector3.ZERO
+			for v in lista:
+				media += pos[v]
+			nueva[k] = pos[k].lerp(media / lista.size(), 0.5 * peso[k])
+		pos = nueva
+	print("  encogido: %d vértices estirados alisados" % estirados)
+	return pos
+
+
+## Cabello del cuerpo masculino (mechones modelados en la piel): para el bebé se alisa la parte
+## alta y trasera de la cabeza hasta quedar como un casquete suave.
+func _pelo_liso(tri: PackedInt32Array, frente: Dictionary) -> PackedVector3Array:
+	var w := PackedFloat32Array()
+	w.resize(_piel_ids.size())
+	for k in w.size():
+		var p := _piel_ids[k]
+		var t := p.y / _altura
+		var atras := smoothstep(0.0, -0.04 * _altura / ALTURA_BASE, p.z)
+		w[k] = maxf(smoothstep(0.925, 0.95, t), smoothstep(0.885, 0.915, t) * atras)
+	return _alisar(tri, w, 220, 0.8)
 
 
 ## Laplaciano ponderado sobre la piel unida: cada vértice se acerca al promedio de sus vecinos
