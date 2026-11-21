@@ -1,0 +1,31 @@
+{
+  "_comentario": "Barra de edad. 'deformacion' la usa tools/ensamblar_cuerpo_glb.gd para precalcular las formas de mezcla (blend shapes) 'Bebe' y 'Anciano' de TODAS las mallas; el resto lo usa la aplicación para mezclarlas según la edad. Alturas relativas a la del adulto. t = altura del punto / altura del adulto (0 = pies, 1 = coronilla).",
+  "edad_min": 0,
+  "edad_max": 90,
+  "edad_inicial": 30,
+  "altura_relativa": [[0, 0.29], [1, 0.43], [3, 0.55], [6, 0.66], [10, 0.79], [14, 0.92], [18, 1.0], [60, 1.0], [90, 0.95]],
+  "peso_bebe": [[0, 1.0], [1, 0.92], [3, 0.72], [6, 0.5], [10, 0.3], [14, 0.12], [18, 0.0]],
+  "peso_sin_mamas": [[0, 1.0], [9, 1.0], [12, 0.55], [15, 0.0]],
+  "peso_anciano": [[55, 0.0], [65, 0.3], [75, 0.7], [90, 1.0]],
+  "canas": [[45, 0.0], [60, 0.45], [75, 0.9], [90, 1.0]],
+  "color_canas": "#cfcfcc",
+  "mamas_desde": 11,
+  "etapas": [[0, "Recién nacido"], [1, "Bebé"], [3, "Primera infancia"], [6, "Niñez"], [12, "Adolescencia"], [18, "Adultez"], [60, "Adulto mayor"]],
+  "deformacion": {
+    "_bebe": "Proporciones de un bebé de ~1 año: la cabeza ocupa 1/4 de la estatura (1/8 en el adulto), piernas y brazos cortos y cuerpo rechoncho. 't' remapea la altura; 'ancho' escala x y z alrededor del eje del cuerpo según la t original.",
+    "bebe": {
+      "t": [[0.0, 0.0], [0.47, 0.36], [0.82, 0.70], [0.875, 0.745], [1.0, 1.0]],
+      "ancho": [[0.0, 1.06], [0.45, 1.08], [0.55, 1.15], [0.80, 1.12], [0.855, 1.02], [0.885, 1.75], [0.92, 1.95], [1.0, 1.95]],
+      "pezones": [[0.10, 1.188, 0.144], [-0.106, 1.188, 0.144]],
+      "pared_torax": 0.085
+    },
+    "_anciano": "Cifosis (espalda encorvada): hombros y cabeza se adelantan y bajan; algo de pérdida de estatura.",
+    "anciano": {
+      "t_inicio": 0.60,
+      "t_hombro": 0.83,
+      "adelante": 0.045,
+      "baja": 0.028,
+      "cabeza_extra": 0.03
+    }
+  }
+}

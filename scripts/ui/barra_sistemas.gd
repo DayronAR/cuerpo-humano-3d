@@ -6,6 +6,7 @@ extends PanelContainer
 signal sistema_solicitado(id_sistema: String)   ## "" = cuerpo completo
 signal modo_fantasma_cambiado(activo: bool)
 signal estructura_elegida(id_organo: String, id_parte: String)   ## Desde el buscador ("" = órgano completo)
+signal edad_cambiada(anios: float, final: bool)   ## final = true al soltar la barra
 
 const MAX_RESULTADOS := 40
 
@@ -38,6 +39,21 @@ func _ready() -> void:
 	_buscador.text_changed.connect(_buscar)
 	_buscador.text_submitted.connect(func(_t): _elegir(0))
 	_resultados.item_clicked.connect(func(i, _pos, _boton): _elegir(i))
+	%BarraEdad.value_changed.connect(func(v): _mostrar_edad(v); edad_cambiada.emit(v, false))
+	%BarraEdad.drag_ended.connect(func(cambio): if cambio: edad_cambiada.emit(%BarraEdad.value, true))
+
+
+## cfg: data/edad.json
+func configurar_edad(cfg: Dictionary) -> void:
+	%BarraEdad.min_value = cfg.get("edad_min", 0)
+	%BarraEdad.max_value = cfg.get("edad_max", 90)
+	%BarraEdad.set_value_no_signal(cfg.get("edad_inicial", 30))
+	_mostrar_edad(%BarraEdad.value)
+
+
+func _mostrar_edad(anios: float) -> void:
+	var texto := "Recién nacido" if anios < 1 else ("1 año" if anios < 2 else "%d años" % int(anios))
+	%ValorEdad.text = "%s · %s" % [texto, Datos.etapa_edad(anios)] if anios >= 1 else texto
 
 
 func configurar(sistemas: Array) -> void:

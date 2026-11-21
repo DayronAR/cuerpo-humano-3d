@@ -84,6 +84,12 @@ func permitir_acercamiento(activo: bool) -> void:
 		distancia = maxf(distancia, _distancia_min)
 
 
+## Cambia el encuadre de referencia ("Cuerpo completo" y vistas rápidas), p. ej. al cambiar la edad.
+func fijar_referencia(nuevo_objetivo: Vector3, nueva_distancia: float) -> void:
+	_objetivo_inicial = nuevo_objetivo
+	_distancia_inicial = nueva_distancia
+
+
 func objetivo_inicial() -> Vector3:
 	return _objetivo_inicial
 

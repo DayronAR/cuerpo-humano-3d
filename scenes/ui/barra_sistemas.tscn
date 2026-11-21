@@ -36,6 +36,32 @@ theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
 theme_override_font_sizes/font_size = 20
 text = "Sistemas del cuerpo"
 
+[node name="FilaEdad" type="HBoxContainer" parent="Contenido"]
+layout_mode = 2
+
+[node name="EtiquetaEdad" type="Label" parent="Contenido/FilaEdad"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+text = "EDAD"
+
+[node name="ValorEdad" type="Label" parent="Contenido/FilaEdad"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "30 años · Adultez"
+horizontal_alignment = 2
+
+[node name="BarraEdad" type="HSlider" parent="Contenido"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+tooltip_text = "Cambia la edad del cuerpo: de recién nacido a adulto mayor"
+focus_mode = 0
+max_value = 90.0
+value = 30.0
+
 [node name="Buscador" type="LineEdit" parent="Contenido"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)

@@ -10,6 +10,7 @@ const RUTA_VISUALES := "res://data/visuales.json"
 const RUTA_CUESTIONARIO := "res://data/cuestionario.json"
 const RUTA_PARTES := "res://data/partes.json"
 const RUTA_PARTES_FICHAS := "res://data/partes_fichas.json"
+const RUTA_EDAD := "res://data/edad.json"
 
 var sistemas: Array = []          ## Lista ordenada de sistemas (cada uno es un Dictionary)
 var orden_capas: Array = []       ## ids de sistema de afuera hacia adentro
@@ -21,6 +22,7 @@ var visuales: Dictionary = {}     ## Órganos, trayectorias y personaje de las v
 var cuestionario: Dictionary = {} ## Preguntas y reglas del modo cuestionario
 var partes: Dictionary = {}       ## id de nodo de la parte -> {nombre, nombre_en, organo} (generado)
 var partes_fichas: Dictionary = {} ## prefijo de id de parte -> {funcion, datos_curiosos} (opcional)
+var edad: Dictionary = {}         ## Barra de edad: curvas de altura, pesos de las formas, etapas
 
 var _sistemas_por_id: Dictionary = {}
 
@@ -39,6 +41,7 @@ func _init() -> void:
 		partes = _cargar_json(RUTA_PARTES).get("partes", {})
 	if FileAccess.file_exists(RUTA_PARTES_FICHAS):
 		partes_fichas = _cargar_json(RUTA_PARTES_FICHAS).get("partes", {})
+	edad = _cargar_json(RUTA_EDAD)
 	for s in sistemas:
 		_sistemas_por_id[s.get("id", "")] = s
 
@@ -77,6 +80,25 @@ func ficha_parte(id_parte: String) -> Dictionary:
 		if id_parte.begins_with(prefijo):
 			return partes_fichas[prefijo]
 	return {}
+
+
+## Valor de una curva [[x, y], ...] de data/edad.json para la edad dada (interpolación lineal).
+func curva_edad(nombre: String, anios: float) -> float:
+	var tabla: Array = edad.get(nombre, [[0, 0]])
+	if anios <= tabla[0][0]:
+		return tabla[0][1]
+	for k in tabla.size() - 1:
+		if anios <= tabla[k + 1][0]:
+			return lerpf(tabla[k][1], tabla[k + 1][1], (anios - tabla[k][0]) / maxf(tabla[k + 1][0] - tabla[k][0], 1e-6))
+	return tabla[-1][1]
+
+
+func etapa_edad(anios: float) -> String:
+	var nombre := ""
+	for e in edad.get("etapas", []):
+		if anios >= e[0]:
+			nombre = e[1]
+	return nombre
 
 
 func sistema(id: String) -> Dictionary:
