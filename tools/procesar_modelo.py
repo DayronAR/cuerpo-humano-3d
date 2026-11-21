@@ -628,7 +628,7 @@ def solo_exterior(obj):
 
 
 def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar, superficie=None, alisado=0,
-                       subdividir=False, remallar=0.0):
+                       subdividir=False, remallar=0.0, alisado_remallado=0):
     """Piel sin costuras: construye la superficie COMPLETA (simétrica y soldada), la reduce, y
     después la corta en partes asignando cada cara a la región fuente más cercana. Las partes
     comparten exactamente los bordes y conservan las normales de la superficie completa, así
@@ -656,6 +656,10 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
                                                            setattr(m, "voxel_size", remallar),
                                                            setattr(m, "adaptivity", 0.0)))
         solo_exterior(completa)
+        if alisado_remallado:
+            # Se alisa la malla densa (antes de reducirla): los escalones de los vóxeles son de
+            # alta frecuencia aquí y se borran sin perder la forma; ya reducida costaría más
+            taubin(completa.data, alisado_remallado)
         tris = sum(len(p.vertices) - 2 for p in completa.data.polygons)
         print(f"  remallado ({remallar * 1000:.1f} mm): {tris} triángulos")
         if tris > max_tris:
@@ -911,7 +915,8 @@ def main():
                 vacio, objetos = dividir_superficie(destino, partes, limite, escala, desplazamiento, soldar, superficie,
                                                     int(definicion.get("alisado_taubin", 0)),
                                                     bool(definicion.get("subdividir", False)),
-                                                    float(definicion.get("remallar_voxel", 0.0)))
+                                                    float(definicion.get("remallar_voxel", 0.0)),
+                                                    int(definicion.get("alisado_remallado", 0)))
             else:
                 sin_reducir = re.compile(definicion["sin_reducir_regex"]) if definicion.get("sin_reducir_regex") else None
                 vacio, objetos = construir_organo_con_partes(destino, partes, limite, min_tris_parte, escala,

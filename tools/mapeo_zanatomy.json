@@ -313,7 +313,8 @@
           }
         },
         "alisado_taubin": 40,
-        "remallar_voxel": 0.003
+        "remallar_voxel": 0.003,
+        "alisado_remallado": 30
       }
     },
     "Muscular": {
