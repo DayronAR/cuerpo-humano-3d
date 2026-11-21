@@ -85,402 +85,402 @@
 [ext_resource type="ArrayMesh" path="res://models/prueba/Nervioso_Cerebelo.res" id="83_ca7m0"]
 [ext_resource type="ArrayMesh" path="res://models/prueba/Nervioso_MedulaEspinal.res" id="84_bxfun"]
 
-[node name="Cuerpo" type="Node3D" unique_id=729486926]
+[node name="Cuerpo" type="Node3D" unique_id=1577868693]
 
-[node name="Piel" type="Node3D" parent="." unique_id=1486870688]
+[node name="Piel" type="Node3D" parent="." unique_id=927137132]
 
-[node name="Epidermis" type="MeshInstance3D" parent="Piel" unique_id=756291525]
+[node name="Epidermis" type="MeshInstance3D" parent="Piel" unique_id=819319922]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9604645e-07, 0.8733289, 0.0057003647)
 mesh = ExtResource("1_yc4w1")
 
-[node name="Muscular" type="Node3D" parent="." unique_id=2024198951]
+[node name="Muscular" type="Node3D" parent="." unique_id=820235128]
 
-[node name="Pectorales" type="Node3D" parent="Muscular" unique_id=1541301452]
+[node name="Pectorales" type="Node3D" parent="Muscular" unique_id=764431554]
 
-[node name="PectoralIzq" type="MeshInstance3D" parent="Muscular/Pectorales" unique_id=1069100481]
+[node name="PectoralIzq" type="MeshInstance3D" parent="Muscular/Pectorales" unique_id=1702786490]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.066, 1.32, 0.082)
 mesh = ExtResource("2_2l641")
 
-[node name="PectoralDer" type="MeshInstance3D" parent="Muscular/Pectorales" unique_id=1468802842]
+[node name="PectoralDer" type="MeshInstance3D" parent="Muscular/Pectorales" unique_id=1807053066]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.066, 1.32, 0.082)
 mesh = ExtResource("3_yaegx")
 
-[node name="Abdominales" type="MeshInstance3D" parent="Muscular" unique_id=1500446650]
+[node name="Abdominales" type="MeshInstance3D" parent="Muscular" unique_id=1829631486]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06, 0.08)
 mesh = ExtResource("4_831lj")
 
-[node name="BicepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=1931459036]
+[node name="BicepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=1341692711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22047159, 1.2475, 0.003970988)
 mesh = ExtResource("5_7cs7i")
 
-[node name="CuadricepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=1739219676]
+[node name="CuadricepsIzq" type="MeshInstance3D" parent="Muscular" unique_id=1056279185]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09598231, 0.6999999, 0.019995095)
 mesh = ExtResource("6_7puug")
 
-[node name="GemeloIzq" type="MeshInstance3D" parent="Muscular" unique_id=336052453]
+[node name="GemeloIzq" type="MeshInstance3D" parent="Muscular" unique_id=980414924]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.32500002, -0.034321316)
 mesh = ExtResource("7_dlr5j")
 
-[node name="BicepsDer" type="MeshInstance3D" parent="Muscular" unique_id=1499230823]
+[node name="BicepsDer" type="MeshInstance3D" parent="Muscular" unique_id=1822280206]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22047159, 1.2475, 0.003970988)
 mesh = ExtResource("8_5o1xd")
 
-[node name="CuadricepsDer" type="MeshInstance3D" parent="Muscular" unique_id=1987737790]
+[node name="CuadricepsDer" type="MeshInstance3D" parent="Muscular" unique_id=781726916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09598232, 0.6999999, 0.019995095)
 mesh = ExtResource("9_0kwfs")
 
-[node name="GemeloDer" type="MeshInstance3D" parent="Muscular" unique_id=939123487]
+[node name="GemeloDer" type="MeshInstance3D" parent="Muscular" unique_id=899787364]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.32500002, -0.034321316)
 mesh = ExtResource("10_5pbic")
 
-[node name="Deltoides" type="Node3D" parent="Muscular" unique_id=25756402]
+[node name="Deltoides" type="Node3D" parent="Muscular" unique_id=1293836312]
 
-[node name="DeltoidesIzq" type="MeshInstance3D" parent="Muscular/Deltoides" unique_id=1670810749]
+[node name="DeltoidesIzq" type="MeshInstance3D" parent="Muscular/Deltoides" unique_id=2066272245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2036719, 1.380091, -0.012403838)
 mesh = ExtResource("11_46324")
 
-[node name="DeltoidesDer" type="MeshInstance3D" parent="Muscular/Deltoides" unique_id=1317526237]
+[node name="DeltoidesDer" type="MeshInstance3D" parent="Muscular/Deltoides" unique_id=10913926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2036719, 1.380091, -0.012403838)
 mesh = ExtResource("12_skra4")
 
-[node name="Triceps" type="Node3D" parent="Muscular" unique_id=1982120071]
+[node name="Triceps" type="Node3D" parent="Muscular" unique_id=1958415753]
 
-[node name="TricepsIzq" type="MeshInstance3D" parent="Muscular/Triceps" unique_id=229654308]
+[node name="TricepsIzq" type="MeshInstance3D" parent="Muscular/Triceps" unique_id=1358667737]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22084923, 1.2475002, -0.039969027)
 mesh = ExtResource("13_c3b57")
 
-[node name="TricepsDer" type="MeshInstance3D" parent="Muscular/Triceps" unique_id=2068469875]
+[node name="TricepsDer" type="MeshInstance3D" parent="Muscular/Triceps" unique_id=1662798282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22084923, 1.2475002, -0.039969027)
 mesh = ExtResource("14_ieqq6")
 
-[node name="MusculosAntebrazo" type="Node3D" parent="Muscular" unique_id=313602221]
+[node name="MusculosAntebrazo" type="Node3D" parent="Muscular" unique_id=405100621]
 
-[node name="MusculosAntebrazoIzq" type="MeshInstance3D" parent="Muscular/MusculosAntebrazo" unique_id=693220210]
+[node name="MusculosAntebrazoIzq" type="MeshInstance3D" parent="Muscular/MusculosAntebrazo" unique_id=177098421]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2436381, 0.985, -0.007486474)
 mesh = ExtResource("15_ofqfy")
 
-[node name="MusculosAntebrazoDer" type="MeshInstance3D" parent="Muscular/MusculosAntebrazo" unique_id=1976856142]
+[node name="MusculosAntebrazoDer" type="MeshInstance3D" parent="Muscular/MusculosAntebrazo" unique_id=611784739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2436381, 0.985, -0.007486474)
 mesh = ExtResource("16_04lu5")
 
-[node name="Gluteos" type="Node3D" parent="Muscular" unique_id=1379780530]
+[node name="Gluteos" type="Node3D" parent="Muscular" unique_id=2011904869]
 
-[node name="GluteosIzq" type="MeshInstance3D" parent="Muscular/Gluteos" unique_id=202331822]
+[node name="GluteosIzq" type="MeshInstance3D" parent="Muscular/Gluteos" unique_id=1721993662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07199999, 0.905, -0.06995068)
 mesh = ExtResource("17_40lom")
 
-[node name="GluteosDer" type="MeshInstance3D" parent="Muscular/Gluteos" unique_id=805415873]
+[node name="GluteosDer" type="MeshInstance3D" parent="Muscular/Gluteos" unique_id=868770374]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.072, 0.905, -0.06995068)
 mesh = ExtResource("18_3u77k")
 
-[node name="Isquiotibiales" type="Node3D" parent="Muscular" unique_id=931662751]
+[node name="Isquiotibiales" type="Node3D" parent="Muscular" unique_id=366574707]
 
-[node name="IsquiotibialesIzq" type="MeshInstance3D" parent="Muscular/Isquiotibiales" unique_id=1518760859]
+[node name="IsquiotibialesIzq" type="MeshInstance3D" parent="Muscular/Isquiotibiales" unique_id=1650310969]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09696344, 0.67999995, -0.027980588)
 mesh = ExtResource("19_2hdq6")
 
-[node name="IsquiotibialesDer" type="MeshInstance3D" parent="Muscular/Isquiotibiales" unique_id=273299147]
+[node name="IsquiotibialesDer" type="MeshInstance3D" parent="Muscular/Isquiotibiales" unique_id=1958332262]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09696344, 0.67999995, -0.027980588)
 mesh = ExtResource("20_4a0l8")
 
-[node name="TibialAnterior" type="Node3D" parent="Muscular" unique_id=1394579528]
+[node name="TibialAnterior" type="Node3D" parent="Muscular" unique_id=622953906]
 
-[node name="TibialAnteriorIzq" type="MeshInstance3D" parent="Muscular/TibialAnterior" unique_id=119060425]
+[node name="TibialAnteriorIzq" type="MeshInstance3D" parent="Muscular/TibialAnterior" unique_id=1246942920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10753804, 0.285, 0.024168618)
 mesh = ExtResource("21_tngj1")
 
-[node name="TibialAnteriorDer" type="MeshInstance3D" parent="Muscular/TibialAnterior" unique_id=806156641]
+[node name="TibialAnteriorDer" type="MeshInstance3D" parent="Muscular/TibialAnterior" unique_id=1655303048]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10753804, 0.285, 0.024168618)
 mesh = ExtResource("22_mt1uq")
 
-[node name="Trapecio" type="Node3D" parent="Muscular" unique_id=222371572]
+[node name="Trapecio" type="Node3D" parent="Muscular" unique_id=2062205463]
 
-[node name="TrapecioIzq" type="MeshInstance3D" parent="Muscular/Trapecio" unique_id=856703432]
+[node name="TrapecioIzq" type="MeshInstance3D" parent="Muscular/Trapecio" unique_id=908082948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.081542365, 1.4001918, -0.054783344)
 mesh = ExtResource("23_t0bgm")
 
-[node name="TrapecioDer" type="MeshInstance3D" parent="Muscular/Trapecio" unique_id=671836686]
+[node name="TrapecioDer" type="MeshInstance3D" parent="Muscular/Trapecio" unique_id=453401205]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08154237, 1.4001918, -0.054783344)
 mesh = ExtResource("24_qsxxp")
 
-[node name="Dorsal" type="Node3D" parent="Muscular" unique_id=885099667]
+[node name="Dorsal" type="Node3D" parent="Muscular" unique_id=255169060]
 
-[node name="DorsalIzq" type="MeshInstance3D" parent="Muscular/Dorsal" unique_id=1812371495]
+[node name="DorsalIzq" type="MeshInstance3D" parent="Muscular/Dorsal" unique_id=1074858524]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10326922, 1.23, -0.06270892)
 mesh = ExtResource("25_fwxu8")
 
-[node name="DorsalDer" type="MeshInstance3D" parent="Muscular/Dorsal" unique_id=1944523717]
+[node name="DorsalDer" type="MeshInstance3D" parent="Muscular/Dorsal" unique_id=985508193]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10326922, 1.23, -0.06270892)
 mesh = ExtResource("26_8n5xp")
 
-[node name="Oblicuos" type="Node3D" parent="Muscular" unique_id=355794595]
+[node name="Oblicuos" type="Node3D" parent="Muscular" unique_id=453207080]
 
-[node name="OblicuosIzq" type="MeshInstance3D" parent="Muscular/Oblicuos" unique_id=1285297039]
+[node name="OblicuosIzq" type="MeshInstance3D" parent="Muscular/Oblicuos" unique_id=1476238327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121735156, 1.055, 0.032198787)
 mesh = ExtResource("27_bthfj")
 
-[node name="OblicuosDer" type="MeshInstance3D" parent="Muscular/Oblicuos" unique_id=1203833309]
+[node name="OblicuosDer" type="MeshInstance3D" parent="Muscular/Oblicuos" unique_id=237317400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.121735156, 1.055, 0.032198787)
 mesh = ExtResource("28_dc1mq")
 
-[node name="Esternocleidomastoideo" type="Node3D" parent="Muscular" unique_id=2021788190]
+[node name="Esternocleidomastoideo" type="Node3D" parent="Muscular" unique_id=1272636710]
 
-[node name="EsternocleidomastoideoIzq" type="MeshInstance3D" parent="Muscular/Esternocleidomastoideo" unique_id=925927942]
+[node name="EsternocleidomastoideoIzq" type="MeshInstance3D" parent="Muscular/Esternocleidomastoideo" unique_id=1086458304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028164122, 1.495, 0.012366375)
 mesh = ExtResource("29_u8edw")
 
-[node name="EsternocleidomastoideoDer" type="MeshInstance3D" parent="Muscular/Esternocleidomastoideo" unique_id=1908824299]
+[node name="EsternocleidomastoideoDer" type="MeshInstance3D" parent="Muscular/Esternocleidomastoideo" unique_id=1884336312]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028164124, 1.495, 0.012366375)
 mesh = ExtResource("30_tqml3")
 
-[node name="Oseo" type="Node3D" parent="." unique_id=97487573]
+[node name="Oseo" type="Node3D" parent="." unique_id=1733444956]
 
-[node name="Craneo" type="MeshInstance3D" parent="Oseo" unique_id=1939094751]
+[node name="Craneo" type="MeshInstance3D" parent="Oseo" unique_id=1882701701]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.450581e-09, 1.6244922, -0.003102474)
 mesh = ExtResource("31_rl277")
 
-[node name="ColumnaVertebral" type="MeshInstance3D" parent="Oseo" unique_id=1008911231]
+[node name="ColumnaVertebral" type="MeshInstance3D" parent="Oseo" unique_id=793274539]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2586206, -0.046656065)
 mesh = ExtResource("32_o7lca")
 
-[node name="CajaToracica" type="Node3D" parent="Oseo" unique_id=658450166]
+[node name="CajaToracica" type="Node3D" parent="Oseo" unique_id=761193143]
 
-[node name="Costilla1Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1613614658]
+[node name="Costilla1Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=461185027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06088343, 1.3682073, 0.010481447)
 mesh = ExtResource("33_r2ltp")
 
-[node name="Costilla1Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=665748076]
+[node name="Costilla1Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1052559252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06088343, 1.3682073, 0.010481447)
 mesh = ExtResource("34_n1tjr")
 
-[node name="Costilla2Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=130201356]
+[node name="Costilla2Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1377729318]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06717688, 1.3383074, 0.010669641)
 mesh = ExtResource("35_5xyvj")
 
-[node name="Costilla2Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1451224502]
+[node name="Costilla2Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1913457611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06717688, 1.3383074, 0.010669641)
 mesh = ExtResource("36_03vcp")
 
-[node name="Costilla3Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=333531500]
+[node name="Costilla3Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1489665487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07258639, 1.308399, 0.010788448)
 mesh = ExtResource("37_e33bo")
 
-[node name="Costilla3Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1440734911]
+[node name="Costilla3Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=447628219]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07258639, 1.308399, 0.010788448)
 mesh = ExtResource("38_klky1")
 
-[node name="Costilla4Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1080297755]
+[node name="Costilla4Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=647475700]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.076738104, 1.2784703, 0.010872617)
 mesh = ExtResource("39_xpjrg")
 
-[node name="Costilla4Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=6161425]
+[node name="Costilla4Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=215393943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.076738104, 1.2784703, 0.010872617)
 mesh = ExtResource("40_5m53x")
 
-[node name="Costilla5Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=325279767]
+[node name="Costilla5Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=95513837]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07934767, 1.2485665, 0.010921337)
 mesh = ExtResource("41_eeuxd")
 
-[node name="Costilla5Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1357551306]
+[node name="Costilla5Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=324403795]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07934767, 1.2485665, 0.010921337)
 mesh = ExtResource("42_ysosf")
 
-[node name="Costilla6Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1957159334]
+[node name="Costilla6Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=293880089]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08023211, 1.2186854, 0.010951281)
 mesh = ExtResource("43_7xtw1")
 
-[node name="Costilla6Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1918617464]
+[node name="Costilla6Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1451868308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08023211, 1.2186854, 0.010951281)
 mesh = ExtResource("44_c8nnw")
 
-[node name="Costilla7Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1855284922]
+[node name="Costilla7Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1645684335]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.080235705, 1.188827, 0.010974079)
 mesh = ExtResource("45_cr66q")
 
-[node name="Costilla7Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=971871991]
+[node name="Costilla7Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1669738634]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.080235705, 1.188827, 0.010974079)
 mesh = ExtResource("46_nwwhw")
 
-[node name="Costilla8Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=69762732]
+[node name="Costilla8Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=174069682]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08023752, 1.158967, 0.010996014)
 mesh = ExtResource("47_5gt73")
 
-[node name="Costilla8Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=948962404]
+[node name="Costilla8Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=933441212]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08023752, 1.158967, 0.010996014)
 mesh = ExtResource("48_gig46")
 
-[node name="Costilla9Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=481596750]
+[node name="Costilla9Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1747858320]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08023472, 1.1543329, -0.004754603)
 mesh = ExtResource("49_qw53m")
 
-[node name="Costilla9Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=794980310]
+[node name="Costilla9Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=915266988]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08023472, 1.1543329, -0.004754603)
 mesh = ExtResource("50_dfqwc")
 
-[node name="Costilla10Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1265343989]
+[node name="Costilla10Izq" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=585257081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08023469, 1.126333, -0.0047549605)
 mesh = ExtResource("51_as6mq")
 
-[node name="Costilla10Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=415874857]
+[node name="Costilla10Der" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1536769186]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08023469, 1.126333, -0.0047549605)
 mesh = ExtResource("52_m4t28")
 
-[node name="Esternon" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=1949332474]
+[node name="Esternon" type="MeshInstance3D" parent="Oseo/CajaToracica" unique_id=118334214]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3025, 0.0926453)
 mesh = ExtResource("53_iupe2")
 
-[node name="Pelvis" type="MeshInstance3D" parent="Oseo" unique_id=2026057855]
+[node name="Pelvis" type="MeshInstance3D" parent="Oseo" unique_id=1113991227]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9373016, 0.0016236454)
 mesh = ExtResource("54_f7a7c")
 
-[node name="HumeroIzq" type="MeshInstance3D" parent="Oseo" unique_id=660161264]
+[node name="HumeroIzq" type="MeshInstance3D" parent="Oseo" unique_id=1972696992]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20948237, 1.2624999, -0.013927665)
 mesh = ExtResource("55_n17oo")
 
-[node name="FemurIzq" type="MeshInstance3D" parent="Oseo" unique_id=1166477131]
+[node name="FemurIzq" type="MeshInstance3D" parent="Oseo" unique_id=1516434654]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09387298, 0.70849997, 0.0051277373)
 mesh = ExtResource("56_3uhb1")
 
-[node name="TibiaIzq" type="MeshInstance3D" parent="Oseo" unique_id=125478110]
+[node name="TibiaIzq" type="MeshInstance3D" parent="Oseo" unique_id=1302382814]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10307464, 0.27749997, 0.0041497927)
 mesh = ExtResource("57_rueyi")
 
-[node name="HumeroDer" type="MeshInstance3D" parent="Oseo" unique_id=974444977]
+[node name="HumeroDer" type="MeshInstance3D" parent="Oseo" unique_id=1608922961]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20948237, 1.2624999, -0.013927665)
 mesh = ExtResource("58_ynqga")
 
-[node name="FemurDer" type="MeshInstance3D" parent="Oseo" unique_id=1024638207]
+[node name="FemurDer" type="MeshInstance3D" parent="Oseo" unique_id=1248446381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09387298, 0.70849997, 0.0051277373)
 mesh = ExtResource("59_tjms7")
 
-[node name="TibiaDer" type="MeshInstance3D" parent="Oseo" unique_id=74049805]
+[node name="TibiaDer" type="MeshInstance3D" parent="Oseo" unique_id=954594037]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10307464, 0.27749997, 0.0041497927)
 mesh = ExtResource("60_pqmtm")
 
-[node name="Claviculas" type="Node3D" parent="Oseo" unique_id=1920738100]
+[node name="Claviculas" type="Node3D" parent="Oseo" unique_id=1259705108]
 
-[node name="ClaviculasIzq" type="MeshInstance3D" parent="Oseo/Claviculas" unique_id=1763702323]
+[node name="ClaviculasIzq" type="MeshInstance3D" parent="Oseo/Claviculas" unique_id=1705183051]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.092439346, 1.4287329, 0.034816865)
 mesh = ExtResource("61_w5lxj")
 
-[node name="ClaviculasDer" type="MeshInstance3D" parent="Oseo/Claviculas" unique_id=178697047]
+[node name="ClaviculasDer" type="MeshInstance3D" parent="Oseo/Claviculas" unique_id=1643539149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.092439346, 1.4287329, 0.034816865)
 mesh = ExtResource("62_s8kys")
 
-[node name="Escapulas" type="Node3D" parent="Oseo" unique_id=1536977707]
+[node name="Escapulas" type="Node3D" parent="Oseo" unique_id=1235110048]
 
-[node name="EscapulasIzq" type="MeshInstance3D" parent="Oseo/Escapulas" unique_id=1372354689]
+[node name="EscapulasIzq" type="MeshInstance3D" parent="Oseo/Escapulas" unique_id=1524237346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10341124, 1.3261709, -0.08083153)
 mesh = ExtResource("63_hu7nj")
 
-[node name="EscapulasDer" type="MeshInstance3D" parent="Oseo/Escapulas" unique_id=1946257818]
+[node name="EscapulasDer" type="MeshInstance3D" parent="Oseo/Escapulas" unique_id=1443441766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10353167, 1.3261659, -0.080908835)
 mesh = ExtResource("64_7coec")
 
-[node name="RadioCubito" type="Node3D" parent="Oseo" unique_id=90459271]
+[node name="RadioCubito" type="Node3D" parent="Oseo" unique_id=715908250]
 
-[node name="RadioCubitoIzq" type="MeshInstance3D" parent="Oseo/RadioCubito" unique_id=2006855118]
+[node name="RadioCubitoIzq" type="MeshInstance3D" parent="Oseo/RadioCubito" unique_id=1697646954]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24058282, 0.991, -0.010508554)
 mesh = ExtResource("65_b54rv")
 
-[node name="RadioCubitoDer" type="MeshInstance3D" parent="Oseo/RadioCubito" unique_id=1054775218]
+[node name="RadioCubitoDer" type="MeshInstance3D" parent="Oseo/RadioCubito" unique_id=1689562758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24058282, 0.991, -0.010508554)
 mesh = ExtResource("66_88bgd")
 
-[node name="HuesosMano" type="Node3D" parent="Oseo" unique_id=446755329]
+[node name="HuesosMano" type="Node3D" parent="Oseo" unique_id=358127552]
 
-[node name="HuesosManoIzq" type="MeshInstance3D" parent="Oseo/HuesosMano" unique_id=632094142]
+[node name="HuesosManoIzq" type="MeshInstance3D" parent="Oseo/HuesosMano" unique_id=1886439086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25100005, 0.78991115, 0.012498993)
 mesh = ExtResource("67_yxlsq")
 
-[node name="HuesosManoDer" type="MeshInstance3D" parent="Oseo/HuesosMano" unique_id=1895152271]
+[node name="HuesosManoDer" type="MeshInstance3D" parent="Oseo/HuesosMano" unique_id=1336537]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2507254, 0.78972447, 0.012498993)
 mesh = ExtResource("68_iwsa5")
 
-[node name="HuesosPie" type="Node3D" parent="Oseo" unique_id=546941158]
+[node name="HuesosPie" type="Node3D" parent="Oseo" unique_id=1538224217]
 
-[node name="HuesosPieIzq" type="MeshInstance3D" parent="Oseo/HuesosPie" unique_id=202057158]
+[node name="HuesosPieIzq" type="MeshInstance3D" parent="Oseo/HuesosPie" unique_id=54001599]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10196256, 0.043161504, 0.036136724)
 mesh = ExtResource("69_1cxtr")
 
-[node name="HuesosPieDer" type="MeshInstance3D" parent="Oseo/HuesosPie" unique_id=956764061]
+[node name="HuesosPieDer" type="MeshInstance3D" parent="Oseo/HuesosPie" unique_id=317402896]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10196256, 0.043161504, 0.036136724)
 mesh = ExtResource("70_b1glb")
 
-[node name="Circulatorio" type="Node3D" parent="." unique_id=348855264]
+[node name="Circulatorio" type="Node3D" parent="." unique_id=1898312228]
 
-[node name="Corazon" type="MeshInstance3D" parent="Circulatorio" unique_id=2009662345]
+[node name="Corazon" type="MeshInstance3D" parent="Circulatorio" unique_id=24310522]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013396803, 1.2148099, 0.03489818)
 cast_shadow = 0
 mesh = ExtResource("71_m0hb0")
 
-[node name="Aorta" type="MeshInstance3D" parent="Circulatorio" unique_id=1852604690]
+[node name="Aorta" type="MeshInstance3D" parent="Circulatorio" unique_id=213698036]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1799176, -0.005513508)
 cast_shadow = 0
 mesh = ExtResource("72_lv7wa")
 
-[node name="VenaCava" type="MeshInstance3D" parent="Circulatorio" unique_id=1935983493]
+[node name="VenaCava" type="MeshInstance3D" parent="Circulatorio" unique_id=1986095630]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005804673, 1.1783981, -0.0052984133)
 cast_shadow = 0
 mesh = ExtResource("73_s3j6k")
 
-[node name="Respiratorio" type="Node3D" parent="." unique_id=2145917506]
+[node name="Respiratorio" type="Node3D" parent="." unique_id=979374618]
 
-[node name="Traquea" type="MeshInstance3D" parent="Respiratorio" unique_id=424618999]
+[node name="Traquea" type="MeshInstance3D" parent="Respiratorio" unique_id=1582897029]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.412303, 0.011999497)
 cast_shadow = 0
 mesh = ExtResource("74_nc06u")
 
-[node name="PulmonIzq" type="MeshInstance3D" parent="Respiratorio" unique_id=1443139604]
+[node name="PulmonIzq" type="MeshInstance3D" parent="Respiratorio" unique_id=967960356]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07861723, 1.2670543, 5.9604645e-08)
 cast_shadow = 0
 mesh = ExtResource("75_ufq8s")
 
-[node name="PulmonDer" type="MeshInstance3D" parent="Respiratorio" unique_id=336342312]
+[node name="PulmonDer" type="MeshInstance3D" parent="Respiratorio" unique_id=372547081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07861914, 1.2670543, 5.9604645e-08)
 cast_shadow = 0
 mesh = ExtResource("76_arod0")
 
-[node name="Digestivo" type="Node3D" parent="." unique_id=409659429]
+[node name="Digestivo" type="Node3D" parent="." unique_id=325898241]
 
-[node name="Esofago" type="MeshInstance3D" parent="Digestivo" unique_id=1387505160]
+[node name="Esofago" type="MeshInstance3D" parent="Digestivo" unique_id=1772571267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014731455, 1.3186015, -0.015416535)
 cast_shadow = 0
 mesh = ExtResource("77_12t3g")
 
-[node name="Estomago" type="MeshInstance3D" parent="Digestivo" unique_id=2006843544]
+[node name="Estomago" type="MeshInstance3D" parent="Digestivo" unique_id=1722418653]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05407202, 1.0788534, 0.018143956)
 cast_shadow = 0
 mesh = ExtResource("78_oxpr2")
 
-[node name="Higado" type="MeshInstance3D" parent="Digestivo" unique_id=2087894411]
+[node name="Higado" type="MeshInstance3D" parent="Digestivo" unique_id=1426668905]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019594409, 1.1029177, 0.017999995)
 cast_shadow = 0
 mesh = ExtResource("79_hcci0")
 
-[node name="IntestinoDelgado" type="MeshInstance3D" parent="Digestivo" unique_id=1081020083]
+[node name="IntestinoDelgado" type="MeshInstance3D" parent="Digestivo" unique_id=495629832]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065494925, 0.95843816, 0.039013218)
 cast_shadow = 0
 mesh = ExtResource("80_slp02")
 
-[node name="IntestinoGrueso" type="MeshInstance3D" parent="Digestivo" unique_id=1028843972]
+[node name="IntestinoGrueso" type="MeshInstance3D" parent="Digestivo" unique_id=360914025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023401156, 0.9302195, 0.018567048)
 cast_shadow = 0
 mesh = ExtResource("81_d8epr")
 
-[node name="Nervioso" type="Node3D" parent="." unique_id=269094306]
+[node name="Nervioso" type="Node3D" parent="." unique_id=199473359]
 
-[node name="Cerebro" type="MeshInstance3D" parent="Nervioso" unique_id=468950794]
+[node name="Cerebro" type="MeshInstance3D" parent="Nervioso" unique_id=1832763409]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1265278e-05, 1.6626829, 2.4937093e-05)
 cast_shadow = 0
 mesh = ExtResource("82_7kgl4")
 
-[node name="Cerebelo" type="MeshInstance3D" parent="Nervioso" unique_id=331333547]
+[node name="Cerebelo" type="MeshInstance3D" parent="Nervioso" unique_id=2078518414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1175871e-08, 1.6039599, -0.045875773)
 cast_shadow = 0
 mesh = ExtResource("83_ca7m0")
 
-[node name="MedulaEspinal" type="MeshInstance3D" parent="Nervioso" unique_id=706973846]
+[node name="MedulaEspinal" type="MeshInstance3D" parent="Nervioso" unique_id=694861385]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2975001, -0.038457874)
 cast_shadow = 0
 mesh = ExtResource("84_bxfun")

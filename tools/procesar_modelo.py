@@ -502,7 +502,133 @@ def construir_organo_con_partes(destino, partes, max_tris, min_tris_parte, escal
     return vacio, objetos
 
 
-def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar, superficie=None):
+def taubin(malla, iteraciones, lam=0.5, mu=-0.53):
+    """Alisado de Taubin: alterna un paso que suaviza (lam) y otro que 'infla' (mu). Quita los
+    bultos e irregularidades sin encoger la forma (el alisado normal la encoge)."""
+    import numpy as np
+    n = len(malla.vertices)
+    co = np.empty(n * 3)
+    malla.vertices.foreach_get("co", co)
+    co = co.reshape(n, 3)
+    aristas = np.empty(len(malla.edges) * 2, dtype=np.int64)
+    malla.edges.foreach_get("vertices", aristas)
+    aristas = aristas.reshape(-1, 2)
+    grado = np.bincount(aristas.ravel(), minlength=n).astype(float)
+    grado[grado == 0] = 1
+    for _ in range(iteraciones):
+        for factor in (lam, mu):
+            suma = np.zeros((n, 3))
+            np.add.at(suma, aristas[:, 0], co[aristas[:, 1]])
+            np.add.at(suma, aristas[:, 1], co[aristas[:, 0]])
+            co = co + factor * (suma / grado[:, None] - co)
+    malla.vertices.foreach_set("co", co.ravel())
+    malla.update()
+
+
+def desplegar(malla, rondas=8):
+    """Corrige las caras plegadas que deja la reducción (Decimate): una cara cuya normal se opone
+    a la de sus vecinas queda "de espaldas" y Godot no la dibuja (parece un agujero). Sus
+    vértices y los de alrededor se alisan hasta que la cara vuelve a mirar hacia afuera."""
+    bm = bmesh.new()
+    bm.from_mesh(malla)
+    for ronda in range(rondas):
+        bm.normal_update()
+        malas = []
+        for f in bm.faces:
+            vecinas = [g for e in f.edges for g in e.link_faces if g is not f]
+            if not vecinas:
+                continue
+            media = sum((g.normal * g.calc_area() for g in vecinas), Vector()).normalized()
+            if f.normal.dot(media) < 0.3 or f.calc_area() < 1e-9:
+                malas.append(f)
+        if ronda == 0 or not malas:
+            print(f"  caras plegadas: {len(malas)} (ronda {ronda + 1})")
+        if not malas:
+            break
+        zona = {v for f in malas for v in f.verts}
+        zona |= {w for v in list(zona) for e in v.link_edges for w in e.verts}
+        for _ in range(6):
+            nuevas = {}
+            for v in zona:
+                vecinos = [e.other_vert(v) for e in v.link_edges]
+                if vecinos and not v.is_boundary:
+                    nuevas[v] = v.co.lerp(sum((w.co for w in vecinos), Vector()) / len(vecinos), 0.6)
+            for v, co in nuevas.items():
+                v.co = co
+    bm.to_mesh(malla)
+    bm.free()
+
+
+def solo_exterior(obj):
+    """La piel de Z-Anatomy son parches superpuestos (no un sólido), así que el remallado da una
+    lámina doble: una capa mira hacia afuera y otra hacia adentro, casi en el mismo lugar. Se
+    conserva la exterior: desde cada cara se lanzan rayos en un cono alrededor de su normal; si
+    alguno sale del cuerpo la cara es exterior (también en zonas cóncavas, como entre los
+    muslos), si todos chocan es la capa interior. Después se tapan agujeros y se quitan sueltos."""
+    from mathutils.bvhtree import BVHTree
+    bm = bmesh.new()
+    bm.from_mesh(obj.data)
+    bm.normal_update()
+    arbol = BVHTree.FromBMesh(bm)
+
+    def direcciones(n):
+        t = n.orthogonal().normalized()
+        b = n.cross(t)
+        res = [n]
+        for k in range(8):
+            ang = k * math.tau / 8
+            res.append((n * 0.6 + (t * math.cos(ang) + b * math.sin(ang)) * 0.8).normalized())
+        return res
+
+    lejos = []
+    for f in bm.faces:
+        c = f.calc_center_median()
+        sale = False
+        for d in direcciones(f.normal):
+            if arbol.ray_cast(c + d * 2e-4, d, 3.0)[0] is None:
+                sale = True
+                break
+        if not sale:
+            lejos.append(f)
+    print(f"  remallado: {len(lejos)} de {len(bm.faces)} caras son de la capa interior")
+    bmesh.ops.delete(bm, geom=lejos, context="FACES")
+    bordes = [e for e in bm.edges if e.is_boundary]
+    bmesh.ops.holes_fill(bm, edges=bordes, sides=1500)
+    bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
+    bm.verts.ensure_lookup_table()
+    visto = set()
+    piezas = []
+    for v in bm.verts:
+        if v.index in visto:
+            continue
+        pila, pieza = [v], []
+        visto.add(v.index)
+        while pila:
+            a = pila.pop()
+            pieza.append(a)
+            for e in a.link_edges:
+                b = e.other_vert(a)
+                if b.index not in visto:
+                    visto.add(b.index)
+                    pila.append(b)
+        piezas.append(pieza)
+    piezas.sort(key=len, reverse=True)
+    sobran = [v for pieza in piezas[1:] for v in pieza if len(pieza) < 2000]
+    bmesh.ops.delete(bm, geom=sobran, context="VERTS")
+    abiertos = sum(1 for e in bm.edges if e.is_boundary)
+    print(f"  remallado: {len(piezas)} piezas, {abiertos} aristas de borde restantes")
+    # Las caras de relleno pueden quedar al revés (Godot no las dibuja: se verían agujeros);
+    # se orientan todas de forma coherente y hacia afuera
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    bm.normal_update()
+    if sum(f.calc_area() * f.normal.dot(f.calc_center_median()) for f in bm.faces) < 0:
+        bmesh.ops.reverse_faces(bm, faces=bm.faces[:])
+    bm.to_mesh(obj.data)
+    bm.free()
+
+
+def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar, superficie=None, alisado=0,
+                       subdividir=False, remallar=0.0):
     """Piel sin costuras: construye la superficie COMPLETA (simétrica y soldada), la reduce, y
     después la corta en partes asignando cada cara a la región fuente más cercana. Las partes
     comparten exactamente los bordes y conservan las normales de la superficie completa, así
@@ -518,8 +644,36 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
         completa, _ = preparar_organo(destino + "__completa", superficie, max_tris, escala, desplazamiento, False,
                                       soldar=soldar)
     else:
-        completa, _ = preparar_organo(destino + "__completa", todas, max_tris, escala, desplazamiento, False,
-                                      soldar=soldar, simetria=True)
+        # Con remallado se parte de la malla completa (sin reducir) para no perder detalle
+        completa, _ = preparar_organo(destino + "__completa", todas, max_tris * 40 if remallar else max_tris, escala,
+                                      desplazamiento, False, soldar=soldar, simetria=True)
+    if remallar:
+        # Piel hecha de parches (p. ej. la masculina de Z-Anatomy): un remallado por vóxeles la
+        # convierte en UNA superficie cerrada y uniforme, sin bordes entre parches ni pliegues
+        # El remallado de una superficie abierta da dos capas (afuera y adentro de la piel): se
+        # conserva la exterior (ver solo_exterior)
+        aplicar_modificador(completa, "REMESH", lambda m: (setattr(m, "mode", "VOXEL"),
+                                                           setattr(m, "voxel_size", remallar),
+                                                           setattr(m, "adaptivity", 0.0)))
+        solo_exterior(completa)
+        tris = sum(len(p.vertices) - 2 for p in completa.data.polygons)
+        print(f"  remallado ({remallar * 1000:.1f} mm): {tris} triángulos")
+        if tris > max_tris:
+            aplicar_modificador(completa, "DECIMATE", lambda m: (setattr(m, "ratio", max_tris / tris),
+                                                                 setattr(m, "use_collapse_triangulate", True)))
+    if subdividir:
+        # Piel de pocos polígonos (p. ej. la masculina de Z-Anatomy): se subdivide (Catmull-Clark)
+        # para redondear las facetas y se vuelve a reducir al presupuesto de triángulos
+        aplicar_modificador(completa, "SUBSURF", lambda m: (setattr(m, "levels", 1), setattr(m, "render_levels", 1)))
+        tris = sum(len(p.vertices) - 2 for p in completa.data.polygons)
+        if tris > max_tris:
+            aplicar_modificador(completa, "DECIMATE", lambda m: (setattr(m, "ratio", max_tris / tris),
+                                                                 setattr(m, "use_collapse_triangulate", True)))
+    if alisado:
+        taubin(completa.data, alisado)
+        completa.data.shade_smooth()
+    if remallar or subdividir:
+        desplegar(completa.data)
     # Centros de las caras de cada región fuente (el lado izquierdo es el reflejo del derecho)
     dg = bpy.context.evaluated_depsgraph_get()
     ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
@@ -754,7 +908,10 @@ def main():
 
             if modo == "grupos" and definicion.get("dividir_superficie"):
                 superficie = buscar_fuentes(definicion["superficie"]) if definicion.get("superficie") else None
-                vacio, objetos = dividir_superficie(destino, partes, limite, escala, desplazamiento, soldar, superficie)
+                vacio, objetos = dividir_superficie(destino, partes, limite, escala, desplazamiento, soldar, superficie,
+                                                    int(definicion.get("alisado_taubin", 0)),
+                                                    bool(definicion.get("subdividir", False)),
+                                                    float(definicion.get("remallar_voxel", 0.0)))
             else:
                 sin_reducir = re.compile(definicion["sin_reducir_regex"]) if definicion.get("sin_reducir_regex") else None
                 vacio, objetos = construir_organo_con_partes(destino, partes, limite, min_tris_parte, escala,

@@ -529,7 +529,8 @@ func _malla_columna() -> ArrayMesh:
 
 ## Materiales: color, rugosidad, brillo húmedo (clearcoat), borde (rim) y relieve fino con ruido.
 const DEF_MATERIALES := {
-	"piel": {"color": Color(0.8, 0.58, 0.47), "rugosidad": 0.55, "rim": 0.25, "relieve": [0.12, 18.0]},
+	"piel": {"color": Color(0.82, 0.6, 0.5), "rugosidad": 0.48, "rim": 0.32, "tinte_rim": 0.25, "especular": 0.38,
+			"brillo_suave": 0.06, "doble_cara": true},   # Piel fina: sin ruido (parecía arcilla), brillo leve y borde rosado
 	"musculo": {"color": Color(0.58, 0.13, 0.13), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2, "relieve": [0.35, 30.0]},
 	"hueso": {"color": Color(0.9, 0.86, 0.76), "rugosidad": 0.72, "rim": 0.1, "relieve": [0.25, 25.0]},
 	"corazon": {"color": Color(0.55, 0.09, 0.1), "rugosidad": 0.35, "brillo": 0.6, "rim": 0.2, "relieve": [0.3, 25.0]},
@@ -573,10 +574,19 @@ func _material(nombre: String) -> StandardMaterial3D:
 		# Semitransparente (p. ej. la grasa de las mamas): deja ver lo que hay dentro
 		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		m.cull_mode = BaseMaterial3D.CULL_BACK
+	if d.get("doble_cara", false):
+		# Se dibujan ambas caras: un hueco diminuto de la malla no deja ver el fondo
+		m.cull_mode = BaseMaterial3D.CULL_DISABLED
 	if d.has("rim"):
 		m.rim_enabled = true
 		m.rim = d["rim"]
-		m.rim_tint = 0.6
+		m.rim_tint = d.get("tinte_rim", 0.6)
+	if d.has("especular"):
+		m.metallic_specular = d["especular"]
+	if d.has("brillo_suave"):
+		m.clearcoat_enabled = true
+		m.clearcoat = d["brillo_suave"]
+		m.clearcoat_roughness = 0.6
 	if d.has("relieve"):
 		# Relieve fino (poros, fibras) con ruido proyectado en 3 ejes: no necesita coordenadas UV
 		var ruido := FastNoiseLite.new()

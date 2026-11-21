@@ -189,7 +189,9 @@
         "superficie": [
           "VH_F_skin"
         ],
-        "max_triangulos": 60000
+        "max_triangulos": 140000,
+        "alisado_taubin": 12,
+        "subdividir": false
       },
       "Cabello": {
         "fuentes": [

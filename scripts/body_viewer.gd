@@ -190,7 +190,7 @@ func _preparar_edad() -> void:
 		var m := mi.mesh as ArrayMesh
 		if m and m.get_blend_shape_count() >= 2:
 			_formas_edad.append([mi, mi.find_blend_shape_by_name("Bebe"), mi.find_blend_shape_by_name("Anciano"),
-					mi.find_blend_shape_by_name("SinMamas")])
+					mi.find_blend_shape_by_name("SinMamas"), mi.find_blend_shape_by_name("Liso")])
 	var cabello: Node3D = _organos.get("Cabello")
 	if cabello:
 		var malla := mallas_de(cabello)[0]
@@ -209,11 +209,14 @@ func fijar_edad(anios: float, final := false) -> void:
 	var anciano := Datos.curva_edad("peso_anciano", anios)
 	# La forma "Bebe" ya aplana el pecho; "SinMamas" completa lo que falta hasta la pubertad
 	var sin_mamas := maxf(0.0, Datos.curva_edad("peso_sin_mamas", anios) - bebe)
+	var liso := Datos.curva_edad("peso_liso", anios)   # Abdomen sin definición en la infancia
 	for f in _formas_edad:
 		f[0].set_blend_shape_value(f[1], bebe)
 		f[0].set_blend_shape_value(f[2], anciano)
 		if f[3] >= 0:
 			f[0].set_blend_shape_value(f[3], sin_mamas)
+		if f.size() > 4 and f[4] >= 0:
+			f[0].set_blend_shape_value(f[4], liso)
 	var escala := Datos.curva_edad("altura_relativa", anios)
 	cuerpo.scale = Vector3.ONE * escala
 	visuales.scale = Vector3.ONE * escala   # Trayectorias de la simulación (pies en el origen)
@@ -242,7 +245,7 @@ func edad_actual() -> float:
 ## Se hace en varios hilos en segundo plano (WorkerThreadPool): la barra no se traba.
 var _tarea_colisiones := -1
 var _pendiente_colisiones := Vector3(-1, -1, -1)
-var _trabajos: Array = []          ## [CollisionShape3D, ArrayMesh, índices de formas] por malla
+var _trabajos: Array = []          ## [CollisionShape3D, base, índices, Bebe, Anciano, SinMamas] por malla
 var _resultados: Array = []        ## ConcavePolygonShape3D nuevas (mismo orden que _trabajos)
 var _pesos_en_calculo := Vector3.ZERO
 
@@ -253,28 +256,52 @@ func _actualizar_colisiones_edad(pesos: Vector3) -> void:
 	if _tarea_colisiones != -1:
 		_pendiente_colisiones = pesos   # Se hará al terminar la tarea actual
 		return
-	if _trabajos.is_empty():
-		for f in _formas_edad:
-			for hijo in f[0].get_children():
-				if hijo is StaticBody3D and hijo.get_child_count() > 0:
-					_trabajos.append([hijo.get_child(0), f[0].mesh, f[1], f[2], f[3]])
+	if _por_leer != 0:
+		_pendiente_colisiones = pesos   # Se hará al terminar de leer las mallas (_leer_mallas)
+		return
 	_pesos_en_calculo = pesos
 	_resultados.resize(_trabajos.size())
 	_tarea_colisiones = WorkerThreadPool.add_group_task(_calcular_colision, _trabajos.size(), -1, true,
 			"Colisiones por edad")
 
 
+## Los vértices de las mallas se leen una sola vez, en el hilo principal y de a poco (unos
+## milisegundos por cuadro tras cargar): leerlos desde los hilos de trabajo pide datos a la GPU
+## y puede trabar la aplicación, y leerlos todos de golpe la congela unos segundos.
+var _por_leer := -1   ## Mallas que faltan por leer (-1 = aún no se empezó)
+
+
+func _leer_mallas() -> void:
+	if _por_leer == -1:
+		_trabajos.clear()
+		_por_leer = _formas_edad.size()
+	var limite := Time.get_ticks_usec() + 3000
+	while _por_leer > 0 and Time.get_ticks_usec() < limite:
+		var f: Array = _formas_edad[_formas_edad.size() - _por_leer]
+		_por_leer -= 1
+		for hijo in f[0].get_children():
+			if hijo is StaticBody3D and hijo.get_child_count() > 0:
+				var m: ArrayMesh = f[0].mesh
+				var arrays := m.surface_get_arrays(0)
+				var formas := m.surface_get_blend_shape_arrays(0)
+				var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+				_trabajos.append([hijo.get_child(0), base, arrays[Mesh.ARRAY_INDEX],
+						formas[f[1]][Mesh.ARRAY_VERTEX], formas[f[2]][Mesh.ARRAY_VERTEX],
+						formas[f[3]][Mesh.ARRAY_VERTEX] if f[3] >= 0 else base])
+	if _por_leer == 0 and _pendiente_colisiones.x >= 0:
+		var p := _pendiente_colisiones
+		_pendiente_colisiones = Vector3(-1, -1, -1)
+		_actualizar_colisiones_edad(p)
+
+
 func _calcular_colision(k: int) -> void:
 	var t: Array = _trabajos[k]
-	var m: ArrayMesh = t[1]
 	var pesos := _pesos_en_calculo
-	var arrays := m.surface_get_arrays(0)
-	var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
-	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
-	var formas := m.surface_get_blend_shape_arrays(0)
-	var vb: PackedVector3Array = formas[t[2]][Mesh.ARRAY_VERTEX]
-	var va: PackedVector3Array = formas[t[3]][Mesh.ARRAY_VERTEX]
-	var vs: PackedVector3Array = formas[t[4]][Mesh.ARRAY_VERTEX] if t[4] >= 0 else base
+	var base: PackedVector3Array = t[1]
+	var indices: PackedInt32Array = t[2]
+	var vb: PackedVector3Array = t[3]
+	var va: PackedVector3Array = t[4]
+	var vs: PackedVector3Array = t[5]
 	var caras := PackedVector3Array()
 	caras.resize(indices.size())
 	for i in indices.size():
@@ -626,6 +653,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
+	if _por_leer != 0 and not _formas_edad.is_empty():
+		_leer_mallas()
 	_revisar_tarea_colisiones()
 	# Una consulta por cuadro como máximo, aunque lleguen muchos eventos de movimiento
 	var id := _organo_bajo_cursor

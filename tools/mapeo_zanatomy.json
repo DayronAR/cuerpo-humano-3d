@@ -84,7 +84,7 @@
       "Epidermis": {
         "partes": "grupos",
         "dividir_superficie": true,
-        "max_triangulos": 50000,
+        "max_triangulos": 150000,
         "soldar": 0.0015,
         "grupos": {
           "Cabeza": {
@@ -311,7 +311,9 @@
             ],
             "lateral": true
           }
-        }
+        },
+        "alisado_taubin": 40,
+        "remallar_voxel": 0.003
       }
     },
     "Muscular": {

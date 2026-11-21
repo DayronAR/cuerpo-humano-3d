@@ -1,25 +1,14 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ldtr3"]
-frequency = 0.05
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uyvcm"]
-width = 256
-height = 256
-noise = SubResource("FastNoiseLite_ldtr3")
-seamless = true
-as_normal_map = true
-bump_strength = 6.0
-
 [resource]
 resource_name = "piel"
-albedo_color = Color(0.8, 0.58, 0.47, 1)
-roughness = 0.55
-normal_enabled = true
-normal_scale = 0.12
-normal_texture = SubResource("NoiseTexture2D_uyvcm")
+cull_mode = 2
+albedo_color = Color(0.82, 0.6, 0.5, 1)
+metallic_specular = 0.38
+roughness = 0.48
 rim_enabled = true
-rim = 0.25
-rim_tint = 0.6
-uv1_scale = Vector3(18, 18, 18)
-uv1_triplanar = true
+rim = 0.32
+rim_tint = 0.25
+clearcoat_enabled = true
+clearcoat = 0.06
+clearcoat_roughness = 0.6
