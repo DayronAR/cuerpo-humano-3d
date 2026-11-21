@@ -589,6 +589,46 @@ def alisar_linea_media(malla, mundo):
     bm.free()
 
 
+def separar_brazos(malla, mundo, arbol, etiquetas):
+    """El remallado une con puentes finos las manos y antebrazos con los muslos y las caderas
+    (están a pocos milímetros). En la postura fetal del recién nacido el brazo se mueve y esos
+    puentes se estirarían. Se cortan: se quitan las caras de la zona de contacto (por debajo de
+    la axila) y se tapa el agujero de cada lado por separado."""
+    es_brazo = lambda e: any(k in e.lower() for k in ("brazo", "codo", "mano"))   # Incluye "Antebrazo"
+    bm = bmesh.new()
+    bm.from_mesh(malla)
+    bm.faces.ensure_lookup_table()
+    brazo = {}
+    for f in bm.faces:
+        brazo[f] = es_brazo(etiquetas[arbol.find(mundo @ f.calc_center_median())[1]])
+    contacto = set()
+    for f in bm.faces:
+        if (mundo @ f.calc_center_median()).z > 1.28:
+            continue
+        for e in f.edges:
+            for g in e.link_faces:
+                if g is not f and brazo[g] != brazo[f]:
+                    contacto.add(f)
+    zona = set(contacto)
+    for _ in range(3):
+        zona |= {g for f in list(zona) for e in f.edges for g in e.link_faces}
+    if zona:
+        bmesh.ops.delete(bm, geom=list(zona), context="FACES")
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
+        bordes = [e for e in bm.edges if e.is_boundary]
+        nuevas = bmesh.ops.holes_fill(bm, edges=bordes, sides=200)["faces"]
+        bmesh.ops.triangulate(bm, faces=nuevas)
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+        bm.normal_update()
+        if sum(f.calc_area() * f.normal.dot(f.calc_center_median()) for f in bm.faces) < 0:
+            bmesh.ops.reverse_faces(bm, faces=bm.faces[:])
+    print(f"  brazos separados del tronco: {len(contacto)} caras de contacto, "
+          f"{sum(1 for e in bm.edges if e.is_boundary)} aristas de borde")
+    bm.to_mesh(malla)
+    bm.free()
+    malla.shade_smooth()
+
+
 def cerrar_huecos(malla):
     """Último paso de la piel remallada: suelda bordes casi juntos (p. ej. en la línea media,
     donde se unen las dos mitades), quita las aristas compartidas por más de dos caras y tapa
@@ -789,6 +829,8 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
 
     m = completa.data
     mundo = completa.matrix_world
+    if remallar:
+        separar_brazos(m, mundo, arbol, etiquetas)
     normales = [v.normal.copy() for v in m.vertices]
     arbol_vertices = KDTree(len(m.vertices))
     for v in m.vertices:

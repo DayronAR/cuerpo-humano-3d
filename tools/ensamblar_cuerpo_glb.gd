@@ -166,6 +166,7 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 	nuevo.add_blend_shape("Anciano")
 	nuevo.add_blend_shape("SinMamas")   # Pecho plano de la infancia (solo cambia en el cuerpo femenino)
 	nuevo.add_blend_shape("Liso")       # Abdomen sin definición muscular (infancia)
+	nuevo.add_blend_shape("Encogido")   # Recién nacido en posición fetal (forma "Bebe" + postura)
 	for s in origen.get_surface_count():
 		var arrays := origen.get_surface_arrays(s)
 		var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
@@ -176,7 +177,7 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 		var formas := []
 		if es_piel and not _piel_ids.is_empty():
 			formas = _formas_piel(base, normales_base, global)
-		for forma in ([] if not formas.is_empty() else ["bebe", "anciano", "sin_mamas"]):
+		for forma in ([] if not formas.is_empty() else ["bebe", "anciano", "sin_mamas", "encogido"]):
 			var v := PackedVector3Array()
 			var nn := PackedVector3Array()
 			v.resize(base.size())
@@ -197,12 +198,12 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 			a[Mesh.ARRAY_TANGENT] = arrays[Mesh.ARRAY_TANGENT]
 			formas.append(a)
 		# Forma "Liso": el abdomen de la piel alisado (sin los "cuadritos"); en otras mallas, sin cambio
-		if formas.size() == 3:   # Fuera de la piel la forma "Liso" no cambia nada
+		if formas.size() == 4:   # Fuera de la piel la forma "Liso" no cambia nada (va antes de "Encogido")
 			var liso := []
 			liso.resize(Mesh.ARRAY_MAX)
 			liso[Mesh.ARRAY_VERTEX] = base.duplicate()
 			liso[Mesh.ARRAY_NORMAL] = normales_base.duplicate()
-			formas.append(liso)
+			formas.insert(3, liso)
 		for a in formas:
 			a[Mesh.ARRAY_TANGENT] = arrays[Mesh.ARRAY_TANGENT]
 		# Godot comprime las formas de mezcla respecto de la caja (AABB) de la malla base: si un
@@ -256,7 +257,7 @@ func _aplanar_pecho(p: Vector3) -> Vector3:
 
 # --- Piel completa: formas calculadas sobre toda la superficie (sin costuras entre piezas) -----
 
-const FORMAS_PIEL := ["bebe", "anciano", "sin_mamas", "liso"]
+const FORMAS_PIEL := ["bebe", "anciano", "sin_mamas", "liso", "encogido"]
 const CELDA := 2000.0   ## Celdas de 0,5 mm para unir los vértices repetidos de piezas vecinas
 var _piel_celdas := {}                  ## Vector3i -> Array de ids
 var _piel_ids := PackedVector3Array()   ## Posición (cuerpo) de cada vértice unido
@@ -293,6 +294,8 @@ func _preparar_piel(estado: GLTFState) -> void:
 	var triangulos := PackedInt32Array()
 	var frente := {}   # id -> componente z de la normal (hacia el frente)
 	var pila := []
+	var brazo := []   # Vértices de la piel de brazos, codos, antebrazos y manos
+	var codo := []
 	for i in nodos.size():
 		if nodos[i].parent == -1:
 			pila.append([i, Transform3D.IDENTITY])
@@ -305,6 +308,7 @@ func _preparar_piel(estado: GLTFState) -> void:
 		if nodos[par[0]].mesh < 0 or not nombre.begins_with("Epidermis__"):
 			continue
 		var malla: ImporterMesh = estado.get_meshes()[nodos[par[0]].mesh].mesh
+		var es_brazo := nombre.to_lower().contains("brazo") or nombre.contains("Codo") or nombre.contains("Mano")
 		for s in malla.get_surface_count():
 			var arr := malla.get_surface_arrays(s)
 			var v: PackedVector3Array = arr[Mesh.ARRAY_VERTEX]
@@ -314,12 +318,19 @@ func _preparar_piel(estado: GLTFState) -> void:
 			for k in v.size():
 				ids[k] = _id_piel(g * v[k], true)
 				frente[ids[k]] = (g.basis * nrm[k]).normalized().z
+				if es_brazo:
+					_ids_brazo[ids[k]] = true
+					brazo.append(g * v[k])
+					if nombre.contains("Codo"):
+						codo.append(g * v[k])
 			var ind: PackedInt32Array = arr[Mesh.ARRAY_INDEX]
 			for k in ind.size():
 				triangulos.append(ids[ind[k]])
 	var n := _piel_ids.size()
 	print("  piel unida: %d vértices, %d triángulos" % [n, triangulos.size() / 3])
 	_medir_piernas()
+	_preparar_encogido(brazo, codo)
+	_marcar_brazos(triangulos)
 	# Pecho de la infancia: la mama se rellena como una membrana tensa entre el tórax de alrededor
 	var plano := _pecho_plano(triangulos, frente) if _femenino else _piel_ids
 	for forma in FORMAS_PIEL:
@@ -331,8 +342,21 @@ func _preparar_piel(estado: GLTFState) -> void:
 		else:
 			pos.resize(n)
 			for k in n:
-				pos[k] = _deformar(plano[k], "bebe_sin_aplanar") if forma == "bebe" \
-						else _deformar(_piel_ids[k], forma)
+				if forma == "encogido":   # Bebé (pecho plano y abdomen liso) en posición fetal
+					var liso: PackedVector3Array = _piel_pos["liso"]
+					var q := _deformar(plano[k] + liso[k] - _piel_ids[k], "bebe_sin_aplanar")
+					pos[k] = _encoger(_piel_ids[k], q, 1 if _ids_brazo.has(k) else 0)
+				else:
+					pos[k] = _deformar(plano[k], "bebe_sin_aplanar") if forma == "bebe" \
+							else _deformar(_piel_ids[k], forma)
+			if forma == "encogido":   # Apoyado en el suelo (el punto más bajo en y = 0)
+				var suelo := INF
+				for k in n:
+					suelo = minf(suelo, pos[k].y)
+				_suelo_encogido = suelo
+				for k in n:
+					pos[k].y -= suelo
+				print("  encogido: el bebé se apoya %.3f m más abajo" % suelo)
 		_piel_pos[forma] = pos
 		_piel_normal[forma] = _normales_ids(pos, triangulos)
 		if _piel_peso.has(forma):   # Zona alisada: normales suaves (sin ondas de triángulos plegados)
@@ -556,8 +580,191 @@ func _medir_piernas() -> void:
 		_piernas_z.append([t, (c[2] + c[3]) * 0.5])
 
 
+# --- Posición fetal (recién nacido encogido) -----------------------------------------------
+
+var _brazos := [[], []]        ## Por lado (0: x > 0, 1: x < 0): [t, x, z, radio] cada PASO_BRAZO de t
+var _brazo_t0 := [0.0, 0.0]
+var _hombro_t := 0.8
+var _codo_t := 0.62
+var _pivotes := {}             ## Articulaciones en el espacio del bebé
+var _suelo_encogido := 0.0
+var _angulo_brazo := [0.0, 0.0]   ## Separación del brazo respecto de la vertical (rad), por lado
+var _ids_brazo := {}           ## Vértices de la piel que pertenecen a los brazos
+const PASO_BRAZO := 0.01
+
+
+## Mide el eje de cada brazo en la piel (centro y radio por altura) y calcula las articulaciones
+## de la postura fetal, llevadas a las proporciones del bebé.
+func _preparar_encogido(brazo: Array, codo: Array) -> void:
+	var c: Dictionary = _edad.get("encogido", {})
+	var t_codo := 0.0
+	for p in codo:
+		t_codo += p.y / _altura
+	_codo_t = t_codo / maxf(1, codo.size())
+	_hombro_t = 0.0
+	for lado in 2:
+		var bins := {}
+		for p: Vector3 in brazo:
+			if (p.x > 0) != (lado == 0):
+				continue
+			var b := int(p.y / _altura / PASO_BRAZO)
+			if not bins.has(b):
+				bins[b] = []
+			bins[b].append(p)
+		var claves := bins.keys()
+		claves.sort()
+		_brazo_t0[lado] = claves[0] * PASO_BRAZO
+		_brazos[lado] = []
+		for b in range(claves[0], claves[-1] + 1):
+			var pts: Array = bins.get(b, [])
+			if pts.is_empty():
+				_brazos[lado].append(_brazos[lado][-1] if not _brazos[lado].is_empty() else [0, 0, 0, 0])
+				continue
+			var centro := Vector2.ZERO
+			for p: Vector3 in pts:
+				centro += Vector2(p.x, p.z)
+			centro /= pts.size()
+			var radio := 0.0
+			for p: Vector3 in pts:
+				radio = maxf(radio, Vector2(p.x, p.z).distance_to(centro))
+			_brazos[lado].append([(b + 0.5) * PASO_BRAZO, centro.x, centro.y, radio])
+		_hombro_t = maxf(_hombro_t, (claves[-1] + 1) * PASO_BRAZO)
+	var h := _altura
+	var bebe := func(v: Vector3) -> Vector3: return _deformar(v, "bebe_sin_aplanar")
+	var tc: float = c.get("cadera_t", 0.5)
+	var tr: float = c.get("rodilla_t", 0.285)
+	var tt: float = c.get("tobillo_t", 0.045)
+	_pivotes = {
+		"cadera": bebe.call(Vector3(0, tc * h, _interpolar(_piernas_z, tc - 0.03))),
+		"rodilla": bebe.call(Vector3(0, tr * h, _interpolar(_piernas_z, tr))),
+		"tobillo": bebe.call(Vector3(0, tt * h, _interpolar(_piernas_z, tt + 0.02) - 0.02 * h / ALTURA_BASE)),
+		"columna": bebe.call(Vector3(0, c.get("columna_t", 0.56) * h, -0.05 * h / ALTURA_BASE)),
+		"cuello": bebe.call(Vector3(0, c.get("cuello_t", 0.865) * h, -0.01 * h / ALTURA_BASE)),
+	}
+	for lado in 2:
+		var hombro := _eje_brazo(lado, _hombro_t - 0.025)
+		var codo_c := _eje_brazo(lado, _codo_t)
+		_pivotes["hombro%d" % lado] = bebe.call(Vector3(hombro.x, (_hombro_t - 0.025) * h, hombro.y))
+		_pivotes["codo%d" % lado] = bebe.call(Vector3(codo_c.x, _codo_t * h, codo_c.y))
+		_angulo_brazo[lado] = atan2(absf(codo_c.x - hombro.x), (_hombro_t - 0.025 - _codo_t) * h)
+	print("  encogido: hombro t=%.3f, codo t=%.3f, brazo desde t=%.3f" % [_hombro_t, _codo_t, _brazo_t0[0]])
+
+
+func _eje_brazo(lado: int, t: float) -> Vector2:
+	var lista: Array = _brazos[lado]
+	var i := clampi(int((t - _brazo_t0[lado]) / PASO_BRAZO), 0, lista.size() - 1)
+	return Vector2(lista[i][1], lista[i][2])
+
+
+## 1 dentro del brazo (cerca de su eje), 0 en el tronco y las piernas; suave en la axila.
+func _peso_brazo(p: Vector3, t: float) -> float:
+	var lado := 0 if p.x >= 0.0 else 1
+	var lista: Array = _brazos[lado]
+	if lista.is_empty():
+		return 0.0
+	var i := int((t - _brazo_t0[lado]) / PASO_BRAZO)
+	if i < -2 or i >= lista.size():
+		return 0.0
+	var b: Array = lista[clampi(i, 0, lista.size() - 1)]
+	var d := Vector2(p.x - b[1], p.z - b[2]).length()
+	var margen := 0.01 * _altura / ALTURA_BASE
+	return (1.0 - smoothstep(b[3] * 1.05, b[3] * 1.05 + margen, d)) \
+			* (1.0 - smoothstep(_hombro_t - 0.06, _hombro_t - 0.01, t))
+
+
+## Qué vértices de la piel son del brazo, siguiendo la superficie: desde el codo se recorre la
+## malla por debajo de la axila (los puentes con el muslo ya se cortaron al procesarla), así no
+## dependen de la etiqueta de cada pieza (cerca del muslo puede ser errónea).
+func _marcar_brazos(tri: PackedInt32Array) -> void:
+	var axila := _hombro_t - 0.10   # Por debajo del pliegue de la axila
+	var vecinos := {}
+	for k in range(0, tri.size(), 3):
+		for e in 3:
+			var a := tri[k + e]
+			var b := tri[k + (e + 1) % 3]
+			if _piel_ids[a].y / _altura < axila and _piel_ids[b].y / _altura < axila:
+				if not vecinos.has(a): vecinos[a] = []
+				if not vecinos.has(b): vecinos[b] = []
+				vecinos[a].append(b)
+				vecinos[b].append(a)
+	var pila := []
+	var nuevos := {}
+	for id in _ids_brazo:
+		var p := _piel_ids[id]
+		var t := p.y / _altura
+		if absf(t - _codo_t) < 0.03 and _peso_brazo(p, t) > 0.9:
+			pila.append(id)
+			nuevos[id] = true
+	while not pila.is_empty():
+		var a = pila.pop_back()
+		for b in vecinos.get(a, []):
+			if not nuevos.has(b):
+				nuevos[b] = true
+				pila.append(b)
+	for id in _ids_brazo:
+		if _piel_ids[id].y / _altura >= axila:
+			nuevos[id] = true
+	print("  brazos: %d vértices por etiqueta, %d siguiendo la superficie" % [_ids_brazo.size(), nuevos.size()])
+	if nuevos.size() > _ids_brazo.size() * 1.5:
+		push_warning("El recorrido de los brazos se escapó al tronco; se usan las etiquetas")
+		return
+	_ids_brazo = nuevos
+
+
+static func _rotar_x(q: Vector3, pivote: Vector3, angulo: float) -> Vector3:
+	if absf(angulo) < 1e-6:
+		return q
+	return pivote + Basis(Vector3.RIGHT, angulo) * (q - pivote)
+
+
+## Postura fetal: p es el punto del adulto (decide a qué parte del cuerpo pertenece) y q el mismo
+## punto con las proporciones del bebé (el que se mueve). Cada articulación dobla de forma suave
+## (el ángulo crece en una franja), del hijo al padre: codo -> hombro -> columna.
+func _encoger(p: Vector3, q: Vector3, piel := -1) -> Vector3:
+	var c: Dictionary = _edad.get("encogido", {})
+	var t := p.y / _altura
+	var r := q
+	var wa := _peso_brazo(p, t)
+	if piel == 0:   # Piel del tronco o de las piernas: solo se une al brazo en el hombro y la axila
+		wa *= smoothstep(_hombro_t - 0.13, _hombro_t - 0.09, t)
+	elif piel == 1 and t < _hombro_t - 0.10:   # Piel del brazo (por la superficie): se mueve entera
+		wa = 1.0
+	if wa > 0.0:
+		var lado := 0 if p.x >= 0.0 else 1
+		var we := wa * (1.0 - smoothstep(_codo_t - 0.015, _codo_t + 0.025, t))
+		var hombro: Vector3 = _pivotes["hombro%d" % lado]
+		var signo := 1.0 if lado == 0 else -1.0
+		# Primero el brazo se lleva a la vertical (el cuerpo femenino está en pose "A")
+		var vertical: float = -signo * _angulo_brazo[lado]
+		r = hombro + Basis(Vector3.BACK, vertical * wa) * (r - hombro)
+		var codo_p: Vector3 = hombro + Basis(Vector3.BACK, vertical) * (_pivotes["codo%d" % lado] - hombro)
+		r = _rotar_x(r, codo_p, deg_to_rad(c.get("codo", -120.0)) * we)
+		r = _rotar_x(r, hombro, deg_to_rad(c.get("hombro", -45.0)) * wa)
+		# Aducción: las manos se juntan delante de la cara
+		r = hombro + Basis(Vector3.UP, -signo * deg_to_rad(c.get("aduccion", 25.0)) * wa) * (r - hombro)
+	var tc: float = c.get("cadera_t", 0.5)
+	var tr: float = c.get("rodilla_t", 0.285)
+	var tt: float = c.get("tobillo_t", 0.045)
+	var wl := (1.0 - smoothstep(tc - 0.04, tc + 0.03, t)) * (1.0 - wa)
+	if wl > 0.0:
+		var wk := 1.0 - smoothstep(tr - 0.02, tr + 0.025, t)
+		var wt := 1.0 - smoothstep(tt - 0.01, tt + 0.02, t)
+		r = _rotar_x(r, _pivotes["tobillo"], deg_to_rad(c.get("tobillo", -20.0)) * wt * wl)
+		r = _rotar_x(r, _pivotes["rodilla"], deg_to_rad(c.get("rodilla", 125.0)) * wk * wl)
+		r = _rotar_x(r, _pivotes["cadera"], deg_to_rad(c.get("cadera", -95.0)) * wl)
+	# Cabeza y columna (los brazos las siguen desde el hombro)
+	var ts := lerpf(t, _hombro_t, wa)
+	var tn: float = c.get("cuello_t", 0.865)
+	r = _rotar_x(r, _pivotes["cuello"], deg_to_rad(c.get("cabeza", 25.0)) * smoothstep(tn - 0.02, tn + 0.02, ts))
+	var tcol: float = c.get("columna_t", 0.56)
+	r = _rotar_x(r, _pivotes["columna"], deg_to_rad(c.get("columna", 25.0)) * smoothstep(tcol, 0.82, ts))
+	return r
+
+
 func _deformar(p: Vector3, forma: String) -> Vector3:
 	var t := p.y / _altura
+	if forma == "encogido":
+		return _encoger(p, _deformar(p, "bebe")) - Vector3(0, _suelo_encogido, 0)
 	if forma == "sin_mamas":
 		return _aplanar_pecho(p) if _femenino else p
 	if forma == "bebe" or forma == "bebe_sin_aplanar":

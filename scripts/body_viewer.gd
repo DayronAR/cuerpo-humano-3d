@@ -180,7 +180,7 @@ var _distancia_adulto := 0.0
 var _color_cabello := Color.BLACK
 var _material_cabello: BaseMaterial3D
 var _edad_actual := -1.0
-var _pesos_colision := Vector3(-1, -1, -1)   ## Pesos con los que se crearon las colisiones actuales
+var _pesos_colision := Vector4(-1, -1, -1, -1)   ## Pesos con los que se crearon las colisiones actuales
 
 
 func _preparar_edad() -> void:
@@ -190,14 +190,15 @@ func _preparar_edad() -> void:
 		var m := mi.mesh as ArrayMesh
 		if m and m.get_blend_shape_count() >= 2:
 			_formas_edad.append([mi, mi.find_blend_shape_by_name("Bebe"), mi.find_blend_shape_by_name("Anciano"),
-					mi.find_blend_shape_by_name("SinMamas"), mi.find_blend_shape_by_name("Liso")])
+					mi.find_blend_shape_by_name("SinMamas"), mi.find_blend_shape_by_name("Liso"),
+					mi.find_blend_shape_by_name("Encogido")])
 	var cabello: Node3D = _organos.get("Cabello")
 	if cabello:
 		var malla := mallas_de(cabello)[0]
 		_material_cabello = malla.get_active_material(0) as BaseMaterial3D
 		if _material_cabello:
 			_color_cabello = _material_cabello.albedo_color
-	_pesos_colision = Vector3.ZERO
+	_pesos_colision = Vector4.ZERO
 
 
 ## Cambia la edad del cuerpo (años). Mezcla las formas "Bebe" y "Anciano" precalculadas (en la GPU,
@@ -210,8 +211,16 @@ func fijar_edad(anios: float, final := false) -> void:
 	# La forma "Bebe" ya aplana el pecho; "SinMamas" completa lo que falta hasta la pubertad
 	var sin_mamas := maxf(0.0, Datos.curva_edad("peso_sin_mamas", anios) - bebe)
 	var liso := Datos.curva_edad("peso_liso", anios)   # Abdomen sin definición en la infancia
+	# Recién nacido en posición fetal: "Encogido" ya incluye la forma de bebé (y el abdomen liso),
+	# así que reemplaza a "Bebe" en la medida en que se activa
+	var encogido := bebe * Datos.curva_edad("peso_encogido", anios)
+	bebe -= encogido
+	liso *= 1.0 - encogido
 	for f in _formas_edad:
-		f[0].set_blend_shape_value(f[1], bebe)
+		var tiene: bool = f.size() > 5 and f[5] >= 0
+		if tiene:
+			f[0].set_blend_shape_value(f[5], encogido)
+		f[0].set_blend_shape_value(f[1], bebe if tiene else bebe + encogido)
 		f[0].set_blend_shape_value(f[2], anciano)
 		if f[3] >= 0:
 			f[0].set_blend_shape_value(f[3], sin_mamas)
@@ -238,7 +247,7 @@ func fijar_edad(anios: float, final := false) -> void:
 	for id in _sistemas:
 		_cajas_sistemas[id] = _caja_mundo(_sistemas[id])
 	if final:
-		_actualizar_colisiones_edad(Vector3(bebe, anciano, sin_mamas))
+		_actualizar_colisiones_edad(Vector4(bebe, anciano, sin_mamas, encogido))
 		if _sistema_actual.is_empty() and _aislado.is_empty():
 			camara.encuadrar(camara.objetivo_inicial(), camara.distancia_inicial())
 
@@ -250,13 +259,13 @@ func edad_actual() -> float:
 ## Las colisiones (para elegir con clic) se calculan con los vértices ya mezclados.
 ## Se hace en varios hilos en segundo plano (WorkerThreadPool): la barra no se traba.
 var _tarea_colisiones := -1
-var _pendiente_colisiones := Vector3(-1, -1, -1)
-var _trabajos: Array = []          ## [CollisionShape3D, base, índices, Bebe, Anciano, SinMamas] por malla
+var _pendiente_colisiones := Vector4(-1, -1, -1, -1)
+var _trabajos: Array = []          ## [CollisionShape3D, base, índices, Bebe, Anciano, SinMamas, Encogido]
 var _resultados: Array = []        ## ConcavePolygonShape3D nuevas (mismo orden que _trabajos)
-var _pesos_en_calculo := Vector3.ZERO
+var _pesos_en_calculo := Vector4.ZERO
 
 
-func _actualizar_colisiones_edad(pesos: Vector3) -> void:
+func _actualizar_colisiones_edad(pesos: Vector4) -> void:
 	if pesos.is_equal_approx(_pesos_colision):
 		return
 	if _tarea_colisiones != -1:
@@ -293,10 +302,11 @@ func _leer_mallas() -> void:
 				var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
 				_trabajos.append([hijo.get_child(0), base, arrays[Mesh.ARRAY_INDEX],
 						formas[f[1]][Mesh.ARRAY_VERTEX], formas[f[2]][Mesh.ARRAY_VERTEX],
-						formas[f[3]][Mesh.ARRAY_VERTEX] if f[3] >= 0 else base])
+						formas[f[3]][Mesh.ARRAY_VERTEX] if f[3] >= 0 else base,
+						formas[f[5]][Mesh.ARRAY_VERTEX] if f.size() > 5 and f[5] >= 0 else base])
 	if _por_leer == 0 and _pendiente_colisiones.x >= 0:
 		var p := _pendiente_colisiones
-		_pendiente_colisiones = Vector3(-1, -1, -1)
+		_pendiente_colisiones = Vector4(-1, -1, -1, -1)
 		_actualizar_colisiones_edad(p)
 
 
@@ -308,11 +318,13 @@ func _calcular_colision(k: int) -> void:
 	var vb: PackedVector3Array = t[3]
 	var va: PackedVector3Array = t[4]
 	var vs: PackedVector3Array = t[5]
+	var ve: PackedVector3Array = t[6]
 	var caras := PackedVector3Array()
 	caras.resize(indices.size())
 	for i in indices.size():
 		var j := indices[i]
-		caras[i] = base[j] + (vb[j] - base[j]) * pesos.x + (va[j] - base[j]) * pesos.y + (vs[j] - base[j]) * pesos.z
+		caras[i] = base[j] + (vb[j] - base[j]) * pesos.x + (va[j] - base[j]) * pesos.y + (vs[j] - base[j]) * pesos.z \
+				+ (ve[j] - base[j]) * pesos.w
 	var forma := ConcavePolygonShape3D.new()
 	forma.set_faces(caras)
 	_resultados[k] = forma
@@ -328,7 +340,7 @@ func _revisar_tarea_colisiones() -> void:
 	_pesos_colision = _pesos_en_calculo
 	if _pendiente_colisiones.x >= 0:
 		var p := _pendiente_colisiones
-		_pendiente_colisiones = Vector3(-1, -1, -1)
+		_pendiente_colisiones = Vector4(-1, -1, -1, -1)
 		_actualizar_colisiones_edad(p)
 
 
