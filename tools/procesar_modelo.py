@@ -559,6 +559,36 @@ def desplegar(malla, rondas=8):
     bm.free()
 
 
+def alisar_linea_media(malla, mundo):
+    """Las dos mitades de la piel (una es el reflejo de la otra) se unen en la línea media y ahí
+    el remallado deja surcos pequeños (se ven como marcas en el esternón y bajo los pectorales).
+    Se alisa una franja estrecha del frente del tórax, desvaneciendo el efecto hacia los lados,
+    sin tocar el ombligo ni el cuello."""
+    bm = bmesh.new()
+    bm.from_mesh(malla)
+    bm.verts.ensure_lookup_table()
+    peso = {}
+    for v in bm.verts:
+        p = mundo @ v.co
+        if p.y > -0.03:   # Solo el frente (en Blender el frente es -Y)
+            continue
+        lado = 1.0 - min(1.0, max(0.0, (abs(p.x) - 0.02) / 0.025))
+        alto = min(1.0, max(0.0, (p.z - 1.07) / 0.03)) * min(1.0, max(0.0, (1.40 - p.z) / 0.03))
+        if lado * alto > 0.0:
+            peso[v] = lado * alto
+    for _ in range(25):
+        nuevas = {}
+        for v, w in peso.items():
+            vec = [e.other_vert(v) for e in v.link_edges]
+            if vec:
+                nuevas[v] = v.co.lerp(sum((u.co for u in vec), Vector()) / len(vec), 0.5 * w)
+        for v, co in nuevas.items():
+            v.co = co
+    print(f"  línea media del tórax alisada ({len(peso)} vértices)")
+    bm.to_mesh(malla)
+    bm.free()
+
+
 def cerrar_huecos(malla):
     """Último paso de la piel remallada: suelda bordes casi juntos (p. ej. en la línea media,
     donde se unen las dos mitades), quita las aristas compartidas por más de dos caras y tapa
@@ -566,6 +596,7 @@ def cerrar_huecos(malla):
     bm = bmesh.new()
     bm.from_mesh(malla)
     antes = sum(1 for e in bm.edges if e.is_boundary)
+    parches = set()
     for _ in range(3):
         bmesh.ops.remove_doubles(bm, verts=[v for v in bm.verts if v.is_boundary], dist=0.002)
         raras = {f for e in bm.edges if len(e.link_faces) > 2 for f in e.link_faces}
@@ -577,7 +608,26 @@ def cerrar_huecos(malla):
         if not bordes:
             break
         nuevas = bmesh.ops.holes_fill(bm, edges=bordes, sides=300)["faces"]
-        bmesh.ops.triangulate(bm, faces=nuevas)
+        parches |= set(bmesh.ops.triangulate(bm, faces=nuevas)["faces"]) | set(nuevas)
+    # Los parches son planos (se notan como marcas): se les agregan vértices interiores y se
+    # alisan junto con dos anillos de alrededor para que sigan la curva de la piel
+    parches = [f for f in parches if f.is_valid]
+    if parches:
+        for _ in range(2):
+            caras = set(parches)
+            res = bmesh.ops.poke(bm, faces=list(caras))
+            parches = res["faces"]
+        zona = {v for f in parches for v in f.verts}
+        for _ in range(2):
+            zona |= {w for v in list(zona) for e in v.link_edges for w in e.verts}
+        fijos = {v for v in zona if any(w not in zona for e in v.link_edges for w in e.verts)}
+        for _ in range(40):
+            nuevas_pos = {}
+            for v in zona - fijos:
+                vec = [e.other_vert(v) for e in v.link_edges]
+                nuevas_pos[v] = v.co.lerp(sum((w.co for w in vec), Vector()) / len(vec), 0.7)
+            for v, co in nuevas_pos.items():
+                v.co = co
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
     bm.normal_update()
     if sum(f.calc_area() * f.normal.dot(f.calc_center_median()) for f in bm.faces) < 0:
@@ -708,6 +758,7 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
         desplegar(completa.data)
     if remallar:
         cerrar_huecos(completa.data)
+        alisar_linea_media(completa.data, completa.matrix_world)
         completa.data.shade_smooth()
     # Centros de las caras de cada región fuente (el lado izquierdo es el reflejo del derecho)
     dg = bpy.context.evaluated_depsgraph_get()
