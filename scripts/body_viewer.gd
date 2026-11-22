@@ -180,7 +180,7 @@ var _distancia_adulto := 0.0
 var _color_cabello := Color.BLACK
 var _material_cabello: BaseMaterial3D
 var _edad_actual := -1.0
-var _pesos_colision := Vector4(-1, -1, -1, -1)   ## Pesos con los que se crearon las colisiones actuales
+var _pesos_colision: Array = []   ## Pesos con los que se crearon las colisiones actuales
 
 
 func _preparar_edad() -> void:
@@ -193,7 +193,7 @@ func _preparar_edad() -> void:
 		_material_cabello = malla.get_active_material(0) as BaseMaterial3D
 		if _material_cabello:
 			_color_cabello = _material_cabello.albedo_color
-	_pesos_colision = Vector4.ZERO
+	_pesos_colision = [0.0, 0.0, 0.0, 0.0, 0.0]
 
 
 ## Mallas con formas de edad de un cuerpo: [MeshInstance3D, índices Bebe, Anciano, SinMamas, Liso, Encogido].
@@ -204,11 +204,11 @@ func preparar_formas(raiz: Node3D) -> Array:
 		if m and m.get_blend_shape_count() >= 2:
 			lista.append([mi, mi.find_blend_shape_by_name("Bebe"), mi.find_blend_shape_by_name("Anciano"),
 					mi.find_blend_shape_by_name("SinMamas"), mi.find_blend_shape_by_name("Liso"),
-					mi.find_blend_shape_by_name("Encogido")])
+					mi.find_blend_shape_by_name("Encogido"), mi.find_blend_shape_by_name("Sentado")])
 	return lista
 
 
-## Pesos de las formas de edad: Vector4(bebe, anciano, sin_mamas, encogido) y "liso" aparte.
+## Pesos de las formas de edad: [bebe, anciano, sin_mamas, encogido, sentado] y "liso" aparte.
 func _pesos_edad(anios: float) -> Array:
 	var bebe := Datos.curva_edad("peso_bebe", anios)
 	var anciano := Datos.curva_edad("peso_anciano", anios)
@@ -218,20 +218,26 @@ func _pesos_edad(anios: float) -> Array:
 	# Recién nacido en posición fetal: "Encogido" ya incluye la forma de bebé (y el abdomen liso),
 	# así que reemplaza a "Bebe" en la medida en que se activa
 	var encogido := bebe * Datos.curva_edad("peso_encogido", anios)
-	bebe -= encogido
-	liso *= 1.0 - encogido
-	return [Vector4(bebe, anciano, sin_mamas, encogido), liso]
+	var sentado := (bebe - encogido) * Datos.curva_edad("peso_sentado", anios)   # Igual, sentado
+	bebe -= encogido + sentado
+	liso *= 1.0 - encogido - sentado
+	return [[bebe, anciano, sin_mamas, encogido, sentado], liso]
 
 
-func _aplicar_pesos(formas: Array, pesos: Vector4, liso: float) -> void:
+## pesos: [bebe, anciano, sin_mamas, encogido, sentado]
+func _aplicar_pesos(formas: Array, pesos: Array, liso: float) -> void:
 	for f in formas:
-		var tiene: bool = f.size() > 5 and f[5] >= 0
-		if tiene:
-			f[0].set_blend_shape_value(f[5], pesos.w)
-		f[0].set_blend_shape_value(f[1], pesos.x if tiene else pesos.x + pesos.w)
-		f[0].set_blend_shape_value(f[2], pesos.y)
+		var bebe: float = pesos[0]
+		for i in [3, 4]:   # Posturas: si la malla no las tiene, se queda con la forma "Bebe"
+			var indice: int = f[i + 2] if f.size() > i + 2 else -1
+			if indice >= 0:
+				f[0].set_blend_shape_value(indice, pesos[i])
+			else:
+				bebe += pesos[i]
+		f[0].set_blend_shape_value(f[1], bebe)
+		f[0].set_blend_shape_value(f[2], pesos[1])
 		if f[3] >= 0:
-			f[0].set_blend_shape_value(f[3], pesos.z)
+			f[0].set_blend_shape_value(f[3], pesos[2])
 		if f.size() > 4 and f[4] >= 0:
 			f[0].set_blend_shape_value(f[4], liso)
 
@@ -291,14 +297,14 @@ func edad_actual() -> float:
 ## Las colisiones (para elegir con clic) se calculan con los vértices ya mezclados.
 ## Se hace en varios hilos en segundo plano (WorkerThreadPool): la barra no se traba.
 var _tarea_colisiones := -1
-var _pendiente_colisiones := Vector4(-1, -1, -1, -1)
+var _pendiente_colisiones: Array = []   ## [] = nada pendiente
 var _trabajos: Array = []          ## [CollisionShape3D, base, índices, Bebe, Anciano, SinMamas, Encogido]
 var _resultados: Array = []        ## ConcavePolygonShape3D nuevas (mismo orden que _trabajos)
-var _pesos_en_calculo := Vector4.ZERO
+var _pesos_en_calculo: Array = [0.0, 0.0, 0.0, 0.0, 0.0]
 
 
-func _actualizar_colisiones_edad(pesos: Vector4) -> void:
-	if pesos.is_equal_approx(_pesos_colision):
+func _actualizar_colisiones_edad(pesos: Array) -> void:
+	if pesos == _pesos_colision:
 		return
 	if _tarea_colisiones != -1:
 		_pendiente_colisiones = pesos   # Se hará al terminar la tarea actual
@@ -335,10 +341,11 @@ func _leer_mallas() -> void:
 				_trabajos.append([hijo.get_child(0), base, arrays[Mesh.ARRAY_INDEX],
 						formas[f[1]][Mesh.ARRAY_VERTEX], formas[f[2]][Mesh.ARRAY_VERTEX],
 						formas[f[3]][Mesh.ARRAY_VERTEX] if f[3] >= 0 else base,
-						formas[f[5]][Mesh.ARRAY_VERTEX] if f.size() > 5 and f[5] >= 0 else base])
-	if _por_leer == 0 and _pendiente_colisiones.x >= 0:
+						formas[f[5]][Mesh.ARRAY_VERTEX] if f.size() > 5 and f[5] >= 0 else base,
+						formas[f[6]][Mesh.ARRAY_VERTEX] if f.size() > 6 and f[6] >= 0 else base])
+	if _por_leer == 0 and not _pendiente_colisiones.is_empty():
 		var p := _pendiente_colisiones
-		_pendiente_colisiones = Vector4(-1, -1, -1, -1)
+		_pendiente_colisiones = []
 		_actualizar_colisiones_edad(p)
 
 
@@ -351,12 +358,15 @@ func _calcular_colision(k: int) -> void:
 	var va: PackedVector3Array = t[4]
 	var vs: PackedVector3Array = t[5]
 	var ve: PackedVector3Array = t[6]
+	var vt: PackedVector3Array = t[7]
+	# Una malla sin las formas de postura usa la de bebé (ver _aplicar_pesos)
+	var wb: float = pesos[0] + (pesos[3] if ve == base else 0.0) + (pesos[4] if vt == base else 0.0)
 	var caras := PackedVector3Array()
 	caras.resize(indices.size())
 	for i in indices.size():
 		var j := indices[i]
-		caras[i] = base[j] + (vb[j] - base[j]) * pesos.x + (va[j] - base[j]) * pesos.y + (vs[j] - base[j]) * pesos.z \
-				+ (ve[j] - base[j]) * pesos.w
+		caras[i] = base[j] + (vb[j] - base[j]) * wb + (va[j] - base[j]) * pesos[1] + (vs[j] - base[j]) * pesos[2] \
+				+ (ve[j] - base[j]) * pesos[3] + (vt[j] - base[j]) * pesos[4]
 	var forma := ConcavePolygonShape3D.new()
 	forma.set_faces(caras)
 	_resultados[k] = forma
@@ -370,9 +380,9 @@ func _revisar_tarea_colisiones() -> void:
 	for k in _trabajos.size():
 		_trabajos[k][0].shape = _resultados[k]
 	_pesos_colision = _pesos_en_calculo
-	if _pendiente_colisiones.x >= 0:
+	if not _pendiente_colisiones.is_empty():
 		var p := _pendiente_colisiones
-		_pendiente_colisiones = Vector4(-1, -1, -1, -1)
+		_pendiente_colisiones = []
 		_actualizar_colisiones_edad(p)
 
 

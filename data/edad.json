@@ -7,6 +7,7 @@
   "peso_bebe": [[0, 1.0], [1, 0.92], [3, 0.72], [6, 0.5], [10, 0.3], [14, 0.12], [18, 0.0]],
   "peso_sin_mamas": [[0, 1.0], [9, 1.0], [12, 0.55], [15, 0.0]],
   "peso_encogido": [[0, 1.0], [0.5, 1.0], [0.9, 0.0]],
+  "peso_sentado": [[0.5, 0.0], [0.9, 1.0], [1.6, 1.0], [2.0, 0.0]],
   "peso_liso": [[0, 1.0], [10, 1.0], [14, 0.6], [18, 0.0]],
   "peso_anciano": [[55, 0.0], [65, 0.3], [75, 0.7], [90, 1.0]],
   "canas": [[45, 0.0], [60, 0.45], [75, 0.9], [90, 1.0]],
@@ -30,6 +31,11 @@
     "encogido": {
       "cadera_t": 0.5, "rodilla_t": 0.285, "tobillo_t": 0.045, "columna_t": 0.56, "cuello_t": 0.865,
       "cadera": -95, "rodilla": 125, "tobillo": -20, "columna": 25, "cabeza": 22, "hombro": -55, "codo": -125, "aduccion": 40
+    },
+    "_sentado": "Bebé de un año sentado: piernas hacia adelante, espalda algo inclinada y manos delante. Mismos campos que 'encogido'; se mezcla con 'peso_sentado'.",
+    "sentado": {
+      "cadera_t": 0.5, "rodilla_t": 0.285, "tobillo_t": 0.045, "columna_t": 0.56, "cuello_t": 0.865,
+      "cadera": -88, "rodilla": 8, "tobillo": -10, "columna": 12, "cabeza": -6, "hombro": -40, "codo": -50, "aduccion": 12
     },
     "_anciano": "Cifosis (espalda encorvada): hombros y cabeza se adelantan y bajan; algo de pérdida de estatura.",
     "anciano": {

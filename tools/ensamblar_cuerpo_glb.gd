@@ -167,6 +167,7 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 	nuevo.add_blend_shape("SinMamas")   # Pecho plano de la infancia (solo cambia en el cuerpo femenino)
 	nuevo.add_blend_shape("Liso")       # Abdomen sin definición muscular (infancia)
 	nuevo.add_blend_shape("Encogido")   # Recién nacido en posición fetal (forma "Bebe" + postura)
+	nuevo.add_blend_shape("Sentado")    # Bebé de un año sentado (forma "Bebe" + postura)
 	for s in origen.get_surface_count():
 		var arrays := origen.get_surface_arrays(s)
 		var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
@@ -177,7 +178,7 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 		var formas := []
 		if es_piel and not _piel_ids.is_empty():
 			formas = _formas_piel(base, normales_base, global)
-		for forma in ([] if not formas.is_empty() else ["bebe", "anciano", "sin_mamas", "encogido"]):
+		for forma in ([] if not formas.is_empty() else ["bebe", "anciano", "sin_mamas", "encogido", "sentado"]):
 			var v := PackedVector3Array()
 			var nn := PackedVector3Array()
 			v.resize(base.size())
@@ -198,7 +199,7 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 			a[Mesh.ARRAY_TANGENT] = arrays[Mesh.ARRAY_TANGENT]
 			formas.append(a)
 		# Forma "Liso": el abdomen de la piel alisado (sin los "cuadritos"); en otras mallas, sin cambio
-		if formas.size() == 4:   # Fuera de la piel la forma "Liso" no cambia nada (va antes de "Encogido")
+		if formas.size() == 5:   # Fuera de la piel la forma "Liso" no cambia nada (va antes de "Encogido")
 			var liso := []
 			liso.resize(Mesh.ARRAY_MAX)
 			liso[Mesh.ARRAY_VERTEX] = base.duplicate()
@@ -257,7 +258,8 @@ func _aplanar_pecho(p: Vector3) -> Vector3:
 
 # --- Piel completa: formas calculadas sobre toda la superficie (sin costuras entre piezas) -----
 
-const FORMAS_PIEL := ["bebe", "anciano", "sin_mamas", "liso", "encogido"]
+const FORMAS_PIEL := ["bebe", "anciano", "sin_mamas", "liso", "encogido", "sentado"]
+const POSTURAS := ["encogido", "sentado"]   ## Formas de bebé con postura (ver _encoger)
 const CELDA := 2000.0   ## Celdas de 0,5 mm para unir los vértices repetidos de piezas vecinas
 var _piel_celdas := {}                  ## Vector3i -> Array de ids
 var _piel_ids := PackedVector3Array()   ## Posición (cuerpo) de cada vértice unido
@@ -345,23 +347,23 @@ func _preparar_piel(estado: GLTFState) -> void:
 		else:
 			pos.resize(n)
 			for k in n:
-				if forma == "encogido":   # Bebé (pecho plano y abdomen liso) en posición fetal
+				if forma in POSTURAS:   # Bebé (pecho plano y abdomen liso) en posición fetal o sentado
 					var liso: PackedVector3Array = _piel_pos["liso"]
 					var q := _deformar(plano[k] + liso[k] - _piel_ids[k], "bebe_sin_aplanar")
-					pos[k] = _encoger(_piel_ids[k], q, 1 if _ids_brazo.has(k) else 0)
+					pos[k] = _encoger(_piel_ids[k], q, 1 if _ids_brazo.has(k) else 0, forma)
 				else:
 					pos[k] = _deformar(plano[k], "bebe_sin_aplanar") if forma == "bebe" \
 							else _deformar(_piel_ids[k], forma)
-			if forma == "encogido":   # Apoyado en el suelo (el punto más bajo en y = 0)
+			if forma in POSTURAS:   # Apoyado en el suelo (el punto más bajo en y = 0)
 				var suelo := INF
 				for k in n:
 					suelo = minf(suelo, pos[k].y)
-				_suelo_encogido = suelo
+				_suelo[forma] = suelo
 				for k in n:
 					pos[k].y -= suelo
-				print("  encogido: el bebé se apoya %.3f m más abajo" % suelo)
+				print("  %s: el bebé se apoya %.3f m más abajo" % [forma, suelo])
 				pos = _relajar_estirado(pos, _piel_pos["bebe"], vecinos)
-			if forma == "bebe" or forma == "encogido":   # Piel de bebé: más suave en todo el cuerpo
+			if forma == "bebe" or forma in POSTURAS:   # Piel de bebé: más suave en todo el cuerpo
 				pos = _taubin_ids(pos, vecinos, 6)
 		_piel_pos[forma] = pos
 		_piel_normal[forma] = _normales_ids(pos, triangulos)
@@ -679,7 +681,7 @@ var _brazo_t0 := [0.0, 0.0]
 var _hombro_t := 0.8
 var _codo_t := 0.62
 var _pivotes := {}             ## Articulaciones en el espacio del bebé
-var _suelo_encogido := 0.0
+var _suelo := {}               ## Postura -> cuánto se bajó para apoyarse en el suelo
 var _angulo_brazo := [0.0, 0.0]   ## Separación del brazo respecto de la vertical (rad), por lado
 var _ids_brazo := {}           ## Vértices de la piel que pertenecen a los brazos
 const PASO_BRAZO := 0.01
@@ -812,8 +814,8 @@ static func _rotar_x(q: Vector3, pivote: Vector3, angulo: float) -> Vector3:
 ## Postura fetal: p es el punto del adulto (decide a qué parte del cuerpo pertenece) y q el mismo
 ## punto con las proporciones del bebé (el que se mueve). Cada articulación dobla de forma suave
 ## (el ángulo crece en una franja), del hijo al padre: codo -> hombro -> columna.
-func _encoger(p: Vector3, q: Vector3, piel := -1) -> Vector3:
-	var c: Dictionary = _edad.get("encogido", {})
+func _encoger(p: Vector3, q: Vector3, piel := -1, postura := "encogido") -> Vector3:
+	var c: Dictionary = _edad.get(postura, {})
 	var t := p.y / _altura
 	var r := q
 	var wa := _peso_brazo(p, t)
@@ -855,8 +857,8 @@ func _encoger(p: Vector3, q: Vector3, piel := -1) -> Vector3:
 
 func _deformar(p: Vector3, forma: String) -> Vector3:
 	var t := p.y / _altura
-	if forma == "encogido":
-		return _encoger(p, _deformar(p, "bebe")) - Vector3(0, _suelo_encogido, 0)
+	if forma in POSTURAS:
+		return _encoger(p, _deformar(p, "bebe"), -1, forma) - Vector3(0, _suelo.get(forma, 0.0), 0)
 	if forma == "sin_mamas":
 		return _aplanar_pecho(p) if _femenino else p
 	if forma == "bebe" or forma == "bebe_sin_aplanar":
