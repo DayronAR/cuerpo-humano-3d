@@ -1,0 +1,78 @@
+{
+  "_comentario": "Recorridos guiados: la cámara va de órgano en órgano y muestra una explicación corta. Cada paso: organo (id del nodo) y texto; 'sistema' opcional para mostrar uno distinto al del órgano. Los pasos cuyo órgano no existe en el cuerpo elegido se omiten (p. ej. la próstata en el femenino).",
+  "recorridos": [
+    {
+      "id": "sangre",
+      "nombre": "El viaje de la sangre",
+      "descripcion": "Sigue a un glóbulo rojo por las dos circulaciones.",
+      "color": "#d33a3a",
+      "pasos": [
+        {"organo": "VenaCava", "texto": "La sangre pobre en oxígeno vuelve del cuerpo por las venas cavas y entra al corazón por la aurícula derecha."},
+        {"organo": "Corazon", "parte": "Corazon__Right_ventricle", "texto": "El ventrículo derecho la empuja hacia los pulmones por la arteria pulmonar."},
+        {"organo": "PulmonDer", "texto": "En los alvéolos la sangre suelta dióxido de carbono y recoge oxígeno: se vuelve roja brillante."},
+        {"organo": "Corazon", "parte": "Corazon__Left_ventricle", "texto": "Vuelve al corazón por la aurícula izquierda; el ventrículo izquierdo, el más fuerte, la impulsa al resto del cuerpo."},
+        {"organo": "Aorta", "texto": "Sale por la aorta, la arteria más grande del cuerpo (unos 2,5 cm de diámetro)."},
+        {"organo": "ArteriasPerifericas", "texto": "Las arterias se ramifican hasta los capilares, donde el oxígeno pasa a las células de todos los tejidos."},
+        {"organo": "VenasPerifericas", "texto": "Las venas recogen la sangre y la devuelven al corazón. Una vuelta completa tarda alrededor de un minuto."}
+      ]
+    },
+    {
+      "id": "respirar",
+      "nombre": "Cómo respiramos",
+      "descripcion": "El camino del aire desde la nariz hasta los alvéolos.",
+      "color": "#e07a8a",
+      "pasos": [
+        {"organo": "CavidadNasal", "texto": "El aire entra por la nariz, que lo calienta, lo humedece y filtra el polvo con sus pelos y su moco."},
+        {"organo": "Faringe", "texto": "Pasa por la faringe, un conducto compartido con la comida."},
+        {"organo": "Laringe", "texto": "En la laringe están las cuerdas vocales; la epiglotis la tapa al tragar para que la comida no entre."},
+        {"organo": "Traquea", "texto": "La tráquea es un tubo reforzado con anillos de cartílago que nunca se cierra."},
+        {"organo": "Bronquios", "texto": "Se divide en dos bronquios, que se ramifican como un árbol dentro de cada pulmón."},
+        {"organo": "PulmonDer", "texto": "Al final hay unos 300 millones de alvéolos: allí el oxígeno pasa a la sangre."},
+        {"organo": "PulmonIzq", "texto": "El pulmón izquierdo es un poco más pequeño: deja espacio para el corazón."}
+      ]
+    },
+    {
+      "id": "digestion",
+      "nombre": "Del bocado al intestino",
+      "descripcion": "Qué le pasa a la comida en el aparato digestivo.",
+      "color": "#d9a066",
+      "pasos": [
+        {"organo": "Boca", "texto": "Los dientes trituran la comida y la lengua la mezcla con saliva."},
+        {"organo": "GlandulasSalivales", "texto": "La saliva humedece el bocado y empieza a digerir el almidón. Producimos más de 1 litro al día."},
+        {"organo": "Esofago", "texto": "El esófago lleva el bocado al estómago con ondas musculares (peristaltismo), incluso cabeza abajo."},
+        {"organo": "Estomago", "texto": "El estómago lo mezcla con ácido y enzimas durante 2 a 4 horas hasta formar una papilla."},
+        {"organo": "Higado", "texto": "El hígado produce bilis, que ayuda a digerir las grasas."},
+        {"organo": "Pancreas", "texto": "El páncreas aporta jugos digestivos y regula el azúcar de la sangre con la insulina."},
+        {"organo": "IntestinoDelgado", "texto": "En el intestino delgado (unos 6 m) se absorben los nutrientes hacia la sangre."},
+        {"organo": "IntestinoGrueso", "texto": "El intestino grueso absorbe el agua y forma las heces con lo que no se digirió."}
+      ]
+    },
+    {
+      "id": "orina",
+      "nombre": "Cómo se forma la orina",
+      "descripcion": "Los riñones limpian la sangre.",
+      "color": "#c9a227",
+      "pasos": [
+        {"organo": "Aorta", "texto": "Una de cada cinco gotas de sangre que bombea el corazón va a los riñones."},
+        {"organo": "Rinones", "texto": "Cada riñón tiene un millón de filtros (nefronas) que limpian unos 180 litros de sangre al día."},
+        {"organo": "Ureteres", "texto": "La orina baja por los uréteres, dos tubos de unos 25 cm."},
+        {"organo": "Vejiga", "texto": "La vejiga la guarda; cuando se llena (unos 400 ml) sentimos ganas de orinar."},
+        {"organo": "Uretra", "texto": "La uretra la lleva hacia afuera."}
+      ]
+    },
+    {
+      "id": "movimiento",
+      "nombre": "De la idea al movimiento",
+      "descripcion": "Cómo decide el cerebro mover una pierna.",
+      "color": "#8a6fd1",
+      "pasos": [
+        {"organo": "Cerebro", "texto": "La corteza motora del cerebro decide el movimiento y envía la orden."},
+        {"organo": "Cerebelo", "texto": "El cerebelo ajusta la fuerza y el equilibrio para que el movimiento sea preciso."},
+        {"organo": "MedulaEspinal", "texto": "La orden baja por la médula espinal a más de 100 metros por segundo."},
+        {"organo": "Nervios", "texto": "Los nervios la llevan hasta los músculos de la pierna."},
+        {"organo": "CuadricepsDer", "texto": "El cuádriceps se contrae y tira de la rótula: la rodilla se estira."},
+        {"organo": "FemurDer", "texto": "Los músculos mueven los huesos como palancas; el fémur es el hueso más largo y fuerte del cuerpo."}
+      ]
+    }
+  ]
+}

@@ -23,14 +23,28 @@ var _organo_en_ficha := ""   ## Órgano mostrado en la ficha (para su lista de p
 var _herramientas: HerramientasVisor
 var _panel_herramientas: PanelHerramientas
 var _etiquetas: EtiquetasFlotantes
+var _tarjeta_recorrido: TarjetaRecorrido
+var _recorrido: Dictionary = {}   ## Recorrido en curso ({} = ninguno)
+var _pasos: Array = []            ## Pasos del recorrido que existen en el cuerpo elegido
+var _paso := 0
+var _pestana_recorridos := -1
 
 const MODOS := {"explorar": PESTANA_SISTEMAS, "simular": PESTANA_SIMULACION, "cuestionario": PESTANA_CUESTIONARIO}
 
 
 func _ready() -> void:
 	_pestanas.set_tab_title(PESTANA_SISTEMAS, "Sistemas")
-	_pestanas.set_tab_title(PESTANA_SIMULACION, "Simulación")
-	_pestanas.set_tab_title(PESTANA_CUESTIONARIO, "Cuestionario")
+	_pestanas.set_tab_title(PESTANA_SIMULACION, "Simular")
+	_pestanas.set_tab_title(PESTANA_CUESTIONARIO, "Preguntas")
+	_pestanas.add_theme_font_size_override("font_size", 13)
+	_pestanas.add_theme_constant_override("side_margin", 0)
+	for estilo in ["tab_selected", "tab_unselected", "tab_hovered", "tab_disabled", "tab_focus"]:
+		var caja := _pestanas.get_theme_stylebox(estilo)
+		if caja:   # Pestañas más angostas: entran las cuatro sin flechas
+			caja = caja.duplicate()
+			caja.content_margin_left = 7
+			caja.content_margin_right = 7
+			_pestanas.add_theme_stylebox_override(estilo, caja)
 	_pestanas.set_tab_tooltip(PESTANA_SISTEMAS, "Explorar los sistemas y desarmar las capas")
 	_pestanas.set_tab_tooltip(PESTANA_SIMULACION, "Simular correr, fumar o comer")
 	_pestanas.set_tab_tooltip(PESTANA_CUESTIONARIO, "Encontrar órganos y sumar puntos")
@@ -39,6 +53,7 @@ func _ready() -> void:
 
 	_conectar_atlas()
 	_conectar_herramientas()
+	_conectar_recorridos()
 	_conectar_simulacion()
 	_conectar_cuestionario()
 	_pestanas.current_tab = MODOS.get(App.modo_inicial, PESTANA_SISTEMAS)
@@ -51,6 +66,8 @@ func _process(_delta: float) -> void:
 
 func _on_pestana_cambiada(pestana: int) -> void:
 	_actualizar_grafico_visible()
+	if pestana != _pestana_recorridos and not _recorrido.is_empty():
+		_terminar_recorrido()
 	_panel_herramientas.apagar_corte()
 	if pestana != PESTANA_CUESTIONARIO and _cuestionario.activo:
 		_cuestionario.abandonar()
@@ -165,6 +182,72 @@ func _actualizar_zona_etiquetas() -> void:
 	var izquierda := _pestanas.position.x + _pestanas.size.x + 12
 	var derecha := tam.x - 290
 	_etiquetas.zona = Rect2(izquierda, 60, maxf(200, derecha - izquierda), tam.y - 130)
+
+
+# --- Recorridos guiados ------------------------------------------------------------------
+
+func _conectar_recorridos() -> void:
+	if Datos.recorridos.is_empty():
+		return
+	var desplazable := ScrollContainer.new()
+	desplazable.name = "Recorridos"
+	desplazable.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	var margen := MarginContainer.new()
+	margen.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for lado in ["left", "right", "top", "bottom"]:
+		margen.add_theme_constant_override("margin_" + lado, 12)
+	desplazable.add_child(margen)
+	var lista := PanelRecorridos.new()
+	lista.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	margen.add_child(lista)
+	_pestanas.add_child(desplazable)
+	_pestana_recorridos = desplazable.get_index()
+	_pestanas.set_tab_title(_pestana_recorridos, "Recorridos")
+	_pestanas.set_tab_tooltip(_pestana_recorridos, "Recorridos guiados por el cuerpo")
+	lista.configurar(Datos.recorridos)
+	lista.recorrido_elegido.connect(_iniciar_recorrido)
+
+	_tarjeta_recorrido = TarjetaRecorrido.new()
+	_tarjeta_recorrido.name = "TarjetaRecorrido"
+	$UI.add_child(_tarjeta_recorrido)
+	_tarjeta_recorrido.anterior.connect(func(): _ir_a_paso(_paso - 1))
+	_tarjeta_recorrido.siguiente.connect(func():
+		if _paso + 1 >= _pasos.size():
+			_terminar_recorrido()
+		else:
+			_ir_a_paso(_paso + 1))
+	_tarjeta_recorrido.salir.connect(_terminar_recorrido)
+
+
+func _iniciar_recorrido(indice: int) -> void:
+	_recorrido = Datos.recorridos[indice]
+	_pasos = _recorrido.get("pasos", []).filter(func(p): return _visor.obtener_organo(p.get("organo", "")) != null)
+	if _pasos.is_empty():
+		_recorrido = {}
+		return
+	_panel_herramientas.apagar_corte()
+	_herramientas.reiniciar_despiece()
+	_ir_a_paso(0)
+
+
+func _ir_a_paso(i: int) -> void:
+	_paso = clampi(i, 0, _pasos.size() - 1)
+	var p: Dictionary = _pasos[_paso]
+	var id_organo: String = p.get("organo", "")
+	_visor.ir_a_estructura(id_organo, p.get("parte", ""))
+	_panel_ficha.ocultar()   # La explicación va en la tarjeta del recorrido
+	var nombre_parte := Datos.nombre_parte(p.get("parte", ""))
+	var nombre: String = nombre_parte if not nombre_parte.is_empty() else Datos.ficha_organo(id_organo).get("nombre", id_organo)
+	_tarjeta_recorrido.mostrar_paso(_recorrido.get("nombre", ""), Color.from_string(_recorrido.get("color", "#2a7f9e"), Color.TEAL),
+			_paso + 1, _pasos.size(), nombre, p.get("texto", ""))
+
+
+func _terminar_recorrido() -> void:
+	_recorrido = {}
+	_pasos = []
+	_tarjeta_recorrido.hide()
+	_visor.limpiar_seleccion()
+	_visor.mostrar_cuerpo_completo()
 
 
 # --- Simulación ------------------------------------------------------------------------

@@ -23,6 +23,7 @@ var cuestionario: Dictionary = {} ## Preguntas y reglas del modo cuestionario
 var partes: Dictionary = {}       ## id de nodo de la parte -> {nombre, nombre_en, organo} (generado)
 var partes_fichas: Dictionary = {} ## prefijo de id de parte -> {funcion, datos_curiosos} (opcional)
 var edad: Dictionary = {}         ## Barra de edad: curvas de altura, pesos de las formas, etapas
+var recorridos: Array = []        ## Recorridos guiados (data/recorridos.json)
 
 var _sistemas_por_id: Dictionary = {}
 
@@ -42,6 +43,8 @@ func _init() -> void:
 	if FileAccess.file_exists(RUTA_PARTES_FICHAS):
 		partes_fichas = _cargar_json(RUTA_PARTES_FICHAS).get("partes", {})
 	edad = _cargar_json(RUTA_EDAD)
+	if FileAccess.file_exists("res://data/recorridos.json"):
+		recorridos = _cargar_json("res://data/recorridos.json").get("recorridos", [])
 	for s in sistemas:
 		_sistemas_por_id[s.get("id", "")] = s
 
