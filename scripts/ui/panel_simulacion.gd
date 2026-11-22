@@ -10,6 +10,7 @@ signal pausar_pulsado
 signal reiniciar_pulsado
 signal velocidad_elegida(velocidad: float)
 signal intensidad_elegida(id_intensidad: String)
+signal anios_cambiados(anios: float)   ## Barra de deterioro (p. ej. años fumando)
 
 const VELOCIDADES := [1.0, 2.0, 4.0]
 const COLOR_TEXTO := Color(0.89, 0.925, 0.945, 1)
@@ -40,6 +41,11 @@ var _escenario := ""
 var _intensidad := ""
 var _activo := false
 var _pausado := false
+var _deterioro: VBoxContainer          ## Sección de la barra de deterioro (se arma por escenario)
+var _barra_anios: HSlider
+var _valor_anios: Label
+var _lista_danos: VBoxContainer
+var _danos: Array = []
 
 
 func _ready() -> void:
@@ -150,6 +156,76 @@ func mostrar_escenario(id: String, activo: bool) -> void:
 		_intensidades.add_child(b)
 		_botones_intensidad[i.get("id")] = b
 	mostrar_intensidad(_intensidad)
+	_armar_deterioro(e.get("deterioro", {}))
+
+
+## Escenarios con "deterioro" (Fumar): barra de años y lista de daños que aparecen con ellos.
+func _armar_deterioro(d: Dictionary) -> void:
+	if _deterioro:
+		_deterioro.queue_free()
+		_deterioro = null
+	_danos = d.get("danos", [])
+	anios_cambiados.emit(0.0)
+	if d.is_empty():
+		return
+	_deterioro = VBoxContainer.new()
+	_deterioro.add_theme_constant_override("separation", 6)
+	add_child(_deterioro)
+	move_child(_deterioro, _fila_intensidad.get_index() + 1)
+	var fila := HBoxContainer.new()
+	_deterioro.add_child(fila)
+	var titulo := Label.new()
+	titulo.text = d.get("titulo", "AÑOS")
+	titulo.add_theme_color_override("font_color", COLOR_ACENTO)
+	titulo.add_theme_font_size_override("font_size", 15)
+	titulo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	fila.add_child(titulo)
+	_valor_anios = Label.new()
+	_valor_anios.add_theme_color_override("font_color", COLOR_TEXTO)
+	fila.add_child(_valor_anios)
+	var ayuda := Label.new()
+	ayuda.text = d.get("ayuda", "")
+	ayuda.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	ayuda.custom_minimum_size = Vector2(240, 0)
+	ayuda.add_theme_color_override("font_color", COLOR_SUAVE)
+	ayuda.add_theme_font_size_override("font_size", 12)
+	_deterioro.add_child(ayuda)
+	_barra_anios = HSlider.new()
+	_barra_anios.min_value = 0
+	_barra_anios.max_value = float(d.get("anios_max", 40))
+	_barra_anios.step = 1
+	_barra_anios.focus_mode = Control.FOCUS_NONE
+	_barra_anios.custom_minimum_size = Vector2(0, 24)
+	_barra_anios.value_changed.connect(_al_cambiar_anios)
+	_deterioro.add_child(_barra_anios)
+	_lista_danos = VBoxContainer.new()
+	_lista_danos.add_theme_constant_override("separation", 4)
+	_deterioro.add_child(_lista_danos)
+	var dejar := Label.new()
+	dejar.text = d.get("dejar", "")
+	dejar.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	dejar.custom_minimum_size = Vector2(240, 0)
+	dejar.add_theme_color_override("font_color", Color(0.36, 0.85, 0.55))
+	dejar.add_theme_font_size_override("font_size", 12)
+	_deterioro.add_child(dejar)
+	_al_cambiar_anios(0.0)
+
+
+func _al_cambiar_anios(anios: float) -> void:
+	_valor_anios.text = "Nunca" if anios <= 0.0 else ("%d año%s" % [anios, "" if anios == 1 else "s"])
+	for hijo in _lista_danos.get_children():
+		hijo.queue_free()
+	for dano in _danos:
+		if anios < float(dano.get("desde", 0)):
+			continue
+		var l := Label.new()
+		l.text = "•  " + dano.get("texto", "")
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.custom_minimum_size = Vector2(240, 0)
+		l.add_theme_font_size_override("font_size", 13)
+		l.add_theme_color_override("font_color", Color(1.0, 0.5, 0.47) if dano.get("grave", false) else COLOR_TEXTO)
+		_lista_danos.add_child(l)
+	anios_cambiados.emit(anios)
 
 
 func mostrar_intensidad(id: String) -> void:

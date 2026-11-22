@@ -44,7 +44,7 @@ var _colisiones: Dictionary = {}    ## id de sistema -> Array[StaticBody3D]
 var _cajas_sistemas: Dictionary = {}  ## id de sistema -> AABB en el mundo (posición original)
 var _caja_cuerpo := AABB()
 var _sistema_actual := ""
-var _tintes: Dictionary = {}          ## Node3D del órgano -> ShaderMaterial de tinte
+var _tintes: Dictionary = {}          ## Node3D del órgano (o malla de una parte) -> ShaderMaterial de tinte
 var _organo_actual: Node3D = null
 var _parte_actual: Node3D = null      ## Parte seleccionada dentro del órgano (null si no tiene partes)
 var _aislado: Array[MeshInstance3D] = []   ## Mallas aisladas (vacío = sin aislar)
@@ -509,23 +509,40 @@ func escalar_organo(id: String, escala: Vector3) -> void:
 
 
 ## Tiñe un órgano con un color semitransparente encima de su material (cantidad 0 = sin tinte).
-func tenir_organo(id: String, color: Color, cantidad: float) -> void:
+## manchas (0 a 1): el tinte se hace irregular, en parches.
+func tenir_organo(id: String, color: Color, cantidad: float, manchas := 0.0) -> void:
 	var organo: Node3D = _organos.get(id)
+	if organo != null:
+		_tenir(organo, organo, color, cantidad, manchas)
+
+
+## Tiñe solo algunas partes de un órgano (p. ej. los dientes del cráneo o las manos en la piel):
+## las partes cuyo id contiene alguna de las claves. Tiene prioridad sobre el tinte del órgano.
+func tenir_partes(id_organo: String, claves: Array, color: Color, cantidad: float, manchas := 0.0) -> void:
+	var organo: Node3D = _organos.get(id_organo)
 	if organo == null:
 		return
-	var tinte: ShaderMaterial = _tintes.get(organo)
+	for malla in mallas_de(organo):
+		var nombre := String(malla.name).to_lower()
+		if malla != organo and claves.any(func(c): return nombre.contains(String(c).to_lower())):
+			_tenir(malla, organo, color, cantidad, manchas)
+
+
+func _tenir(clave: Node3D, organo: Node3D, color: Color, cantidad: float, manchas: float) -> void:
+	var tinte: ShaderMaterial = _tintes.get(clave)
 	if cantidad <= 0.001:
 		if tinte != null:
-			_tintes.erase(organo)
+			_tintes.erase(clave)
 			_actualizar_overlay(organo)
 		return
 	if tinte == null:
 		tinte = ShaderMaterial.new()
 		tinte.shader = SHADER_TINTE
-		_tintes[organo] = tinte
+		_tintes[clave] = tinte
 		_actualizar_overlay(organo)
 	tinte.set_shader_parameter("color_tinte", color)
 	tinte.set_shader_parameter("cantidad", clampf(cantidad, 0.0, 1.0))
+	tinte.set_shader_parameter("manchas", manchas)
 
 
 ## ids de los órganos de un sistema.
@@ -814,4 +831,4 @@ func _actualizar_overlay(organo: Node3D) -> void:
 		if malla in resaltadas:
 			malla.material_overlay = resaltado
 		else:
-			malla.material_overlay = tinte
+			malla.material_overlay = _tintes.get(malla, tinte)

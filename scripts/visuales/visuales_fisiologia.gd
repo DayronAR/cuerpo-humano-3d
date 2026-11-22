@@ -29,6 +29,8 @@ var _humo: Array[FlujoParticulas] = []
 var _bolo: MeshInstance3D
 var _curva_bolo := Curve3D.new()
 var _fase_peristaltismo := 0.0
+var _anios_fumando := 0.0
+var _tumor: MeshInstance3D
 
 
 func configurar(visor: BodyViewer, cfg: Dictionary) -> void:
@@ -160,12 +162,35 @@ func _animar_peristaltismo(dt: float) -> void:
 			p.get("amplitud", 0.0015) * (p.get("factor_comer", 2.0) if comiendo else 1.0))
 
 
+## Años fumando (barra del escenario Fumar): el cuerpo se deteriora según data/visuales.json -> tabaco.
+func fijar_anios_fumando(anios: float) -> void:
+	_anios_fumando = anios
+	_actualizar_tintes()
+
+
+static func _progreso(d: Dictionary, anios: float) -> float:
+	return smoothstep(float(d.get("desde", 0.0)), float(d.get("hasta", 40.0)), anios)
+
+
 func _actualizar_tintes() -> void:
 	var p: Dictionary = _cfg.get("pulmones", {})
-	var dano := _valor(p.get("variable_dano"), 0.0) / 100.0
+	var tabaco: Dictionary = _cfg.get("tabaco", {})
+	var dano: float = _valor(p.get("variable_dano"), 0.0) / 100.0 * p.get("opacidad_dano_max", 0.8)
+	var t_pulmon: Dictionary = tabaco.get("pulmones", {})
+	var dano_anios := _progreso(t_pulmon, _anios_fumando) * float(t_pulmon.get("max", 0.85))
 	var color_dano: Color = Color.from_string(p.get("color_dano", "#2f2622"), Color.BLACK)
 	for id in p.get("organos", []):
-		_visor.tenir_organo(id, color_dano, dano * p.get("opacidad_dano_max", 0.8))
+		_visor.tenir_organo(id, color_dano, maxf(dano, dano_anios),
+				float(t_pulmon.get("manchas", 0.0)) if dano_anios > dano else 0.0)
+	for d in tabaco.get("danos", []):
+		var color := Color.from_string(d.get("color", "#000000"), Color.BLACK)
+		var cantidad := _progreso(d, _anios_fumando) * float(d.get("max", 0.5))
+		if d.has("partes"):
+			_visor.tenir_partes(d.get("organo", ""), d["partes"], color, cantidad, d.get("manchas", 0.0))
+		else:
+			for id in d.get("organos", []):
+				_visor.tenir_organo(id, color, cantidad, d.get("manchas", 0.0))
+	_actualizar_tumor(tabaco.get("tumor", {}))
 
 	var m: Dictionary = _cfg.get("musculos", {})
 	var lactato: float = inverse_lerp(m.get("valor_sin_tinte", 1.2), m.get("valor_tinte_max", 10.0),
@@ -173,6 +198,60 @@ func _actualizar_tintes() -> void:
 	var color_musculo: Color = Color.from_string(m.get("color", "#7a0010"), Color.DARK_RED)
 	for id in _musculos:
 		_visor.tenir_organo(id, color_musculo, clampf(lactato, 0.0, 1.0) * m.get("opacidad_max", 0.75))
+
+
+## Nódulo pequeño en la superficie del pulmón (cáncer) a partir de muchos años fumando.
+func _actualizar_tumor(t: Dictionary) -> void:
+	var visible_ := not t.is_empty() and _anios_fumando >= float(t.get("desde", 30))
+	if not visible_:
+		if _tumor:
+			_tumor.visible = false
+		return
+	if _tumor == null:
+		var pulmon := _visor.obtener_organo(t.get("organo", ""))
+		if pulmon == null:
+			return
+		_tumor = MeshInstance3D.new()
+		_tumor.name = "Tumor"
+		var esfera := SphereMesh.new()
+		esfera.radius = 1.0
+		esfera.height = 2.0
+		var m := StandardMaterial3D.new()
+		m.albedo_color = Color.from_string(t.get("color", "#3a2a36"), Color.DIM_GRAY)
+		m.roughness = 0.75
+		m.rim_enabled = true
+		m.rim = 0.3
+		esfera.material = m
+		_tumor.mesh = esfera
+		pulmon.add_child(_tumor)
+		_tumor.global_position = _punto_frontal(pulmon, float(t.get("altura", 0.2)))
+	var avance := inverse_lerp(float(t.get("desde", 30)), float(_cfg.get("tabaco", {}).get("anios_max", 40)), _anios_fumando)
+	var radio := lerpf(t.get("radio_min", 0.007), t.get("radio_max", 0.016), clampf(avance, 0.0, 1.0))
+	_tumor.scale = Vector3.ONE * radio / maxf(_tumor.get_parent().global_basis.get_scale().x, 1e-4)
+	_tumor.visible = true
+
+
+## Punto de la cara delantera del pulmón, a cierta altura (fracción de su alto desde el centro).
+func _punto_frontal(organo: Node3D, altura: float) -> Vector3:
+	var caja := AABB()
+	var puntos := []
+	for malla in BodyViewer.mallas_de(organo):
+		if malla.mesh == null or malla.name == "Tumor":
+			continue
+		var v: PackedVector3Array = malla.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		var n := v.size() - (2 if malla.mesh.get_blend_shape_count() > 0 else 0)
+		for k in range(0, n, 3):
+			var g: Vector3 = malla.global_transform * v[k]
+			puntos.append(g)
+			caja = AABB(g, Vector3.ZERO) if caja.size == Vector3.ZERO and puntos.size() == 1 else caja.expand(g)
+	var objetivo := caja.get_center() + Vector3(0, caja.size.y * altura, 0)
+	var mejor := objetivo
+	var mejor_z := -INF
+	for g: Vector3 in puntos:   # El vértice más adelantado cerca de esa altura y del centro del pulmón
+		if absf(g.y - objetivo.y) < 0.015 and absf(g.x - objetivo.x) < 0.02 and g.z > mejor_z:
+			mejor_z = g.z
+			mejor = g
+	return mejor - Vector3(0, 0, 0.004)
 
 
 func _actualizar_bolo() -> void:

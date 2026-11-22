@@ -139,6 +139,7 @@ func _process(_delta: float) -> void:
 
 func _on_pestana_cambiada(pestana: int) -> void:
 	_riel.marcar(pestana)
+	_aviso_controles.hide()
 	_actualizar_grafico_visible()
 	if pestana != _pestana_recorridos and not _recorrido.is_empty():
 		_terminar_recorrido()
@@ -338,6 +339,7 @@ func _conectar_simulacion() -> void:
 	_panel_simulacion.reiniciar_pulsado.connect(motor.reiniciar)
 	_panel_simulacion.velocidad_elegida.connect(motor.fijar_velocidad)
 	_panel_simulacion.intensidad_elegida.connect(motor.fijar_intensidad)
+	_panel_simulacion.anios_cambiados.connect(_al_cambiar_anios)
 
 	# Motor -> vistas (todas solo escuchan)
 	for receptor in [_panel_simulacion.mostrar_estado, _grafico.agregar,
@@ -357,9 +359,22 @@ func _conectar_simulacion() -> void:
 	motor.simulacion_reiniciada.connect(_grafico.limpiar)
 
 
+## Barra de deterioro (años fumando): el cuerpo se daña y los signos vitales en reposo empeoran.
+func _al_cambiar_anios(anios: float) -> void:
+	_visor.visuales.fijar_anios_fumando(anios)
+	var d: Dictionary = SimulationEngine.escenario().get("deterioro", {})
+	var ajustes := {}
+	var fraccion := anios / maxf(float(d.get("anios_max", 40)), 1.0)
+	for id in d.get("vitales", {}):
+		ajustes[id] = float(d["vitales"][id]) * fraccion
+	SimulationEngine.fijar_ajustes_base(ajustes)
+
+
 ## Al iniciar un escenario, el cuerpo se desarma para mostrar los sistemas relevantes.
 func _on_escenario_cambiado(_id: String, activo: bool) -> void:
-	if activo:
+	# Los escenarios con deterioro (Fumar) muestran su vista apenas se eligen: la barra de años
+	# se puede mover sin iniciar la simulación
+	if activo or SimulationEngine.escenario().has("deterioro"):
 		_visor.mostrar_vista(SimulationEngine.escenario().get("vista", {}))
 	_actualizar_grafico_visible()
 

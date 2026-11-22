@@ -1890,5 +1890,101 @@
     "ondas_por_segundo": 0.35,
     "factor_comer": 2.2
   },
-  "_peristaltismo": "Ondas que recorren el tubo digestivo (shaders/organo_vivo.gdshader): amplitud y distancia entre ondas en metros. Durante el escenario 'comer' son más fuertes y rápidas (factor_comer)."
+  "_peristaltismo": "Ondas que recorren el tubo digestivo (shaders/organo_vivo.gdshader): amplitud y distancia entre ondas en metros. Durante el escenario 'comer' son más fuertes y rápidas (factor_comer).",
+  "_tabaco": "Daño acumulado por años fumando (barra 'Años fumando' del escenario Fumar). Cada daño crece entre 'desde' y 'hasta' años hasta 'max' de opacidad; 'manchas' lo hace en parches. 'partes': solo las partes del órgano cuyo id contiene esas claves. El tumor es un nódulo pequeño en la superficie del pulmón.",
+  "tabaco": {
+    "anios_max": 40,
+    "pulmones": {
+      "desde": 0.5,
+      "hasta": 16,
+      "max": 0.9,
+      "manchas": 0.75
+    },
+    "danos": [
+      {
+        "organos": [
+          "Bronquios",
+          "Traquea"
+        ],
+        "color": "#c2412f",
+        "desde": 1,
+        "hasta": 15,
+        "max": 0.5,
+        "manchas": 0.35
+      },
+      {
+        "organo": "Boca",
+        "partes": [
+          "Gingiva"
+        ],
+        "color": "#a8242c",
+        "desde": 2,
+        "hasta": 15,
+        "max": 0.55
+      },
+      {
+        "organo": "Craneo",
+        "partes": [
+          "canine",
+          "molar",
+          "incisor"
+        ],
+        "color": "#b8902a",
+        "desde": 2,
+        "hasta": 20,
+        "max": 0.65,
+        "manchas": 0.4
+      },
+      {
+        "organo": "Epidermis",
+        "partes": [
+          "Mano"
+        ],
+        "color": "#a87b2e",
+        "desde": 4,
+        "hasta": 25,
+        "max": 0.4,
+        "manchas": 0.65
+      },
+      {
+        "organos": [
+          "Epidermis"
+        ],
+        "color": "#7d7a68",
+        "desde": 8,
+        "hasta": 40,
+        "max": 0.22,
+        "manchas": 0.3
+      },
+      {
+        "organos": [
+          "Aorta",
+          "ArteriasPerifericas"
+        ],
+        "color": "#e3c04a",
+        "desde": 6,
+        "hasta": 35,
+        "max": 0.6,
+        "manchas": 0.85
+      },
+      {
+        "organos": [
+          "Corazon"
+        ],
+        "color": "#4a0f12",
+        "desde": 12,
+        "hasta": 40,
+        "max": 0.32,
+        "manchas": 0.4
+      }
+    ],
+    "tumor": {
+      "organo": "PulmonDer",
+      "desde": 30,
+      "radio_min": 0.007,
+      "radio_max": 0.016,
+      "color": "#3a2a36",
+      "altura": 0.22
+    }
+  }
 }

@@ -189,10 +189,25 @@ func _paso(dt: float) -> void:
 	_actualizar_estados()
 
 
+## Cambios crónicos del valor base (p. ej. por años fumando): {id de variable: delta}.
+## Se suman al objetivo de reposo, así se ven aunque la simulación no esté en curso.
+var ajustes_base: Dictionary = {}
+
+
+func fijar_ajustes_base(ajustes: Dictionary) -> void:
+	ajustes_base = ajustes
+	if not escenario_activo:   # Sin simulación en curso, los valores saltan directo al nuevo reposo
+		var objetivos := _calcular_objetivos()
+		for id in ajustes:
+			if valores.has(id):
+				valores[id] = objetivos[id]
+		estado_actualizado.emit(estado())
+
+
 func _calcular_objetivos() -> Dictionary:
 	var objetivos := {}
 	for id in _variables:
-		objetivos[id] = float(_variables[id].get("base", 0.0))
+		objetivos[id] = float(_variables[id].get("base", 0.0)) + float(ajustes_base.get(id, 0.0))
 	for a in _acoplamientos:
 		if objetivos.has(a.get("variable")) and valores.has(a.get("desde")):
 			objetivos[a["variable"]] += a.get("factor", 0.0) * valores[a["desde"]]
