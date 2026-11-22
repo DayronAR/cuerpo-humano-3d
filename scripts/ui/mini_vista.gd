@@ -34,7 +34,7 @@ func al_actualizar_estado(estado: Dictionary) -> void:
 		_vitales = Label.new()
 		_vitales.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_vitales.add_theme_font_size_override("font_size", 12)
-		_vitales.add_theme_color_override("font_color", Color(0.35, 0.42, 0.46))
+		_vitales.add_theme_color_override("font_color", Color(0.557, 0.639, 0.69, 1))
 		_etiqueta.get_parent().add_child(_vitales)
 		_etiqueta.get_parent().move_child(_vitales, _etiqueta.get_index() + 1)
 	if _vitales and estado.has("frecuencia_cardiaca"):

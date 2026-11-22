@@ -8,9 +8,9 @@ signal siguiente_pulsado
 signal saltar_pulsado
 signal nivel_elegido(id_nivel: String)
 
-const VERDE := Color(0.17, 0.55, 0.35)
-const ROJO := Color(0.74, 0.28, 0.29)
-const ACENTO := Color(0.06, 0.43, 0.55)
+const VERDE := Color(0.36, 0.85, 0.55)
+const ROJO := Color(0.98, 0.45, 0.45)
+const ACENTO := Color(0.173, 0.773, 0.71, 1)
 
 @onready var _record: Label = %Record
 @onready var _inicio: VBoxContainer = %Inicio
@@ -53,7 +53,7 @@ func configurar_niveles(niveles: Array) -> void:
 	_descripcion_nivel.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_descripcion_nivel.custom_minimum_size = Vector2(240, 0)
 	_descripcion_nivel.add_theme_font_size_override("font_size", 13)
-	_descripcion_nivel.add_theme_color_override("font_color", Color(0.3, 0.38, 0.42))
+	_descripcion_nivel.add_theme_color_override("font_color", Color(0.557, 0.639, 0.69, 1))
 	_inicio.add_child(fila)
 	_inicio.add_child(_descripcion_nivel)
 	_inicio.move_child(fila, _boton_comenzar.get_index())

@@ -64,20 +64,20 @@ func _draw() -> void:
 	var area := Rect2(MARGEN_IZQ, ALTO_LEYENDA, size.x - MARGEN_IZQ - MARGEN_DER,
 			size.y - ALTO_LEYENDA - ALTO_EJE)
 	# Fondo y cuadrícula
-	draw_rect(area, Color(0.97, 0.98, 0.99))
+	draw_rect(area, Color(0.06, 0.09, 0.125))
 	for i in 5:
 		var y := area.position.y + area.size.y * i / 4.0
-		draw_line(Vector2(area.position.x, y), Vector2(area.end.x, y), Color(0.85, 0.89, 0.92), 1.0)
+		draw_line(Vector2(area.position.x, y), Vector2(area.end.x, y), Color(0.17, 0.22, 0.28), 1.0)
 	for i in 7:
 		var x := area.position.x + area.size.x * i / 6.0
-		draw_line(Vector2(x, area.position.y), Vector2(x, area.end.y), Color(0.9, 0.93, 0.95), 1.0)
+		draw_line(Vector2(x, area.position.y), Vector2(x, area.end.y), Color(0.12, 0.16, 0.21), 1.0)
 	# Eje de tiempo
 	for etiqueta in [[0.0, "-%d s" % int(ventana)], [0.5, "-%d s" % int(ventana / 2)], [1.0, "ahora"]]:
 		var x: float = area.position.x + area.size.x * etiqueta[0]
 		var ancho := fuente.get_string_size(etiqueta[1], HORIZONTAL_ALIGNMENT_LEFT, -1, 11).x
 		x = clampf(x - ancho / 2.0, area.position.x, area.end.x - ancho)
 		draw_string(fuente, Vector2(x, size.y - 3), etiqueta[1], HORIZONTAL_ALIGNMENT_LEFT, -1, 11,
-				Color(0.45, 0.52, 0.58))
+				Color(0.557, 0.639, 0.69, 1))
 	# Líneas
 	for id in _ids:
 		var info: Dictionary = _info[id]
@@ -101,5 +101,5 @@ func _draw() -> void:
 				float(_valores_actuales.get(id, info.get("base", 0.0))), info.get("unidad", "")]
 		draw_rect(Rect2(x_leyenda, 6, 10, 10), color)
 		draw_string(fuente, Vector2(x_leyenda + 14, 16), texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 12,
-				Color(0.15, 0.22, 0.28))
+				Color(0.89, 0.925, 0.945, 1))
 		x_leyenda += 20 + fuente.get_string_size(texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x

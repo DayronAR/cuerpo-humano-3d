@@ -20,9 +20,9 @@ const ALTO_ELEMENTO := 66
 
 var _indice_busqueda: Array = []   ## [texto normalizado, nombre visible, id_organo, id_parte]
 
-const COLOR_TEXTO := Color(0.12, 0.2, 0.26)
-const COLOR_TEXTO_SUAVE := Color(0.38, 0.46, 0.52)
-const COLOR_ACENTO := Color(0.06, 0.43, 0.55)
+const COLOR_TEXTO := Color(0.89, 0.925, 0.945, 1)
+const COLOR_TEXTO_SUAVE := Color(0.557, 0.639, 0.69, 1)
+const COLOR_ACENTO := Color(0.173, 0.773, 0.71, 1)
 
 var _grupo := ButtonGroup.new()
 var _botones: Dictionary = {}   ## id -> Button ("" para cuerpo completo)
@@ -122,10 +122,10 @@ func _crear_elemento(s: Dictionary) -> Button:
 ## Estilo claro para los botones: el sistema activo queda resaltado con borde de color.
 func _aplicar_estilo(boton: Button) -> void:
 	var estados := {
-		"normal": [Color(0.95, 0.97, 0.98), Color(0, 0, 0, 0)],
-		"hover": [Color(0.9, 0.95, 0.97), Color(0, 0, 0, 0)],
-		"pressed": [Color(0.86, 0.94, 0.97), COLOR_ACENTO],
-		"hover_pressed": [Color(0.86, 0.94, 0.97), COLOR_ACENTO],
+		"normal": [Color(0.11, 0.153, 0.2), Color(0, 0, 0, 0)],
+		"hover": [Color(0.141, 0.196, 0.255), Color(0, 0, 0, 0)],
+		"pressed": [Color(0.086, 0.235, 0.25), COLOR_ACENTO],
+		"hover_pressed": [Color(0.086, 0.235, 0.25), COLOR_ACENTO],
 	}
 	for estado in estados:
 		var caja := StyleBoxFlat.new()

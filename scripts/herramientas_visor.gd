@@ -267,8 +267,7 @@ func fijar_comparacion(activo: bool) -> void:
 		_visor.aplicar_edad_a(_comparado, _formas_comparado, _visor.edad_actual())
 		al_cambiar_sistema(_visor.sistema_actual())
 		_objetivo_antes = _visor.camara.objetivo
-		_visor.camara.encuadrar(_visor.camara.objetivo_inicial() + Vector3(SEPARACION_COMPARAR * 0.5, 0, 0),
-				_visor.camara.distancia_inicial() * 1.35)
+		encuadrar_comparacion()
 	else:
 		_comparado.queue_free()
 		_comparado = null
@@ -279,6 +278,14 @@ func fijar_comparacion(activo: bool) -> void:
 
 
 ## El cuerpo comparado muestra el mismo sistema que el principal (o solo la piel).
+## Encuadra los dos cuerpos de frente.
+func encuadrar_comparacion() -> void:
+	var c := _visor.camara
+	var v := c.obtener_vista("frente")
+	c.animar_a(v.get("yaw", 0.0), v.get("pitch", 5.0), c.distancia_inicial() * 1.35,
+			c.objetivo_inicial() + Vector3(SEPARACION_COMPARAR * 0.5, 0, 0))
+
+
 func al_cambiar_sistema(id_sistema: String) -> void:
 	if _comparado == null:
 		return

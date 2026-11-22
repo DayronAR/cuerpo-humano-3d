@@ -8,7 +8,7 @@ script = ExtResource("1_panel")
 
 [node name="TituloEscenario" type="Label" parent="."]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_color = Color(0.173, 0.773, 0.71, 1)
 theme_override_font_sizes/font_size = 13
 text = "ESCENARIO"
 
@@ -20,7 +20,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.38, 0.44, 1)
+theme_override_colors/font_color = Color(0.557, 0.639, 0.69, 1)
 theme_override_font_sizes/font_size = 12
 autowrap_mode = 3
 
@@ -30,7 +30,7 @@ layout_mode = 2
 
 [node name="TituloIntensidad" type="Label" parent="FilaIntensidad"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_color = Color(0.173, 0.773, 0.71, 1)
 theme_override_font_sizes/font_size = 13
 text = "INTENSIDAD"
 
@@ -40,7 +40,7 @@ layout_mode = 2
 
 [node name="TituloControles" type="Label" parent="."]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_color = Color(0.173, 0.773, 0.71, 1)
 theme_override_font_sizes/font_size = 13
 text = "CONTROLES"
 
@@ -91,7 +91,7 @@ autowrap_mode = 3
 [node name="Actividad" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.38, 0.44, 1)
+theme_override_colors/font_color = Color(0.557, 0.639, 0.69, 1)
 theme_override_font_sizes/font_size = 12
 text = "Actividad: En reposo"
 

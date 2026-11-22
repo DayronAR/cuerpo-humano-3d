@@ -29,6 +29,15 @@ var _pasos: Array = []            ## Pasos del recorrido que existen en el cuerp
 var _paso := 0
 var _pestana_recorridos := -1
 
+const SECCIONES := [
+	["Sistemas del cuerpo", "res://ui/iconos/barra/sistemas.svg"],
+	["Simular: correr, fumar o comer", "res://ui/iconos/barra/simular.svg"],
+	["Preguntas: encuentra los órganos", "res://ui/iconos/barra/preguntas.svg"],
+	["Recorridos guiados", "res://ui/iconos/barra/recorridos.svg"],
+]
+var _riel: RielNavegacion
+var _aviso_controles: AvisoControles
+
 const MODOS := {"explorar": PESTANA_SISTEMAS, "simular": PESTANA_SIMULACION, "cuestionario": PESTANA_CUESTIONARIO}
 
 
@@ -50,6 +59,7 @@ func _ready() -> void:
 	_pestanas.set_tab_tooltip(PESTANA_CUESTIONARIO, "Encontrar órganos y sumar puntos")
 	_pestanas.tab_changed.connect(_on_pestana_cambiada)
 	$UI/BotonInicio.pressed.connect(App.volver_al_inicio)
+	_armar_diseno()
 
 	_conectar_atlas()
 	_conectar_herramientas()
@@ -57,6 +67,69 @@ func _ready() -> void:
 	_conectar_simulacion()
 	_conectar_cuestionario()
 	_pestanas.current_tab = MODOS.get(App.modo_inicial, PESTANA_SISTEMAS)
+	_riel.configurar(SECCIONES.slice(0, _pestanas.get_tab_count()))
+	_riel.marcar(_pestanas.current_tab)
+	_aviso_controles.mostrar_si_es_la_primera_vez.call_deferred()
+
+
+## Diseño: barra de navegación con íconos a la izquierda (en lugar de pestañas), el panel de la
+## sección a su lado, fondo con degradado y el aviso de controles.
+func _armar_diseno() -> void:
+	_riel = RielNavegacion.new()
+	_riel.name = "Riel"
+	$UI.add_child(_riel)
+	_riel.anchor_bottom = 1.0
+	_riel.offset_left = 12
+	_riel.offset_top = 12
+	_riel.offset_right = 12 + RielNavegacion.ANCHO
+	_riel.offset_bottom = -12
+	_riel.seccion_elegida.connect(func(i): _pestanas.current_tab = i)
+	_riel.inicio_pulsado.connect(App.volver_al_inicio)
+	$UI/BotonInicio.hide()
+	_pestanas.tabs_visible = false
+	_pestanas.offset_left = 88
+	_pestanas.offset_right = 88 + 302
+	_pestanas.offset_top = 12
+	$UI/Aviso.offset_left = 92
+	$UI/Aviso.offset_right = 492
+	_barra_vistas.centrar_solicitado.connect(_centrar)
+	# La barra de vistas se centra en el espacio libre (a la derecha del panel izquierdo)
+	_barra_vistas.offset_left += 100
+	_barra_vistas.offset_right += 100
+
+	# Fondo: degradado radial azul noche detrás del cuerpo (el 3D se dibuja encima)
+	var fondo := CanvasLayer.new()
+	fondo.layer = -1
+	add_child(fondo)
+	var degradado := Gradient.new()
+	degradado.set_color(0, Color(0.11, 0.165, 0.22))
+	degradado.set_color(1, Color(0.035, 0.05, 0.075))
+	var textura := GradientTexture2D.new()
+	textura.gradient = degradado
+	textura.fill = GradientTexture2D.FILL_RADIAL
+	textura.fill_from = Vector2(0.5, 0.42)
+	textura.fill_to = Vector2(1.05, 1.05)
+	var rect := TextureRect.new()
+	rect.texture = textura
+	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	rect.stretch_mode = TextureRect.STRETCH_SCALE
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fondo.add_child(rect)
+	var entorno: Environment = _visor.get_node("Entorno").environment
+	entorno.background_mode = Environment.BG_CANVAS
+	entorno.background_canvas_max_layer = -1
+
+	_aviso_controles = AvisoControles.new()
+	_aviso_controles.name = "AvisoControles"
+	$UI.add_child(_aviso_controles)
+
+
+## Vuelve a la vista inicial (de frente, todo el cuerpo), aunque se haya hecho mucho zoom.
+func _centrar() -> void:
+	if _herramientas.comparando():
+		_herramientas.encuadrar_comparacion()
+	else:
+		_visor.camara.ir_a_vista("frente")
 
 
 func _process(_delta: float) -> void:
@@ -65,6 +138,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_pestana_cambiada(pestana: int) -> void:
+	_riel.marcar(pestana)
 	_actualizar_grafico_visible()
 	if pestana != _pestana_recorridos and not _recorrido.is_empty():
 		_terminar_recorrido()

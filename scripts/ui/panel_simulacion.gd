@@ -12,9 +12,9 @@ signal velocidad_elegida(velocidad: float)
 signal intensidad_elegida(id_intensidad: String)
 
 const VELOCIDADES := [1.0, 2.0, 4.0]
-const COLOR_TEXTO := Color(0.12, 0.2, 0.26)
-const COLOR_SUAVE := Color(0.38, 0.46, 0.52)
-const COLOR_ACENTO := Color(0.06, 0.43, 0.55)
+const COLOR_TEXTO := Color(0.89, 0.925, 0.945, 1)
+const COLOR_SUAVE := Color(0.557, 0.639, 0.69, 1)
+const COLOR_ACENTO := Color(0.173, 0.773, 0.71, 1)
 
 @onready var _escenarios: HBoxContainer = %Escenarios
 @onready var _descripcion: Label = %Descripcion
@@ -111,7 +111,7 @@ func mostrar_estado(estado: Dictionary) -> void:
 func mostrar_estados(estados: Array) -> void:
 	if estados.is_empty():
 		_estados.text = "Estado: normal"
-		_estados.add_theme_color_override("font_color", Color(0.17, 0.55, 0.35))
+		_estados.add_theme_color_override("font_color", Color(0.36, 0.85, 0.55))
 		_estados.tooltip_text = ""
 		return
 	var nombres := []

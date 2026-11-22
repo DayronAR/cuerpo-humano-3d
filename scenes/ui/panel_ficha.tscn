@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/panel_ficha.gd" id="1_panel"]
 
 [sub_resource type="StyleBoxFlat" id="Estilo_panel"]
-bg_color = Color(1, 1, 1, 0.94)
+bg_color = Color(0.075, 0.105, 0.145, 0.94)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -12,7 +12,7 @@ content_margin_left = 18.0
 content_margin_top = 14.0
 content_margin_right = 18.0
 content_margin_bottom = 18.0
-shadow_color = Color(0, 0.1, 0.2, 0.18)
+shadow_color = Color(0, 0, 0, 0.35)
 shadow_size = 8
 
 [node name="PanelFicha" type="PanelContainer"]
@@ -38,7 +38,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.06, 0.2, 0.3, 1)
+theme_override_colors/font_color = Color(0.89, 0.925, 0.945, 1)
 theme_override_font_sizes/font_size = 24
 text = "Órgano"
 autowrap_mode = 3
@@ -48,8 +48,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 tooltip_text = "Cerrar ficha"
-theme_override_colors/font_color = Color(0.3, 0.4, 0.45, 1)
-theme_override_colors/font_hover_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_color = Color(0.557, 0.639, 0.69, 1)
+theme_override_colors/font_hover_color = Color(0.173, 0.773, 0.71, 1)
 theme_override_font_sizes/font_size = 18
 focus_mode = 0
 text = "✕"
@@ -68,7 +68,7 @@ size_flags_vertical = 4
 [node name="Sistema" type="Label" parent="Contenido/FilaSistema"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.4, 0.45, 1)
+theme_override_colors/font_color = Color(0.557, 0.639, 0.69, 1)
 text = "Sistema"
 
 [node name="BotonAislar" type="Button" parent="Contenido"]
@@ -85,7 +85,7 @@ layout_mode = 2
 
 [node name="EtiquetaFuncion" type="Label" parent="Contenido"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_color = Color(0.173, 0.773, 0.71, 1)
 theme_override_font_sizes/font_size = 15
 text = "FUNCIÓN"
 
@@ -93,12 +93,12 @@ text = "FUNCIÓN"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
+theme_override_colors/font_color = Color(0.89, 0.925, 0.945, 1)
 autowrap_mode = 3
 
 [node name="EtiquetaCuriosos" type="Label" parent="Contenido"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_color = Color(0.173, 0.773, 0.71, 1)
 theme_override_font_sizes/font_size = 15
 text = "DATOS CURIOSOS"
 
@@ -106,13 +106,13 @@ text = "DATOS CURIOSOS"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
+theme_override_colors/font_color = Color(0.89, 0.925, 0.945, 1)
 autowrap_mode = 3
 
 [node name="EtiquetaPartes" type="Label" parent="Contenido"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.06, 0.43, 0.55, 1)
+theme_override_colors/font_color = Color(0.173, 0.773, 0.71, 1)
 theme_override_font_sizes/font_size = 15
 text = "PARTES"
 

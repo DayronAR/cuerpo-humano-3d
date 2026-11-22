@@ -6,9 +6,9 @@ extends Control
 
 const ALTO := 24.0
 const MARGEN := 14.0
-const COLOR_LINEA := Color(0.12, 0.25, 0.32, 0.75)
-const COLOR_FONDO := Color(1, 1, 1, 0.92)
-const COLOR_TEXTO := Color(0.1, 0.18, 0.24)
+const COLOR_LINEA := Color(0.173, 0.773, 0.71, 0.8)
+const COLOR_FONDO := Color(0.075, 0.105, 0.145, 0.94)
+const COLOR_TEXTO := Color(0.89, 0.925, 0.945, 1)
 
 var fuente_puntos: Callable   ## () -> [[nombre, Vector3], ...]
 var camara: Camera3D

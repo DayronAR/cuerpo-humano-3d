@@ -28,6 +28,41 @@ func _ready() -> void:
 	var mejor := RegistroPuntajes.mejor_puntaje()
 	_record.text = "Mejor puntaje en el cuestionario: %d de %d" % [mejor.puntaje, mejor.total] \
 			if mejor.total > 0 else "Aún no hay puntajes en el cuestionario"
+	_armar_fondo_y_ayuda()
+
+
+## Fondo con degradado (igual que el visor) y los controles de la cámara bajo los botones.
+func _armar_fondo_y_ayuda() -> void:
+	var capa := CanvasLayer.new()
+	capa.layer = -1
+	add_child(capa)
+	var degradado := Gradient.new()
+	degradado.set_color(0, Color(0.11, 0.165, 0.22))
+	degradado.set_color(1, Color(0.035, 0.05, 0.075))
+	var textura := GradientTexture2D.new()
+	textura.gradient = degradado
+	textura.fill = GradientTexture2D.FILL_RADIAL
+	textura.fill_from = Vector2(0.7, 0.45)
+	textura.fill_to = Vector2(1.25, 1.1)
+	var rect := TextureRect.new()
+	rect.texture = textura
+	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	rect.stretch_mode = TextureRect.STRETCH_SCALE
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	capa.add_child(rect)
+	var entorno: Environment = $Fondo/Entorno.environment
+	entorno.background_mode = Environment.BG_CANVAS
+	entorno.background_canvas_max_layer = -1
+	var ayuda := Label.new()
+	ayuda.text = "Arrastra para girar · Rueda o pellizco para acercar · Clic derecho para desplazar · C para centrar"
+	ayuda.theme_type_variation = "TextoSuave"
+	ayuda.add_theme_font_size_override("font_size", 12)
+	ayuda.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	ayuda.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	ayuda.custom_minimum_size = Vector2(360, 0)
+	var contenido := %BotonSalir.get_parent()
+	contenido.add_child(ayuda)
+	contenido.move_child(ayuda, %Record.get_index() + 1)
 
 
 func _elegir_cuerpo(id: String) -> void:

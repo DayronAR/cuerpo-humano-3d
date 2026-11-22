@@ -105,12 +105,12 @@ func _armar_secciones() -> void:
 	contenido.move_child(_desplazable, titulo_funcion.get_index())
 	for nodo in [titulo_funcion, _funcion, contenido.get_node("EtiquetaCuriosos"), _curiosos]:
 		nodo.reparent(secciones)
-	var t_enf := _titulo_seccion("ENFERMEDADES FRECUENTES", Color(0.72, 0.22, 0.2))
+	var t_enf := _titulo_seccion("ENFERMEDADES FRECUENTES", Color(1.0, 0.5, 0.47))
 	secciones.add_child(t_enf)
 	_enfermedades = _texto()
 	_enfermedades.set_meta("titulo", t_enf)
 	secciones.add_child(_enfermedades)
-	_etiqueta_edad = _titulo_seccion("", Color(0.45, 0.3, 0.6))
+	_etiqueta_edad = _titulo_seccion("", Color(0.72, 0.6, 0.98))
 	secciones.add_child(_etiqueta_edad)
 	_texto_edad = _texto()
 	secciones.add_child(_texto_edad)
@@ -128,7 +128,7 @@ func _texto() -> Label:
 	var l := Label.new()
 	l.custom_minimum_size = Vector2(320, 0)
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	l.add_theme_color_override("font_color", Color(0.15, 0.2, 0.25))
+	l.add_theme_color_override("font_color", Color(0.89, 0.925, 0.945, 1))
 	return l
 
 

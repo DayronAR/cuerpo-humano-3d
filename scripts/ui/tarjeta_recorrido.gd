@@ -18,13 +18,13 @@ var _barra_color: ColorRect
 func _ready() -> void:
 	hide()
 	var estilo := StyleBoxFlat.new()
-	estilo.bg_color = Color(1, 1, 1, 0.96)
+	estilo.bg_color = Color(0.075, 0.105, 0.145, 0.94)
 	estilo.set_corner_radius_all(12)
 	estilo.content_margin_left = 18
 	estilo.content_margin_right = 18
 	estilo.content_margin_top = 12
 	estilo.content_margin_bottom = 12
-	estilo.shadow_color = Color(0, 0.1, 0.2, 0.2)
+	estilo.shadow_color = Color(0, 0, 0, 0.35)
 	estilo.shadow_size = 8
 	add_theme_stylebox_override("panel", estilo)
 	var caja := VBoxContainer.new()
@@ -37,18 +37,18 @@ func _ready() -> void:
 	fila.add_child(_barra_color)
 	_titulo = Label.new()
 	_titulo.add_theme_font_size_override("font_size", 17)
-	_titulo.add_theme_color_override("font_color", Color(0.1, 0.18, 0.24))
+	_titulo.add_theme_color_override("font_color", Color(0.89, 0.925, 0.945, 1))
 	_titulo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	fila.add_child(_titulo)
 	_paso = Label.new()
 	_paso.add_theme_font_size_override("font_size", 13)
-	_paso.add_theme_color_override("font_color", Color(0.4, 0.48, 0.52))
+	_paso.add_theme_color_override("font_color", Color(0.557, 0.639, 0.69, 1))
 	fila.add_child(_paso)
 	_texto = Label.new()
 	_texto.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_texto.custom_minimum_size = Vector2(520, 0)
 	_texto.add_theme_font_size_override("font_size", 15)
-	_texto.add_theme_color_override("font_color", Color(0.15, 0.2, 0.25))
+	_texto.add_theme_color_override("font_color", Color(0.89, 0.925, 0.945, 1))
 	caja.add_child(_texto)
 	var botones := HBoxContainer.new()
 	botones.alignment = BoxContainer.ALIGNMENT_END

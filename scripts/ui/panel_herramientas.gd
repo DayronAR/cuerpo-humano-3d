@@ -23,13 +23,13 @@ var _comparar: CheckButton
 
 func _ready() -> void:
 	var estilo := StyleBoxFlat.new()
-	estilo.bg_color = Color(1, 1, 1, 0.94)
+	estilo.bg_color = Color(0.075, 0.105, 0.145, 0.94)
 	estilo.set_corner_radius_all(12)
 	estilo.content_margin_left = 12
 	estilo.content_margin_right = 12
 	estilo.content_margin_top = 8
 	estilo.content_margin_bottom = 10
-	estilo.shadow_color = Color(0, 0.1, 0.2, 0.15)
+	estilo.shadow_color = Color(0, 0, 0, 0.35)
 	estilo.shadow_size = 6
 	add_theme_stylebox_override("panel", estilo)
 	custom_minimum_size = Vector2(250, 0)
@@ -59,7 +59,7 @@ func _ready() -> void:
 	_despiece = _deslizador(0.0, "Separa los órganos del sistema que estás viendo")
 	_despiece.value_changed.connect(func(v): despiece_cambiado.emit(v))
 	caja.add_child(_despiece)
-	_aviso_despiece = _etiqueta("Elige un sistema para separarlo", 12, Color(0.4, 0.48, 0.52))
+	_aviso_despiece = _etiqueta("Elige un sistema para separarlo", 12, Color(0.557, 0.639, 0.69, 1))
 	caja.add_child(_aviso_despiece)
 
 	_etiquetas = _interruptor("Etiquetas", "Nombres de los órganos del sistema visible")
@@ -94,11 +94,11 @@ func _emitir_corte() -> void:
 
 
 func _titulo(texto: String) -> Label:
-	var l := _etiqueta(texto, 17, Color(0.1, 0.18, 0.24))
+	var l := _etiqueta(texto, 17, Color(0.89, 0.925, 0.945, 1))
 	return l
 
 
-func _etiqueta(texto: String, tamano := 14, color := Color(0.2, 0.28, 0.33)) -> Label:
+func _etiqueta(texto: String, tamano := 14, color := Color(0.89, 0.925, 0.945, 1)) -> Label:
 	var l := Label.new()
 	l.text = texto
 	l.add_theme_font_size_override("font_size", tamano)

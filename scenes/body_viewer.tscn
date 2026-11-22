@@ -17,7 +17,7 @@ radiance_size = 1
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
-background_color = Color(0.86, 0.9, 0.93, 1)
+background_color = Color(0.055, 0.078, 0.11, 1)
 sky = SubResource("Cielo")
 ambient_light_source = 3
 ambient_light_energy = 0.6
@@ -36,8 +36,11 @@ radial_segments = 48
 rings = 1
 
 [sub_resource type="StandardMaterial3D" id="Material_base"]
-albedo_color = Color(0.74, 0.8, 0.85, 1)
-roughness = 0.9
+albedo_color = Color(0.06, 0.085, 0.115, 1)
+roughness = 0.55
+rim_enabled = true
+rim = 0.6
+rim_tint = 1.0
 
 [node name="BodyViewer" type="Node3D"]
 script = ExtResource("1_visor")
