@@ -76,6 +76,7 @@ func _ready() -> void:
 	visuales.configurar(self, Datos.visuales)
 	_mostrar_interior(false)
 	_preparar_edad()
+	_completar_colisiones([CAPA_CERRADA])   # Con la piel completa solo se puede tocar la piel
 
 
 # --- API pública --------------------------------------------------------------
@@ -187,6 +188,8 @@ func _preparar_edad() -> void:
 	_objetivo_adulto = camara.objetivo_inicial()
 	_distancia_adulto = camara.distancia_inicial()
 	_formas_edad = preparar_formas(cuerpo)
+	for f in _formas_edad:
+		_forma_de_malla[f[0]] = f
 	var cabello: Node3D = _organos.get("Cabello")
 	if cabello:
 		var malla := mallas_de(cabello)[0]
@@ -309,8 +312,8 @@ func _actualizar_colisiones_edad(pesos: Array) -> void:
 	if _tarea_colisiones != -1:
 		_pendiente_colisiones = pesos   # Se hará al terminar la tarea actual
 		return
-	if _por_leer != 0:
-		_pendiente_colisiones = pesos   # Se hará al terminar de leer las mallas (_leer_mallas)
+	if not _cola_colisiones.is_empty():
+		_pendiente_colisiones = pesos   # Se hará al terminar la cola de colisiones
 		return
 	_pesos_en_calculo = pesos
 	_resultados.resize(_trabajos.size())
@@ -318,40 +321,81 @@ func _actualizar_colisiones_edad(pesos: Array) -> void:
 			"Colisiones por edad")
 
 
-## Los vértices de las mallas se leen una sola vez, en el hilo principal y de a poco (unos
-## milisegundos por cuadro tras cargar): leerlos desde los hilos de trabajo pide datos a la GPU
-## y puede trabar la aplicación, y leerlos todos de golpe la congela unos segundos.
-var _por_leer := -1   ## Mallas que faltan por leer (-1 = aún no se empezó)
+## Colisiones (para elegir con clic): leer una malla pide sus datos a la GPU, y leer las ~1150
+## de golpe congela el arranque unos segundos. Se crean de a poco en el hilo principal (unos
+## milisegundos por cuadro) en una cola; las del sistema que se va a mostrar se adelantan. La
+## misma lectura sirve para las formas de edad (_trabajos).
+var _cola_colisiones: Array = []   ## [CollisionShape3D, MeshInstance3D, id de sistema]
+var _forma_de_malla: Dictionary = {}   ## MeshInstance3D -> entrada de _formas_edad
+const PRESUPUESTO_COLA_US := 10000
 
 
-func _leer_mallas() -> void:
-	if _por_leer == -1:
-		_trabajos.clear()
-		_por_leer = _formas_edad.size()
-	var limite := Time.get_ticks_usec() + 3000
-	while _por_leer > 0 and Time.get_ticks_usec() < limite:
-		var f: Array = _formas_edad[_formas_edad.size() - _por_leer]
-		_por_leer -= 1
-		for hijo in f[0].get_children():
-			if hijo is StaticBody3D and hijo.get_child_count() > 0:
-				var m: ArrayMesh = f[0].mesh
-				var arrays := m.surface_get_arrays(0)
-				var formas := m.surface_get_blend_shape_arrays(0)
-				var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
-				_trabajos.append([hijo.get_child(0), base, arrays[Mesh.ARRAY_INDEX],
-						formas[f[1]][Mesh.ARRAY_VERTEX], formas[f[2]][Mesh.ARRAY_VERTEX],
-						formas[f[3]][Mesh.ARRAY_VERTEX] if f[3] >= 0 else base,
-						formas[f[5]][Mesh.ARRAY_VERTEX] if f.size() > 5 and f[5] >= 0 else base,
-						formas[f[6]][Mesh.ARRAY_VERTEX] if f.size() > 6 and f[6] >= 0 else base])
-	if _por_leer == 0 and not _pendiente_colisiones.is_empty():
+func _procesar_cola(limite_us: int) -> void:
+	var fin := Time.get_ticks_usec() + limite_us
+	while not _cola_colisiones.is_empty() and Time.get_ticks_usec() < fin:
+		_crear_forma(_cola_colisiones.pop_back())
+	if _cola_colisiones.is_empty() and not _pendiente_colisiones.is_empty():
 		var p := _pendiente_colisiones
 		_pendiente_colisiones = []
 		_actualizar_colisiones_edad(p)
 
 
+## Termina ya las colisiones de estos sistemas (todas si ids está vacío).
+func completar_colisiones(ids: Array = []) -> void:
+	_completar_colisiones(ids)
+
+
+func _completar_colisiones(ids: Array) -> void:
+	var resto := []
+	for item in _cola_colisiones:
+		if ids.is_empty() or item[2] in ids:
+			_crear_forma(item)
+		else:
+			resto.append(item)
+	_cola_colisiones = resto
+	if _cola_colisiones.is_empty() and not _pendiente_colisiones.is_empty():
+		var p := _pendiente_colisiones
+		_pendiente_colisiones = []
+		_actualizar_colisiones_edad(p)
+
+
+func _crear_forma(item: Array) -> void:
+	var nodo: CollisionShape3D = item[0]
+	var malla: MeshInstance3D = item[1]
+	if not is_instance_valid(nodo) or malla.mesh == null:
+		return
+	var m := malla.mesh as ArrayMesh
+	if m == null or m.get_surface_count() != 1:
+		nodo.shape = malla.mesh.create_trimesh_shape()
+		return
+	var arrays := m.surface_get_arrays(0)
+	var base: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	var f: Array = _forma_de_malla.get(malla, [])
+	if f.is_empty():
+		var caras := PackedVector3Array()
+		caras.resize(indices.size())
+		for k in indices.size():
+			caras[k] = base[indices[k]]
+		var forma := ConcavePolygonShape3D.new()
+		forma.set_faces(caras)
+		nodo.shape = forma
+		return
+	var formas := m.surface_get_blend_shape_arrays(0)
+	var trabajo := [nodo, base, indices,
+			formas[f[1]][Mesh.ARRAY_VERTEX], formas[f[2]][Mesh.ARRAY_VERTEX],
+			formas[f[3]][Mesh.ARRAY_VERTEX] if f[3] >= 0 else base,
+			formas[f[5]][Mesh.ARRAY_VERTEX] if f.size() > 5 and f[5] >= 0 else base,
+			formas[f[6]][Mesh.ARRAY_VERTEX] if f.size() > 6 and f[6] >= 0 else base]
+	_trabajos.append(trabajo)
+	nodo.shape = _forma_con_pesos(trabajo, _pesos_colision)
+
+
 func _calcular_colision(k: int) -> void:
-	var t: Array = _trabajos[k]
-	var pesos := _pesos_en_calculo
+	_resultados[k] = _forma_con_pesos(_trabajos[k], _pesos_en_calculo)
+
+
+func _forma_con_pesos(t: Array, pesos: Array) -> ConcavePolygonShape3D:
 	var base: PackedVector3Array = t[1]
 	var indices: PackedInt32Array = t[2]
 	var vb: PackedVector3Array = t[3]
@@ -369,7 +413,7 @@ func _calcular_colision(k: int) -> void:
 				+ (ve[j] - base[j]) * pesos[3] + (vt[j] - base[j]) * pesos[4]
 	var forma := ConcavePolygonShape3D.new()
 	forma.set_faces(caras)
-	_resultados[k] = forma
+	return forma
 
 
 func _revisar_tarea_colisiones() -> void:
@@ -469,6 +513,7 @@ func enfocar_sistema(id: String, transparencia := TRANSPARENCIA_CONTEXTO) -> voi
 	for otro in _sistemas:
 		if otro != id and not otro in retirar and not otro in dentro:
 			fantasmas[otro] = transparencia
+	_completar_colisiones([id] + fantasmas.keys())
 	capas.retirar_solo(retirar + dentro, fantasmas, dentro)
 	_encuadrar(_cajas_sistemas[id])
 	sistema_mostrado.emit(id)
@@ -486,6 +531,7 @@ func mostrar_cuerpo_completo() -> void:
 ## {capas_retiradas: [...], capas_fantasma: {id: transparencia}, encuadre: "cuerpo" | id de sistema}
 func mostrar_vista(vista: Dictionary) -> void:
 	_sistema_actual = ""
+	_completar_colisiones(_sistemas.keys().filter(func(x): return not x in vista.get("capas_retiradas", [])))
 	capas.retirar_solo(vista.get("capas_retiradas", []), vista.get("capas_fantasma", {}))
 	var encuadre: String = vista.get("encuadre", "cuerpo")
 	var caja: AABB = _cajas_sistemas.get(encuadre, _caja_cuerpo)
@@ -656,10 +702,10 @@ func _crear_colisiones(organo: Node3D) -> Array:
 		if malla != organo:
 			cuerpo_fisico.set_meta("parte", malla)
 		var forma := CollisionShape3D.new()
-		forma.shape = malla.mesh.create_trimesh_shape()
 		cuerpo_fisico.add_child(forma)
 		malla.add_child(cuerpo_fisico)
 		creados.append(cuerpo_fisico)
+		_cola_colisiones.append([forma, malla, organo.get_meta("sistema")])
 	return creados
 
 
@@ -747,8 +793,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	if _por_leer != 0 and not _formas_edad.is_empty():
-		_leer_mallas()
+	if not _cola_colisiones.is_empty():
+		_procesar_cola(PRESUPUESTO_COLA_US)
 	_revisar_tarea_colisiones()
 	# Una consulta por cuadro como máximo, aunque lleguen muchos eventos de movimiento
 	var id := _organo_bajo_cursor

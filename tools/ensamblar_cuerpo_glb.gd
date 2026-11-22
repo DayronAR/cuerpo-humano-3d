@@ -150,6 +150,8 @@ func _mezclar(base: Dictionary, cambios: Dictionary) -> Dictionary:
 # --- Formas de mezcla por edad ----------------------------------------------------------
 
 var SIN_LOD := OS.get_environment("SIN_LOD") == "1"
+## Compresión de vértices: con formas de mezcla hace fallar a Godot 4.7 (get_mesh): desactivada.
+var COMPRIMIR := OS.get_environment("COMPRIMIR") == "1"
 const ALTURA_BASE := 1.743   ## Estatura del cuerpo masculino de Z-Anatomy (m); se multiplica por la escala
 var _edad: Dictionary = {}
 var _altura := ALTURA_BASE
@@ -164,8 +166,9 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 	nuevo.set_blend_shape_mode(Mesh.BLEND_SHAPE_MODE_NORMALIZED)   # Formas con posiciones absolutas
 	nuevo.add_blend_shape("Bebe")
 	nuevo.add_blend_shape("Anciano")
-	nuevo.add_blend_shape("SinMamas")   # Pecho plano de la infancia (solo cambia en el cuerpo femenino)
-	nuevo.add_blend_shape("Liso")       # Abdomen sin definición muscular (infancia)
+	if es_piel:   # Solo cambian la piel: en los órganos serían copias iguales a la base (peso inútil)
+		nuevo.add_blend_shape("SinMamas")   # Pecho plano de la infancia (cuerpo femenino)
+		nuevo.add_blend_shape("Liso")       # Abdomen sin definición muscular (infancia)
 	nuevo.add_blend_shape("Encogido")   # Recién nacido en posición fetal (forma "Bebe" + postura)
 	nuevo.add_blend_shape("Sentado")    # Bebé de un año sentado (forma "Bebe" + postura)
 	for s in origen.get_surface_count():
@@ -178,7 +181,7 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 		var formas := []
 		if es_piel and not _piel_ids.is_empty():
 			formas = _formas_piel(base, normales_base, global)
-		for forma in ([] if not formas.is_empty() else ["bebe", "anciano", "sin_mamas", "encogido", "sentado"]):
+		for forma in ([] if not formas.is_empty() else ["bebe", "anciano", "encogido", "sentado"]):
 			var v := PackedVector3Array()
 			var nn := PackedVector3Array()
 			v.resize(base.size())
@@ -198,15 +201,13 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 			a[Mesh.ARRAY_NORMAL] = nn
 			a[Mesh.ARRAY_TANGENT] = arrays[Mesh.ARRAY_TANGENT]
 			formas.append(a)
-		# Forma "Liso": el abdomen de la piel alisado (sin los "cuadritos"); en otras mallas, sin cambio
-		if formas.size() == 5:   # Fuera de la piel la forma "Liso" no cambia nada (va antes de "Encogido")
-			var liso := []
-			liso.resize(Mesh.ARRAY_MAX)
-			liso[Mesh.ARRAY_VERTEX] = base.duplicate()
-			liso[Mesh.ARRAY_NORMAL] = normales_base.duplicate()
-			formas.insert(3, liso)
+		# Sin tangentes ni coordenadas UV: los materiales son triplanares (no usan UV y calculan sus
+		# propias tangentes), y las tangentes se repetirían en cada forma de edad. Ocupa casi la mitad.
+		arrays[Mesh.ARRAY_TANGENT] = null
+		arrays[Mesh.ARRAY_TEX_UV] = null
+		arrays[Mesh.ARRAY_TEX_UV2] = null
 		for a in formas:
-			a[Mesh.ARRAY_TANGENT] = arrays[Mesh.ARRAY_TANGENT]
+			a[Mesh.ARRAY_TANGENT] = null
 		# Godot comprime las formas de mezcla respecto de la caja (AABB) de la malla base: si un
 		# vértice deformado sale de esa caja, queda recortado. Se agregan dos vértices sin usar
 		# (no están en los índices) en las esquinas de la caja que incluye todas las formas.
@@ -238,8 +239,10 @@ func _con_formas_de_edad(origen: ImporterMesh, material: Material, global: Trans
 			na.append(Vector3.UP)
 			na.append(Vector3.UP)
 			a[Mesh.ARRAY_NORMAL] = na
-			a[Mesh.ARRAY_TANGENT] = arrays[Mesh.ARRAY_TANGENT]
-		nuevo.add_surface(Mesh.PRIMITIVE_TRIANGLES, arrays, formas, {}, material, origen.get_surface_name(s))
+		# Compresión de vértices (posición en 16 bits respecto de la caja, normales octaédricas):
+		# las mallas ocupan bastante menos en disco y en la memoria de video
+		nuevo.add_surface(Mesh.PRIMITIVE_TRIANGLES, arrays, formas, {}, material, origen.get_surface_name(s),
+				Mesh.ARRAY_FLAG_COMPRESS_ATTRIBUTES if COMPRIMIR else 0)
 	return nuevo
 
 

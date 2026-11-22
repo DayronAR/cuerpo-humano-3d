@@ -58,6 +58,7 @@ func fijar_corte(activo: bool, plano_id := "", posicion := -1.0) -> void:
 	if activo != _corte_activo:
 		_corte_activo = activo
 		if activo:
+			_visor.completar_colisiones()   # Con el corte se puede tocar el interior
 			_aplicar_materiales_corte()
 		else:
 			_restaurar_materiales()
