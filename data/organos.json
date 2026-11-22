@@ -1,5 +1,5 @@
 {
-  "_comentario": "Fichas de los órganos. Cada clave debe coincidir EXACTAMENTE con el nombre del nodo del órgano en la escena del cuerpo. El sistema se deduce del nodo padre (no se repite aquí).",
+  "_comentario": "Fichas de los órganos. Cada clave debe coincidir EXACTAMENTE con el nombre del nodo del órgano en la escena del cuerpo. El sistema se deduce del nodo padre (no se repite aquí). 'enfermedades': afecciones frecuentes. 'edad': cómo es o cambia el órgano en el bebé, el niño y el adulto mayor (la ficha muestra la etapa de la edad elegida).",
   "organos": {
     "Epidermis": {
       "nombre": "Piel",
@@ -7,7 +7,16 @@
       "datos_curiosos": [
         "En un adulto pesa alrededor de 4 kg y cubre cerca de 2 m².",
         "La capa más externa se renueva aproximadamente cada 4 semanas."
-      ]
+      ],
+      "enfermedades": [
+        "Dermatitis: inflamación con picor y enrojecimiento.",
+        "Acné: obstrucción e infección de los poros.",
+        "Cáncer de piel (melanoma): relacionado con el exceso de sol."
+      ],
+      "edad": {
+        "bebe": "Es muy fina y pierde calor y agua con facilidad.",
+        "anciano": "Pierde colágeno y grasa: se vuelve fina, seca y aparecen arrugas."
+      }
     },
     "Pectorales": {
       "nombre": "Pectorales",
@@ -15,7 +24,16 @@
       "datos_curiosos": [
         "El pectoral mayor tiene forma de abanico y se une al húmero.",
         "Al respirar con mucho esfuerzo (por ejemplo, después de correr) se usan como músculos respiratorios accesorios."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Abdominales": {
       "nombre": "Recto abdominal",
@@ -23,7 +41,16 @@
       "datos_curiosos": [
         "Los 'cuadritos' del abdomen se deben a bandas de tejido tendinoso que cruzan el músculo.",
         "Trabaja junto con el diafragma para aumentar la presión dentro del abdomen."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Diástasis: separación de los rectos abdominales, frecuente tras el embarazo."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "BicepsIzq": {
       "nombre": "Bíceps braquial izquierdo",
@@ -31,7 +58,16 @@
       "datos_curiosos": [
         "Se llama 'bí-ceps' porque tiene dos cabezas que se unen en un solo tendón.",
         "Su antagonista es el tríceps: cuando uno se contrae, el otro se relaja."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "BicepsDer": {
       "nombre": "Bíceps braquial derecho",
@@ -39,7 +75,16 @@
       "datos_curiosos": [
         "En la supinación es más potente que en la flexión: por eso es fácil apretar un tornillo con la mano derecha.",
         "Los músculos solo pueden tirar, nunca empujar; por eso trabajan en parejas."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "CuadricepsIzq": {
       "nombre": "Cuádriceps izquierdo",
@@ -47,7 +92,16 @@
       "datos_curiosos": [
         "Está formado por cuatro músculos, de ahí su nombre.",
         "Es uno de los músculos donde más se acumula ácido láctico al correr a alta intensidad."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "CuadricepsDer": {
       "nombre": "Cuádriceps derecho",
@@ -55,7 +109,16 @@
       "datos_curiosos": [
         "Es uno de los grupos musculares más fuertes del cuerpo.",
         "Su tendón contiene la rótula, un hueso que mejora su palanca."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "GemeloIzq": {
       "nombre": "Gemelos izquierdos (gastrocnemio)",
@@ -63,7 +126,15 @@
       "datos_curiosos": [
         "Se unen al talón mediante el tendón de Aquiles, el tendón más fuerte del cuerpo.",
         "Tienen muchas fibras rápidas, útiles para esfuerzos cortos e intensos."
-      ]
+      ],
+      "enfermedades": [
+        "Rotura del tendón de Aquiles: típica al saltar o arrancar a correr.",
+        "Calambres: contracciones dolorosas e involuntarias."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "GemeloDer": {
       "nombre": "Gemelos derechos (gastrocnemio)",
@@ -71,7 +142,15 @@
       "datos_curiosos": [
         "Ayudan a bombear la sangre de las piernas de vuelta al corazón al contraerse.",
         "Los calambres en la pantorrilla suelen ocurrir en este músculo."
-      ]
+      ],
+      "enfermedades": [
+        "Rotura del tendón de Aquiles: típica al saltar o arrancar a correr.",
+        "Calambres: contracciones dolorosas e involuntarias."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Craneo": {
       "nombre": "Cráneo",
@@ -79,7 +158,15 @@
       "datos_curiosos": [
         "Está formado por 22 huesos; el único que se mueve libremente es la mandíbula.",
         "En los bebés los huesos aún no están unidos: hay zonas blandas llamadas fontanelas."
-      ]
+      ],
+      "enfermedades": [
+        "Traumatismo craneal: golpe en la cabeza; el casco lo previene.",
+        "Fractura de cráneo."
+      ],
+      "edad": {
+        "bebe": "Tiene fontanelas (zonas blandas) que permiten pasar por el canal de parto y que el cerebro crezca; se cierran antes de los 2 años.",
+        "anciano": "Las suturas entre los huesos están completamente soldadas."
+      }
     },
     "ColumnaVertebral": {
       "nombre": "Columna vertebral",
@@ -87,7 +174,16 @@
       "datos_curiosos": [
         "Tiene 33 vértebras; algunas se fusionan para formar el sacro y el cóccix.",
         "Los discos entre vértebras actúan como amortiguadores: por eso somos un poco más altos por la mañana."
-      ]
+      ],
+      "enfermedades": [
+        "Escoliosis: la columna se curva hacia un lado.",
+        "Hernia de disco: el disco presiona un nervio.",
+        "Lumbalgia: dolor en la zona baja de la espalda."
+      ],
+      "edad": {
+        "bebe": "Nace con forma de 'C'; las curvas del cuello y la cintura aparecen al sostener la cabeza y al caminar.",
+        "anciano": "Las vértebras pierden altura y la espalda se encorva (cifosis)."
+      }
     },
     "CajaToracica": {
       "nombre": "Caja torácica",
@@ -95,7 +191,15 @@
       "datos_curiosos": [
         "Tiene 12 pares de costillas; los dos últimos se llaman 'flotantes' porque no llegan al esternón.",
         "El esternón contiene médula ósea roja, que fabrica células de la sangre."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura de costilla: duele al respirar.",
+        "Pectus excavatum: el esternón está hundido."
+      ],
+      "edad": {
+        "bebe": "Las costillas son casi horizontales y muy flexibles.",
+        "anciano": "Los cartílagos costales se calcifican y el tórax es más rígido."
+      }
     },
     "Pelvis": {
       "nombre": "Pelvis",
@@ -103,7 +207,14 @@
       "datos_curiosos": [
         "La pelvis femenina suele ser más ancha y abierta para permitir el parto.",
         "Es uno de los huesos más usados en antropología para estimar sexo y edad."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura de cadera: frecuente en personas mayores tras una caída."
+      ],
+      "edad": {
+        "nino": "Hasta la adolescencia la pelvis son tres huesos (ilion, isquion y pubis) que luego se fusionan.",
+        "anciano": "La fractura de cadera es una de las lesiones más graves en la vejez."
+      }
     },
     "HumeroIzq": {
       "nombre": "Húmero izquierdo",
@@ -111,7 +222,16 @@
       "datos_curiosos": [
         "El 'hueso de la risa' no es un hueso: es el nervio cubital pasando junto al húmero.",
         "Su nombre viene del latín 'humerus', que significa hombro."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "HumeroDer": {
       "nombre": "Húmero derecho",
@@ -119,7 +239,16 @@
       "datos_curiosos": [
         "La articulación del hombro es la más móvil del cuerpo, y también la que más se disloca.",
         "Su cabeza encaja en una cavidad poco profunda del omóplato."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "FemurIzq": {
       "nombre": "Fémur izquierdo",
@@ -127,7 +256,16 @@
       "datos_curiosos": [
         "Mide aproximadamente un cuarto de la estatura de una persona.",
         "Puede soportar fuerzas de varias veces el peso corporal al saltar."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "FemurDer": {
       "nombre": "Fémur derecho",
@@ -135,7 +273,16 @@
       "datos_curiosos": [
         "En su interior hay médula ósea que, en la infancia, produce células sanguíneas.",
         "Los forenses pueden estimar la estatura de una persona a partir de su longitud."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "TibiaIzq": {
       "nombre": "Tibia izquierda",
@@ -143,7 +290,16 @@
       "datos_curiosos": [
         "Su borde frontal está justo bajo la piel: por eso los golpes en la espinilla duelen tanto.",
         "Junto a ella está el peroné, un hueso más delgado que casi no soporta peso."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "TibiaDer": {
       "nombre": "Tibia derecha",
@@ -151,7 +307,16 @@
       "datos_curiosos": [
         "Es el segundo hueso más largo del cuerpo, después del fémur.",
         "En los corredores puede sufrir pequeñas fisuras por estrés si se entrena en exceso."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "Corazon": {
       "nombre": "Corazón",
@@ -160,7 +325,17 @@
         "En reposo late entre 60 y 100 veces por minuto y bombea unos 5 litros de sangre cada minuto.",
         "Tiene su propio marcapasos natural, el nódulo sinusal, que inicia cada latido.",
         "Durante el ejercicio intenso puede superar los 180 latidos por minuto."
-      ]
+      ],
+      "enfermedades": [
+        "Infarto: se tapa una arteria coronaria y una parte del músculo se queda sin oxígeno.",
+        "Insuficiencia cardíaca: el corazón no bombea con fuerza suficiente.",
+        "Arritmias: el ritmo del latido es irregular."
+      ],
+      "edad": {
+        "bebe": "Late unas 120-160 veces por minuto; al nacer se cierran el foramen oval y el conducto arterioso.",
+        "nino": "La frecuencia baja con la edad: unas 80-100 por minuto en la niñez.",
+        "anciano": "Las paredes se engrosan y las válvulas se endurecen; en reposo late unas 60-80 veces por minuto."
+      }
     },
     "Aorta": {
       "nombre": "Arteria aorta",
@@ -168,7 +343,14 @@
       "datos_curiosos": [
         "Su diámetro es de unos 2,5 cm, similar al de una manguera de jardín.",
         "Sus paredes son elásticas: se estiran con cada latido y ayudan a mantener el flujo constante."
-      ]
+      ],
+      "enfermedades": [
+        "Aneurisma: dilatación de la pared que puede romperse.",
+        "Hipertensión: la presión alta daña la pared con los años."
+      ],
+      "edad": {
+        "anciano": "Las arterias se endurecen y pierden elasticidad con la edad (arteriosclerosis)."
+      }
     },
     "VenaCava": {
       "nombre": "Venas cavas",
@@ -176,6 +358,10 @@
       "datos_curiosos": [
         "Son dos: la superior recoge la sangre de la cabeza y los brazos, y la inferior la del tronco y las piernas.",
         "La vena cava inferior es la vena más grande del cuerpo."
+      ],
+      "enfermedades": [
+        "Trombosis: un coágulo bloquea la vena.",
+        "Compresión en el embarazo: al acostarse boca arriba el útero la aprieta."
       ]
     },
     "Traquea": {
@@ -184,7 +370,14 @@
       "datos_curiosos": [
         "Anillos de cartílago en forma de C la mantienen siempre abierta.",
         "Sus cilios barren el moco y las partículas hacia arriba; el humo del tabaco los paraliza."
-      ]
+      ],
+      "enfermedades": [
+        "Traqueítis: inflamación por infección.",
+        "Atragantamiento: un objeto obstruye la vía aérea (maniobra de Heimlich)."
+      ],
+      "edad": {
+        "bebe": "Es muy estrecha (como una pajita): un objeto pequeño la puede tapar."
+      }
     },
     "PulmonIzq": {
       "nombre": "Pulmón izquierdo",
@@ -192,7 +385,16 @@
       "datos_curiosos": [
         "Tiene 2 lóbulos y es algo más pequeño que el derecho para dejar espacio al corazón.",
         "El hueco donde se apoya el corazón se llama impresión cardíaca."
-      ]
+      ],
+      "enfermedades": [
+        "Neumonía: infección de los alvéolos.",
+        "Asma: los bronquios se estrechan y cuesta respirar.",
+        "EPOC y cáncer de pulmón: causados sobre todo por el tabaco."
+      ],
+      "edad": {
+        "bebe": "Respira 30-60 veces por minuto; los alvéolos se siguen formando hasta los 8 años.",
+        "anciano": "El pulmón pierde elasticidad y la capacidad respiratoria baja."
+      }
     },
     "PulmonDer": {
       "nombre": "Pulmón derecho",
@@ -200,7 +402,16 @@
       "datos_curiosos": [
         "Tiene 3 lóbulos y es un poco más grande que el izquierdo.",
         "Entre ambos pulmones hay cientos de millones de alvéolos, con una superficie de unos 70 m²."
-      ]
+      ],
+      "enfermedades": [
+        "Neumonía: infección de los alvéolos.",
+        "Asma: los bronquios se estrechan y cuesta respirar.",
+        "EPOC y cáncer de pulmón: causados sobre todo por el tabaco."
+      ],
+      "edad": {
+        "bebe": "Respira 30-60 veces por minuto; los alvéolos se siguen formando hasta los 8 años.",
+        "anciano": "El pulmón pierde elasticidad y la capacidad respiratoria baja."
+      }
     },
     "Esofago": {
       "nombre": "Esófago",
@@ -208,7 +419,14 @@
       "datos_curiosos": [
         "Gracias a la peristalsis se puede tragar incluso estando cabeza abajo.",
         "Un bocado tarda entre 5 y 10 segundos en recorrerlo."
-      ]
+      ],
+      "enfermedades": [
+        "Reflujo: el ácido del estómago sube y causa ardor.",
+        "Esofagitis: inflamación de la pared."
+      ],
+      "edad": {
+        "bebe": "El cierre con el estómago es débil: por eso los bebés regurgitan leche."
+      }
     },
     "Estomago": {
       "nombre": "Estómago",
@@ -216,7 +434,16 @@
       "datos_curiosos": [
         "Vacío tiene el tamaño de un puño, pero puede expandirse hasta contener más de 1 litro.",
         "Su revestimiento se renueva cada pocos días para no ser digerido por su propio ácido."
-      ]
+      ],
+      "enfermedades": [
+        "Gastritis: inflamación de la pared.",
+        "Úlcera péptica: herida causada muchas veces por la bacteria Helicobacter pylori.",
+        "Cáncer gástrico."
+      ],
+      "edad": {
+        "bebe": "Al nacer tiene el tamaño de una canica (5-7 ml); a los 10 días, el de un huevo.",
+        "anciano": "Produce menos ácido y la digestión es más lenta."
+      }
     },
     "Higado": {
       "nombre": "Hígado",
@@ -224,7 +451,15 @@
       "datos_curiosos": [
         "Es la víscera más grande del cuerpo: pesa alrededor de 1,5 kg.",
         "Puede regenerarse aunque se haya extirpado una parte importante de él."
-      ]
+      ],
+      "enfermedades": [
+        "Hepatitis: inflamación, casi siempre por virus (A, B, C).",
+        "Hígado graso: por exceso de grasa o de alcohol.",
+        "Cirrosis: el tejido se cicatriza y deja de funcionar."
+      ],
+      "edad": {
+        "bebe": "Es grande en proporción; muchos recién nacidos tienen ictericia (piel amarilla) porque aún no elimina bien la bilirrubina."
+      }
     },
     "IntestinoDelgado": {
       "nombre": "Intestino delgado",
@@ -232,7 +467,16 @@
       "datos_curiosos": [
         "Mide entre 6 y 7 metros de largo.",
         "Sus vellosidades y microvellosidades multiplican enormemente su superficie de absorción."
-      ]
+      ],
+      "enfermedades": [
+        "Celiaquía: el gluten daña la pared intestinal.",
+        "Gastroenteritis: infección con diarrea y vómitos.",
+        "Intolerancia a la lactosa."
+      ],
+      "edad": {
+        "bebe": "Está adaptado a la leche: digiere muy bien la lactosa.",
+        "nino": "Mide unos 6-7 m en el adulto: crece con el niño."
+      }
     },
     "IntestinoGrueso": {
       "nombre": "Intestino grueso",
@@ -240,7 +484,16 @@
       "datos_curiosos": [
         "Mide alrededor de 1,5 metros y rodea al intestino delgado como un marco.",
         "Sus bacterias producen vitaminas como la K y algunas del grupo B."
-      ]
+      ],
+      "enfermedades": [
+        "Apendicitis: inflamación del apéndice que requiere cirugía.",
+        "Estreñimiento: heces duras por poca fibra o poca agua.",
+        "Cáncer de colon: se detecta a tiempo con controles desde los 50 años."
+      ],
+      "edad": {
+        "bebe": "La primera deposición (meconio) es verde oscura y pegajosa.",
+        "anciano": "Se mueve más lento y el estreñimiento es más frecuente."
+      }
     },
     "Cerebro": {
       "nombre": "Cerebro",
@@ -248,7 +501,16 @@
       "datos_curiosos": [
         "Pesa entre 1,3 y 1,4 kg, pero consume cerca del 20 % de la energía del cuerpo en reposo.",
         "Contiene alrededor de 86 mil millones de neuronas."
-      ]
+      ],
+      "enfermedades": [
+        "Ictus (derrame o infarto cerebral): se interrumpe la sangre en una zona del cerebro.",
+        "Epilepsia: descargas eléctricas anormales que causan convulsiones.",
+        "Alzheimer: pérdida progresiva de la memoria."
+      ],
+      "edad": {
+        "bebe": "Al nacer pesa unos 350 g (un cuarto del adulto) y crece muy rápido: a los 2 años ya tiene el 75 % de su tamaño.",
+        "anciano": "Pierde algo de volumen; la memoria reciente puede volverse más lenta."
+      }
     },
     "Cerebelo": {
       "nombre": "Cerebelo",
@@ -256,7 +518,15 @@
       "datos_curiosos": [
         "Ocupa solo el 10 % del volumen del encéfalo, pero contiene más de la mitad de sus neuronas.",
         "Es el responsable de que podamos aprender a montar en bicicleta sin pensar en cada movimiento."
-      ]
+      ],
+      "enfermedades": [
+        "Ataxia: falta de coordinación de los movimientos.",
+        "Lesiones por alcohol: el alcohol altera el equilibrio porque afecta al cerebelo."
+      ],
+      "edad": {
+        "bebe": "Madura en el primer año: por eso el bebé aprende de a poco a sentarse y caminar.",
+        "anciano": "Se pierde equilibrio y aumenta el riesgo de caídas."
+      }
     },
     "MedulaEspinal": {
       "nombre": "Médula espinal",
@@ -264,7 +534,14 @@
       "datos_curiosos": [
         "Mide unos 45 cm en un adulto y es más corta que la columna que la protege.",
         "El reflejo de retirar la mano de algo caliente se resuelve en la médula, antes de sentir el dolor."
-      ]
+      ],
+      "enfermedades": [
+        "Lesión medular: un golpe puede causar parálisis por debajo de la lesión.",
+        "Espina bífida: defecto de nacimiento; se previene con ácido fólico en el embarazo."
+      ],
+      "edad": {
+        "bebe": "Al nacer llega más abajo en la columna; luego la columna crece más rápido que la médula."
+      }
     },
     "Deltoides": {
       "nombre": "Deltoides",
@@ -272,7 +549,16 @@
       "datos_curiosos": [
         "Da la forma redondeada al hombro.",
         "Es uno de los lugares más usados para aplicar vacunas e inyecciones."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Triceps": {
       "nombre": "Tríceps braquial",
@@ -280,7 +566,16 @@
       "datos_curiosos": [
         "Tiene tres cabezas, de ahí su nombre.",
         "Ocupa cerca de dos tercios del volumen de la parte superior del brazo."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "MusculosAntebrazo": {
       "nombre": "Músculos del antebrazo",
@@ -288,7 +583,16 @@
       "datos_curiosos": [
         "Mueven los dedos a distancia mediante largos tendones: los dedos casi no tienen músculos propios.",
         "Son los que se cansan al escribir o usar el ratón mucho tiempo."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Gluteos": {
       "nombre": "Glúteos",
@@ -296,7 +600,16 @@
       "datos_curiosos": [
         "El glúteo mayor es el músculo más grande del cuerpo.",
         "Mantienen la pelvis nivelada al caminar sobre una sola pierna."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Isquiotibiales": {
       "nombre": "Isquiotibiales",
@@ -304,7 +617,16 @@
       "datos_curiosos": [
         "Son tres músculos en la parte posterior del muslo.",
         "Sus desgarros son de las lesiones más frecuentes en deportistas de velocidad."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "TibialAnterior": {
       "nombre": "Tibial anterior",
@@ -312,7 +634,16 @@
       "datos_curiosos": [
         "Se nota justo al lado de la espinilla al levantar los dedos del pie.",
         "Su sobrecarga produce la conocida 'periostitis' de los corredores."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Trapecio": {
       "nombre": "Trapecio",
@@ -320,7 +651,16 @@
       "datos_curiosos": [
         "Su forma de rombo, al unir ambos lados, le da el nombre.",
         "Se tensa con el estrés y la mala postura frente a pantallas."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Dorsal": {
       "nombre": "Dorsal ancho",
@@ -328,7 +668,16 @@
       "datos_curiosos": [
         "Es el músculo más ancho del cuerpo.",
         "Ayuda en la respiración forzada y en la tos."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Oblicuos": {
       "nombre": "Oblicuos del abdomen",
@@ -336,7 +685,16 @@
       "datos_curiosos": [
         "Sus fibras van en diagonal, como las manos en los bolsillos.",
         "Trabajan al toser, al reír y al girar el tronco para lanzar."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Esternocleidomastoideo": {
       "nombre": "Esternocleidomastoideo",
@@ -344,7 +702,16 @@
       "datos_curiosos": [
         "Su nombre indica sus inserciones: esternón, clavícula y apófisis mastoides del cráneo.",
         "Se marca claramente al girar la cabeza hacia un lado."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "Claviculas": {
       "nombre": "Clavículas",
@@ -352,7 +719,16 @@
       "datos_curiosos": [
         "Es el único hueso largo que se coloca en posición horizontal.",
         "Es uno de los huesos que más se fractura en caídas sobre el brazo."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "Escapulas": {
       "nombre": "Escápulas (omóplatos)",
@@ -360,7 +736,16 @@
       "datos_curiosos": [
         "Se deslizan sobre las costillas sin estar unidas a ellas por una articulación.",
         "Su 'espina' es la cresta que se palpa en la parte alta de la espalda."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "RadioCubito": {
       "nombre": "Radio y cúbito",
@@ -368,7 +753,16 @@
       "datos_curiosos": [
         "El radio está del lado del pulgar y el cúbito del lado del meñique.",
         "La fractura de radio en la muñeca es muy común al caer con la mano extendida."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "HuesosMano": {
       "nombre": "Huesos de la mano",
@@ -376,7 +770,16 @@
       "datos_curiosos": [
         "Cada mano tiene 27 huesos.",
         "El pulgar oponible permite la pinza fina, clave en la evolución humana."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "HuesosPie": {
       "nombre": "Huesos del pie",
@@ -384,7 +787,16 @@
       "datos_curiosos": [
         "Cada pie tiene 26 huesos; entre los dos pies hay casi una cuarta parte de los huesos del cuerpo.",
         "El calcáneo (talón) es el hueso más grande del pie."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "MusculosCabeza": {
       "nombre": "Músculos de la cabeza",
@@ -392,7 +804,16 @@
       "datos_curiosos": [
         "Para sonreír se usan unos 12 músculos; para fruncir el ceño, todavía más.",
         "El masetero, que cierra la mandíbula, es uno de los músculos más fuertes según su tamaño."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "MusculosCuello": {
       "nombre": "Músculos del cuello",
@@ -400,7 +821,16 @@
       "datos_curiosos": [
         "La cabeza de un adulto pesa unos 5 kg: el cuello la sostiene todo el día.",
         "Los músculos alrededor de la laringe ajustan las cuerdas vocales al hablar."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "MusculosTronco": {
       "nombre": "Músculos del tronco",
@@ -408,7 +838,16 @@
       "datos_curiosos": [
         "El diafragma es el principal músculo de la respiración.",
         "Los músculos profundos de la espalda trabajan sin parar para mantenernos erguidos."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "MusculosMiembroSuperior": {
       "nombre": "Músculos del miembro superior",
@@ -416,7 +855,16 @@
       "datos_curiosos": [
         "La mano tiene músculos propios muy pequeños que permiten movimientos finos como escribir.",
         "El manguito rotador estabiliza el hombro, la articulación más móvil del cuerpo."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "MusculosMiembroInferior": {
       "nombre": "Músculos del miembro inferior",
@@ -424,7 +872,16 @@
       "datos_curiosos": [
         "El sartorio es el músculo más largo del cuerpo.",
         "Los músculos de la pierna ayudan a bombear la sangre de vuelta al corazón."
-      ]
+      ],
+      "enfermedades": [
+        "Distensión o desgarro: rotura parcial de fibras por un esfuerzo brusco.",
+        "Contractura: el músculo queda tenso y dolorido.",
+        "Tendinitis: inflamación del tendón por uso repetido."
+      ],
+      "edad": {
+        "bebe": "Al nacer los músculos son pequeños y débiles; se fortalecen al gatear y caminar.",
+        "anciano": "Desde los 50 años se pierde masa muscular (sarcopenia); el ejercicio la frena."
+      }
     },
     "OtrosHuesos": {
       "nombre": "Otros huesos y cartílagos",
@@ -432,7 +889,16 @@
       "datos_curiosos": [
         "El hioides es el único hueso que no se articula con ningún otro.",
         "Un adulto tiene 206 huesos; un recién nacido, cerca de 300 que luego se fusionan."
-      ]
+      ],
+      "enfermedades": [
+        "Fractura: rotura del hueso por un golpe o una caída.",
+        "Osteoporosis: el hueso pierde densidad y se rompe con facilidad."
+      ],
+      "edad": {
+        "bebe": "Muchos huesos aún son cartílago y se van osificando; el bebé tiene unos 300 huesos que se fusionan hasta 206.",
+        "nino": "Las placas de crecimiento (cartílago en los extremos) permiten que el hueso se alargue hasta la adolescencia.",
+        "anciano": "El hueso pierde calcio y densidad, sobre todo en las mujeres tras la menopausia."
+      }
     },
     "ArteriasPerifericas": {
       "nombre": "Arterias",
@@ -440,7 +906,14 @@
       "datos_curiosos": [
         "Si se unieran todos los vasos sanguíneos, darían más de dos vueltas a la Tierra.",
         "El pulso que se toma en la muñeca es la onda de presión en la arteria radial."
-      ]
+      ],
+      "enfermedades": [
+        "Arteriosclerosis: placas de grasa estrechan las arterias.",
+        "Enfermedad arterial periférica: dolor en las piernas al caminar por falta de sangre."
+      ],
+      "edad": {
+        "anciano": "Las arterias se endurecen y pierden elasticidad con la edad (arteriosclerosis)."
+      }
     },
     "VenasPerifericas": {
       "nombre": "Venas",
@@ -448,7 +921,14 @@
       "datos_curiosos": [
         "Las venas de las piernas tienen válvulas que impiden que la sangre baje.",
         "En reposo, las venas contienen cerca del 70 % de toda la sangre."
-      ]
+      ],
+      "enfermedades": [
+        "Várices: venas dilatadas, sobre todo en las piernas.",
+        "Trombosis venosa profunda: coágulo en una vena de la pierna."
+      ],
+      "edad": {
+        "anciano": "Las válvulas de las venas se debilitan y aparecen várices."
+      }
     },
     "Pancreas": {
       "nombre": "Páncreas",
@@ -456,7 +936,15 @@
       "datos_curiosos": [
         "Es la glándula responsable de bajar la glucosa después de comer (escenario 'Comer').",
         "Mide unos 15 cm y está detrás del estómago."
-      ]
+      ],
+      "enfermedades": [
+        "Diabetes: el páncreas no produce suficiente insulina (tipo 1) o el cuerpo no responde a ella (tipo 2).",
+        "Pancreatitis: inflamación, a menudo por cálculos biliares o alcohol."
+      ],
+      "edad": {
+        "nino": "La diabetes tipo 1 suele aparecer en la infancia.",
+        "anciano": "La diabetes tipo 2 es más frecuente con la edad y el sobrepeso."
+      }
     },
     "Nervios": {
       "nombre": "Nervios periféricos",
@@ -464,7 +952,15 @@
       "datos_curiosos": [
         "El nervio ciático es el más largo y grueso del cuerpo.",
         "Algunas señales nerviosas viajan a más de 100 metros por segundo."
-      ]
+      ],
+      "enfermedades": [
+        "Neuropatía: daño de los nervios, frecuente en la diabetes.",
+        "Síndrome del túnel carpiano: compresión de un nervio en la muñeca.",
+        "Ciática: dolor por compresión del nervio ciático."
+      ],
+      "edad": {
+        "anciano": "Los nervios conducen más lento: los reflejos y la sensibilidad disminuyen."
+      }
     },
     "EncefaloYSentidos": {
       "nombre": "Estructuras del encéfalo y órganos de los sentidos",
@@ -472,7 +968,16 @@
       "datos_curiosos": [
         "El oído interno contiene el órgano del equilibrio, además del de la audición.",
         "El ojo puede distinguir millones de colores."
-      ]
+      ],
+      "enfermedades": [
+        "Cataratas: el cristalino del ojo se vuelve opaco.",
+        "Otitis: infección del oído, muy frecuente en niños.",
+        "Hipoacusia: pérdida de audición."
+      ],
+      "edad": {
+        "bebe": "El recién nacido ve borroso (unos 30 cm) y distingue mejor el contraste; oye desde antes de nacer.",
+        "anciano": "Disminuyen la vista de cerca (presbicia) y la audición de sonidos agudos."
+      }
     },
     "Bazo": {
       "nombre": "Bazo",
@@ -480,7 +985,14 @@
       "datos_curiosos": [
         "Está a la izquierda del estómago, protegido por las costillas.",
         "Se puede vivir sin bazo, aunque aumenta el riesgo de algunas infecciones."
-      ]
+      ],
+      "enfermedades": [
+        "Esplenomegalia: aumento de tamaño por infecciones como la mononucleosis.",
+        "Rotura por golpe: puede sangrar mucho."
+      ],
+      "edad": {
+        "nino": "Ayuda a fabricar células de la sangre antes de nacer."
+      }
     },
     "Timo": {
       "nombre": "Timo",
@@ -488,7 +1000,14 @@
       "datos_curiosos": [
         "Es más grande en niños y se va reemplazando por grasa con la edad.",
         "Está detrás del esternón, delante del corazón."
-      ]
+      ],
+      "enfermedades": [
+        "Miastenia gravis: enfermedad autoinmune relacionada con el timo."
+      ],
+      "edad": {
+        "bebe": "Es grande en el bebé y el niño: ahí maduran los linfocitos T.",
+        "anciano": "Desde la pubertad se va reemplazando por grasa."
+      }
     },
     "Amigdalas": {
       "nombre": "Amígdalas palatinas",
@@ -496,7 +1015,14 @@
       "datos_curiosos": [
         "Se inflaman durante la amigdalitis.",
         "Forman parte de un anillo de tejido linfático alrededor de la garganta."
-      ]
+      ],
+      "enfermedades": [
+        "Amigdalitis: inflamación con fiebre y dolor al tragar.",
+        "Hipertrofia amigdalar: amígdalas grandes que causan ronquidos."
+      ],
+      "edad": {
+        "nino": "Son más grandes en la infancia y se reducen en la adolescencia."
+      }
     },
     "GangliosCabezaCuello": {
       "nombre": "Ganglios linfáticos de la cabeza y el cuello",
@@ -504,7 +1030,15 @@
       "datos_curiosos": [
         "Son los 'ganglios' que se inflaman y se palpan con un resfriado.",
         "El cuerpo tiene entre 500 y 700 ganglios linfáticos."
-      ]
+      ],
+      "enfermedades": [
+        "Adenopatía: ganglios inflamados, casi siempre por una infección cercana.",
+        "Linfoma: cáncer de las células del sistema linfático."
+      ],
+      "edad": {
+        "nino": "En la infancia los ganglios se inflaman a menudo porque el sistema inmune está aprendiendo.",
+        "anciano": "La respuesta inmune se vuelve más lenta (inmunosenescencia)."
+      }
     },
     "GangliosMiembroSuperior": {
       "nombre": "Ganglios linfáticos del miembro superior",
@@ -512,7 +1046,15 @@
       "datos_curiosos": [
         "Los ganglios axilares reciben también la linfa de la mama.",
         "La linfa no tiene una bomba: se mueve gracias a los músculos."
-      ]
+      ],
+      "enfermedades": [
+        "Adenopatía: ganglios inflamados, casi siempre por una infección cercana.",
+        "Linfoma: cáncer de las células del sistema linfático."
+      ],
+      "edad": {
+        "nino": "En la infancia los ganglios se inflaman a menudo porque el sistema inmune está aprendiendo.",
+        "anciano": "La respuesta inmune se vuelve más lenta (inmunosenescencia)."
+      }
     },
     "GangliosTorax": {
       "nombre": "Ganglios linfáticos del tórax",
@@ -520,7 +1062,15 @@
       "datos_curiosos": [
         "Rodean la tráquea y los bronquios.",
         "Ayudan a contener infecciones respiratorias."
-      ]
+      ],
+      "enfermedades": [
+        "Adenopatía: ganglios inflamados, casi siempre por una infección cercana.",
+        "Linfoma: cáncer de las células del sistema linfático."
+      ],
+      "edad": {
+        "nino": "En la infancia los ganglios se inflaman a menudo porque el sistema inmune está aprendiendo.",
+        "anciano": "La respuesta inmune se vuelve más lenta (inmunosenescencia)."
+      }
     },
     "GangliosAbdomenPelvis": {
       "nombre": "Ganglios linfáticos del abdomen y la pelvis",
@@ -528,7 +1078,15 @@
       "datos_curiosos": [
         "Hay cientos de ganglios en el mesenterio del intestino.",
         "La linfa intestinal se ve blanquecina después de una comida grasa."
-      ]
+      ],
+      "enfermedades": [
+        "Adenopatía: ganglios inflamados, casi siempre por una infección cercana.",
+        "Linfoma: cáncer de las células del sistema linfático."
+      ],
+      "edad": {
+        "nino": "En la infancia los ganglios se inflaman a menudo porque el sistema inmune está aprendiendo.",
+        "anciano": "La respuesta inmune se vuelve más lenta (inmunosenescencia)."
+      }
     },
     "GangliosMiembroInferior": {
       "nombre": "Ganglios linfáticos del miembro inferior",
@@ -536,7 +1094,15 @@
       "datos_curiosos": [
         "Los ganglios inguinales se pueden palpar en la ingle.",
         "Si la linfa no circula bien, la pierna se hincha (linfedema)."
-      ]
+      ],
+      "enfermedades": [
+        "Adenopatía: ganglios inflamados, casi siempre por una infección cercana.",
+        "Linfoma: cáncer de las células del sistema linfático."
+      ],
+      "edad": {
+        "nino": "En la infancia los ganglios se inflaman a menudo porque el sistema inmune está aprendiendo.",
+        "anciano": "La respuesta inmune se vuelve más lenta (inmunosenescencia)."
+      }
     },
     "Tiroides": {
       "nombre": "Glándula tiroides",
@@ -544,7 +1110,15 @@
       "datos_curiosos": [
         "Tiene forma de mariposa y está delante de la tráquea.",
         "Necesita yodo para fabricar sus hormonas."
-      ]
+      ],
+      "enfermedades": [
+        "Hipotiroidismo: produce poca hormona; cansancio, frío y aumento de peso.",
+        "Hipertiroidismo: produce demasiada; nerviosismo y pérdida de peso.",
+        "Bocio: aumento de tamaño, a veces por falta de yodo."
+      ],
+      "edad": {
+        "bebe": "A todos los recién nacidos se les hace la prueba del talón para detectar hipotiroidismo."
+      }
     },
     "Paratiroides": {
       "nombre": "Glándulas paratiroides",
@@ -552,6 +1126,9 @@
       "datos_curiosos": [
         "Son cuatro glándulas del tamaño de un grano de arroz.",
         "Están pegadas a la parte posterior de la tiroides."
+      ],
+      "enfermedades": [
+        "Hiperparatiroidismo: demasiado calcio en la sangre, que debilita los huesos y forma cálculos renales."
       ]
     },
     "Suprarrenales": {
@@ -560,7 +1137,14 @@
       "datos_curiosos": [
         "Están sobre cada riñón, como un sombrero.",
         "La adrenalina acelera el corazón en segundos (lo ves en el escenario 'Correr')."
-      ]
+      ],
+      "enfermedades": [
+        "Enfermedad de Addison: producen poco cortisol.",
+        "Síndrome de Cushing: exceso de cortisol."
+      ],
+      "edad": {
+        "bebe": "Al nacer son grandes (proporcionalmente) y se reducen en los primeros meses."
+      }
     },
     "Hipofisis": {
       "nombre": "Hipófisis",
@@ -568,7 +1152,14 @@
       "datos_curiosos": [
         "Tiene el tamaño de un garbanzo.",
         "Está alojada en un hueco del hueso esfenoides llamado silla turca."
-      ]
+      ],
+      "enfermedades": [
+        "Adenoma de hipófisis: tumor benigno que altera las hormonas.",
+        "Enanismo o gigantismo: por poca o mucha hormona del crecimiento."
+      ],
+      "edad": {
+        "nino": "Libera hormona del crecimiento, sobre todo durante el sueño."
+      }
     },
     "GlandulaPineal": {
       "nombre": "Glándula pineal",
@@ -576,7 +1167,14 @@
       "datos_curiosos": [
         "La luz de las pantallas por la noche reduce la melatonina.",
         "Está en el centro del encéfalo."
-      ]
+      ],
+      "enfermedades": [
+        "Alteraciones del sueño: la luz de pantallas de noche reduce la melatonina que produce."
+      ],
+      "edad": {
+        "nino": "Produce mucha melatonina en la infancia.",
+        "anciano": "Produce menos melatonina: el sueño se vuelve más ligero."
+      }
     },
     "Rinones": {
       "nombre": "Riñones",
@@ -584,7 +1182,16 @@
       "datos_curiosos": [
         "Filtran unos 180 litros de sangre al día.",
         "Cada riñón tiene alrededor de un millón de nefronas, sus filtros."
-      ]
+      ],
+      "enfermedades": [
+        "Cálculos renales: piedras que causan un dolor muy fuerte.",
+        "Insuficiencia renal: los riñones dejan de filtrar (diálisis).",
+        "Infección urinaria alta (pielonefritis)."
+      ],
+      "edad": {
+        "bebe": "Aún no concentran bien la orina: los bebés mojan muchos pañales.",
+        "anciano": "Filtran menos sangre por minuto; los medicamentos se eliminan más lento."
+      }
     },
     "Ureteres": {
       "nombre": "Uréteres",
@@ -592,6 +1199,9 @@
       "datos_curiosos": [
         "Miden unos 25 a 30 cm.",
         "Un cálculo renal atascado en el uréter causa un dolor muy intenso."
+      ],
+      "enfermedades": [
+        "Cálculo ureteral: una piedra que baja desde el riñón y causa cólico."
       ]
     },
     "Vejiga": {
@@ -600,7 +1210,15 @@
       "datos_curiosos": [
         "Puede contener alrededor de medio litro.",
         "Sus paredes son elásticas y se estiran al llenarse."
-      ]
+      ],
+      "enfermedades": [
+        "Cistitis: infección urinaria, más frecuente en mujeres.",
+        "Incontinencia: pérdida involuntaria de orina."
+      ],
+      "edad": {
+        "bebe": "Se vacía por reflejo; el control se aprende entre los 2 y 4 años.",
+        "anciano": "Retiene menos orina y hay que orinar más seguido."
+      }
     },
     "Uretra": {
       "nombre": "Uretra",
@@ -608,6 +1226,9 @@
       "datos_curiosos": [
         "En el hombre mide unos 20 cm; en la mujer, unos 4 cm.",
         "Un esfínter muscular controla cuándo sale la orina."
+      ],
+      "enfermedades": [
+        "Uretritis: inflamación, a veces por infecciones de transmisión sexual."
       ]
     },
     "Testiculos": {
@@ -616,7 +1237,15 @@
       "datos_curiosos": [
         "Están fuera del abdomen porque los espermatozoides necesitan una temperatura algo menor.",
         "Se producen millones de espermatozoides cada día."
-      ]
+      ],
+      "enfermedades": [
+        "Varicocele: venas dilatadas en el escroto.",
+        "Cáncer testicular: más frecuente en jóvenes; se detecta con autoexamen."
+      ],
+      "edad": {
+        "bebe": "Bajan al escroto antes de nacer; si no lo hacen (criptorquidia) se revisa.",
+        "nino": "En la pubertad crecen y comienzan a producir espermatozoides y testosterona."
+      }
     },
     "ConductosSeminales": {
       "nombre": "Conductos deferentes y vesículas seminales",
@@ -624,6 +1253,9 @@
       "datos_curiosos": [
         "Cada conducto deferente mide unos 30 cm.",
         "La vasectomía consiste en cortar los conductos deferentes."
+      ],
+      "enfermedades": [
+        "Vasectomía: se cortan para que no salgan espermatozoides (método anticonceptivo)."
       ]
     },
     "Prostata": {
@@ -632,7 +1264,14 @@
       "datos_curiosos": [
         "Tiene el tamaño de una nuez.",
         "Suele crecer con la edad y puede dificultar la salida de la orina."
-      ]
+      ],
+      "enfermedades": [
+        "Hiperplasia benigna: agrandamiento que dificulta orinar.",
+        "Cáncer de próstata: frecuente después de los 50 años."
+      ],
+      "edad": {
+        "anciano": "Crece con la edad: casi todos los hombres mayores tienen algún agrandamiento."
+      }
     },
     "Pene": {
       "nombre": "Pene",
@@ -640,6 +1279,10 @@
       "datos_curiosos": [
         "Contiene tres cuerpos de tejido eréctil.",
         "La uretra lo recorre por el cuerpo esponjoso."
+      ],
+      "enfermedades": [
+        "Fimosis: el prepucio no se retrae; frecuente y normal en bebés.",
+        "Infecciones de transmisión sexual."
       ]
     },
     "DiscosIntervertebrales": {
@@ -648,7 +1291,14 @@
       "datos_curiosos": [
         "Tienen un centro gelatinoso rodeado de anillos fibrosos.",
         "Una hernia de disco ocurre cuando el centro sale y presiona un nervio."
-      ]
+      ],
+      "enfermedades": [
+        "Hernia de disco: el centro del disco sale y aprieta un nervio.",
+        "Degeneración discal: el disco se seca y pierde altura."
+      ],
+      "edad": {
+        "anciano": "Pierden agua: por eso se pierde algo de estatura con los años."
+      }
     },
     "Meniscos": {
       "nombre": "Meniscos de la rodilla",
@@ -656,7 +1306,13 @@
       "datos_curiosos": [
         "Cada rodilla tiene un menisco medial y uno lateral.",
         "Sus roturas son lesiones comunes en el fútbol."
-      ]
+      ],
+      "enfermedades": [
+        "Rotura de menisco: frecuente al girar la rodilla con el pie apoyado (deportes)."
+      ],
+      "edad": {
+        "anciano": "Se desgastan y se rompen con más facilidad."
+      }
     },
     "LigamentosMiembroSuperior": {
       "nombre": "Ligamentos del miembro superior",
@@ -664,7 +1320,15 @@
       "datos_curiosos": [
         "El hombro es tan móvil porque sus ligamentos son flexibles.",
         "Los ligamentos casi no tienen vasos sanguíneos: sanan lento."
-      ]
+      ],
+      "enfermedades": [
+        "Esguince: estiramiento o rotura de un ligamento al torcer la articulación.",
+        "Artrosis: desgaste del cartílago de la articulación."
+      ],
+      "edad": {
+        "nino": "Los ligamentos son muy elásticos: los niños son más flexibles.",
+        "anciano": "Se vuelven más rígidos y el cartílago se desgasta (artrosis)."
+      }
     },
     "LigamentosMiembroInferior": {
       "nombre": "Ligamentos del miembro inferior",
@@ -672,7 +1336,15 @@
       "datos_curiosos": [
         "El ligamento cruzado anterior es de los que más se lesionan en deportistas.",
         "Un esguince de tobillo es una lesión de sus ligamentos."
-      ]
+      ],
+      "enfermedades": [
+        "Esguince: estiramiento o rotura de un ligamento al torcer la articulación.",
+        "Artrosis: desgaste del cartílago de la articulación."
+      ],
+      "edad": {
+        "nino": "Los ligamentos son muy elásticos: los niños son más flexibles.",
+        "anciano": "Se vuelven más rígidos y el cartílago se desgasta (artrosis)."
+      }
     },
     "LigamentosTronco": {
       "nombre": "Ligamentos del tronco y la cabeza",
@@ -680,7 +1352,15 @@
       "datos_curiosos": [
         "Los ligamentos amarillos de la columna son de los más elásticos del cuerpo.",
         "La articulación de la mandíbula también tiene un disco propio."
-      ]
+      ],
+      "enfermedades": [
+        "Esguince: estiramiento o rotura de un ligamento al torcer la articulación.",
+        "Artrosis: desgaste del cartílago de la articulación."
+      ],
+      "edad": {
+        "nino": "Los ligamentos son muy elásticos: los niños son más flexibles.",
+        "anciano": "Se vuelven más rígidos y el cartílago se desgasta (artrosis)."
+      }
     },
     "Laringe": {
       "nombre": "Laringe",
@@ -688,7 +1368,15 @@
       "datos_curiosos": [
         "La 'manzana de Adán' es el cartílago tiroides.",
         "La epiglotis se cierra como una tapa cada vez que tragamos."
-      ]
+      ],
+      "enfermedades": [
+        "Laringitis: inflamación que causa ronquera o pérdida de la voz.",
+        "Nódulos en las cuerdas vocales: por forzar la voz."
+      ],
+      "edad": {
+        "bebe": "Está más alta en el cuello: el bebé puede tragar y respirar casi a la vez.",
+        "nino": "En la pubertad crece (más en los varones) y la voz se vuelve más grave: el 'cambio de voz'."
+      }
     },
     "Bronquios": {
       "nombre": "Bronquios",
@@ -696,7 +1384,15 @@
       "datos_curiosos": [
         "Se dividen más de 20 veces hasta llegar a los alvéolos.",
         "En el asma, los bronquios se estrechan y cuesta respirar."
-      ]
+      ],
+      "enfermedades": [
+        "Bronquitis: inflamación, con tos y flemas.",
+        "Asma: los bronquios se cierran y silban al respirar.",
+        "Bronquiolitis: infección viral frecuente en bebés."
+      ],
+      "edad": {
+        "bebe": "Son muy finos: una inflamación pequeña dificulta mucho la respiración."
+      }
     },
     "CavidadNasal": {
       "nombre": "Cavidad nasal",
@@ -704,7 +1400,14 @@
       "datos_curiosos": [
         "Los vellos y el moco de la nariz atrapan polvo y microbios.",
         "El tabique nasal la divide en dos lados."
-      ]
+      ],
+      "enfermedades": [
+        "Rinitis: congestión y moco por alergia o resfriado.",
+        "Sinusitis: infección de los senos paranasales."
+      ],
+      "edad": {
+        "bebe": "Los bebés respiran casi solo por la nariz durante sus primeros meses."
+      }
     },
     "Boca": {
       "nombre": "Boca: lengua, encías y paladar",
@@ -712,7 +1415,17 @@
       "datos_curiosos": [
         "La lengua tiene ocho músculos y miles de papilas gustativas.",
         "La úvula ayuda a cerrar el paso hacia la nariz al tragar."
-      ]
+      ],
+      "enfermedades": [
+        "Caries: bacterias que dañan el esmalte del diente.",
+        "Gingivitis: encías inflamadas que sangran.",
+        "Aftas: pequeñas úlceras dolorosas."
+      ],
+      "edad": {
+        "bebe": "Nace sin dientes visibles; los dientes de leche salen desde los 6 meses (20 en total).",
+        "nino": "Entre los 6 y 12 años se cambian por los 32 dientes permanentes.",
+        "anciano": "Se produce menos saliva y aumenta el riesgo de perder dientes."
+      }
     },
     "GlandulasSalivales": {
       "nombre": "Glándulas salivales",
@@ -720,6 +1433,10 @@
       "datos_curiosos": [
         "Producen entre 1 y 1,5 litros de saliva al día.",
         "La parótida es la que se inflama en las paperas."
+      ],
+      "enfermedades": [
+        "Paperas: infección viral de la parótida (prevenible con vacuna).",
+        "Cálculos salivales: piedras que tapan el conducto."
       ]
     },
     "Faringe": {
@@ -728,6 +1445,10 @@
       "datos_curiosos": [
         "Tiene tres partes: nasofaringe, orofaringe y laringofaringe.",
         "Al tragar, se coordina para que el alimento no vaya a los pulmones."
+      ],
+      "enfermedades": [
+        "Faringitis: dolor de garganta por virus o bacterias.",
+        "Apnea del sueño: la faringe se cierra al dormir y corta la respiración."
       ]
     },
     "Utero": {
@@ -736,7 +1457,16 @@
       "datos_curiosos": [
         "Tiene el tamaño de una pera, pero en el embarazo puede crecer unas 500 veces su volumen.",
         "Su pared (miometrio) es uno de los músculos más fuertes del cuerpo durante el parto."
-      ]
+      ],
+      "enfermedades": [
+        "Miomas: tumores benignos del músculo uterino.",
+        "Endometriosis: tejido del útero fuera de él, con dolor.",
+        "Cáncer de cuello uterino: prevenible con la vacuna del VPH."
+      ],
+      "edad": {
+        "nino": "Antes de la pubertad es pequeño; con la primera menstruación (menarquia) madura.",
+        "anciano": "Tras la menopausia (unos 50 años) se reduce de tamaño."
+      }
     },
     "Ovarios": {
       "nombre": "Ovarios",
@@ -744,7 +1474,15 @@
       "datos_curiosos": [
         "Al nacer contienen cerca de un millón de folículos, de los que solo unos 400 llegarán a liberar un óvulo.",
         "Normalmente liberan un óvulo al mes, alternando de lado."
-      ]
+      ],
+      "enfermedades": [
+        "Quistes de ovario: bolsas de líquido, casi siempre benignas.",
+        "Síndrome de ovario poliquístico: altera la menstruación."
+      ],
+      "edad": {
+        "bebe": "Una niña nace con todos sus óvulos (1 a 2 millones); llegan unos 400 000 a la pubertad.",
+        "anciano": "En la menopausia dejan de liberar óvulos y de producir estrógenos."
+      }
     },
     "TrompasUterinas": {
       "nombre": "Trompas uterinas (de Falopio)",
@@ -752,6 +1490,10 @@
       "datos_curiosos": [
         "Sus fimbrias, en forma de dedos, 'barren' la superficie del ovario para atrapar el óvulo.",
         "Miden unos 10 a 12 cm de largo."
+      ],
+      "enfermedades": [
+        "Embarazo ectópico: el embrión se implanta en la trompa (urgencia).",
+        "Salpingitis: infección de las trompas."
       ]
     },
     "Mamas": {
@@ -760,7 +1502,15 @@
       "datos_curiosos": [
         "La mayor parte del volumen de la mama es grasa; el tejido glandular se desarrolla sobre todo en el embarazo y la lactancia.",
         "La areola tiene pequeñas glándulas (de Montgomery) que lubrican y protegen el pezón."
-      ]
+      ],
+      "enfermedades": [
+        "Mastitis: inflamación, frecuente durante la lactancia.",
+        "Cáncer de mama: el más común en mujeres; se detecta a tiempo con autoexamen y mamografía."
+      ],
+      "edad": {
+        "nino": "Antes de la pubertad no están desarrolladas.",
+        "anciano": "Tras la menopausia la glándula se reemplaza por grasa."
+      }
     },
     "Cabello": {
       "nombre": "Cabello",
@@ -768,7 +1518,15 @@
       "datos_curiosos": [
         "Una persona tiene entre 100 000 y 150 000 cabellos en la cabeza.",
         "Crece alrededor de 1 cm al mes, y es normal perder unos 50 a 100 cabellos al día."
-      ]
+      ],
+      "enfermedades": [
+        "Alopecia: caída del cabello (hereditaria, por estrés o por enfermedad).",
+        "Pediculosis: piojos, frecuente en niños."
+      ],
+      "edad": {
+        "bebe": "El recién nacido tiene poco cabello, fino; a veces se le cae en los primeros meses.",
+        "anciano": "Los folículos dejan de producir pigmento (canas) y el cabello se vuelve más fino."
+      }
     }
   }
 }

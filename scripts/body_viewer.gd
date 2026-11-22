@@ -280,6 +280,8 @@ func fijar_edad(anios: float, final := false) -> void:
 		_actualizar_colisiones_edad(pesos[0])
 		if _sistema_actual.is_empty() and _aislado.is_empty():
 			camara.encuadrar(camara.objetivo_inicial(), camara.distancia_inicial())
+		elif _aislado.is_empty():   # Viendo un sistema: se reencuadra a su nuevo tamaño
+			_encuadrar(_cajas_sistemas[_sistema_actual])
 
 
 func edad_actual() -> float:

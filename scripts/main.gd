@@ -150,6 +150,10 @@ func _conectar_herramientas() -> void:
 	_panel_herramientas.comparar_cambiado.connect(_herramientas.fijar_comparacion)
 	_visor.sistema_mostrado.connect(_panel_herramientas.al_cambiar_sistema)
 	_visor.sistema_mostrado.connect(_herramientas.al_cambiar_sistema)
+	_barra_sistemas.edad_cambiada.connect(_panel_ficha.fijar_edad)
+	_panel_ficha.fijar_edad(_visor.edad_actual())
+	# La ficha y las herramientas comparten la esquina derecha: mientras hay ficha no se ven
+	_panel_ficha.visibility_changed.connect(func(): _panel_herramientas.visible = not _panel_ficha.visible)
 	_barra_sistemas.edad_cambiada.connect(_herramientas.al_cambiar_edad)
 	get_viewport().size_changed.connect(_actualizar_zona_etiquetas)
 	_actualizar_zona_etiquetas()
