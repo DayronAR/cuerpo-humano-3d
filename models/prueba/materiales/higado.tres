@@ -1,12 +1,26 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8d4r3"]
-frequency = 0.05
+[sub_resource type="Gradient" id="Gradient_8d4r3"]
+colors = PackedColorArray(0.7, 0.745, 0.745, 1, 1, 1, 1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uk3iw"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uk3iw"]
+frequency = 0.018
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ry2gf"]
 width = 256
 height = 256
-noise = SubResource("FastNoiseLite_8d4r3")
+noise = SubResource("FastNoiseLite_uk3iw")
+color_ramp = SubResource("Gradient_8d4r3")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2udv1"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f0t5j"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_2udv1")
 seamless = true
 as_normal_map = true
 bump_strength = 6.0
@@ -14,10 +28,11 @@ bump_strength = 6.0
 [resource]
 resource_name = "higado"
 albedo_color = Color(0.45, 0.13, 0.1, 1)
+albedo_texture = SubResource("NoiseTexture2D_ry2gf")
 roughness = 0.3
 normal_enabled = true
 normal_scale = 0.15
-normal_texture = SubResource("NoiseTexture2D_uk3iw")
+normal_texture = SubResource("NoiseTexture2D_f0t5j")
 rim_enabled = true
 rim = 0.2
 rim_tint = 0.6

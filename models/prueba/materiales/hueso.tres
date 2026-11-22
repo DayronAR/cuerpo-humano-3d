@@ -1,12 +1,26 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_lch3d"]
-frequency = 0.05
+[sub_resource type="Gradient" id="Gradient_lch3d"]
+colors = PackedColorArray(0.88, 0.898, 0.898, 1, 1, 1, 1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xqasu"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xqasu"]
+frequency = 0.018
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s0pm5"]
 width = 256
 height = 256
-noise = SubResource("FastNoiseLite_lch3d")
+noise = SubResource("FastNoiseLite_xqasu")
+color_ramp = SubResource("Gradient_lch3d")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ogv0v"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_58vqc"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_ogv0v")
 seamless = true
 as_normal_map = true
 bump_strength = 6.0
@@ -14,10 +28,11 @@ bump_strength = 6.0
 [resource]
 resource_name = "hueso"
 albedo_color = Color(0.9, 0.86, 0.76, 1)
+albedo_texture = SubResource("NoiseTexture2D_s0pm5")
 roughness = 0.72
 normal_enabled = true
 normal_scale = 0.25
-normal_texture = SubResource("NoiseTexture2D_xqasu")
+normal_texture = SubResource("NoiseTexture2D_58vqc")
 rim_enabled = true
 rim = 0.1
 rim_tint = 0.6

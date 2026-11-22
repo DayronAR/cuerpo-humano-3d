@@ -1,8 +1,23 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
+[sub_resource type="Gradient" id="Gradient_x1k22"]
+colors = PackedColorArray(0.8, 0.83, 0.83, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n2ngs"]
+frequency = 0.018
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_18tgh"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_n2ngs")
+color_ramp = SubResource("Gradient_x1k22")
+seamless = true
+
 [resource]
 resource_name = "glandula"
 albedo_color = Color(0.78, 0.48, 0.32, 1)
+albedo_texture = SubResource("NoiseTexture2D_18tgh")
 roughness = 0.45
 rim_enabled = true
 rim = 0.2
@@ -10,3 +25,5 @@ rim_tint = 0.6
 clearcoat_enabled = true
 clearcoat = 0.4
 clearcoat_roughness = 0.35
+uv1_scale = Vector3(25, 25, 25)
+uv1_triplanar = true

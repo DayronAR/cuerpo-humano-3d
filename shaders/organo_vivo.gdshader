@@ -17,11 +17,30 @@ global uniform float peristaltismo_onda;   // Amplitud (m) — la fija VisualesF
 global uniform float peristaltismo_fase;   // Avance de las ondas
 uniform float longitud = 0.045;     // Distancia entre ondas (m)
 uniform vec3 direccion = vec3(0.0, -1.0, 0.2);   // Dirección general en que avanzan
+uniform float variacion = 0.15;     // Color moteado (como "variacion" de los materiales estándar)
+uniform float escala_variacion = 25.0;
 
 varying vec3 posicion_mundo;
+varying vec3 posicion_local;
+
+// Ruido de valor 3D (barato) para el color moteado
+float hash(vec3 p) {
+	p = fract(p * 0.3183099 + 0.1);
+	p *= 17.0;
+	return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+}
+
+float ruido(vec3 x) {
+	vec3 i = floor(x);
+	vec3 f = fract(x);
+	f = f * f * (3.0 - 2.0 * f);
+	return mix(mix(mix(hash(i), hash(i + vec3(1, 0, 0)), f.x), mix(hash(i + vec3(0, 1, 0)), hash(i + vec3(1, 1, 0)), f.x), f.y),
+			mix(mix(hash(i + vec3(0, 0, 1)), hash(i + vec3(1, 0, 1)), f.x), mix(hash(i + vec3(0, 1, 1)), hash(i + vec3(1, 1, 1)), f.x), f.y), f.z);
+}
 
 void vertex() {
 	vec3 p = VERTEX;
+	posicion_local = VERTEX;
 	// Dos trenes de ondas en direcciones distintas: en un intestino enrollado se ven como
 	// contracciones que recorren el tubo y no como una ola recta
 	float a = sin(dot(p, normalize(direccion)) * 6.2832 / longitud - peristaltismo_fase);
@@ -35,7 +54,9 @@ void fragment() {
 	if (dot(posicion_mundo, plano.xyz) > plano.w) {
 		discard;
 	}
-	ALBEDO = color.rgb;
+	vec3 q = posicion_local * escala_variacion;
+	float n = ruido(q) * 0.6 + ruido(q * 2.3) * 0.4;
+	ALBEDO = color.rgb * mix(vec3(1.0 - variacion, 1.0 - variacion * 0.85, 1.0 - variacion * 0.85), vec3(1.0), n);
 	ROUGHNESS = rugosidad;
 	SPECULAR = especular;
 	RIM = borde;

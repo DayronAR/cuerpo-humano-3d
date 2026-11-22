@@ -1,12 +1,26 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_2vncd"]
-frequency = 0.05
+[sub_resource type="Gradient" id="Gradient_2vncd"]
+colors = PackedColorArray(0.7, 0.745, 0.745, 1, 1, 1, 1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a0cym"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a0cym"]
+frequency = 0.018
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d0o2p"]
 width = 256
 height = 256
-noise = SubResource("FastNoiseLite_2vncd")
+noise = SubResource("FastNoiseLite_a0cym")
+color_ramp = SubResource("Gradient_2vncd")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g5vhk"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3uy5y"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_g5vhk")
 seamless = true
 as_normal_map = true
 bump_strength = 6.0
@@ -14,10 +28,11 @@ bump_strength = 6.0
 [resource]
 resource_name = "pulmon"
 albedo_color = Color(0.9, 0.58, 0.6, 1)
+albedo_texture = SubResource("NoiseTexture2D_d0o2p")
 roughness = 0.7
 normal_enabled = true
 normal_scale = 0.45
-normal_texture = SubResource("NoiseTexture2D_a0cym")
+normal_texture = SubResource("NoiseTexture2D_3uy5y")
 rim_enabled = true
 rim = 0.3
 rim_tint = 0.6

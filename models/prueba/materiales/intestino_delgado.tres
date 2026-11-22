@@ -1,8 +1,23 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
+[sub_resource type="Gradient" id="Gradient_cnlwd"]
+colors = PackedColorArray(0.85, 0.8725, 0.8725, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c4y5k"]
+frequency = 0.018
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7dwj4"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_c4y5k")
+color_ramp = SubResource("Gradient_cnlwd")
+seamless = true
+
 [resource]
 resource_name = "intestino_delgado"
 albedo_color = Color(0.92, 0.66, 0.6, 1)
+albedo_texture = SubResource("NoiseTexture2D_7dwj4")
 roughness = 0.4
 rim_enabled = true
 rim = 0.2
@@ -10,3 +25,5 @@ rim_tint = 0.6
 clearcoat_enabled = true
 clearcoat = 0.5
 clearcoat_roughness = 0.35
+uv1_scale = Vector3(25, 25, 25)
+uv1_triplanar = true

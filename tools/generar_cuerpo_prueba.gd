@@ -531,28 +531,28 @@ func _malla_columna() -> ArrayMesh:
 const DEF_MATERIALES := {
 	"piel": {"color": Color(0.82, 0.6, 0.5), "rugosidad": 0.48, "rim": 0.32, "tinte_rim": 0.25, "especular": 0.38,
 			"brillo_suave": 0.06, "doble_cara": true},   # Piel fina: sin ruido (parecía arcilla), brillo leve y borde rosado
-	"musculo": {"color": Color(0.58, 0.13, 0.13), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2, "relieve": [0.35, 30.0]},
-	"hueso": {"color": Color(0.9, 0.86, 0.76), "rugosidad": 0.72, "rim": 0.1, "relieve": [0.25, 25.0]},
-	"corazon": {"color": Color(0.55, 0.09, 0.1), "rugosidad": 0.35, "brillo": 0.6, "rim": 0.2, "relieve": [0.3, 25.0]},
+	"musculo": {"variacion": [0.22, 30.0], "color": Color(0.58, 0.13, 0.13), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2, "relieve": [0.35, 30.0]},
+	"hueso": {"variacion": [0.12, 25.0], "color": Color(0.9, 0.86, 0.76), "rugosidad": 0.72, "rim": 0.1, "relieve": [0.25, 25.0]},
+	"corazon": {"variacion": [0.3, 25.0], "color": Color(0.55, 0.09, 0.1), "rugosidad": 0.35, "brillo": 0.6, "rim": 0.2, "relieve": [0.3, 25.0]},
 	"arteria": {"color": Color(0.74, 0.1, 0.12), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
 	"vena": {"color": Color(0.22, 0.27, 0.6), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
 	"traquea": {"color": Color(0.86, 0.74, 0.72), "rugosidad": 0.5, "brillo": 0.3, "rim": 0.15},
-	"pulmon": {"color": Color(0.9, 0.58, 0.6), "rugosidad": 0.7, "brillo": 0.2, "rim": 0.3, "relieve": [0.45, 40.0]},
+	"pulmon": {"variacion": [0.3, 40.0], "color": Color(0.9, 0.58, 0.6), "rugosidad": 0.7, "brillo": 0.2, "rim": 0.3, "relieve": [0.45, 40.0]},
 	"esofago": {"color": Color(0.8, 0.48, 0.43), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.15},
-	"estomago": {"color": Color(0.88, 0.58, 0.52), "rugosidad": 0.4, "brillo": 0.5, "rim": 0.2, "relieve": [0.25, 30.0]},
-	"higado": {"color": Color(0.45, 0.13, 0.1), "rugosidad": 0.3, "brillo": 0.6, "rim": 0.2, "relieve": [0.15, 20.0]},
-	"intestino_delgado": {"color": Color(0.92, 0.66, 0.6), "rugosidad": 0.4, "brillo": 0.5, "rim": 0.2},
-	"intestino_grueso": {"color": Color(0.8, 0.56, 0.48), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
-	"cerebro": {"color": Color(0.93, 0.74, 0.72), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2},
-	"cerebelo": {"color": Color(0.86, 0.65, 0.64), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2},
+	"estomago": {"variacion": [0.18, 30.0], "color": Color(0.88, 0.58, 0.52), "rugosidad": 0.4, "brillo": 0.5, "rim": 0.2, "relieve": [0.25, 30.0]},
+	"higado": {"variacion": [0.3, 20.0], "color": Color(0.45, 0.13, 0.1), "rugosidad": 0.3, "brillo": 0.6, "rim": 0.2, "relieve": [0.15, 20.0]},
+	"intestino_delgado": {"variacion": [0.15, 25.0], "color": Color(0.92, 0.66, 0.6), "rugosidad": 0.4, "brillo": 0.5, "rim": 0.2},
+	"intestino_grueso": {"variacion": [0.18, 25.0], "color": Color(0.8, 0.56, 0.48), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
+	"cerebro": {"variacion": [0.2, 18.0], "color": Color(0.93, 0.74, 0.72), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2},
+	"cerebelo": {"variacion": [0.2, 25.0], "color": Color(0.86, 0.65, 0.64), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2},
 	"medula": {"color": Color(0.95, 0.88, 0.72), "rugosidad": 0.5, "brillo": 0.3, "rim": 0.15},
 	"ligamento": {"color": Color(0.85, 0.87, 0.8), "rugosidad": 0.4, "brillo": 0.4, "rim": 0.15},
-	"rinon": {"color": Color(0.55, 0.18, 0.16), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
-	"vejiga": {"color": Color(0.86, 0.62, 0.55), "rugosidad": 0.4, "brillo": 0.45, "rim": 0.2},
-	"reproductor": {"color": Color(0.82, 0.55, 0.52), "rugosidad": 0.4, "brillo": 0.4, "rim": 0.2},
-	"glandula": {"color": Color(0.78, 0.48, 0.32), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
+	"rinon": {"variacion": [0.25, 25.0], "color": Color(0.55, 0.18, 0.16), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
+	"vejiga": {"variacion": [0.15, 20.0], "color": Color(0.86, 0.62, 0.55), "rugosidad": 0.4, "brillo": 0.45, "rim": 0.2},
+	"reproductor": {"variacion": [0.18, 25.0], "color": Color(0.82, 0.55, 0.52), "rugosidad": 0.4, "brillo": 0.4, "rim": 0.2},
+	"glandula": {"variacion": [0.2, 25.0], "color": Color(0.78, 0.48, 0.32), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
 	"linfatico": {"color": Color(0.55, 0.72, 0.36), "rugosidad": 0.45, "brillo": 0.4, "rim": 0.2},
-	"bazo": {"color": Color(0.42, 0.14, 0.25), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
+	"bazo": {"variacion": [0.25, 25.0], "color": Color(0.42, 0.14, 0.25), "rugosidad": 0.35, "brillo": 0.5, "rim": 0.2},
 	"cabello": {"color": Color(0.17, 0.1, 0.06), "rugosidad": 0.68, "brillo": 0.08, "rim": 0.3, "relieve": [0.8, 140.0]},
 	"grasa": {"color": Color(0.98, 0.86, 0.52, 0.32), "rugosidad": 0.45, "brillo": 0.3, "rim": 0.35, "transparente": true},
 }
@@ -604,6 +604,27 @@ func _material(nombre: String) -> StandardMaterial3D:
 		m.normal_scale = d["relieve"][0]
 		m.uv1_triplanar = true
 		m.uv1_scale = Vector3.ONE * d["relieve"][1]
+	if d.has("variacion"):
+		# Color moteado (zonas algo más oscuras y más claras), como el tejido real: ruido en 3 ejes
+		# que multiplica el color. [fuerza, escala]; si ya hay relieve se usa su misma escala.
+		var ruido := FastNoiseLite.new()
+		ruido.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+		ruido.frequency = 0.018
+		ruido.fractal_octaves = 4
+		var rampa := Gradient.new()
+		var f: float = d["variacion"][0]
+		rampa.set_color(0, Color(1.0 - f, 1.0 - f * 0.85, 1.0 - f * 0.85))
+		rampa.set_color(1, Color.WHITE)
+		var textura := NoiseTexture2D.new()
+		textura.noise = ruido
+		textura.color_ramp = rampa
+		textura.width = 256
+		textura.height = 256
+		textura.seamless = true
+		m.albedo_texture = textura
+		if not d.has("relieve"):
+			m.uv1_triplanar = true
+			m.uv1_scale = Vector3.ONE * d["variacion"][1]
 	var ruta := "%s/materiales/%s.tres" % [CARPETA, nombre]
 	ResourceSaver.save(m, ruta, ResourceSaver.FLAG_CHANGE_PATH)
 	_materiales[nombre] = m

@@ -1,8 +1,23 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
+[sub_resource type="Gradient" id="Gradient_hoavq"]
+colors = PackedColorArray(0.75, 0.7875, 0.7875, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_75qps"]
+frequency = 0.018
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7qumy"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_75qps")
+color_ramp = SubResource("Gradient_hoavq")
+seamless = true
+
 [resource]
 resource_name = "rinon"
 albedo_color = Color(0.55, 0.18, 0.16, 1)
+albedo_texture = SubResource("NoiseTexture2D_7qumy")
 roughness = 0.35
 rim_enabled = true
 rim = 0.2
@@ -10,3 +25,5 @@ rim_tint = 0.6
 clearcoat_enabled = true
 clearcoat = 0.5
 clearcoat_roughness = 0.35
+uv1_scale = Vector3(25, 25, 25)
+uv1_triplanar = true

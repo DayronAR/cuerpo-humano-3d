@@ -1,8 +1,23 @@
 [gd_resource type="StandardMaterial3D" format=3]
 
+[sub_resource type="Gradient" id="Gradient_0v0ve"]
+colors = PackedColorArray(0.8, 0.83, 0.83, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nska3"]
+frequency = 0.018
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rg1jm"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_nska3")
+color_ramp = SubResource("Gradient_0v0ve")
+seamless = true
+
 [resource]
 resource_name = "cerebro"
 albedo_color = Color(0.93, 0.74, 0.72, 1)
+albedo_texture = SubResource("NoiseTexture2D_rg1jm")
 roughness = 0.45
 rim_enabled = true
 rim = 0.2
@@ -10,3 +25,5 @@ rim_tint = 0.6
 clearcoat_enabled = true
 clearcoat = 0.35
 clearcoat_roughness = 0.35
+uv1_scale = Vector3(18, 18, 18)
+uv1_triplanar = true

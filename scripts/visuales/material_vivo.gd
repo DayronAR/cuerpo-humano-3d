@@ -28,6 +28,12 @@ static func desde(base: BaseMaterial3D) -> ShaderMaterial:
 	m.set_shader_parameter("borde", base.rim if base.rim_enabled else 0.0)
 	m.set_shader_parameter("tinte_borde", base.rim_tint)
 	m.set_shader_parameter("brillo", base.clearcoat if base.clearcoat_enabled else 0.0)
+	if base.albedo_texture is NoiseTexture2D and base.albedo_texture.color_ramp:
+		var oscuro: Color = base.albedo_texture.color_ramp.get_color(0)
+		m.set_shader_parameter("variacion", 1.0 - oscuro.r)
+		m.set_shader_parameter("escala_variacion", base.uv1_scale.x)
+	else:
+		m.set_shader_parameter("variacion", 0.0)
 	m.set_meta("organo_vivo", true)
 	return m
 
