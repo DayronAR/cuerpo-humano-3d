@@ -37,10 +37,7 @@ rings = 1
 
 [sub_resource type="StandardMaterial3D" id="Material_base"]
 albedo_color = Color(0.06, 0.085, 0.115, 1)
-roughness = 0.55
-rim_enabled = true
-rim = 0.6
-rim_tint = 1.0
+roughness = 0.9
 
 [node name="BodyViewer" type="Node3D"]
 script = ExtResource("1_visor")

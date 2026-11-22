@@ -8,10 +8,35 @@ const ESCENA_PRINCIPAL := "res://scenes/main.tscn"
 const TAMANO_MINIMO := Vector2i(1024, 600)
 
 var modo_inicial := "explorar"   ## "explorar", "simular" o "cuestionario"
+var estado_vista: Dictionary = {} ## Lo que se conserva al cambiar de cuerpo (edad, sección)
+
+signal tema_cambiado(claro: bool)
 
 
 func _ready() -> void:
 	DisplayServer.window_set_min_size(TAMANO_MINIMO)
+	Tema.cargar()
+	Tema.aplicar.call_deferred(get_tree(), "oscuro")
+
+
+## Alterna entre el tema claro y el oscuro (y lo recuerda para la próxima vez).
+func alternar_tema() -> void:
+	var anterior := Tema.modo
+	Tema.modo = "oscuro" if Tema.es_claro() else "claro"
+	Tema.guardar()
+	Tema.aplicar(get_tree(), anterior)
+	tema_cambiado.emit(Tema.es_claro())
+
+
+## Cambia entre el cuerpo masculino y el femenino sin pasar por el inicio: recarga la pantalla
+## principal conservando la sección y la edad.
+func cambiar_cuerpo(id: String, estado: Dictionary) -> void:
+	Datos.cuerpo_elegido = id
+	estado_vista = estado
+	modo_inicial = estado.get("modo", modo_inicial)
+	SimulationEngine.reiniciar()
+	SimulationEngine.seleccionar_escenario("")
+	get_tree().change_scene_to_file(ESCENA_PRINCIPAL)
 
 
 func ir_a_principal(modo: String) -> void:

@@ -37,8 +37,8 @@ func _armar_fondo_y_ayuda() -> void:
 	capa.layer = -1
 	add_child(capa)
 	var degradado := Gradient.new()
-	degradado.set_color(0, Color(0.11, 0.165, 0.22))
-	degradado.set_color(1, Color(0.035, 0.05, 0.075))
+	_degradado = degradado
+	_pintar_fondo()
 	var textura := GradientTexture2D.new()
 	textura.gradient = degradado
 	textura.fill = GradientTexture2D.FILL_RADIAL
@@ -63,6 +63,33 @@ func _armar_fondo_y_ayuda() -> void:
 	var contenido := %BotonSalir.get_parent()
 	contenido.add_child(ayuda)
 	contenido.move_child(ayuda, %Record.get_index() + 1)
+	# Tema claro / oscuro (arriba a la derecha)
+	_boton_tema = Button.new()
+	_boton_tema.focus_mode = Control.FOCUS_NONE
+	_boton_tema.custom_minimum_size = Vector2(150, 36)
+	_boton_tema.add_theme_constant_override("icon_max_width", 18)
+	_boton_tema.anchor_left = 1.0
+	_boton_tema.anchor_right = 1.0
+	_boton_tema.offset_left = -170
+	_boton_tema.offset_right = -20
+	_boton_tema.offset_top = 20
+	_boton_tema.offset_bottom = 56
+	_boton_tema.pressed.connect(App.alternar_tema)
+	$UI.add_child(_boton_tema)
+	App.tema_cambiado.connect(func(_c): _pintar_fondo())
+	_pintar_fondo()
+
+
+var _degradado: Gradient
+var _boton_tema: Button
+
+
+func _pintar_fondo() -> void:
+	_degradado.set_color(0, Tema.fondo("centro"))
+	_degradado.set_color(1, Tema.fondo("borde"))
+	if _boton_tema:
+		_boton_tema.text = "Tema oscuro" if Tema.es_claro() else "Tema claro"
+		_boton_tema.icon = load("res://ui/iconos/barra/%s.svg" % ("luna" if Tema.es_claro() else "sol"))
 
 
 func _elegir_cuerpo(id: String) -> void:

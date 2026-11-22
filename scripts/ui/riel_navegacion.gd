@@ -5,11 +5,15 @@ extends PanelContainer
 
 signal seccion_elegida(indice: int)
 signal inicio_pulsado
+signal tema_pulsado
+signal cuerpo_pulsado
 
 const ANCHO := 64
 const ACENTO := Color(0.173, 0.773, 0.71)
 
 var _botones: Array[Button] = []
+var _boton_tema: Button
+var _boton_cuerpo: Button
 
 
 func _ready() -> void:
@@ -54,14 +58,53 @@ func configurar(secciones: Array) -> void:
 	var espacio := Control.new()
 	espacio.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	caja.add_child(espacio)
+	_boton_cuerpo = _boton("", "res://ui/iconos/barra/mujer.svg")
+	_boton_cuerpo.pressed.connect(cuerpo_pulsado.emit)
+	caja.add_child(_boton_cuerpo)
+	caja.add_child(_leyenda(_boton_cuerpo))
+	_boton_tema = _boton("", "res://ui/iconos/barra/sol.svg")
+	_boton_tema.pressed.connect(tema_pulsado.emit)
+	caja.add_child(_boton_tema)
+	caja.add_child(_leyenda(_boton_tema))
 	var inicio := _boton("Volver a la pantalla de inicio", "res://ui/iconos/barra/inicio.svg")
 	inicio.pressed.connect(inicio_pulsado.emit)
 	caja.add_child(inicio)
 
 
+## femenino: el cuerpo que se ve ahora (el botón ofrece cambiar al otro).
+func mostrar_cuerpo(femenino: bool) -> void:
+	if _boton_cuerpo == null:
+		return
+	_boton_cuerpo.icon = load("res://ui/iconos/barra/%s.svg" % ("hombre" if femenino else "mujer"))
+	_boton_cuerpo.tooltip_text = "Cambiar al cuerpo %s" % ("masculino" if femenino else "femenino")
+	_boton_cuerpo.get_meta("leyenda").text = "Hombre" if femenino else "Mujer"
+
+
+func mostrar_tema(claro: bool) -> void:
+	if _boton_tema == null:
+		return
+	_boton_tema.icon = load("res://ui/iconos/barra/%s.svg" % ("luna" if claro else "sol"))
+	_boton_tema.tooltip_text = "Cambiar al tema %s" % ("oscuro" if claro else "claro")
+	_boton_tema.get_meta("leyenda").text = "Oscuro" if claro else "Claro"
+
+
+## Texto pequeño bajo un botón (los íconos solos no dicen qué hacen).
+func _leyenda(boton: Button) -> Control:
+	var l := Label.new()
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.add_theme_font_size_override("font_size", 10)
+	l.add_theme_color_override("font_color", Color(0.557, 0.639, 0.69, 1))
+	l.add_theme_constant_override("line_spacing", 0)
+	boton.set_meta("leyenda", l)
+	var margen := MarginContainer.new()
+	margen.add_theme_constant_override("margin_top", -8)
+	margen.add_child(l)
+	return margen
+
+
 func marcar(indice: int) -> void:
-	if indice >= 0 and indice < _botones.size():
-		_botones[indice].set_pressed_no_signal(true)
+	for i in _botones.size():   # set_pressed_no_signal no desmarca a los demás del grupo
+		_botones[i].set_pressed_no_signal(i == indice)
 
 
 func _boton(ayuda: String, icono: String) -> Button:

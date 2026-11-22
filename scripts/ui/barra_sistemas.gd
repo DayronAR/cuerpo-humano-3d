@@ -51,6 +51,11 @@ func configurar_edad(cfg: Dictionary) -> void:
 	_mostrar_edad(%BarraEdad.value)
 
 
+func fijar_edad_sin_senal(anios: float) -> void:
+	%BarraEdad.set_value_no_signal(anios)
+	_mostrar_edad(anios)
+
+
 func _mostrar_edad(anios: float) -> void:
 	var texto := "Recién nacido" if anios < 1 else ("1 año" if anios < 2 else "%d años" % int(anios))
 	%ValorEdad.text = "%s · %s" % [texto, Datos.etapa_edad(anios)] if anios >= 1 else texto

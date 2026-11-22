@@ -111,9 +111,6 @@ func _interruptor(texto: String, ayuda: String) -> CheckButton:
 	b.text = texto
 	b.tooltip_text = ayuda
 	b.focus_mode = Control.FOCUS_NONE
-	# El tema pinta el fondo de los botones presionados: el texto va en blanco para que se lea
-	for estado in ["font_pressed_color", "font_hover_pressed_color"]:
-		b.add_theme_color_override(estado, Color.WHITE)
 	return b
 
 

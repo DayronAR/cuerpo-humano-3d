@@ -68,6 +68,9 @@ func _ready() -> void:
 	_conectar_cuestionario()
 	_pestanas.current_tab = MODOS.get(App.modo_inicial, PESTANA_SISTEMAS)
 	_riel.configurar(SECCIONES.slice(0, _pestanas.get_tab_count()))
+	_riel.mostrar_cuerpo(_es_femenino())
+	_riel.mostrar_tema(Tema.es_claro())
+	_restaurar_estado_vista()
 	_riel.marcar(_pestanas.current_tab)
 	_aviso_controles.mostrar_si_es_la_primera_vez.call_deferred()
 
@@ -84,6 +87,9 @@ func _armar_diseno() -> void:
 	_riel.offset_right = 12 + RielNavegacion.ANCHO
 	_riel.offset_bottom = -12
 	_riel.seccion_elegida.connect(func(i): _pestanas.current_tab = i)
+	_riel.tema_pulsado.connect(App.alternar_tema)
+	_riel.cuerpo_pulsado.connect(_cambiar_cuerpo)
+	App.tema_cambiado.connect(_al_cambiar_tema)
 	_riel.inicio_pulsado.connect(App.volver_al_inicio)
 	$UI/BotonInicio.hide()
 	_pestanas.tabs_visible = false
@@ -101,9 +107,8 @@ func _armar_diseno() -> void:
 	var fondo := CanvasLayer.new()
 	fondo.layer = -1
 	add_child(fondo)
-	var degradado := Gradient.new()
-	degradado.set_color(0, Color(0.11, 0.165, 0.22))
-	degradado.set_color(1, Color(0.035, 0.05, 0.075))
+	_degradado = Gradient.new()
+	var degradado := _degradado
 	var textura := GradientTexture2D.new()
 	textura.gradient = degradado
 	textura.fill = GradientTexture2D.FILL_RADIAL
@@ -119,9 +124,45 @@ func _armar_diseno() -> void:
 	entorno.background_mode = Environment.BG_CANVAS
 	entorno.background_canvas_max_layer = -1
 
+	_al_cambiar_tema(Tema.es_claro())
+
 	_aviso_controles = AvisoControles.new()
 	_aviso_controles.name = "AvisoControles"
 	$UI.add_child(_aviso_controles)
+
+
+var _degradado: Gradient
+
+
+## Fondos (degradado, plataforma y mini vista) del tema claro u oscuro.
+func _al_cambiar_tema(claro: bool) -> void:
+	_degradado.set_color(0, Tema.fondo("centro"))
+	_degradado.set_color(1, Tema.fondo("borde"))
+	var plataforma: MeshInstance3D = _visor.get_node("Plataforma")
+	(plataforma.get_surface_override_material(0) as StandardMaterial3D).albedo_color = Tema.fondo("plataforma")
+	var vp := _mini_vista.get_node("Contenido/Marco/Viewport")
+	(vp.get_node("Entorno") as WorldEnvironment).environment.background_color = Tema.fondo("mini")
+	((vp.get_node("Suelo") as MeshInstance3D).get_surface_override_material(0) as StandardMaterial3D).albedo_color = Tema.fondo("suelo")
+	if _riel:
+		_riel.mostrar_tema(claro)
+
+
+func _es_femenino() -> bool:
+	var actual: String = Datos.cuerpo_elegido if not Datos.cuerpo_elegido.is_empty() \
+			else Datos.visuales.get("cuerpo_activo", "")
+	return actual == "zanatomy_femenino"
+
+
+## Cambia entre el cuerpo masculino y el femenino conservando la sección y la edad.
+func _cambiar_cuerpo() -> void:
+	var modos := MODOS.keys()
+	var modo := "explorar"
+	for m in modos:
+		if MODOS[m] == _pestanas.current_tab:
+			modo = m
+	App.cambiar_cuerpo("zanatomy" if _es_femenino() else "zanatomy_femenino",
+			{"modo": modo, "pestana": _pestanas.current_tab, "edad": _visor.edad_actual(),
+			"sistema": _visor.sistema_actual()})
 
 
 ## Vuelve a la vista inicial (de frente, todo el cuerpo), aunque se haya hecho mucho zoom.
@@ -130,6 +171,22 @@ func _centrar() -> void:
 		_herramientas.encuadrar_comparacion()
 	else:
 		_visor.camara.ir_a_vista("frente")
+
+
+## Tras cambiar de cuerpo: la misma sección, edad y sistema que antes.
+func _restaurar_estado_vista() -> void:
+	var e := App.estado_vista
+	App.estado_vista = {}
+	if e.is_empty():
+		return
+	_pestanas.current_tab = int(e.get("pestana", _pestanas.current_tab))
+	var edad := float(e.get("edad", Datos.edad.get("edad_inicial", 30)))
+	_barra_sistemas.fijar_edad_sin_senal(edad)
+	_visor.fijar_edad(edad, true)
+	_panel_ficha.fijar_edad(edad)
+	var sistema: String = e.get("sistema", "")
+	if not sistema.is_empty() and _visor.obtener_sistema(sistema):
+		_on_sistema_solicitado.call_deferred(sistema)
 
 
 func _process(_delta: float) -> void:

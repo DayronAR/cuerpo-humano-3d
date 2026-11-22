@@ -60,21 +60,22 @@ func _draw() -> void:
 			var caja := Rect2(x, ys[i], ancho, ALTO)
 			var ancla := Vector2(caja.end.x if lado[1] else caja.position.x, caja.get_center().y)
 			var punto: Vector2 = lista[i][1]
-			draw_line(ancla, punto, COLOR_LINEA, 1.5, true)
-			draw_circle(punto, 3.5, COLOR_LINEA)
+			draw_line(ancla, punto, Tema.color(COLOR_LINEA), 1.5, true)
+			draw_circle(punto, 3.5, Tema.color(COLOR_LINEA))
 			draw_style_box(_estilo(), caja)
 			draw_string(fuente, Vector2(caja.position.x + 8, caja.position.y + 17), texto,
-					HORIZONTAL_ALIGNMENT_LEFT, -1, tamano, COLOR_TEXTO)
+					HORIZONTAL_ALIGNMENT_LEFT, -1, tamano, Tema.color(COLOR_TEXTO))
 
 
 var _estilo_cache: StyleBoxFlat
 
 
 func _estilo() -> StyleBoxFlat:
-	if _estilo_cache == null:
+	if _estilo_cache == null or _estilo_cache.get_meta("tema", "") != Tema.modo:
 		_estilo_cache = StyleBoxFlat.new()
-		_estilo_cache.bg_color = COLOR_FONDO
+		_estilo_cache.set_meta("tema", Tema.modo)
+		_estilo_cache.bg_color = Tema.color(COLOR_FONDO)
 		_estilo_cache.set_corner_radius_all(6)
-		_estilo_cache.border_color = COLOR_LINEA
+		_estilo_cache.border_color = Tema.color(COLOR_LINEA)
 		_estilo_cache.set_border_width_all(1)
 	return _estilo_cache
