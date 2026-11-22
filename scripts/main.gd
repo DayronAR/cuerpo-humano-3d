@@ -20,6 +20,9 @@ const PESTANA_SIMULACION := 1
 const PESTANA_CUESTIONARIO := 2
 var _puntaje_actual := 0
 var _organo_en_ficha := ""   ## Órgano mostrado en la ficha (para su lista de partes)
+var _herramientas: HerramientasVisor
+var _panel_herramientas: PanelHerramientas
+var _etiquetas: EtiquetasFlotantes
 
 const MODOS := {"explorar": PESTANA_SISTEMAS, "simular": PESTANA_SIMULACION, "cuestionario": PESTANA_CUESTIONARIO}
 
@@ -35,6 +38,7 @@ func _ready() -> void:
 	$UI/BotonInicio.pressed.connect(App.volver_al_inicio)
 
 	_conectar_atlas()
+	_conectar_herramientas()
 	_conectar_simulacion()
 	_conectar_cuestionario()
 	_pestanas.current_tab = MODOS.get(App.modo_inicial, PESTANA_SISTEMAS)
@@ -47,6 +51,7 @@ func _process(_delta: float) -> void:
 
 func _on_pestana_cambiada(pestana: int) -> void:
 	_actualizar_grafico_visible()
+	_panel_herramientas.apagar_corte()
 	if pestana != PESTANA_CUESTIONARIO and _cuestionario.activo:
 		_cuestionario.abandonar()
 		_panel_cuestionario.mostrar_inicio()
@@ -101,10 +106,61 @@ func _on_organo_seleccionado(id_organo: String, id_sistema: String, id_parte: St
 
 
 func _on_sistema_solicitado(id_sistema: String) -> void:
+	# El corte reemplaza los materiales y el despiece mueve los órganos: se quitan antes de
+	# que las capas se animen para mostrar otro sistema
+	_panel_herramientas.apagar_corte()
+	_herramientas.reiniciar_despiece()
 	if id_sistema.is_empty():
 		_visor.mostrar_cuerpo_completo()
 	else:
 		_visor.mostrar_sistema(id_sistema)
+
+
+# --- Herramientas: corte, despiece, etiquetas y comparar --------------------------------
+
+func _conectar_herramientas() -> void:
+	_herramientas = HerramientasVisor.new()
+	_herramientas.name = "Herramientas"
+	add_child(_herramientas)
+	_herramientas.configurar(_visor)
+
+	_etiquetas = EtiquetasFlotantes.new()
+	_etiquetas.name = "Etiquetas"
+	_etiquetas.visible = false
+	_etiquetas.camara = _visor.camara
+	_etiquetas.fuente_puntos = _herramientas.puntos_etiquetas
+	$UI.add_child(_etiquetas)
+	$UI.move_child(_etiquetas, 0)   # Debajo de los paneles
+
+	_panel_herramientas = PanelHerramientas.new()
+	_panel_herramientas.name = "PanelHerramientas"
+	$UI.add_child(_panel_herramientas)
+	_panel_herramientas.anchor_left = 1.0
+	_panel_herramientas.anchor_right = 1.0
+	_panel_herramientas.offset_left = -282
+	_panel_herramientas.offset_right = -16
+	_panel_herramientas.offset_top = 54
+	_panel_herramientas.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	_panel_herramientas.configurar_comparar(_herramientas.nombre_comparado())
+	_panel_herramientas.al_cambiar_sistema("")
+
+	_panel_herramientas.corte_cambiado.connect(_herramientas.fijar_corte)
+	_panel_herramientas.despiece_cambiado.connect(_herramientas.fijar_despiece)
+	_panel_herramientas.etiquetas_cambiadas.connect(func(v): _etiquetas.visible = v)
+	_panel_herramientas.comparar_cambiado.connect(_herramientas.fijar_comparacion)
+	_visor.sistema_mostrado.connect(_panel_herramientas.al_cambiar_sistema)
+	_visor.sistema_mostrado.connect(_herramientas.al_cambiar_sistema)
+	_barra_sistemas.edad_cambiada.connect(_herramientas.al_cambiar_edad)
+	get_viewport().size_changed.connect(_actualizar_zona_etiquetas)
+	_actualizar_zona_etiquetas()
+
+
+## Las etiquetas se acomodan entre el panel izquierdo y el de herramientas.
+func _actualizar_zona_etiquetas() -> void:
+	var tam := get_viewport().get_visible_rect().size
+	var izquierda := _pestanas.position.x + _pestanas.size.x + 12
+	var derecha := tam.x - 290
+	_etiquetas.zona = Rect2(izquierda, 60, maxf(200, derecha - izquierda), tam.y - 130)
 
 
 # --- Simulación ------------------------------------------------------------------------

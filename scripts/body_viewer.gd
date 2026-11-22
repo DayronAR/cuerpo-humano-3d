@@ -186,12 +186,7 @@ var _pesos_colision := Vector4(-1, -1, -1, -1)   ## Pesos con los que se crearon
 func _preparar_edad() -> void:
 	_objetivo_adulto = camara.objetivo_inicial()
 	_distancia_adulto = camara.distancia_inicial()
-	for mi in mallas_de(cuerpo):
-		var m := mi.mesh as ArrayMesh
-		if m and m.get_blend_shape_count() >= 2:
-			_formas_edad.append([mi, mi.find_blend_shape_by_name("Bebe"), mi.find_blend_shape_by_name("Anciano"),
-					mi.find_blend_shape_by_name("SinMamas"), mi.find_blend_shape_by_name("Liso"),
-					mi.find_blend_shape_by_name("Encogido")])
+	_formas_edad = preparar_formas(cuerpo)
 	var cabello: Node3D = _organos.get("Cabello")
 	if cabello:
 		var malla := mallas_de(cabello)[0]
@@ -201,11 +196,20 @@ func _preparar_edad() -> void:
 	_pesos_colision = Vector4.ZERO
 
 
-## Cambia la edad del cuerpo (años). Mezcla las formas "Bebe" y "Anciano" precalculadas (en la GPU,
-## instantáneo), escala la estatura, agrega canas y oculta las mamas en la infancia.
-## final = true cuando se suelta la barra: entonces se recalculan las colisiones.
-func fijar_edad(anios: float, final := false) -> void:
-	_edad_actual = anios
+## Mallas con formas de edad de un cuerpo: [MeshInstance3D, índices Bebe, Anciano, SinMamas, Liso, Encogido].
+func preparar_formas(raiz: Node3D) -> Array:
+	var lista := []
+	for mi in mallas_de(raiz):
+		var m := mi.mesh as ArrayMesh
+		if m and m.get_blend_shape_count() >= 2:
+			lista.append([mi, mi.find_blend_shape_by_name("Bebe"), mi.find_blend_shape_by_name("Anciano"),
+					mi.find_blend_shape_by_name("SinMamas"), mi.find_blend_shape_by_name("Liso"),
+					mi.find_blend_shape_by_name("Encogido")])
+	return lista
+
+
+## Pesos de las formas de edad: Vector4(bebe, anciano, sin_mamas, encogido) y "liso" aparte.
+func _pesos_edad(anios: float) -> Array:
 	var bebe := Datos.curva_edad("peso_bebe", anios)
 	var anciano := Datos.curva_edad("peso_anciano", anios)
 	# La forma "Bebe" ya aplana el pecho; "SinMamas" completa lo que falta hasta la pubertad
@@ -216,38 +220,64 @@ func fijar_edad(anios: float, final := false) -> void:
 	var encogido := bebe * Datos.curva_edad("peso_encogido", anios)
 	bebe -= encogido
 	liso *= 1.0 - encogido
-	for f in _formas_edad:
+	return [Vector4(bebe, anciano, sin_mamas, encogido), liso]
+
+
+func _aplicar_pesos(formas: Array, pesos: Vector4, liso: float) -> void:
+	for f in formas:
 		var tiene: bool = f.size() > 5 and f[5] >= 0
 		if tiene:
-			f[0].set_blend_shape_value(f[5], encogido)
-		f[0].set_blend_shape_value(f[1], bebe if tiene else bebe + encogido)
-		f[0].set_blend_shape_value(f[2], anciano)
+			f[0].set_blend_shape_value(f[5], pesos.w)
+		f[0].set_blend_shape_value(f[1], pesos.x if tiene else pesos.x + pesos.w)
+		f[0].set_blend_shape_value(f[2], pesos.y)
 		if f[3] >= 0:
-			f[0].set_blend_shape_value(f[3], sin_mamas)
+			f[0].set_blend_shape_value(f[3], pesos.z)
 		if f.size() > 4 and f[4] >= 0:
 			f[0].set_blend_shape_value(f[4], liso)
+
+
+## Melena y mamas según la edad (en cualquier cuerpo: el principal o el comparado).
+func _detalles_edad(raiz: Node3D, anios: float) -> void:
+	var cabello := raiz.find_child("Cabello", true, false)
+	if cabello:
+		for malla in mallas_de(cabello):
+			if String(malla.name).contains("hair_loose"):
+				malla.visible = anios >= float(Datos.edad.get("melena_desde", 3))
+	var mamas := raiz.find_child("Mamas", true, false) as Node3D
+	if mamas:
+		mamas.visible = anios >= float(Datos.edad.get("mamas_desde", 11))
+
+
+## Edad de otro cuerpo (el que se compara): formas, estatura y detalles, sin colisiones.
+func aplicar_edad_a(raiz: Node3D, formas: Array, anios: float) -> void:
+	var pesos := _pesos_edad(anios)
+	_aplicar_pesos(formas, pesos[0], pesos[1])
+	raiz.scale = Vector3.ONE * Datos.curva_edad("altura_relativa", anios)
+	_detalles_edad(raiz, anios)
+
+
+## Cambia la edad del cuerpo (años). Mezcla las formas "Bebe" y "Anciano" precalculadas (en la GPU,
+## instantáneo), escala la estatura, agrega canas y oculta las mamas en la infancia.
+## final = true cuando se suelta la barra: entonces se recalculan las colisiones.
+func fijar_edad(anios: float, final := false) -> void:
+	_edad_actual = anios
+	var pesos := _pesos_edad(anios)
+	_aplicar_pesos(_formas_edad, pesos[0], pesos[1])
 	var escala := Datos.curva_edad("altura_relativa", anios)
 	cuerpo.scale = Vector3.ONE * escala
 	visuales.scale = Vector3.ONE * escala   # Trayectorias de la simulación (pies en el origen)
 	if _material_cabello:
 		var gris := Color.from_string(Datos.edad.get("color_canas", "#cfcfcc"), Color.GRAY)
 		_material_cabello.albedo_color = _color_cabello.lerp(gris, Datos.curva_edad("canas", anios))
-	# Un recién nacido casi no tiene pelo: la melena larga aparece con la edad
-	var cabello: Node3D = _organos.get("Cabello")
-	if cabello:
-		for malla in mallas_de(cabello):
-			if String(malla.name).contains("hair_loose"):
-				malla.visible = anios >= float(Datos.edad.get("melena_desde", 3))
-	var mamas: Node3D = _organos.get("Mamas")
-	if mamas:
-		mamas.visible = anios >= float(Datos.edad.get("mamas_desde", 11))
+	# Un recién nacido casi no tiene pelo (la melena aparece con la edad) ni mamas desarrolladas
+	_detalles_edad(cuerpo, anios)
 	# Encuadre de referencia y cajas de los sistemas según el nuevo tamaño
 	camara.fijar_referencia(Vector3(_objetivo_adulto.x, _objetivo_adulto.y * escala, _objetivo_adulto.z),
 			maxf(_distancia_adulto * lerpf(0.55, 1.0, escala), 0.8))
 	for id in _sistemas:
 		_cajas_sistemas[id] = _caja_mundo(_sistemas[id])
 	if final:
-		_actualizar_colisiones_edad(Vector4(bebe, anciano, sin_mamas, encogido))
+		_actualizar_colisiones_edad(pesos[0])
 		if _sistema_actual.is_empty() and _aislado.is_empty():
 			camara.encuadrar(camara.objetivo_inicial(), camara.distancia_inicial())
 
@@ -647,9 +677,26 @@ func _on_capa_restaurada(id_sistema: String) -> void:
 		_mostrar_interior(false)
 
 
+## Plano del corte (ver HerramientasVisor): normal y distancia; w = INF sin corte.
+var plano_corte := Vector4(0, 0, 0, INF)
+var _interior_forzado := false
+
+
+## Con el corte activo se dibuja todo el interior aunque la piel esté completa.
+func mostrar_interior_forzado(activo: bool) -> void:
+	_interior_forzado = activo
+	_mostrar_interior(activo or CAPA_CERRADA in capas.capas_retiradas())
+
+
+## Caja del cuerpo en su tamaño actual (cambia con la edad).
+func caja_cuerpo_actual() -> AABB:
+	return _caja_mundo(cuerpo)
+
+
 ## Optimización: mientras la piel (superficie cerrada y opaca) está completa, nada de su interior
 ## se ve, así que no se dibuja. Reduce mucho los triángulos por cuadro en GPU integradas.
 func _mostrar_interior(visible_: bool) -> void:
+	visible_ = visible_ or _interior_forzado
 	for id in _sistemas:
 		if id != CAPA_CERRADA:
 			_sistemas[id].visible = visible_
@@ -710,6 +757,13 @@ func _objetivo_en(pos: Vector2) -> Choque:
 	if not _aislado.is_empty():
 		consulta.collision_mask = 1 << (CAPA_RENDER_AISLADA - 1)
 	var resultado := get_world_3d().direct_space_state.intersect_ray(consulta)
+	# Con el corte activo, lo que está del lado quitado no se ve: el rayo sigue hasta lo visible
+	var excluidos := []
+	while not resultado.is_empty() and plano_corte.w < INF and excluidos.size() < 24 \
+			and Vector3(plano_corte.x, plano_corte.y, plano_corte.z).dot(resultado.position) > plano_corte.w:
+		excluidos.append(resultado.rid)
+		consulta.exclude = excluidos
+		resultado = get_world_3d().direct_space_state.intersect_ray(consulta)
 	if resultado.is_empty() or not resultado.collider.has_meta("organo"):
 		return null
 	var choque := Choque.new()
