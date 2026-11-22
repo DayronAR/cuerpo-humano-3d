@@ -9,11 +9,14 @@ generar_cabello.py — Genera el cabello del cuerpo femenino sobre su cuero cabe
      sobre los hombros y la espalda (detecta la piel para no atravesarla).
 Uso:
     blender -b --factory-startup --python tools/generar_cabello.py
+    blender -b --factory-startup --python tools/generar_cabello.py -- --piel P.glb --salida S.glb \
+        --prefijo M --corto      (cabello corto, sin melena: cuerpo masculino)
 Salida: assets_fuente/hra-femenino/Cabello_generado.glb
 """
 
 import math
 import os
+import sys
 
 import bmesh
 import bpy
@@ -29,6 +32,7 @@ LARGO_ATRAS = 1.15      # Altura (m) a la que llegan las puntas en la espalda
 LARGO_LADOS = 1.24      # ... y a los lados, sobre los hombros
 PASO = 0.006            # Distancia entre filas
 SEPARACION = 0.006      # Distancia mínima entre el pelo y la piel
+FRENTE = 0.055          # Altura de la línea del pelo en la frente, medida desde la coronilla
 
 
 def suave(a, b, x):
@@ -36,13 +40,37 @@ def suave(a, b, x):
     return t * t * (3 - 2 * t)
 
 
+def argumentos():
+    args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+    opciones = {"piel": PIEL, "salida": SALIDA, "prefijo": "VH_F", "corto": False}
+    i = 0
+    while i < len(args):
+        if args[i] == "--corto":
+            opciones["corto"] = True
+        else:
+            opciones[args[i].lstrip("-")] = args[i + 1]
+            i += 1
+        i += 1
+    return opciones
+
+
 def main():
+    global GROSOR, GROSOR_BORDE, FRENTE
+    op = argumentos()
+    if op["corto"]:
+        GROSOR = 0.007         # Cabello corto: capa delgada y pegada a la cabeza
+        GROSOR_BORDE = 0.003
+        FRENTE = 0.09          # Línea del pelo más baja (cabeza masculina más alta)
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    bpy.ops.import_scene.gltf(filepath=os.path.abspath(PIEL))
-    piel = next(o for o in bpy.data.objects if o.type == "MESH")
+    bpy.ops.import_scene.gltf(filepath=os.path.abspath(op["piel"]))
+    # Toda la piel (puede venir en varias piezas, como la masculina)
     bm = bmesh.new()
-    bm.from_mesh(piel.data)
-    bm.transform(piel.matrix_world)
+    for o in bpy.data.objects:
+        if o.type == "MESH" and ("Epidermis" in o.name or len(bpy.data.objects) < 3 or o.name.startswith("VH_F")):
+            malla = o.data.copy()
+            malla.transform(o.matrix_world)
+            bm.from_mesh(malla)
+    piel = next(o for o in bpy.data.objects if o.type == "MESH")
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
     bm.normal_update()
 
@@ -61,7 +89,7 @@ def main():
         atras = suave(-0.55, 0.65, frente)
         # Frente redondeada: el nacimiento baja hacia las sienes (curva y no línea recta)
         sienes = 0.032 * min(1.0, abs(p.x) / (ancho * 0.75)) ** 2 * (1.0 - atras)
-        return z_top - (0.055 + 0.12 * atras + sienes)
+        return z_top - (FRENTE + 0.12 * atras + sienes)
 
     def es_oreja(p):
         frente = (p.y - cy) / medio
@@ -94,12 +122,34 @@ def main():
     for _ in range(4):
         bmesh.ops.smooth_vert(pelo, verts=pelo.verts[:], factor=0.5, use_axis_x=True, use_axis_y=True,
                               use_axis_z=True)
-    malla = bpy.data.meshes.new("VH_F_hair_scalp")
+    # El borde se alisa a lo largo de sí mismo: una línea curva y no dentada (con la piel densa
+    # el contorno sigue cada escalón de los triángulos)
+    for _ in range(60 if op["corto"] else 0):
+        nuevas = {}
+        for v in pelo.verts:
+            if not v.is_boundary:
+                continue
+            vecinos = [e.other_vert(v) for e in v.link_edges if e.is_boundary]
+            if len(vecinos) == 2:
+                nuevas[v] = v.co.lerp((vecinos[0].co + vecinos[1].co) / 2, 0.5)
+        for v, co in nuevas.items():
+            v.co = co
+    malla = bpy.data.meshes.new(op["prefijo"] + "_hair_scalp")
     pelo.to_mesh(malla)
     pelo.free()
-    capa = bpy.data.objects.new("VH_F_hair_scalp", malla)
+    capa = bpy.data.objects.new(op["prefijo"] + "_hair_scalp", malla)
     bpy.context.scene.collection.objects.link(capa)
     print(f"  cuero cabelludo: {len(caras)} caras")
+
+    if op["corto"]:
+        for o in list(bpy.data.objects):
+            if o is not capa:
+                bpy.data.objects.remove(o, do_unlink=True)
+        capa.select_set(True)
+        bpy.ops.export_scene.gltf(filepath=os.path.abspath(op["salida"]), export_format="GLB",
+                                  use_selection=True, export_yup=True)
+        print(f"[OK] Cabello corto generado en {op['salida']}")
+        return
 
     # Melena suelta: columnas que bajan desde la parte más ancha de la cabeza (por detrás de las
     # orejas) y se apoyan sobre los hombros y la espalda sin atravesar la piel
@@ -158,12 +208,14 @@ def main():
     bpy.context.scene.collection.objects.link(melena_obj)
     print(f"  melena: {len(columnas)} columnas, hasta {filas} filas")
 
-    bpy.data.objects.remove(piel, do_unlink=True)
+    for o in list(bpy.data.objects):
+        if o not in (capa, melena_obj):
+            bpy.data.objects.remove(o, do_unlink=True)
     for o in (capa, melena_obj):
         o.select_set(True)
-    bpy.ops.export_scene.gltf(filepath=os.path.abspath(SALIDA), export_format="GLB", use_selection=True,
+    bpy.ops.export_scene.gltf(filepath=os.path.abspath(op["salida"]), export_format="GLB", use_selection=True,
                               export_yup=True)
-    print(f"[OK] Cabello generado en {SALIDA}")
+    print(f"[OK] Cabello generado en {op['salida']}")
 
 
 if __name__ == "__main__":

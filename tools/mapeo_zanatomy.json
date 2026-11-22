@@ -36,7 +36,8 @@
     "Trachea": "Tráquea",
     "Spinal dura": "Duramadre espinal",
     "Jejunum": "Yeyuno e íleon",
-    "Vermiform appendix": "Apéndice vermiforme"
+    "Vermiform appendix": "Apéndice vermiforme",
+    "hair scalp": "Cabello"
   },
   "_materiales": "Material de la paleta del proyecto (models/prueba/materiales/<nombre>.tres) por sistema u órgano. Lo usa tools/ensamblar_cuerpo_glb.gd.",
   "materiales": {
@@ -77,7 +78,8 @@
     "CavidadNasal": "esofago",
     "Boca": "esofago",
     "GlandulasSalivales": "glandula",
-    "Faringe": "esofago"
+    "Faringe": "esofago",
+    "Cabello": "cabello"
   },
   "sistemas": {
     "Piel": {
@@ -94,8 +96,7 @@
               "Parietal region.r",
               "Occipital region.r",
               "Temporal region.r",
-              "Mastoid region.r",
-              "Hairs of head"
+              "Mastoid region.r"
             ]
           },
           "Cara": {
@@ -315,6 +316,11 @@
         "alisado_taubin": 40,
         "remallar_voxel": 0.003,
         "alisado_remallado": 30
+      },
+      "Cabello": {
+        "fuentes": [
+          "M_hair_scalp"
+        ]
       }
     },
     "Muscular": {
@@ -1036,5 +1042,18 @@
         }
       ]
     }
-  }
+  },
+  "importar": [
+    {
+      "archivo": "assets_fuente/z-anatomy/Cabello_masculino.glb",
+      "transformacion": {
+        "desplazamiento": [
+          0,
+          0,
+          0
+        ]
+      },
+      "_nota": "Generado con tools/generar_cabello.py --corto sobre la piel masculina (ya en coordenadas finales)."
+    }
+  ]
 }
