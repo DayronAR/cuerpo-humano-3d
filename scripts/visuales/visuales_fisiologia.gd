@@ -7,6 +7,7 @@ extends Node3D
 ##   Pulmones     -> se expanden y contraen con la frecuencia respiratoria; se oscurecen con el daño.
 ##   Músculos     -> se tiñen de rojo intenso según el ácido láctico.
 ##   Bolo         -> recorre esófago, estómago e intestinos según "progreso_bolo".
+##   Tubo digestivo -> ondas de peristaltismo (más fuertes al comer).
 ##   Humo         -> partículas de la boca a los pulmones (escenario fumar).
 ##   Glóbulos     -> partículas que circulan más rápido cuanto mayor es la frecuencia cardiaca.
 ##
@@ -27,6 +28,7 @@ var _globulos: FlujoParticulas
 var _humo: Array[FlujoParticulas] = []
 var _bolo: MeshInstance3D
 var _curva_bolo := Curve3D.new()
+var _fase_peristaltismo := 0.0
 
 
 func configurar(visor: BodyViewer, cfg: Dictionary) -> void:
@@ -65,6 +67,26 @@ func configurar(visor: BodyViewer, cfg: Dictionary) -> void:
 	_bolo.mesh = esfera
 	_bolo.visible = false
 	add_child(_bolo)
+	_preparar_peristaltismo(visor.cuerpo)
+
+
+## Reemplaza el material del tubo digestivo por el "vivo" (se mueve con ondas). Se cambia en el
+## recurso de la malla, así lo respetan las capas (que guardan los materiales de reemplazo).
+func _preparar_peristaltismo(raiz: Node3D) -> void:
+	var p: Dictionary = _cfg.get("peristaltismo", {})
+	for id in p.get("organos", []):
+		var organo := raiz.find_child(id, true, false)
+		if organo == null:
+			continue
+		for malla in BodyViewer.mallas_de(organo):
+			if malla.mesh == null:
+				continue
+			for s in malla.mesh.get_surface_count():
+				var base := malla.mesh.surface_get_material(s)
+				if base is BaseMaterial3D and base.transparency == BaseMaterial3D.TRANSPARENCY_DISABLED:
+					var vivo := MaterialVivo.desde(base)
+					vivo.set_shader_parameter("longitud", p.get("longitud", 0.045))
+					malla.mesh.surface_set_material(s, vivo)
 
 
 # --- Receptores de señales del motor ------------------------------------------------
@@ -103,6 +125,7 @@ func _process(delta: float) -> void:
 	if _visor == null:
 		return
 	var dt := delta * _factor_tiempo
+	_animar_peristaltismo(dt)
 
 	# Corazón: dos golpes por ciclo ("lub-dub")
 	var c: Dictionary = _cfg.get("corazon", {})
@@ -125,6 +148,16 @@ func _process(delta: float) -> void:
 	# Glóbulos rojos: más rápidos con mayor frecuencia cardiaca
 	var g: Dictionary = _cfg.get("globulos", {})
 	_globulos.velocidad = _valor(c.get("variable"), 70.0) * g.get("velocidad_por_lpm", 0.006)
+
+
+func _animar_peristaltismo(dt: float) -> void:
+	var p: Dictionary = _cfg.get("peristaltismo", {})
+	var comiendo: bool = _visuales_escenario.get("bolo", false)
+	_fase_peristaltismo = fposmod(_fase_peristaltismo + TAU * p.get("ondas_por_segundo", 0.35)
+			* (p.get("factor_comer", 2.0) if comiendo else 1.0) * dt, TAU * 1000.0)
+	RenderingServer.global_shader_parameter_set("peristaltismo_fase", _fase_peristaltismo)
+	RenderingServer.global_shader_parameter_set("peristaltismo_onda",
+			p.get("amplitud", 0.0015) * (p.get("factor_comer", 2.0) if comiendo else 1.0))
 
 
 func _actualizar_tintes() -> void:

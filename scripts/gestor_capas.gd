@@ -245,14 +245,19 @@ func _fijar_transparencia(pieza: Pieza, indice: int, transparencia: float) -> vo
 				copia = base.duplicate()
 				copia.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
 				copia.set_meta("alfa_original", base.albedo_color.a)
+			elif MaterialVivo.es_vivo(base):   # Órganos con peristaltismo (shader propio)
+				copia = MaterialVivo.transparente(base)
 			copias.append(copia)
 	for s in copias.size():
 		var copia: Material = copias[s]
 		if copia == null:
 			continue   # Material de shader propio: no se puede desvanecer de esta forma
-		var color: Color = copia.albedo_color
-		color.a = copia.get_meta("alfa_original") * (1.0 - transparencia)
-		copia.albedo_color = color
+		if copia is ShaderMaterial:
+			copia.set_shader_parameter("alfa", 1.0 - transparencia)
+		else:
+			var color: Color = copia.albedo_color
+			color.a = copia.get_meta("alfa_original") * (1.0 - transparencia)
+			copia.albedo_color = color
 		malla.set_surface_override_material(s, copia)
 
 

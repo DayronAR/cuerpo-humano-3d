@@ -24,7 +24,22 @@ func _ready() -> void:
 	al_actualizar_estado({"actividad": "reposo"})
 
 
+var _vitales: Label
+
+
+## El maniquí cambia de animación según la actividad y debajo se muestran el pulso y la
+## respiración que la simulación calcula para esa actividad (cambian juntos).
 func al_actualizar_estado(estado: Dictionary) -> void:
+	if _vitales == null and _etiqueta:
+		_vitales = Label.new()
+		_vitales.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_vitales.add_theme_font_size_override("font_size", 12)
+		_vitales.add_theme_color_override("font_color", Color(0.35, 0.42, 0.46))
+		_etiqueta.get_parent().add_child(_vitales)
+		_etiqueta.get_parent().move_child(_vitales, _etiqueta.get_index() + 1)
+	if _vitales and estado.has("frecuencia_cardiaca"):
+		_vitales.text = "♥ %d lpm   ·   🫁 %d rpm" % [roundi(estado["frecuencia_cardiaca"]),
+				roundi(estado.get("frecuencia_respiratoria", 14))]
 	var actividad: String = estado.get("actividad", "reposo")
 	if actividad == _actividad or _personaje == null:
 		return

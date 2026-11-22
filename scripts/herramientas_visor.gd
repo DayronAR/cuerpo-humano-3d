@@ -149,6 +149,9 @@ func _restaurar_materiales() -> void:
 
 
 func _material_corte(original: Material) -> ShaderMaterial:
+	if MaterialVivo.es_vivo(original):   # Ya admite el plano de corte: se usa el mismo
+		_materiales_corte[original] = original
+		return original
 	if not original is BaseMaterial3D:
 		return null
 	if _materiales_corte.has(original):
