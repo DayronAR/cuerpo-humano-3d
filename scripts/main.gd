@@ -303,6 +303,8 @@ func _actualizar_tiempo_personaje() -> void:
 
 func _conectar_cuestionario() -> void:
 	_cuestionario.configurar(Datos.cuestionario, _visor.ids_organos(), _visor.ids_partes())
+	_panel_cuestionario.nivel_elegido.connect(func(n): _cuestionario.nivel = n)
+	_panel_cuestionario.configurar_niveles(_cuestionario.niveles())
 	_panel_cuestionario.comenzar_pulsado.connect(_cuestionario.iniciar)
 	_panel_cuestionario.siguiente_pulsado.connect(_cuestionario.siguiente)
 	_panel_cuestionario.saltar_pulsado.connect(_cuestionario.saltar)
@@ -331,7 +333,7 @@ func _on_respuesta_evaluada(correcta: bool, id_respondido: String, id_correcto: 
 	var parte_correcta := _visor.buscar_parte(id_correcto, pedida)
 	var nombre_correcto := _nombre(String(parte_correcta.name)) if parte_correcta else _nombre(id_correcto)
 	_panel_cuestionario.mostrar_resultado(correcta, _nombre(id_respondido), nombre_correcto, puntos,
-			puntaje, restantes)
+			puntaje, restantes, _cuestionario.racha())
 
 
 func _on_ronda_terminada(puntaje: int, maximo: int, es_record: bool) -> void:

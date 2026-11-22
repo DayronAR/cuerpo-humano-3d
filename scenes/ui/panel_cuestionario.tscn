@@ -32,7 +32,7 @@ theme_override_font_sizes/font_size = 13
 text = "Se te pedirá encontrar órganos en el cuerpo. Haz clic sobre el órgano correcto.
 
 • 10 puntos si aciertas al primer intento.
-• 5 puntos si aciertas al segundo.
+• 5 puntos si aciertas al segundo.\n• Racha: puntos extra desde el 3.er acierto seguido.
 • Puedes girar y acercar la cámara como siempre.
 
 Tu mejor puntaje se guarda en este equipo."

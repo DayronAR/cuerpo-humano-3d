@@ -19,19 +19,23 @@ static func cargar() -> Dictionary:
 
 
 ## Registra una partida. Devuelve true si es un nuevo récord.
-static func registrar(puntaje: int, total: int) -> bool:
+static func registrar(puntaje: int, total: int, nivel := "facil") -> bool:
 	var datos := cargar()
 	var historial: Array = datos.get("historial", [])
 	historial.push_front({
 		"fecha": Time.get_datetime_string_from_system(false, true),
 		"puntaje": puntaje,
 		"total": total,
+		"nivel": nivel,
 	})
 	datos["historial"] = historial.slice(0, MAXIMO_HISTORIAL)
-	var record := puntaje > int(datos.get("mejor_puntaje", 0))
+	# Récord por nivel (las partidas antiguas, sin nivel, cuentan como "facil")
+	var mejores: Dictionary = datos.get("mejores", {"facil": {"puntaje": datos.get("mejor_puntaje", 0),
+			"total": datos.get("mejor_total", 0)}})
+	var record := puntaje > int(mejores.get(nivel, {}).get("puntaje", 0))
 	if record:
-		datos["mejor_puntaje"] = puntaje
-		datos["mejor_total"] = total
+		mejores[nivel] = {"puntaje": puntaje, "total": total}
+	datos["mejores"] = mejores
 	var archivo := FileAccess.open(RUTA, FileAccess.WRITE)
 	if archivo == null:
 		push_error("No se pudo guardar %s: %s" % [RUTA, error_string(FileAccess.get_open_error())])
@@ -40,6 +44,9 @@ static func registrar(puntaje: int, total: int) -> bool:
 	return record
 
 
-static func mejor_puntaje() -> Dictionary:
+static func mejor_puntaje(nivel := "facil") -> Dictionary:
 	var datos := cargar()
-	return {"puntaje": int(datos.get("mejor_puntaje", 0)), "total": int(datos.get("mejor_total", 0))}
+	var mejores: Dictionary = datos.get("mejores", {"facil": {"puntaje": datos.get("mejor_puntaje", 0),
+			"total": datos.get("mejor_total", 0)}})
+	var m: Dictionary = mejores.get(nivel, {})
+	return {"puntaje": int(m.get("puntaje", 0)), "total": int(m.get("total", 0))}

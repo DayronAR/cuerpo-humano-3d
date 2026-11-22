@@ -20,6 +20,8 @@ var _ronda: Array = []
 var _indice := -1
 var _intentos_usados := 0
 var _puntaje := 0
+var _racha := 0              ## Aciertos seguidos (al primer intento)
+var nivel := "facil"         ## facil, medio o dificil (ver data/cuestionario.json -> niveles)
 
 
 ## ids_validos: órganos que existen en la escena (se ignoran preguntas de órganos que no estén).
@@ -34,9 +36,29 @@ func configurar(datos: Dictionary, ids_validos: Array, partes_validas: Array = [
 		return parte.is_empty() or partes_validas.any(func(x): return x.begins_with(parte)))
 
 
+static func nivel_de(p: Dictionary) -> String:
+	if p.has("nivel"):
+		return p["nivel"]
+	if p.has("parte"):
+		return "dificil"
+	return "medio" if String(p.get("texto", "")).begins_with("¿") else "facil"
+
+
+func niveles() -> Array:
+	return _config.get("niveles", [])
+
+
 func iniciar() -> void:
-	var mezcladas := _preguntas.duplicate()
+	var orden := ["facil", "medio", "dificil"]
+	var mezcladas := _preguntas.filter(func(p): return nivel_de(p) == nivel)
 	mezcladas.shuffle()
+	# Si el nivel tiene pocas preguntas en este cuerpo, se completa con el nivel anterior
+	var anterior := orden.find(nivel) - 1
+	if anterior >= 0:
+		var extra := _preguntas.filter(func(p): return nivel_de(p) == orden[anterior])
+		extra.shuffle()
+		mezcladas.append_array(extra)
+	_racha = 0
 	_ronda.clear()
 	var usados := {}
 	for p in mezcladas:
@@ -79,10 +101,14 @@ func responder(id_organo: String, id_parte := "") -> void:
 	if acierto:
 		var tabla: Array = _config.get("puntos_por_intento", [10, 5])
 		var puntos := int(tabla[mini(_intentos_usados - 1, tabla.size() - 1)])
+		_racha = _racha + 1 if _intentos_usados == 1 else 0
+		if _racha >= 3:   # Bono por racha de aciertos al primer intento
+			puntos += int(_config.get("bono_racha", 2)) * (_racha - 2)
 		_puntaje += puntos
 		esperando = false
 		respuesta_evaluada.emit(true, id_organo, correcto, puntos, _puntaje, 0)
 	else:
+		_racha = 0
 		var restantes := maxi(maximos - _intentos_usados, 0)
 		esperando = restantes > 0
 		respuesta_evaluada.emit(false, id_parte if not id_parte.is_empty() else id_organo, correcto, 0, _puntaje,
@@ -93,6 +119,7 @@ func saltar() -> void:
 	if not esperando:
 		return
 	esperando = false
+	_racha = 0
 	respuesta_evaluada.emit(false, "", organo_actual(), 0, _puntaje, 0)
 
 
@@ -106,6 +133,10 @@ func parte_actual() -> String:
 	if _indice < 0 or _indice >= _ronda.size():
 		return ""
 	return _ronda[_indice].get("parte", "")
+
+
+func racha() -> int:
+	return _racha
 
 
 func organo_actual() -> String:
@@ -122,5 +153,5 @@ func _terminar() -> void:
 	activo = false
 	esperando = false
 	var maximo := _ronda.size() * int(_config.get("puntos_por_intento", [10])[0])
-	var record := RegistroPuntajes.registrar(_puntaje, maximo)
+	var record := RegistroPuntajes.registrar(_puntaje, maximo, nivel)
 	ronda_terminada.emit(_puntaje, maximo, record)

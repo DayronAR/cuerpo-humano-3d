@@ -291,7 +291,218 @@
     {
       "organo": "Mamas",
       "texto": "¿Qué glándulas producen la leche? Selecciona las mamas"
+    },
+    {
+      "organo": "Rinones",
+      "texto": "Toca el órgano que filtra la sangre y forma la orina.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Pancreas",
+      "texto": "Toca el órgano que produce la insulina.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Bazo",
+      "texto": "Toca el órgano que elimina los glóbulos rojos viejos.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Vejiga",
+      "texto": "Toca el órgano que almacena la orina.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Laringe",
+      "texto": "Toca el órgano donde están las cuerdas vocales.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Esofago",
+      "texto": "Toca el tubo que lleva la comida de la boca al estómago.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "IntestinoGrueso",
+      "texto": "Toca el órgano que absorbe el agua y forma las heces.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Aorta",
+      "texto": "Toca la arteria más grande del cuerpo.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Bronquios",
+      "texto": "Toca los tubos que reparten el aire dentro de los pulmones.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Tiroides",
+      "texto": "Toca la glándula con forma de mariposa que regula el metabolismo.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Hipofisis",
+      "texto": "Toca la glándula que controla a casi todas las demás glándulas.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Timo",
+      "texto": "Toca el órgano donde maduran los linfocitos T.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "FemurDer",
+      "texto": "Toca el hueso más largo del cuerpo.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "CajaToracica",
+      "texto": "Toca los huesos que protegen el corazón y los pulmones.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Gluteos",
+      "texto": "Toca el músculo más grande del cuerpo.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "CuadricepsIzq",
+      "texto": "Toca el músculo que estira la rodilla.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Ureteres",
+      "texto": "Toca los tubos que llevan la orina del riñón a la vejiga.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Ovarios",
+      "texto": "Toca las glándulas que producen los óvulos.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Testiculos",
+      "texto": "Toca las glándulas que producen los espermatozoides.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "GlandulasSalivales",
+      "texto": "Toca las glándulas que producen la saliva.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Cerebelo",
+      "texto": "Toca la parte del encéfalo que coordina el equilibrio.",
+      "nivel": "medio"
+    },
+    {
+      "organo": "Corazon",
+      "texto": "Toca el ventrículo izquierdo, la cavidad que bombea la sangre a todo el cuerpo.",
+      "nivel": "dificil",
+      "parte": "Corazon__Left_ventricle"
+    },
+    {
+      "organo": "Corazon",
+      "texto": "Toca la aurícula derecha, donde llega la sangre de las venas cavas.",
+      "nivel": "dificil",
+      "parte": "Corazon__Right_atrium"
+    },
+    {
+      "organo": "Craneo",
+      "texto": "Toca el hueso occipital, en la nuca.",
+      "nivel": "dificil",
+      "parte": "Craneo__Occipital_bone"
+    },
+    {
+      "organo": "Craneo",
+      "texto": "Toca un hueso temporal, a los lados de la cabeza.",
+      "nivel": "dificil",
+      "parte": "Craneo__Temporal_bone"
+    },
+    {
+      "organo": "Craneo",
+      "texto": "Toca el estribo, el hueso más pequeño del cuerpo.",
+      "nivel": "dificil",
+      "parte": "Craneo__Stapes"
+    },
+    {
+      "organo": "Craneo",
+      "texto": "Toca el martillo, el huesecillo unido al tímpano.",
+      "nivel": "dificil",
+      "parte": "Craneo__Malleus"
+    },
+    {
+      "organo": "Suprarrenales",
+      "texto": "Toca las glándulas que producen la adrenalina.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "Paratiroides",
+      "texto": "Toca las glándulas que regulan el calcio de la sangre.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "GlandulaPineal",
+      "texto": "Toca la glándula que produce la melatonina.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "Meniscos",
+      "texto": "Toca los cartílagos que amortiguan la rodilla.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "DiscosIntervertebrales",
+      "texto": "Toca los cojines entre las vértebras.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "TrompasUterinas",
+      "texto": "Toca el lugar donde se suele producir la fecundación.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "Prostata",
+      "texto": "Toca la glándula que rodea la uretra debajo de la vejiga.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "GangliosCabezaCuello",
+      "texto": "Toca los ganglios linfáticos que se inflaman con una infección de garganta.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "Amigdalas",
+      "texto": "Toca las amígdalas.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "Escapulas",
+      "texto": "Toca un omóplato.",
+      "nivel": "dificil"
     }
   ],
-  "_partes": "Preguntas con 'parte': hay que hacer clic en esa parte exacta (id de nodo o su comienzo; ambos lados valen). Solo aparecen si el modelo 3D tiene esa parte (Z-Anatomy)."
+  "_partes": "Preguntas con 'parte': hay que hacer clic en esa parte exacta (id de nodo o su comienzo; ambos lados valen). Solo aparecen si el modelo 3D tiene esa parte (Z-Anatomy).",
+  "niveles": [
+    {
+      "id": "facil",
+      "nombre": "Fácil",
+      "descripcion": "Encuentra los órganos por su nombre."
+    },
+    {
+      "id": "medio",
+      "nombre": "Medio",
+      "descripcion": "Toca el órgano según lo que hace."
+    },
+    {
+      "id": "dificil",
+      "nombre": "Difícil",
+      "descripcion": "Partes concretas y estructuras pequeñas."
+    }
+  ],
+  "_niveles": "Cada pregunta tiene 'nivel' (facil, medio o dificil). Si no lo tiene: con 'parte' es difícil, si empieza con '¿' es media y si no, fácil. La ronda usa las de su nivel (y si faltan, completa con las del nivel anterior).",
+  "bono_racha": 2,
+  "_bono_racha": "Puntos extra por cada acierto seguido a partir del tercero."
 }
