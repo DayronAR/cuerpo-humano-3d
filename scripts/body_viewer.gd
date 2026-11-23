@@ -271,6 +271,7 @@ func aplicar_edad_a(raiz: Node3D, formas: Array, anios: float) -> void:
 func fijar_edad(anios: float, final := false) -> void:
 	_edad_actual = anios
 	var pesos := _pesos_edad(anios)
+	pesos_actuales = pesos[0]
 	_aplicar_pesos(_formas_edad, pesos[0], pesos[1])
 	var escala := Datos.curva_edad("altura_relativa", anios)
 	cuerpo.scale = Vector3.ONE * escala
@@ -393,6 +394,30 @@ func _crear_forma(item: Array) -> void:
 
 func _calcular_colision(k: int) -> void:
 	_resultados[k] = _forma_con_pesos(_trabajos[k], _pesos_en_calculo)
+
+
+## Pesos de las formas de edad que se ven ahora: [bebe, anciano, sin_mamas, encogido, sentado].
+var pesos_actuales: Array = [0.0, 0.0, 0.0, 0.0, 0.0]
+
+
+## Datos de vértices (base y formas de edad) de las mallas de un órgano, en el formato de
+## _trabajos: [CollisionShape3D, base, índices, Bebe, Anciano, SinMamas, Encogido, Sentado].
+func trabajos_de(organo: Node3D) -> Array:
+	var sistema: String = organo.get_meta("sistema", "")
+	_completar_colisiones([sistema])
+	var mallas := mallas_de(organo)
+	return _trabajos.filter(func(t): return is_instance_valid(t[0]) and t[0].get_parent().get_parent() in mallas)
+
+
+## Posición en el mundo del vértice i de una malla, con la edad y postura que se ven ahora.
+func punto_deformado(t: Array, i: int) -> Vector3:
+	var base: PackedVector3Array = t[1]
+	var p := pesos_actuales
+	var wb: float = p[0] + (p[3] if t[6] == base else 0.0) + (p[4] if t[7] == base else 0.0)
+	var v: Vector3 = base[i] + (t[3][i] - base[i]) * wb + (t[4][i] - base[i]) * p[1] + (t[5][i] - base[i]) * p[2] \
+			+ (t[6][i] - base[i]) * p[3] + (t[7][i] - base[i]) * p[4]
+	var malla: MeshInstance3D = t[0].get_parent().get_parent()
+	return malla.global_transform * v
 
 
 func _forma_con_pesos(t: Array, pesos: Array) -> ConcavePolygonShape3D:

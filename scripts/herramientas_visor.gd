@@ -233,50 +233,45 @@ func puntos_etiquetas() -> Array:
 		var organo := _visor.obtener_organo(id)
 		if organo == null or not organo.is_visible_in_tree():
 			continue
-		var ancla: Array = _anclas.get(organo, [])
-		if ancla.is_empty():
-			ancla = _calcular_ancla(organo)
-			_anclas[organo] = ancla
+		if not _anclas.has(organo):
+			_anclas[organo] = _calcular_ancla(organo)
+		var ancla: Array = _anclas[organo]
 		if ancla.is_empty():
 			continue
 		var nombre: String = Datos.ficha_organo(id).get("nombre", id)
-		lista.append([nombre, organo.global_transform * (ancla[0] as Vector3), ancla[1]])
+		# El punto sigue al vértice elegido con la edad y la postura actuales (también al arrastrar
+		# la barra de edad o en el despiece)
+		lista.append([nombre, _visor.punto_deformado(ancla[0], ancla[1]), ancla[2]])
 	lista.sort_custom(func(a, b): return a[2] > b[2])
 	return lista.slice(0, MAX_ETIQUETAS)
 
 
-var _anclas: Dictionary = {}   ## Órgano -> [punto en el espacio del órgano, tamaño]; se borra al cambiar la edad
+var _anclas: Dictionary = {}   ## Órgano -> [datos de la malla, índice de vértice, tamaño]; se elige de nuevo al soltar la edad
 
 
-## Punto de la superficie del órgano donde apunta su etiqueta: el vértice más cercano al centro
-## de su geometría. Se usan las formas de colisión (en la CPU y con la edad y postura actuales).
-## La caja de las mallas no sirve: incluye el espacio de todas las formas de edad.
+## Vértice del órgano al que apunta su etiqueta: el más cercano al centro de su geometría (con la
+## edad actual), así cae sobre el órgano y no en un hueco.
 func _calcular_ancla(organo: Node3D) -> Array:
-	var puntos := PackedVector3Array()
-	for malla in BodyViewer.mallas_de(organo):
-		var forma: Shape3D = null
-		for hijo in malla.get_children():
-			if hijo is StaticBody3D and hijo.get_child_count() > 0:
-				forma = (hijo.get_child(0) as CollisionShape3D).shape
-		if not forma is ConcavePolygonShape3D:
-			continue
-		var caras: PackedVector3Array = (forma as ConcavePolygonShape3D).get_faces()
-		var paso := maxi(1, caras.size() / 600)   # Una muestra de vértices basta
-		for k in range(0, caras.size(), paso):
-			puntos.append(malla.global_transform * caras[k])
-	if puntos.is_empty():
+	var muestras := []   # [trabajo, índice, posición]
+	for t in _visor.trabajos_de(organo):
+		var indices: PackedInt32Array = t[2]
+		var paso := maxi(1, indices.size() / 400)
+		for k in range(0, indices.size(), paso):
+			var i := indices[k]
+			muestras.append([t, i, _visor.punto_deformado(t, i)])
+	if muestras.is_empty():
 		return []
 	var centro := Vector3.ZERO
-	var caja := AABB(puntos[0], Vector3.ZERO)
-	for p in puntos:
-		centro += p
-		caja = caja.expand(p)
-	centro /= puntos.size()
-	var mejor := puntos[0]
-	for p in puntos:
-		if p.distance_squared_to(centro) < mejor.distance_squared_to(centro):
-			mejor = p
-	return [organo.global_transform.affine_inverse() * mejor, caja.size.length()]
+	var caja := AABB(muestras[0][2], Vector3.ZERO)
+	for m in muestras:
+		centro += m[2]
+		caja = caja.expand(m[2])
+	centro /= muestras.size()
+	var mejor: Array = muestras[0]
+	for m in muestras:
+		if (m[2] as Vector3).distance_squared_to(centro) < (mejor[2] as Vector3).distance_squared_to(centro):
+			mejor = m
+	return [mejor[0], mejor[1], caja.size.length()]
 
 
 # --- Comparar ---------------------------------------------------------------------------
@@ -335,8 +330,9 @@ func al_cambiar_sistema(id_sistema: String) -> void:
 
 
 ## Al cambiar la edad, el cuerpo comparado también cambia.
-func al_cambiar_edad(anios: float, _final := false) -> void:
-	_anclas.clear()
+func al_cambiar_edad(anios: float, final := false) -> void:
+	if final:   # Con otra postura (bebé encogido, sentado) el centro de cada órgano cambia
+		_anclas.clear()
 	if _comparado:
 		_visor.aplicar_edad_a(_comparado, _formas_comparado, anios)
 	if _corte_activo:
