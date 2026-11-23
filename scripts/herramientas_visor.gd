@@ -15,7 +15,7 @@ const PLANOS := {
 	"coronal": Vector3.BACK,        ## De frente: se quita la parte delantera
 }
 const SEPARACION_COMPARAR := 0.95   ## Distancia (m) entre los dos cuerpos al compararlos
-const MAX_ETIQUETAS := 18
+const MAX_ETIQUETAS := 30   ## Se muestran las que entran en pantalla (ver EtiquetasFlotantes)
 
 var _visor: BodyViewer
 var _corte_activo := false
@@ -233,11 +233,50 @@ func puntos_etiquetas() -> Array:
 		var organo := _visor.obtener_organo(id)
 		if organo == null or not organo.is_visible_in_tree():
 			continue
-		var caja := _caja_de(organo)
+		var ancla: Array = _anclas.get(organo, [])
+		if ancla.is_empty():
+			ancla = _calcular_ancla(organo)
+			_anclas[organo] = ancla
+		if ancla.is_empty():
+			continue
 		var nombre: String = Datos.ficha_organo(id).get("nombre", id)
-		lista.append([nombre, caja.get_center(), caja.size.length()])
+		lista.append([nombre, organo.global_transform * (ancla[0] as Vector3), ancla[1]])
 	lista.sort_custom(func(a, b): return a[2] > b[2])
 	return lista.slice(0, MAX_ETIQUETAS)
+
+
+var _anclas: Dictionary = {}   ## Órgano -> [punto en el espacio del órgano, tamaño]; se borra al cambiar la edad
+
+
+## Punto de la superficie del órgano donde apunta su etiqueta: el vértice más cercano al centro
+## de su geometría. Se usan las formas de colisión (en la CPU y con la edad y postura actuales).
+## La caja de las mallas no sirve: incluye el espacio de todas las formas de edad.
+func _calcular_ancla(organo: Node3D) -> Array:
+	var puntos := PackedVector3Array()
+	for malla in BodyViewer.mallas_de(organo):
+		var forma: Shape3D = null
+		for hijo in malla.get_children():
+			if hijo is StaticBody3D and hijo.get_child_count() > 0:
+				forma = (hijo.get_child(0) as CollisionShape3D).shape
+		if not forma is ConcavePolygonShape3D:
+			continue
+		var caras: PackedVector3Array = (forma as ConcavePolygonShape3D).get_faces()
+		var paso := maxi(1, caras.size() / 600)   # Una muestra de vértices basta
+		for k in range(0, caras.size(), paso):
+			puntos.append(malla.global_transform * caras[k])
+	if puntos.is_empty():
+		return []
+	var centro := Vector3.ZERO
+	var caja := AABB(puntos[0], Vector3.ZERO)
+	for p in puntos:
+		centro += p
+		caja = caja.expand(p)
+	centro /= puntos.size()
+	var mejor := puntos[0]
+	for p in puntos:
+		if p.distance_squared_to(centro) < mejor.distance_squared_to(centro):
+			mejor = p
+	return [organo.global_transform.affine_inverse() * mejor, caja.size.length()]
 
 
 # --- Comparar ---------------------------------------------------------------------------
@@ -297,6 +336,7 @@ func al_cambiar_sistema(id_sistema: String) -> void:
 
 ## Al cambiar la edad, el cuerpo comparado también cambia.
 func al_cambiar_edad(anios: float, _final := false) -> void:
+	_anclas.clear()
 	if _comparado:
 		_visor.aplicar_edad_a(_comparado, _formas_comparado, anios)
 	if _corte_activo:
