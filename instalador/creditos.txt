@@ -1,0 +1,25 @@
+﻿Cuerpo Humano 3D — Atlas interactivo y simulaciones fisiológicas
+Aplicación educativa. Las simulaciones usan valores aproximados y no
+reemplazan el consejo de un profesional de la salud.
+
+MODELOS ANATÓMICOS Y RECURSOS DE TERCEROS
+
+• Z-Anatomy (cuerpo masculino y la mayoría de los órganos), basado en
+  BodyParts3D (© The Database Center for Life Science).
+  Licencia: Creative Commons Atribución-CompartirIgual 4.0 Internacional
+  (CC BY-SA 4.0) — https://creativecommons.org/licenses/by-sa/4.0/
+  Los modelos fueron modificados (reducción, unión de piezas, formas de
+  edad y posturas) y se distribuyen bajo la misma licencia.
+
+• Human Reference Atlas — HuBMAP / NIH (piel, pelvis, vejiga y aparato
+  reproductor del cuerpo femenino, derivados del Visible Human Female).
+  Licencia: Creative Commons Atribución 4.0 Internacional (CC BY 4.0) —
+  https://creativecommons.org/licenses/by/4.0/
+
+• Personaje animado de la mini vista: Mixamo (Adobe), usado según sus
+  condiciones de uso.
+
+• Motor: Godot Engine (licencia MIT) — https://godotengine.org/license
+
+Al instalar aceptas usar la aplicación con fines educativos y respetar las
+licencias indicadas arriba.
