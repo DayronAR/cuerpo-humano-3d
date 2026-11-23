@@ -23,6 +23,10 @@ var _desplazable: ScrollContainer
 var _ficha_actual: Dictionary = {}
 var _edad := 30.0
 
+const MARGEN := 16.0
+const ARRIBA := 58.0   ## Debajo de la barra de vistas (Frente, Espalda, ..., Centrar)
+const ANCHO := 360.0
+
 const ETAPAS := [[2.0, "bebe", "EN EL BEBÉ"], [12.0, "nino", "EN LA INFANCIA"], [60.0, "", ""], [999.0, "anciano", "EN EL ADULTO MAYOR"]]
 
 
@@ -137,7 +141,17 @@ func _ajustar_alto() -> void:
 	var reservado := 260.0 + (150.0 if _lista_partes.visible else 0.0)
 	var contenido_alto: float = _desplazable.get_child(0).get_combined_minimum_size().y
 	_desplazable.custom_minimum_size.y = minf(contenido_alto, maxf(160.0, alto_pantalla - reservado))
-	reset_size()
+	# Siempre pegada al borde derecho y debajo de la barra de vistas. (reset_size() conservaba la
+	# esquina superior izquierda: al cambiar el ancho, la ficha se iba corriendo hacia el centro.)
+	var minimo := get_combined_minimum_size()
+	anchor_left = 1.0
+	anchor_right = 1.0
+	anchor_top = 0.0
+	anchor_bottom = 0.0
+	offset_right = -MARGEN
+	offset_left = -MARGEN - maxf(minimo.x, ANCHO)
+	offset_top = ARRIBA
+	offset_bottom = ARRIBA + minf(minimo.y, alto_pantalla - ARRIBA - MARGEN)
 
 
 ## partes: [[id, nombre], ...] del órgano seleccionado ([] = no tiene partes; se oculta la lista).

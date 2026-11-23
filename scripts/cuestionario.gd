@@ -152,6 +152,10 @@ func mostrar_sistema() -> bool:
 func _terminar() -> void:
 	activo = false
 	esperando = false
-	var maximo := _ronda.size() * int(_config.get("puntos_por_intento", [10])[0])
+	# Máximo posible: todo al primer intento, con el bono de racha desde el tercer acierto
+	var n := _ronda.size()
+	var maximo := n * int(_config.get("puntos_por_intento", [10])[0])
+	for racha in range(3, n + 1):
+		maximo += int(_config.get("bono_racha", 2)) * (racha - 2)
 	var record := RegistroPuntajes.registrar(_puntaje, maximo, nivel)
 	ronda_terminada.emit(_puntaje, maximo, record)

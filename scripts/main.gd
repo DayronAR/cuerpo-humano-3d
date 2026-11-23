@@ -305,7 +305,7 @@ func _conectar_herramientas() -> void:
 	_panel_ficha.visibility_changed.connect(func(): _panel_herramientas.visible = not _panel_ficha.visible)
 	_barra_sistemas.edad_cambiada.connect(_herramientas.al_cambiar_edad)
 	get_viewport().size_changed.connect(_actualizar_zona_etiquetas)
-	_actualizar_zona_etiquetas()
+	_actualizar_zona_etiquetas.call_deferred()
 
 
 ## Las etiquetas se acomodan entre el panel izquierdo y el de herramientas.
@@ -314,6 +314,15 @@ func _actualizar_zona_etiquetas() -> void:
 	var izquierda := _pestanas.position.x + _pestanas.size.x + 12
 	var derecha := tam.x - 290
 	_etiquetas.zona = Rect2(izquierda, 60, maxf(200, derecha - izquierda), tam.y - 130)
+	# El gráfico de la simulación va en el espacio libre entre el panel izquierdo y la mini vista
+	# (centrado en la pantalla solo tapaba la lista de valores en ventanas angostas)
+	var libre_izq := _pestanas.position.x + _pestanas.size.x + 12
+	var libre_der := _mini_vista.global_position.x - 12 if _mini_vista.size.x > 0 else tam.x - 220
+	var ancho := clampf(libre_der - libre_izq, 280, 620)
+	_panel_grafico.anchor_left = 0.0
+	_panel_grafico.anchor_right = 0.0
+	_panel_grafico.offset_left = libre_izq + maxf(0.0, (libre_der - libre_izq - ancho) * 0.5)
+	_panel_grafico.offset_right = _panel_grafico.offset_left + ancho
 
 
 # --- Recorridos guiados ------------------------------------------------------------------
