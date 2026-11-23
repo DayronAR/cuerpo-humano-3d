@@ -482,6 +482,24 @@
       "organo": "Escapulas",
       "texto": "Toca un omóplato.",
       "nivel": "dificil"
+    },
+    {
+      "organo": "Estomago",
+      "parte": "Estomago__Piloro",
+      "texto": "Toca el píloro, la salida del estómago hacia el duodeno.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "Estomago",
+      "parte": "Estomago__Cardias",
+      "texto": "Toca el cardias, donde el esófago entra al estómago.",
+      "nivel": "dificil"
+    },
+    {
+      "organo": "Estomago",
+      "parte": "Estomago__Fondo",
+      "texto": "Toca el fondo del estómago, donde se acumula el aire tragado.",
+      "nivel": "dificil"
     }
   ],
   "_partes": "Preguntas con 'parte': hay que hacer clic en esa parte exacta (id de nodo o su comienzo; ambos lados valen). Solo aparecen si el modelo 3D tiene esa parte (Z-Anatomy).",

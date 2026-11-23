@@ -745,6 +745,121 @@ def solo_exterior(obj):
     bm.free()
 
 
+def partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices):
+    """Corta la malla completa en un objeto por clave de "asignacion" ({clave: [caras]}). Cada
+    parte conserva las normales de la superficie completa (bordes idénticos entre partes) y
+    cuelga de un vacío con el nombre del órgano."""
+    m = completa.data
+    mundo = completa.matrix_world
+    objetos = []
+    for clave, caras in asignacion.items():
+        bm = bmesh.new()
+        bm.from_mesh(m)
+        bm.faces.ensure_lookup_table()
+        conservar = set(caras)
+        bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.index not in conservar], context="FACES")
+        bmesh.ops.transform(bm, matrix=mundo, verts=bm.verts[:])
+        nueva = bpy.data.meshes.new(f"{destino}__{clave}_malla")
+        bm.to_mesh(nueva)
+        bm.free()
+        # Normales de la superficie completa en cada vértice (bordes idénticos entre partes)
+        nueva.normals_split_custom_set_from_vertices(
+            [normales[arbol_vertices.find(v.co)[1]] for v in nueva.vertices])
+        obj = bpy.data.objects.new(f"{destino}__{clave}", nueva)
+        bpy.context.scene.collection.objects.link(obj)
+        mn = Vector((min(v.co[i] for v in nueva.vertices) for i in range(3)))
+        mx = Vector((max(v.co[i] for v in nueva.vertices) for i in range(3)))
+        centro = (mn + mx) / 2
+        nueva.transform(Matrix.Translation(-centro))
+        obj.location = centro
+        objetos.append((clave, obj))
+    bpy.data.objects.remove(completa, do_unlink=True)
+
+    anterior = bpy.data.objects.get(destino)
+    if anterior is not None:
+        anterior.name = destino + "_original"
+    vacio = bpy.data.objects.new(destino, None)
+    bpy.context.scene.collection.objects.link(vacio)
+    mn = Vector((min(o.location[i] for _, o in objetos) for i in range(3)))
+    mx = Vector((max(o.location[i] for _, o in objetos) for i in range(3)))
+    vacio.location = (mn + mx) / 2
+    bpy.context.view_layer.update()
+    for _, o in objetos:
+        mundo_o = o.matrix_world.copy()
+        o.parent = vacio
+        o.matrix_world = mundo_o
+    return vacio, objetos
+
+
+def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazamiento, soldar, cerrar=False):
+    """Divide un órgano que viene en una sola malla (p. ej. el estómago) en regiones anatómicas.
+    regiones: {clave: {"nombre": ..., "marcas": [nombres de objetos de Z-Anatomy]}}. Cada marca
+    es la etiqueta de posición que trae el modelo (objetos ".j" o textos ".t"), o "junto:<objeto>":
+    el punto del órgano más cercano a otro órgano (p. ej. el duodeno, para el píloro). Cada cara
+    va a la región de la marca más cercana."""
+    from mathutils.kdtree import KDTree
+    from mathutils.bvhtree import BVHTree
+    completa, _ = preparar_organo(destino + "__completa", fuentes, max_tris, escala, desplazamiento, False,
+                                  soldar=soldar)
+    if cerrar:   # El modelo trae una ventana abierta (para ver el interior): se tapa
+        cerrar_huecos(completa.data)
+        completa.data.shade_smooth()
+    m = completa.data
+    mundo = completa.matrix_world
+    ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
+    vertices = [mundo @ v.co for v in m.vertices]
+    puntos, etiquetas = [], []
+    radios = []   # [clave, punto, radio]: regiones pequeñas alrededor de un punto (p. ej. el píloro)
+    for clave, r in regiones.items():
+        for marca in r["marcas"]:
+            if marca.startswith("junto:"):
+                otro = bpy.data.objects.get(marca[6:])
+                if otro is None:
+                    print(f"[AVISO] {destino}: no existe {marca[6:]}")
+                    continue
+                dg = bpy.context.evaluated_depsgraph_get()
+                malla = bpy.data.meshes.new_from_object(otro.evaluated_get(dg), depsgraph=dg)
+                malla.transform(ajuste_de(otro, ajuste) @ otro.matrix_world)
+                bm = bmesh.new()
+                bm.from_mesh(malla)
+                arbol_otro = BVHTree.FromBMesh(bm)
+                punto = min(vertices, key=lambda v: (arbol_otro.find_nearest(v)[3] or 1e9))
+                bm.free()
+                bpy.data.meshes.remove(malla)
+            else:
+                obj = bpy.data.objects.get(marca)
+                if obj is None:
+                    print(f"[AVISO] {destino}: no existe la marca {marca}")
+                    continue
+                punto = ajuste_de(obj, ajuste) @ obj.matrix_world.translation
+            if r.get("radio"):
+                radios.append([clave, punto, float(r["radio"])])
+                continue
+            puntos.append(Vector((punto.x, 0.0, punto.z)))   # Vista de frente (ver abajo)
+            etiquetas.append(clave)
+    arbol = KDTree(len(puntos))
+    for k, pt in enumerate(puntos):
+        arbol.insert(pt, k)
+    arbol.balance()
+    normales = [v.normal.copy() for v in m.vertices]
+    arbol_vertices = KDTree(len(m.vertices))
+    for v in m.vertices:
+        arbol_vertices.insert(mundo @ v.co, v.index)
+    arbol_vertices.balance()
+    asignacion = {}
+    for poligono in m.polygons:
+        # Las marcas están sobre la cara de adelante: se compara la posición vista de frente
+        # (sin la profundidad), así la pared de atrás va a la misma región que la de adelante
+        c = mundo @ poligono.center
+        clave = next((rad[0] for rad in radios if (c - rad[1]).length < rad[2]), None)
+        if clave is None:
+            _, k, _ = arbol.find(Vector((c.x, 0.0, c.z)))
+            clave = etiquetas[k]
+        asignacion.setdefault(clave, []).append(poligono.index)
+    print(f"  {destino}: " + ", ".join(f"{c} {len(v)} caras" for c, v in asignacion.items()))
+    return partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices)
+
+
 def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar, superficie=None, alisado=0,
                        subdividir=False, remallar=0.0, alisado_remallado=0):
     """Piel sin costuras: construye la superficie COMPLETA (simétrica y soldada), la reduce, y
@@ -841,44 +956,7 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
         _, i, _ = arbol.find(mundo @ poligono.center)
         asignacion.setdefault(etiquetas[i], []).append(poligono.index)
 
-    objetos = []
-    for clave, caras in asignacion.items():
-        bm = bmesh.new()
-        bm.from_mesh(m)
-        bm.faces.ensure_lookup_table()
-        conservar = set(caras)
-        bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.index not in conservar], context="FACES")
-        bmesh.ops.transform(bm, matrix=mundo, verts=bm.verts[:])
-        nueva = bpy.data.meshes.new(f"{destino}__{clave}_malla")
-        bm.to_mesh(nueva)
-        bm.free()
-        # Normales de la superficie completa en cada vértice (bordes idénticos entre partes)
-        nueva.normals_split_custom_set_from_vertices(
-            [normales[arbol_vertices.find(v.co)[1]] for v in nueva.vertices])
-        obj = bpy.data.objects.new(f"{destino}__{clave}", nueva)
-        bpy.context.scene.collection.objects.link(obj)
-        mn = Vector((min(v.co[i] for v in nueva.vertices) for i in range(3)))
-        mx = Vector((max(v.co[i] for v in nueva.vertices) for i in range(3)))
-        centro = (mn + mx) / 2
-        nueva.transform(Matrix.Translation(-centro))
-        obj.location = centro
-        objetos.append((clave, obj))
-    bpy.data.objects.remove(completa, do_unlink=True)
-
-    anterior = bpy.data.objects.get(destino)
-    if anterior is not None:
-        anterior.name = destino + "_original"
-    vacio = bpy.data.objects.new(destino, None)
-    bpy.context.scene.collection.objects.link(vacio)
-    mn = Vector((min(o.location[i] for _, o in objetos) for i in range(3)))
-    mx = Vector((max(o.location[i] for _, o in objetos) for i in range(3)))
-    vacio.location = (mn + mx) / 2
-    bpy.context.view_layer.update()
-    for _, o in objetos:
-        mundo_o = o.matrix_world.copy()
-        o.parent = vacio
-        o.matrix_world = mundo_o
-    return vacio, objetos
+    return partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices)
 
 
 def clasificar_por_region(obj, regiones):
@@ -1001,6 +1079,22 @@ def main():
             fuentes = definicion.get("fuentes_objetos") if isinstance(definicion, dict) and "fuentes_objetos" in definicion \
                 else buscar_fuentes(patrones if isinstance(patrones, list) else [patrones])
 
+            if modo == "regiones":
+                if not fuentes:
+                    faltantes.append((sistema, destino, patrones))
+                    continue
+                partes = {c: {"nombre": r["nombre"], "lado": "", "nombre_en": r.get("nombre_en", "")}
+                          for c, r in definicion["regiones"].items()}
+                vacio, objetos = dividir_por_regiones(destino, fuentes, definicion["regiones"], limite, escala,
+                                                      desplazamiento, soldar, bool(definicion.get("cerrar")))
+                exportables.append(vacio)
+                exportables.extend(o for _, o in objetos)
+                for clave, o in objetos:
+                    nombres_partes[o.name] = {"nombre": partes[clave]["nombre"],
+                                              "nombre_en": partes[clave]["nombre_en"], "organo": destino}
+                reporte.append((sistema, f"{destino} [{len(objetos)} regiones]", len(fuentes), 0,
+                                sum(contar_triangulos(o) for _, o in objetos)))
+                continue
             if modo == "grupos":
                 # Partes definidas a mano (p. ej. regiones de la piel), con simetría por grupo
                 partes = {}

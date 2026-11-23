@@ -21,6 +21,42 @@
         "Mide unos 3 mm y pesa alrededor de 3 miligramos.",
         "Su músculo, el estapedio, protege el oído reduciendo su movimiento ante ruidos fuertes."
       ]
+    },
+    "Estomago__Cardias": {
+      "funcion": "Entrada del estómago, donde desemboca el esófago. Su esfínter (el cardias) se cierra después de tragar para que el ácido no suba.",
+      "datos_curiosos": [
+        "Cuando el cardias no cierra bien, el ácido sube al esófago: es el reflujo o «agruras».",
+        "No es un músculo grueso como el píloro, sino una zona de presión."
+      ]
+    },
+    "Estomago__Fondo": {
+      "funcion": "Parte alta y redondeada del estómago, a la izquierda del cardias. Guarda el aire que se traga y parte de la comida recién llegada.",
+      "datos_curiosos": [
+        "La «burbuja de aire» que se ve en una radiografía está en el fondo gástrico.",
+        "Produce grelina, la hormona que da sensación de hambre."
+      ]
+    },
+    "Estomago__Cuerpo": {
+      "funcion": "La parte más grande del estómago. Sus glándulas producen ácido clorhídrico y pepsina, y sus músculos mezclan la comida hasta formar el quimo.",
+      "datos_curiosos": [
+        "El ácido del estómago es tan fuerte (pH 1 a 2) que podría disolver un clavo, pero una capa de moco protege la pared.",
+        "Vacío tiene unos 50 ml; lleno puede guardar 1 a 1,5 litros."
+      ]
+    },
+    "Estomago__AntroPilorico": {
+      "funcion": "Parte final del estómago, antes del píloro. Tritura la comida con contracciones fuertes y la empuja hacia el duodeno de a poco.",
+      "datos_curiosos": [
+        "Produce gastrina, la hormona que ordena fabricar más ácido.",
+        "Aquí se forman muchas úlceras gástricas."
+      ]
+    },
+    "Estomago__Piloro": {
+      "funcion": "Salida del estómago hacia el duodeno. Es un anillo de músculo (esfínter pilórico) que se abre poco a poco para dejar pasar el quimo en pequeñas cantidades.",
+      "datos_curiosos": [
+        "Su nombre viene del griego «pylōros»: el guardián de la puerta.",
+        "En algunos bebés el píloro se engrosa (estenosis pilórica) y vomitan con fuerza después de comer; se corrige con una cirugía sencilla.",
+        "La comida tarda entre 2 y 4 horas en pasar por el píloro."
+      ]
     }
   }
 }

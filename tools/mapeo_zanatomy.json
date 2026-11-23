@@ -791,7 +791,52 @@
       "Estomago": {
         "fuentes": [
           "Stomach"
-        ]
+        ],
+        "partes": "regiones",
+        "_regiones": "El estómago viene en una sola malla: se divide por las marcas de posición de Z-Anatomy. El píloro se ubica en la unión con el duodeno. El píloro es el anillo de 2 cm alrededor de la unión con el duodeno. 'cerrar' tapa la ventana que trae el modelo.",
+        "regiones": {
+          "Cardias": {
+            "nombre": "Cardias",
+            "nombre_en": "Cardia",
+            "marcas": [
+              "junto:Oesophagus"
+            ],
+            "radio": 0.025
+          },
+          "Fondo": {
+            "nombre": "Fondo gástrico",
+            "nombre_en": "Fundus of stomach",
+            "marcas": [
+              "Fundus of stomach.j"
+            ]
+          },
+          "Cuerpo": {
+            "nombre": "Cuerpo del estómago",
+            "nombre_en": "Body of stomach",
+            "marcas": [
+              "Body of stomach.j",
+              "Greater curvature of stomach.j",
+              "Lesser curvature of stomach.j"
+            ]
+          },
+          "AntroPilorico": {
+            "nombre": "Antro pilórico",
+            "nombre_en": "Pyloric antrum",
+            "marcas": [
+              "Pyloric antrum.j",
+              "Pyloric part.j"
+            ]
+          },
+          "Piloro": {
+            "nombre": "Píloro",
+            "nombre_en": "Pylorus",
+            "marcas": [
+              "junto:Duodenum"
+            ],
+            "radio": 0.02
+          }
+        },
+        "cerrar": true
       },
       "Higado": {
         "fuentes": [

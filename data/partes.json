@@ -2276,6 +2276,31 @@
    "nombre_en": "Sternocleidomastoid muscle",
    "organo": "Esternocleidomastoideo"
   },
+  "Estomago__AntroPilorico": {
+   "nombre": "Antro pilórico",
+   "nombre_en": "Pyloric antrum",
+   "organo": "Estomago"
+  },
+  "Estomago__Cardias": {
+   "nombre": "Cardias",
+   "nombre_en": "Cardia",
+   "organo": "Estomago"
+  },
+  "Estomago__Cuerpo": {
+   "nombre": "Cuerpo del estómago",
+   "nombre_en": "Body of stomach",
+   "organo": "Estomago"
+  },
+  "Estomago__Fondo": {
+   "nombre": "Fondo gástrico",
+   "nombre_en": "Fundus of stomach",
+   "organo": "Estomago"
+  },
+  "Estomago__Piloro": {
+   "nombre": "Píloro",
+   "nombre_en": "Pylorus",
+   "organo": "Estomago"
+  },
   "Faringe__Laryngopharynx": {
    "nombre": "Porción laríngea de la farínge",
    "nombre_en": "Laryngopharynx",
