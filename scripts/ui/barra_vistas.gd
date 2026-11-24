@@ -1,7 +1,5 @@
 class_name BarraVistas
 extends HBoxContainer
-## Botones de vista rápida (Frente, Espalda, ...). Se generan desde la lista de vistas de
-## res://data/camara.json y emiten una señal; no controlan la cámara directamente.
 
 signal vista_solicitada(id_vista: String)
 signal centrar_solicitado
@@ -9,7 +7,7 @@ signal centrar_solicitado
 const AYUDA := "Clic: seleccionar órgano\nArrastrar: girar\nRueda o pellizco: zoom\nClic derecho, Mayús+arrastrar o dos dedos: desplazar"
 
 
-func configurar(vistas: Array) -> void:
+func drar_configurar(vistas: Array) -> void:
 	for hijo in get_children():
 		hijo.queue_free()
 	for v in vistas:

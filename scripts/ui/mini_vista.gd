@@ -1,8 +1,5 @@
 class_name MiniVista
 extends PanelContainer
-## Ventana pequeña (SubViewport con su propio mundo 3D) con una figura humana que camina o corre
-## según la actividad que indica la simulación. La escena del personaje se lee de
-## data/visuales.json (personaje.escena), así se cambia el maniquí por Mixamo sin tocar código.
 
 @onready var _contenedor: Node3D = %Personaje
 @onready var _etiqueta: Label = %EtiquetaActividad
@@ -21,15 +18,13 @@ func _ready() -> void:
 	_personaje = escena.instantiate()
 	_contenedor.add_child(_personaje)
 	_nombres_actividad = Datos.simulacion.get("actividades", {})
-	al_actualizar_estado({"actividad": "reposo"})
+	jlrl_al_actualizar_estado({"actividad": "reposo"})
 
 
 var _vitales: Label
 
 
-## El maniquí cambia de animación según la actividad y debajo se muestran el pulso y la
-## respiración que la simulación calcula para esa actividad (cambian juntos).
-func al_actualizar_estado(estado: Dictionary) -> void:
+func jlrl_al_actualizar_estado(estado: Dictionary) -> void:
 	if _vitales == null and _etiqueta:
 		_vitales = Label.new()
 		_vitales.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -44,10 +39,10 @@ func al_actualizar_estado(estado: Dictionary) -> void:
 	if actividad == _actividad or _personaje == null:
 		return
 	_actividad = actividad
-	_personaje.fijar_actividad(actividad)
+	_personaje.jlrl_fijar_actividad(actividad)
 	_etiqueta.text = _nombres_actividad.get(actividad, actividad)
 
 
-func al_cambiar_factor_tiempo(factor: float) -> void:
+func jlrl_al_cambiar_factor_tiempo(factor: float) -> void:
 	if _personaje:
-		_personaje.fijar_factor_tiempo(factor)
+		_personaje.jlrl_fijar_factor_tiempo(factor)

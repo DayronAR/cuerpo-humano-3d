@@ -1,9 +1,4 @@
 extends SceneTree
-## Rasteriza icon.svg en PNG de varios tamaños dentro de ui/iconos/ (para el .ico de Windows y
-## el icono de macOS). Después tools/empaquetar_ico.py une los PNG en ui/icono.ico.
-##
-##     godot --headless --path . --script res://tools/generar_iconos.gd
-##     python3 tools/empaquetar_ico.py
 
 const TAMANOS := [16, 24, 32, 48, 64, 128, 256, 512, 1024]
 

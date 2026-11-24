@@ -1,5 +1,3 @@
-"""Une ui/iconos/icono_{16..256}.png en ui/icono.ico (formato ICO con imágenes PNG, válido desde
-Windows Vista). No necesita librerías externas."""
 import os
 import struct
 
@@ -16,7 +14,7 @@ directorio = b""
 datos = b""
 desplazamiento = 6 + 16 * len(imagenes)
 for t, png in imagenes:
-    lado = 0 if t >= 256 else t  # 0 significa 256 en el formato ICO
+    lado = 0 if t >= 256 else t
     directorio += struct.pack("<BBBBHHII", lado, lado, 0, 0, 1, 32, len(png), desplazamiento + len(datos))
     datos += png
 

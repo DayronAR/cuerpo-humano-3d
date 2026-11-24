@@ -1,25 +1,4 @@
 extends SceneTree
-## Genera res://scenes/cuerpo_prueba.tscn: cuerpo humano de prueba con geometría ORGÁNICA hecha
-## por código (sin descargar modelos). Sirve hasta integrar los modelos de Z-Anatomy.
-##
-## Uso (desde la raíz del proyecto; tarda ~1 minuto):
-##     godot --headless --path . --script res://tools/generar_cuerpo_prueba.gd
-##
-## Técnicas:
-##   - Superficies implícitas (SDF, "signed distance fields") malladas con "surface nets":
-##     piel, cráneo, corazón, pulmones, hígado, cerebro, pelvis, músculos. Permiten unir formas
-##     suavemente (smooth union) y restar huecos (órbitas, muesca cardiaca), como en escultura.
-##   - Tubos a lo largo de curvas: intestinos, vasos, costillas, tráquea, esófago, estómago,
-##     huesos largos (con perfil de radio: epífisis anchas y diáfisis delgada).
-##
-## Convención OBLIGATORIA (la misma que deben cumplir los .glb de Blender):
-##     Cuerpo (Node3D) / <Sistema> (Node3D) / <Organo> (MeshInstance3D o Node3D con partes)
-## Unidades en metros. Pies en y = 0, altura ~1,75 m. El cuerpo mira hacia +Z.
-## El lado IZQUIERDO del paciente está en +X.
-##
-## Las mallas se guardan en res://models/prueba/ (binario .res) y los materiales en
-## res://models/prueba/materiales/. Al final imprime las trayectorias del bolo, el humo y la
-## circulación para copiarlas en data/visuales.json si se cambia la anatomía.
 
 const SALIDA := "res://scenes/cuerpo_prueba.tscn"
 const CARPETA := "res://models/prueba"
@@ -28,8 +7,8 @@ var _raiz: Node3D
 var _materiales := {}
 var _ruido := FastNoiseLite.new()
 var _triangulos_total := 0
-var _curvas := {}   ## Centros de los tubos digestivos y respiratorios, para las trayectorias
-var _relieve := []  ## Formas (infladas) de músculos y huesos superficiales que la piel debe cubrir
+var _curvas := {}
+var _relieve := []
 var _registrar_relieve := false
 const INFLADO_RELIEVE := 0.0035
 
@@ -41,15 +20,11 @@ func _init() -> void:
 	_ruido.frequency = 55.0
 	_ruido.seed = 7
 
-	# Toda la paleta se guarda en disco (también la usa tools/ensamblar_cuerpo_glb.gd)
 	for nombre in DEF_MATERIALES:
 		_material(nombre)
 
 	_raiz = Node3D.new()
 	_raiz.name = "Cuerpo"
-	# Los músculos (y algunos huesos superficiales) se construyen ANTES que la piel: cada uno
-	# registra su forma inflada unos milímetros en _relieve, y la piel se genera envolviéndolos.
-	# Así nada atraviesa la piel y la piel muestra el relieve muscular.
 	_registrar_relieve = true
 	_construir_muscular()
 	_construir_oseo()
@@ -77,37 +52,29 @@ func _init() -> void:
 	quit()
 
 
-# =============================================================================================
-# ANATOMÍA
-# =============================================================================================
-
-# --- Piel ------------------------------------------------------------------------------------
-
-## Primitivas del cuerpo: [tipo, ...]. "e" elipsoide (centro, radios), "c" cápsula cónica
-## (a, b, radio_a, radio_b). Se unen con smooth union para que no se noten las uniones.
 var _formas_piel := []
 
 
 func _construir_piel() -> void:
 	var f := _formas_piel
-	f.append(["e", Vector3(0, 1.648, -0.006), Vector3(0.08, 0.1, 0.1)])     # cráneo
-	f.append(["e", Vector3(0, 1.575, 0.034), Vector3(0.061, 0.07, 0.066)])     # cara y mandíbula
-	f.append(["e", Vector3(0, 1.6, 0.098), Vector3(0.012, 0.022, 0.014)])      # nariz
-	f.append(["c", Vector3(0, 1.42, -0.012), Vector3(0, 1.54, -0.006), 0.053, 0.05])  # cuello
-	f.append(["e", Vector3(0, 1.3, 0.0), Vector3(0.172, 0.175, 0.122)])         # tórax
-	f.append(["c", Vector3(-0.17, 1.4, -0.008), Vector3(0.17, 1.4, -0.008), 0.064, 0.064])  # hombros
-	f.append(["e", Vector3(0, 1.07, 0.006), Vector3(0.143, 0.162, 0.106)])      # abdomen
-	f.append(["e", Vector3(0, 1.175, 0.004), Vector3(0.152, 0.11, 0.112)])      # borde costal
-	f.append(["e", Vector3(0, 0.93, -0.008), Vector3(0.17, 0.113, 0.112)])     # pelvis
-	f.append(["e", Vector3(0, 0.895, -0.06), Vector3(0.135, 0.074, 0.076)])       # glúteos
+	f.append(["e", Vector3(0, 1.648, -0.006), Vector3(0.08, 0.1, 0.1)])
+	f.append(["e", Vector3(0, 1.575, 0.034), Vector3(0.061, 0.07, 0.066)])
+	f.append(["e", Vector3(0, 1.6, 0.098), Vector3(0.012, 0.022, 0.014)])
+	f.append(["c", Vector3(0, 1.42, -0.012), Vector3(0, 1.54, -0.006), 0.053, 0.05])
+	f.append(["e", Vector3(0, 1.3, 0.0), Vector3(0.172, 0.175, 0.122)])
+	f.append(["c", Vector3(-0.17, 1.4, -0.008), Vector3(0.17, 1.4, -0.008), 0.064, 0.064])
+	f.append(["e", Vector3(0, 1.07, 0.006), Vector3(0.143, 0.162, 0.106)])
+	f.append(["e", Vector3(0, 1.175, 0.004), Vector3(0.152, 0.11, 0.112)])
+	f.append(["e", Vector3(0, 0.93, -0.008), Vector3(0.17, 0.113, 0.112)])
+	f.append(["e", Vector3(0, 0.895, -0.06), Vector3(0.135, 0.074, 0.076)])
 	for s in [1.0, -1.0]:
-		f.append(["c", Vector3(0.2 * s, 1.39, -0.012), Vector3(0.236 * s, 1.11, -0.018), 0.049, 0.039])  # brazo
-		f.append(["c", Vector3(0.236 * s, 1.11, -0.018), Vector3(0.25 * s, 0.855, 0.0), 0.039, 0.026])  # antebrazo
-		f.append(["e", Vector3(0.255 * s, 0.775, 0.008), Vector3(0.02, 0.062, 0.04)])                     # mano
-		f.append(["c", Vector3(0.092 * s, 0.9, 0.0), Vector3(0.1 * s, 0.5, 0.006), 0.082, 0.052])         # muslo
-		f.append(["c", Vector3(0.1 * s, 0.5, 0.006), Vector3(0.1 * s, 0.08, -0.012), 0.052, 0.031])       # pierna
-		f.append(["e", Vector3(0.1 * s, 0.33, -0.028), Vector3(0.045, 0.09, 0.045)])                      # pantorrilla
-		f.append(["c", Vector3(0.1 * s, 0.035, -0.03), Vector3(0.112 * s, 0.03, 0.12), 0.036, 0.03])    # pie
+		f.append(["c", Vector3(0.2 * s, 1.39, -0.012), Vector3(0.236 * s, 1.11, -0.018), 0.049, 0.039])
+		f.append(["c", Vector3(0.236 * s, 1.11, -0.018), Vector3(0.25 * s, 0.855, 0.0), 0.039, 0.026])
+		f.append(["e", Vector3(0.255 * s, 0.775, 0.008), Vector3(0.02, 0.062, 0.04)])
+		f.append(["c", Vector3(0.092 * s, 0.9, 0.0), Vector3(0.1 * s, 0.5, 0.006), 0.082, 0.052])
+		f.append(["c", Vector3(0.1 * s, 0.5, 0.006), Vector3(0.1 * s, 0.08, -0.012), 0.052, 0.031])
+		f.append(["e", Vector3(0.1 * s, 0.33, -0.028), Vector3(0.045, 0.09, 0.045)])
+		f.append(["c", Vector3(0.1 * s, 0.035, -0.03), Vector3(0.112 * s, 0.03, 0.12), 0.036, 0.03])
 	var s := _sistema("Piel")
 	var malla := _malla_sdf(_sdf_piel, Vector3(-0.33, -0.02, -0.16), Vector3(0.33, 1.77, 0.17), 0.0108)
 	_organo(s, "Epidermis", malla, _material("piel"))
@@ -131,13 +98,10 @@ func _sdf_formas(p: Vector3, formas: Array, k: float) -> float:
 	return d
 
 
-## Registra una forma para que la piel la cubra (solo mientras se construyen músculos y huesos).
 func _relieve_elipsoide(c: Vector3, r: Vector3) -> void:
 	if _registrar_relieve:
 		_relieve.append(["e", c, r + Vector3.ONE * INFLADO_RELIEVE])
 
-
-# --- Muscular --------------------------------------------------------------------------------
 
 func _construir_muscular() -> void:
 	var s := _sistema("Muscular")
@@ -149,7 +113,6 @@ func _construir_muscular() -> void:
 		_relieve_elipsoide(c, Vector3(0.07, 0.05, 0.016))
 		var sdf := func(p: Vector3) -> float:
 			var q := giro * (p - c)
-			# Abanico: más grueso cerca del esternón y la axila
 			return _sd_elipsoide(q, Vector3.ZERO, Vector3(0.072, 0.05, 0.016))
 		_parte(pect, "PectoralIzq" if lado > 0 else "PectoralDer",
 				_malla_sdf(sdf, c - Vector3(0.09, 0.08, 0.03), c + Vector3(0.09, 0.08, 0.03), 0.004), mat)
@@ -158,7 +121,6 @@ func _construir_muscular() -> void:
 	var abd := func(p: Vector3) -> float:
 		var q := p - Vector3(0, 1.06, 0.08)
 		var d := _sd_caja_redondeada(q, Vector3(0.048, 0.118, 0.008), 0.006)
-		# Línea alba (surco vertical) e intersecciones tendinosas (los "cuadritos")
 		d = maxf(d, -(_sd_caja_redondeada(q - Vector3(0, 0, 0.012), Vector3(0.003, 0.2, 0.006), 0.002)))
 		for y in [0.045, -0.01, -0.06]:
 			d = maxf(d, -(_sd_caja_redondeada(q - Vector3(0, y, 0.013), Vector3(0.06, 0.0025, 0.005), 0.002)))
@@ -177,7 +139,6 @@ func _construir_muscular() -> void:
 				[Vector3(0.1 * lado, 0.46, -0.022), Vector3(0.1 * lado, 0.34, -0.034), Vector3(0.1 * lado, 0.19, -0.03)],
 				_perfil_fusiforme(0.033, 0.006), 16, 0.006), mat)
 
-	# Grupos bilaterales: un órgano con una parte por lado (sufijos Izq / Der)
 	_bilateral(s, "Deltoides", mat, func(l: float) -> ArrayMesh: return _malla_combinada([
 			_malla_tubo([Vector3(0.16 * l, 1.43, 0.018), Vector3(0.212 * l, 1.415, -0.002), Vector3(0.226 * l, 1.31, -0.012)],
 					_perfil_fusiforme(0.026, 0.006), 14, 0.004),
@@ -218,9 +179,6 @@ func _construir_muscular() -> void:
 			_perfil_fusiforme(0.009, 0.003), 10, 0.003))
 
 
-# --- Óseo ------------------------------------------------------------------------------------
-
-## Curva central de la columna (curvaturas cervical, dorsal y lumbar)
 const ESPINA := [
 	Vector3(0, 1.565, -0.03), Vector3(0, 1.48, -0.026), Vector3(0, 1.4, -0.04), Vector3(0, 1.3, -0.058),
 	Vector3(0, 1.2, -0.062), Vector3(0, 1.1, -0.055), Vector3(0, 1.02, -0.046), Vector3(0, 0.96, -0.052),
@@ -230,15 +188,15 @@ const ESPINA := [
 func _construir_oseo() -> void:
 	var s := _sistema("Oseo")
 	var hueso := _material("hueso")
-	_registrar_relieve = false   # Los huesos profundos no deforman la piel...
+	_registrar_relieve = false
 
 	var craneo := func(p: Vector3) -> float:
 		var d := _sd_elipsoide(p, Vector3(0, 1.65, -0.008), Vector3(0.071, 0.088, 0.089))
 		d = _smin(d, _sd_elipsoide(p, Vector3(0, 1.585, 0.036), Vector3(0.054, 0.056, 0.056)), 0.02)
-		d = _smin(d, _sd_elipsoide(p, Vector3(0, 1.533, 0.03), Vector3(0.045, 0.022, 0.046)), 0.015)   # mandíbula
+		d = _smin(d, _sd_elipsoide(p, Vector3(0, 1.533, 0.03), Vector3(0.045, 0.022, 0.046)), 0.015)
 		for x in [0.029, -0.029]:
-			d = maxf(d, -_sd_esfera(p, Vector3(x, 1.612, 0.087), 0.019))   # órbitas
-		d = maxf(d, -_sd_elipsoide(p, Vector3(0, 1.582, 0.093), Vector3(0.008, 0.014, 0.012)))   # nariz
+			d = maxf(d, -_sd_esfera(p, Vector3(x, 1.612, 0.087), 0.019))
+		d = maxf(d, -_sd_elipsoide(p, Vector3(0, 1.582, 0.093), Vector3(0.008, 0.014, 0.012)))
 		return d
 	_organo(s, "Craneo", _malla_sdf(craneo, Vector3(-0.09, 1.49, -0.11), Vector3(0.09, 1.75, 0.11), 0.0038), hueso)
 
@@ -251,7 +209,7 @@ func _construir_oseo() -> void:
 		for lado in [1.0, -1.0]:
 			var puntos := [Vector3(0.018 * lado, y, -0.062), Vector3(ancho * 0.8 * lado, y - 0.01, -0.058),
 					Vector3(ancho * lado, y - 0.035, -0.012), Vector3(ancho * 0.78 * lado, y - 0.065, 0.06)]
-			if i < 8:   # Las costillas 11 y 12 son flotantes: no llegan al esternón
+			if i < 8:
 				puntos.append(Vector3(0.024 * lado, y - 0.085 - i * 0.004, 0.088))
 			_parte(caja, "Costilla%d%s" % [i + 1, "Izq" if lado > 0 else "Der"],
 					_malla_tubo(puntos, _perfil_constante(0.0052), 8, 0.006), hueso)
@@ -263,13 +221,13 @@ func _construir_oseo() -> void:
 		for lado in [1.0, -1.0]:
 			var c := Vector3(0.088 * lado, 0.965, -0.012)
 			var q := Basis(Vector3.UP, deg_to_rad(38.0 * lado)) * (p - c)
-			d = _smin(d, _sd_elipsoide(q, Vector3.ZERO, Vector3(0.056, 0.053, 0.012)), 0.02)   # ala ilíaca
-			d = _smin(d, _sd_esfera(p, Vector3(0.075 * lado, 0.89, 0.004), 0.03), 0.02)          # acetábulo
+			d = _smin(d, _sd_elipsoide(q, Vector3.ZERO, Vector3(0.056, 0.053, 0.012)), 0.02)
+			d = _smin(d, _sd_esfera(p, Vector3(0.075 * lado, 0.89, 0.004), 0.03), 0.02)
 		var anillo := Vector2(Vector2(p.x / 1.25, p.z - 0.01).length() - 0.06, (p.y - 0.875) * 1.3)
-		d = _smin(d, anillo.length() - 0.014, 0.02)                                              # anillo pélvico
-		d = _smin(d, _sd_elipsoide(p, Vector3(0, 0.93, -0.06), Vector3(0.036, 0.062, 0.02)), 0.02)   # sacro
+		d = _smin(d, anillo.length() - 0.014, 0.02)
+		d = _smin(d, _sd_elipsoide(p, Vector3(0, 0.93, -0.06), Vector3(0.036, 0.062, 0.02)), 0.02)
 		for lado in [1.0, -1.0]:
-			d = maxf(d, -_sd_esfera(p, Vector3(0.042 * lado, 0.85, 0.035), 0.022))   # agujero obturador
+			d = maxf(d, -_sd_esfera(p, Vector3(0.042 * lado, 0.85, 0.035), 0.022))
 		return d
 	_organo(s, "Pelvis", _malla_sdf(pelvis, Vector3(-0.17, 0.8, -0.1), Vector3(0.17, 1.04, 0.09), 0.005), hueso)
 
@@ -289,9 +247,9 @@ func _construir_oseo() -> void:
 				_malla_tubo([Vector3(0.097 * lado, 0.47, 0.012), Vector3(0.1 * lado, 0.28, 0.008),
 						Vector3(0.1 * lado, 0.085, -0.004)], _perfil_hueso(0.0105, 0.024), 12, 0.006),
 				_malla_tubo([Vector3(0.122 * lado, 0.45, -0.006), Vector3(0.124 * lado, 0.27, -0.01),
-						Vector3(0.12 * lado, 0.085, -0.012)], _perfil_hueso(0.0045, 0.009), 8, 0.008)]), hueso)   # peroné
+						Vector3(0.12 * lado, 0.085, -0.012)], _perfil_hueso(0.0045, 0.009), 8, 0.008)]), hueso)
 
-	_registrar_relieve = true    # ...pero los superficiales (clavículas, antebrazo, mano, pie) sí
+	_registrar_relieve = true
 	_bilateral(s, "Claviculas", hueso, func(l: float) -> ArrayMesh: return _malla_tubo(
 			[Vector3(0.016 * l, 1.425, 0.065), Vector3(0.09 * l, 1.432, 0.05), Vector3(0.168 * l, 1.432, 0.002)],
 			_perfil_hueso(0.0055, 0.008), 10, 0.004))
@@ -301,14 +259,14 @@ func _construir_oseo() -> void:
 		return _malla_sdf(func(p: Vector3) -> float:
 			var q := giro * (p - c)
 			var d := _sd_elipsoide(q, Vector3(0, 0.0, 0), Vector3(0.045, 0.062, 0.007))
-			d = maxf(d, q.y - 0.045)   # borde superior recto
-			d = _smin(d, _sd_capsula(q, Vector3(-0.04 * l, 0.03, -0.006), Vector3(0.05 * l, 0.045, -0.006), 0.006, 0.008), 0.006)   # espina
+			d = maxf(d, q.y - 0.045)
+			d = _smin(d, _sd_capsula(q, Vector3(-0.04 * l, 0.03, -0.006), Vector3(0.05 * l, 0.045, -0.006), 0.006, 0.008), 0.006)
 			return d, c - Vector3(0.07, 0.08, 0.04), c + Vector3(0.07, 0.08, 0.04), 0.003))
 	_bilateral(s, "RadioCubito", hueso, func(l: float) -> ArrayMesh: return _malla_combinada([
 			_malla_tubo([Vector3(0.238 * l, 1.105, -0.008), Vector3(0.245 * l, 0.98, 0.002), Vector3(0.25 * l, 0.862, 0.008)],
-					_perfil_hueso(0.0055, 0.011), 10, 0.005),   # radio
+					_perfil_hueso(0.0055, 0.011), 10, 0.005),
 			_malla_tubo([Vector3(0.23 * l, 1.12, -0.03), Vector3(0.24 * l, 0.98, -0.022), Vector3(0.245 * l, 0.862, -0.012)],
-					_perfil_hueso(0.005, 0.01), 10, 0.005)]))   # cúbito
+					_perfil_hueso(0.005, 0.01), 10, 0.005)]))
 	_bilateral(s, "HuesosMano", hueso, func(l: float) -> ArrayMesh:
 		var dedos := [_malla_sdf(func(p: Vector3) -> float: return _sd_elipsoide(p, Vector3(0.251 * l, 0.838, 0.0),
 				Vector3(0.011, 0.014, 0.024)), Vector3(0.22 * l - 0.03, 0.81, -0.04), Vector3(0.22 * l + 0.06, 0.87, 0.04), 0.003)]
@@ -316,7 +274,7 @@ func _construir_oseo() -> void:
 			dedos.append(_malla_tubo([Vector3(0.251 * l, 0.83, z * 0.7), Vector3(0.254 * l, 0.775, z), Vector3(0.257 * l, 0.72 + absf(z), z)],
 					_perfil_hueso(0.0032, 0.0048), 6, 0.003))
 		dedos.append(_malla_tubo([Vector3(0.25 * l, 0.84, 0.018), Vector3(0.253 * l, 0.805, 0.04), Vector3(0.255 * l, 0.78, 0.05)],
-				_perfil_hueso(0.0036, 0.0052), 6, 0.003))   # pulgar
+				_perfil_hueso(0.0036, 0.0052), 6, 0.003))
 		return _malla_combinada(dedos))
 	_bilateral(s, "HuesosPie", hueso, func(l: float) -> ArrayMesh:
 		var partes := [_malla_esfera(Vector3(0.1 * l, 0.034, -0.032), 0.018), _malla_esfera(Vector3(0.1 * l, 0.058, -0.012), 0.014)]
@@ -327,18 +285,15 @@ func _construir_oseo() -> void:
 		return _malla_combinada(partes))
 
 
-# --- Circulatorio ----------------------------------------------------------------------------
-
 func _construir_circulatorio() -> void:
 	var s := _sistema("Circulatorio")
 	var corazon := func(p: Vector3) -> float:
 		var c := Vector3(0.02, 1.22, 0.035)
-		var q := Basis(Vector3.FORWARD, deg_to_rad(-38.0)) * (p - c)   # punta hacia abajo y a la izquierda
-		var d := _sd_elipsoide(q, Vector3(0, -0.008, 0), Vector3(0.046, 0.058, 0.04))      # ventrículos
-		d = _smin(d, _sd_elipsoide(q, Vector3(0, -0.055, 0.003), Vector3(0.022, 0.025, 0.02)), 0.02)   # punta
-		d = _smin(d, _sd_elipsoide(p, c + Vector3(-0.032, 0.03, -0.004), Vector3(0.024, 0.024, 0.022)), 0.012)  # aurícula der.
-		d = _smin(d, _sd_elipsoide(p, c + Vector3(0.022, 0.04, -0.012), Vector3(0.02, 0.018, 0.02)), 0.012)    # aurícula izq.
-		# Surco interventricular
+		var q := Basis(Vector3.FORWARD, deg_to_rad(-38.0)) * (p - c)
+		var d := _sd_elipsoide(q, Vector3(0, -0.008, 0), Vector3(0.046, 0.058, 0.04))
+		d = _smin(d, _sd_elipsoide(q, Vector3(0, -0.055, 0.003), Vector3(0.022, 0.025, 0.02)), 0.02)
+		d = _smin(d, _sd_elipsoide(p, c + Vector3(-0.032, 0.03, -0.004), Vector3(0.024, 0.024, 0.022)), 0.012)
+		d = _smin(d, _sd_elipsoide(p, c + Vector3(0.022, 0.04, -0.012), Vector3(0.02, 0.018, 0.02)), 0.012)
 		d = maxf(d, -(_sd_capsula(q, Vector3(-0.004, 0.04, 0.042), Vector3(0.006, -0.07, 0.04), 0.0035, 0.002)))
 		return d
 	_organo(s, "Corazon", _malla_sdf(corazon, Vector3(-0.06, 1.13, -0.03), Vector3(0.1, 1.3, 0.1), 0.003),
@@ -352,33 +307,31 @@ func _construir_circulatorio() -> void:
 	var ramas := [_malla_tubo(aorta, _perfil_lineal(0.012, 0.009), 14, 0.004)]
 	for lado in [1.0, -1.0]:
 		ramas.append(_malla_tubo([Vector3(0, 0.935, -0.022), Vector3(0.04 * lado, 0.885, -0.004),
-				Vector3(0.072 * lado, 0.84, 0.01)], _perfil_lineal(0.0065, 0.0055), 10, 0.004))   # ilíacas
+				Vector3(0.072 * lado, 0.84, 0.01)], _perfil_lineal(0.0065, 0.0055), 10, 0.004))
 		ramas.append(_malla_tubo([Vector3(0.004 * lado, 1.34, -0.004), Vector3(0.018 * lado, 1.43, 0.006),
-				Vector3(0.022 * lado, 1.52, 0.012)], _perfil_constante(0.0042), 8, 0.004))       # carótidas
+				Vector3(0.022 * lado, 1.52, 0.012)], _perfil_constante(0.0042), 8, 0.004))
 	_organo(s, "Aorta", _malla_combinada(ramas), arteria)
 
 	var vena := _material("vena")
 	var venas := [
 		_malla_tubo([Vector3(-0.026, 1.4, 0.0), Vector3(-0.024, 1.32, 0.008), Vector3(-0.022, 1.255, 0.022)],
-				_perfil_constante(0.0095), 12, 0.004),   # cava superior
+				_perfil_constante(0.0095), 12, 0.004),
 		_malla_tubo([Vector3(-0.02, 1.19, 0.012), Vector3(-0.026, 1.1, -0.018), Vector3(-0.024, 1.02, -0.03),
-				Vector3(-0.01, 0.94, -0.026)], _perfil_constante(0.0105), 12, 0.004),   # cava inferior
+				Vector3(-0.01, 0.94, -0.026)], _perfil_constante(0.0105), 12, 0.004),
 	]
 	for lado in [1.0, -1.0]:
 		venas.append(_malla_tubo([Vector3(-0.01, 0.94, -0.026), Vector3(0.045 * lado - 0.005, 0.882, -0.01),
-				Vector3(0.074 * lado, 0.838, 0.002)], _perfil_constante(0.007), 10, 0.004))    # ilíacas
+				Vector3(0.074 * lado, 0.838, 0.002)], _perfil_constante(0.007), 10, 0.004))
 		venas.append(_malla_tubo([Vector3(0.03 * lado, 1.52, 0.004), Vector3(0.028 * lado, 1.45, 0.0),
-				Vector3(-0.026, 1.4, 0.0)], _perfil_constante(0.0048), 8, 0.004))              # yugulares
+				Vector3(-0.026, 1.4, 0.0)], _perfil_constante(0.0048), 8, 0.004))
 	_organo(s, "VenaCava", _malla_combinada(venas), vena)
 
-
-# --- Respiratorio ----------------------------------------------------------------------------
 
 func _construir_respiratorio() -> void:
 	var s := _sistema("Respiratorio")
 	var traquea := [Vector3(0, 1.525, 0.022), Vector3(0, 1.45, 0.012), Vector3(0, 1.365, 0.002)]
 	_curvas["traquea"] = traquea
-	var anillos := func(t: float) -> float:   # Anillos de cartílago
+	var anillos := func(t: float) -> float:
 		return 0.0105 * (1.0 + 0.1 * sin(t * TAU * 16.0)) * _redondeo(t, 0.02)
 	var partes := [_malla_tubo(traquea, anillos, 14, 0.002)]
 	for lado in [1.0, -1.0]:
@@ -392,11 +345,10 @@ func _construir_respiratorio() -> void:
 		var c := Vector3(0.076 * lado, 1.258, 0.0)
 		var sdf := func(p: Vector3) -> float:
 			var d := _sd_elipsoide(p, c, Vector3(0.06, 0.125, 0.074))
-			d = maxf(d, -_sd_esfera(p, Vector3(0.076 * lado, 0.99, 0.0), 0.165))         # base sobre el diafragma
-			d = maxf(d, -_sd_elipsoide(p, Vector3(0, 1.24, 0.02), Vector3(0.035, 0.12, 0.06)))  # mediastino
+			d = maxf(d, -_sd_esfera(p, Vector3(0.076 * lado, 0.99, 0.0), 0.165))
+			d = maxf(d, -_sd_elipsoide(p, Vector3(0, 1.24, 0.02), Vector3(0.035, 0.12, 0.06)))
 			if lado > 0:
-				d = maxf(d, -_sd_esfera(p, Vector3(0.025, 1.205, 0.045), 0.05))          # muesca cardiaca
-			# Cisuras entre lóbulos (oblicua; el derecho además tiene la horizontal)
+				d = maxf(d, -_sd_esfera(p, Vector3(0.025, 1.205, 0.045), 0.05))
 			var oblicua := absf((p.y - 1.22) + (p.z + 0.02) * 0.9) - 0.0016
 			d = maxf(d, -maxf(oblicua, -(absf(p.x - c.x * 1.25) - 0.03)))
 			if lado < 0:
@@ -406,8 +358,6 @@ func _construir_respiratorio() -> void:
 		_organo(s, "Pulmon" + ("Izq" if lado > 0 else "Der"),
 				_malla_sdf(sdf, c - Vector3(0.075, 0.14, 0.085), c + Vector3(0.075, 0.14, 0.085), 0.0044), pulmon)
 
-
-# --- Digestivo -------------------------------------------------------------------------------
 
 func _construir_digestivo() -> void:
 	var s := _sistema("Digestivo")
@@ -426,9 +376,9 @@ func _construir_digestivo() -> void:
 	_organo(s, "Estomago", _malla_tubo(estomago, perfil_estomago, 20, 0.003), _material("estomago"))
 
 	var higado := func(p: Vector3) -> float:
-		var d := _sd_elipsoide(p, Vector3(-0.042, 1.1, 0.018), Vector3(0.09, 0.056, 0.068))   # lóbulo derecho
-		d = _smin(d, _sd_elipsoide(p, Vector3(0.035, 1.118, 0.03), Vector3(0.058, 0.026, 0.05)), 0.025)   # lóbulo izquierdo
-		d = maxf(d, (1.045 + (p.x + 0.1) * 0.22) - p.y)   # cara inferior oblicua
+		var d := _sd_elipsoide(p, Vector3(-0.042, 1.1, 0.018), Vector3(0.09, 0.056, 0.068))
+		d = _smin(d, _sd_elipsoide(p, Vector3(0.035, 1.118, 0.03), Vector3(0.058, 0.026, 0.05)), 0.025)
+		d = maxf(d, (1.045 + (p.x + 0.1) * 0.22) - p.y)
 		return d
 	_organo(s, "Higado", _malla_sdf(higado, Vector3(-0.14, 1.03, -0.06), Vector3(0.1, 1.17, 0.1), 0.0038),
 			_material("higado"))
@@ -444,12 +394,11 @@ func _construir_digestivo() -> void:
 			Vector3(0.068, 0.885, 0.04), Vector3(0.028, 0.872, 0.022), Vector3(0.002, 0.86, -0.022),
 			Vector3(0.0, 0.81, -0.035)]
 	_curvas["grueso"] = grueso
-	var haustras := func(t: float) -> float:   # Abultamientos (haustras) del colon
+	var haustras := func(t: float) -> float:
 		return 0.0185 * (1.0 + 0.13 * sin(t * TAU * 22.0)) * _redondeo(t, 0.015)
 	_organo(s, "IntestinoGrueso", _malla_tubo(grueso, haustras, 14, 0.003), _material("intestino_grueso"))
 
 
-## Recorrido del intestino delgado: duodeno en "C" y luego asas serpenteantes en varias filas.
 func _recorrido_intestino_delgado() -> Array:
 	var puntos := [Vector3(-0.014, 1.036, 0.035), Vector3(-0.042, 1.025, 0.02), Vector3(-0.046, 1.0, 0.016),
 			Vector3(-0.02, 0.99, 0.024)]
@@ -468,18 +417,14 @@ func _recorrido_intestino_delgado() -> Array:
 	return puntos
 
 
-# --- Nervioso --------------------------------------------------------------------------------
-
 func _construir_nervioso() -> void:
 	var s := _sistema("Nervioso")
 	var cerebro := func(p: Vector3) -> float:
 		var c := Vector3(0, 1.66, 0.0)
 		var d := _sd_elipsoide(p, c, Vector3(0.062, 0.056, 0.079))
-		d = maxf(d, -_sd_elipsoide(p, c + Vector3(0, -0.07, -0.01), Vector3(0.05, 0.035, 0.05)))   # base
-		# Surcos: las líneas donde el ruido vale ~0 forman caminos sinuosos parecidos a circunvoluciones
+		d = maxf(d, -_sd_elipsoide(p, c + Vector3(0, -0.07, -0.01), Vector3(0.05, 0.035, 0.05)))
 		var n := _ruido.get_noise_3dv(p)
 		d += 0.0032 * (1.0 - smoothstep(0.0, 0.16, absf(n)))
-		# Cisura longitudinal entre los dos hemisferios
 		if p.y > c.y - 0.035:
 			d = maxf(d, -(absf(p.x) - 0.0022))
 		return d
@@ -489,9 +434,9 @@ func _construir_nervioso() -> void:
 	var cerebelo := func(p: Vector3) -> float:
 		var c := Vector3(0, 1.604, -0.046)
 		var d := _sd_elipsoide(p, c, Vector3(0.047, 0.027, 0.031))
-		d += 0.0012 * (1.0 - smoothstep(0.0, 0.3, absf(sin((p.y - c.y + (p.z - c.z) * 0.4) * 520.0))))   # folias
+		d += 0.0012 * (1.0 - smoothstep(0.0, 0.3, absf(sin((p.y - c.y + (p.z - c.z) * 0.4) * 520.0))))
 		if p.z < c.z:
-			d = maxf(d, -(absf(p.x) - 0.002))   # vermis (surco central posterior)
+			d = maxf(d, -(absf(p.x) - 0.002))
 		return d
 	_organo(s, "Cerebelo", _malla_sdf(cerebelo, Vector3(-0.055, 1.57, -0.085), Vector3(0.055, 1.64, -0.01), 0.0024),
 			_material("cerebelo"))
@@ -500,7 +445,6 @@ func _construir_nervioso() -> void:
 	_organo(s, "MedulaEspinal", _malla_tubo(medula, _perfil_lineal(0.0085, 0.004), 10, 0.004), _material("medula"))
 
 
-## Columna: 24 vértebras (cuerpo + apófisis espinosa y transversas) a lo largo de la curva ESPINA.
 func _malla_columna() -> ArrayMesh:
 	var curva := _curva_suave(ESPINA, false)
 	var largo := curva.get_baked_length()
@@ -511,26 +455,21 @@ func _malla_columna() -> ArrayMesh:
 		var adelante := curva.sample_baked(minf(largo, t * largo + 0.01), true)
 		var tangente := (adelante - centro).normalized()
 		var radio := lerpf(0.009, 0.019, t)
-		var frente := Vector3.BACK.slide(tangente).normalized()   # +Z (anterior) perpendicular a la curva
+		var frente := Vector3.BACK.slide(tangente).normalized()
 		var cuerpo := centro + frente * (radio + 0.006)
 		partes.append(_malla_tubo([cuerpo - tangente * 0.0055 * (1.0 + t), cuerpo + tangente * 0.0055 * (1.0 + t)],
 				_perfil_extremos_redondos(radio), 12, 0.002))
 		partes.append(_malla_tubo([centro - frente * 0.005, centro - frente * (0.026 + 0.01 * t) - tangente * 0.01],
-				_perfil_lineal(0.004, 0.0028), 6, 0.004))   # apófisis espinosa
+				_perfil_lineal(0.004, 0.0028), 6, 0.004))
 		for lado in [1.0, -1.0]:
 			partes.append(_malla_tubo([centro + Vector3(0.006 * lado, 0, 0), centro + Vector3((0.02 + 0.012 * t) * lado, 0, -0.006)],
-					_perfil_lineal(0.0035, 0.0025), 6, 0.004))   # apófisis transversas
+					_perfil_lineal(0.0035, 0.0025), 6, 0.004))
 	return _malla_combinada(partes)
 
 
-# =============================================================================================
-# MATERIALES
-# =============================================================================================
-
-## Materiales: color, rugosidad, brillo húmedo (clearcoat), borde (rim) y relieve fino con ruido.
 const DEF_MATERIALES := {
 	"piel": {"color": Color(0.82, 0.6, 0.5), "rugosidad": 0.48, "rim": 0.32, "tinte_rim": 0.25, "especular": 0.38,
-			"brillo_suave": 0.06, "doble_cara": true},   # Piel fina: sin ruido (parecía arcilla), brillo leve y borde rosado
+			"brillo_suave": 0.06, "doble_cara": true},
 	"musculo": {"variacion": [0.22, 30.0], "color": Color(0.58, 0.13, 0.13), "rugosidad": 0.45, "brillo": 0.35, "rim": 0.2, "relieve": [0.35, 30.0]},
 	"hueso": {"variacion": [0.12, 25.0], "color": Color(0.9, 0.86, 0.76), "rugosidad": 0.72, "rim": 0.1, "relieve": [0.25, 25.0]},
 	"corazon": {"variacion": [0.3, 25.0], "color": Color(0.55, 0.09, 0.1), "rugosidad": 0.35, "brillo": 0.6, "rim": 0.2, "relieve": [0.3, 25.0]},
@@ -571,11 +510,9 @@ func _material(nombre: String) -> StandardMaterial3D:
 		m.clearcoat = d["brillo"]
 		m.clearcoat_roughness = 0.35
 	if d.get("transparente", false):
-		# Semitransparente (p. ej. la grasa de las mamas): deja ver lo que hay dentro
 		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		m.cull_mode = BaseMaterial3D.CULL_BACK
 	if d.get("doble_cara", false):
-		# Se dibujan ambas caras: un hueco diminuto de la malla no deja ver el fondo
 		m.cull_mode = BaseMaterial3D.CULL_DISABLED
 	if d.has("rim"):
 		m.rim_enabled = true
@@ -588,7 +525,6 @@ func _material(nombre: String) -> StandardMaterial3D:
 		m.clearcoat = d["brillo_suave"]
 		m.clearcoat_roughness = 0.6
 	if d.has("relieve"):
-		# Relieve fino (poros, fibras) con ruido proyectado en 3 ejes: no necesita coordenadas UV
 		var ruido := FastNoiseLite.new()
 		ruido.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 		ruido.frequency = 0.05
@@ -605,8 +541,6 @@ func _material(nombre: String) -> StandardMaterial3D:
 		m.uv1_triplanar = true
 		m.uv1_scale = Vector3.ONE * d["relieve"][1]
 	if d.has("variacion"):
-		# Color moteado (zonas algo más oscuras y más claras), como el tejido real: ruido en 3 ejes
-		# que multiplica el color. [fuerza, escala]; si ya hay relieve se usa su misma escala.
 		var ruido := FastNoiseLite.new()
 		ruido.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 		ruido.frequency = 0.018
@@ -631,10 +565,6 @@ func _material(nombre: String) -> StandardMaterial3D:
 	return m
 
 
-# =============================================================================================
-# CONSTRUCCIÓN DE NODOS
-# =============================================================================================
-
 func _sistema(nombre: String) -> Node3D:
 	var n := Node3D.new()
 	n.name = nombre
@@ -643,7 +573,6 @@ func _sistema(nombre: String) -> Node3D:
 	return n
 
 
-## Órgano bilateral (p. ej. "Deltoides") con una parte por lado: <Nombre>Izq y <Nombre>Der.
 func _bilateral(padre: Node3D, nombre: String, material: Material, crear: Callable) -> void:
 	var grupo := _compuesto(padre, nombre)
 	for lado in [1.0, -1.0]:
@@ -658,8 +587,6 @@ func _compuesto(padre: Node3D, nombre: String) -> Node3D:
 	return n
 
 
-## Órgano de una sola malla. La malla se recentra para que el origen quede en su centro
-## (necesario para el latido, la respiración y la animación de capas).
 func _organo(padre: Node3D, nombre: String, malla: ArrayMesh, material: Material) -> MeshInstance3D:
 	return _parte(padre, nombre, malla, material)
 
@@ -674,11 +601,10 @@ func _parte(padre: Node3D, nombre: String, malla: ArrayMesh, material: Material)
 	var recentrada := _con_lods(_trasladar(malla, -centro), material, nombre)
 	var ruta := "%s/%s.res" % [CARPETA, _ruta_nodo(padre) + nombre]
 	ResourceSaver.save(recentrada, ruta, ResourceSaver.FLAG_COMPRESS)
-	recentrada = ResourceLoader.load(ruta, "", ResourceLoader.CACHE_MODE_REPLACE)   # referenciar, no incrustar
+	recentrada = ResourceLoader.load(ruta, "", ResourceLoader.CACHE_MODE_REPLACE)
 	var mi := MeshInstance3D.new()
 	mi.name = nombre
 	mi.mesh = recentrada
-	# Solo las capas grandes proyectan sombra; los órganos internos no (ahorra GPU)
 	var sistema := _ruta_nodo(padre).get_slice("_", 0)
 	if not sistema in ["Piel", "Muscular", "Oseo"]:
 		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -699,13 +625,6 @@ func _ruta_nodo(nodo: Node) -> String:
 	return "_".join(partes) + "_" if not partes.is_empty() else ""
 
 
-# =============================================================================================
-# GEOMETRÍA: SDF + SURFACE NETS
-# =============================================================================================
-
-## Malla de la superficie sdf(p) = 0 dentro de la caja [minimo, maximo], con celdas de "celda" m.
-## Surface nets: un vértice por celda que cruza la superficie (promedio de los cruces en sus
-## aristas) y un cuadrilátero por cada arista de la rejilla que cruza la superficie.
 func _malla_sdf(sdf: Callable, minimo: Vector3, maximo: Vector3, celda: float) -> ArrayMesh:
 	var nx := int(ceil((maximo.x - minimo.x) / celda)) + 1
 	var ny := int(ceil((maximo.y - minimo.y) / celda)) + 1
@@ -757,7 +676,6 @@ func _malla_sdf(sdf: Callable, minimo: Vector3, maximo: Vector3, celda: float) -
 				indice_celda[i + cx * (j + cy * k)] = vertices.size()
 				vertices.append(minimo + (Vector3(i, j, k) + suma / cuenta) * celda)
 
-	# Normales suaves a partir del gradiente del campo
 	var normales := PackedVector3Array()
 	normales.resize(vertices.size())
 	var h := celda * 0.5
@@ -775,7 +693,6 @@ func _malla_sdf(sdf: Callable, minimo: Vector3, maximo: Vector3, celda: float) -
 		for j in ny:
 			for i in nx:
 				var s0 := valores[i + nx * (j + ny * k)] < 0.0
-				# Arista en X: celdas (i, j-1..j, k-1..k)
 				if i < nx - 1 and j > 0 and k > 0 and j < ny - 1 and k < nz - 1:
 					if s0 != (valores[(i + 1) + nx * (j + ny * k)] < 0.0):
 						_quad(indices, vertices, normales, celda_en.call(i, j - 1, k - 1), celda_en.call(i, j, k - 1),
@@ -791,8 +708,6 @@ func _malla_sdf(sdf: Callable, minimo: Vector3, maximo: Vector3, celda: float) -
 	return _malla_desde_arrays(vertices, normales, indices)
 
 
-## Agrega un cuadrilátero (dos triángulos) con el orden de vértices correcto para que su cara
-## frontal mire hacia afuera. Godot considera frontales los triángulos en sentido horario.
 func _quad(indices: PackedInt32Array, vertices: PackedVector3Array, normales: PackedVector3Array,
 		a: int, b: int, c: int, d: int) -> void:
 	if a < 0 or b < 0 or c < 0 or d < 0:
@@ -817,13 +732,10 @@ func _malla_desde_arrays(vertices: PackedVector3Array, normales: PackedVector3Ar
 	return malla
 
 
-# --- Funciones de distancia ------------------------------------------------------------------
-
 func _sd_esfera(p: Vector3, c: Vector3, r: float) -> float:
 	return (p - c).length() - r
 
 
-## Elipsoide (aproximación de Inigo Quilez, buena cerca de la superficie)
 func _sd_elipsoide(p: Vector3, c: Vector3, r: Vector3) -> float:
 	var q := p - c
 	var k0 := (q / r).length()
@@ -831,7 +743,6 @@ func _sd_elipsoide(p: Vector3, c: Vector3, r: Vector3) -> float:
 	return k0 * (k0 - 1.0) / k1 if k1 > 0.0 else -minf(r.x, minf(r.y, r.z))
 
 
-## Cápsula con radios distintos en cada extremo (cono redondeado aproximado)
 func _sd_capsula(p: Vector3, a: Vector3, b: Vector3, ra: float, rb: float) -> float:
 	var ab := b - a
 	var t := clampf((p - a).dot(ab) / ab.length_squared(), 0.0, 1.0)
@@ -843,23 +754,15 @@ func _sd_caja_redondeada(p: Vector3, medio: Vector3, r: float) -> float:
 	return Vector3(maxf(q.x, 0), maxf(q.y, 0), maxf(q.z, 0)).length() + minf(maxf(q.x, maxf(q.y, q.z)), 0.0) - r
 
 
-## Unión suave: funde dos formas con un "filete" de tamaño k
 func _smin(a: float, b: float, k: float) -> float:
 	var h := clampf(0.5 + 0.5 * (b - a) / k, 0.0, 1.0)
 	return lerpf(b, a, h) - k * h * (1.0 - h)
 
 
-# =============================================================================================
-# GEOMETRÍA: TUBOS A LO LARGO DE CURVAS
-# =============================================================================================
-
-## Tubo que sigue una curva suave por los puntos dados. perfil(t) da el radio en t ∈ [0, 1].
-## seccion escala la sección transversal (p. ej. para un esternón plano).
 func _malla_tubo(puntos: Array, perfil: Callable, lados: int, paso: float, seccion := Vector2.ONE) -> ArrayMesh:
 	var curva := _curva_suave(puntos, false)
 	var largo := curva.get_baked_length()
 	if _registrar_relieve:
-		# Aproximación por cápsulas cortas a lo largo de la curva, con el radio del perfil
 		var muestras := 8
 		var escala := maxf(seccion.x, seccion.y)
 		for m in muestras:
@@ -883,7 +786,7 @@ func _malla_tubo(puntos: Array, perfil: Callable, lados: int, paso: float, secci
 		var d := t * largo
 		var centro := curva.sample_baked(d, true)
 		var tangente := (curva.sample_baked(minf(largo, d + 0.002), true) - curva.sample_baked(maxf(0.0, d - 0.002), true)).normalized()
-		n = n.slide(tangente).normalized()   # Transporte paralelo: el marco no gira bruscamente
+		n = n.slide(tangente).normalized()
 		var b := tangente.cross(n)
 		var r: float = perfil.call(t)
 		centros.append(centro)
@@ -896,7 +799,6 @@ func _malla_tubo(puntos: Array, perfil: Callable, lados: int, paso: float, secci
 		for l in lados:
 			var l2 := (l + 1) % lados
 			_quad(indices, vertices, normales, a * lados + l, (a + 1) * lados + l, (a + 1) * lados + l2, a * lados + l2)
-	# Tapas (si el perfil no termina en cero)
 	for extremo in [0, anillos - 1]:
 		var centro_idx := vertices.size()
 		var c: Vector3 = centros[extremo]
@@ -927,7 +829,6 @@ func _malla_esfera(centro: Vector3, radio: float) -> ArrayMesh:
 	return _malla_desde_arrays(v, arrays[Mesh.ARRAY_NORMAL], arrays[Mesh.ARRAY_INDEX])
 
 
-## Une varias mallas en una sola superficie (una sola llamada de dibujo).
 func _malla_combinada(mallas: Array) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	for m in mallas:
@@ -935,7 +836,6 @@ func _malla_combinada(mallas: Array) -> ArrayMesh:
 	return st.commit()
 
 
-## Genera niveles de detalle automáticos: de lejos Godot dibuja versiones con menos triángulos.
 func _con_lods(malla: ArrayMesh, material: Material, nombre: String) -> ArrayMesh:
 	var importador := ImporterMesh.new()
 	importador.add_surface(Mesh.PRIMITIVE_TRIANGLES, malla.surface_get_arrays(0), [], {}, material, nombre)
@@ -954,7 +854,6 @@ func _trasladar(malla: ArrayMesh, desplazamiento: Vector3) -> ArrayMesh:
 	return nueva
 
 
-## Curva suave tipo Catmull-Rom (tangentes a 1/4 de la distancia entre vecinos).
 func _curva_suave(puntos: Array, cerrada: bool) -> Curve3D:
 	var curva := Curve3D.new()
 	curva.bake_interval = 0.002
@@ -971,9 +870,6 @@ func _curva_suave(puntos: Array, cerrada: bool) -> Curve3D:
 	return curva
 
 
-# --- Perfiles de radio -------------------------------------------------------------------------
-
-## Factor que redondea los extremos del tubo (0 en las puntas, 1 en el resto)
 func _redondeo(t: float, borde: float) -> float:
 	var x := minf(t, 1.0 - t) / borde
 	return sqrt(maxf(0.0, 1.0 - pow(1.0 - minf(x, 1.0), 2.0))) if x < 1.0 else 1.0
@@ -991,25 +887,17 @@ func _perfil_extremos_redondos(r: float) -> Callable:
 	return func(t: float) -> float: return r * _redondeo(t, 0.15)
 
 
-## Músculo: delgado en los tendones y grueso en el vientre muscular
 func _perfil_fusiforme(r_max: float, r_tendon: float) -> Callable:
 	return func(t: float) -> float:
 		return lerpf(r_tendon, r_max, pow(sin(t * PI), 0.8)) * _redondeo(t, 0.03)
 
 
-## Hueso largo: diáfisis delgada y epífisis anchas y redondeadas en los extremos
 func _perfil_hueso(r_diafisis: float, r_epifisis: float) -> Callable:
 	return func(t: float) -> float:
 		var bulto := exp(-pow(t / 0.07, 2.0)) + exp(-pow((1.0 - t) / 0.07, 2.0))
 		return lerpf(r_diafisis, r_epifisis, clampf(bulto, 0.0, 1.0)) * _redondeo(t, 0.025)
 
 
-# =============================================================================================
-# MANIQUÍ DE LA MINI VISTA
-# =============================================================================================
-
-## Partes suaves del maniquí (scripts/personajes/maniqui.gd). Cada malla está en el espacio local
-## de su articulación: el origen es la articulación y el segmento cuelga hacia -Y.
 func _generar_maniqui() -> void:
 	var carpeta := CARPETA + "/maniqui"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(carpeta))
@@ -1050,10 +938,6 @@ func _generar_maniqui() -> void:
 		ResourceSaver.save(final, "%s/%s.res" % [carpeta, nombre], ResourceSaver.FLAG_COMPRESS)
 	print("Maniquí generado en ", carpeta)
 
-
-# =============================================================================================
-# TRAYECTORIAS PARA data/visuales.json
-# =============================================================================================
 
 func _imprimir_trayectorias() -> void:
 	var boca := [Vector3(0, 1.556, 0.09), Vector3(0, 1.54, 0.03)]

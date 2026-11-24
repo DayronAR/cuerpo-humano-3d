@@ -1,7 +1,5 @@
 class_name PanelHerramientas
 extends PanelContainer
-## Panel de herramientas de exploración (arriba a la derecha): corte, despiece, etiquetas y
-## comparar cuerpos. Solo emite señales; la escena principal las conecta con HerramientasVisor.
 
 signal corte_cambiado(activo: bool, plano: String, posicion: float)
 signal despiece_cambiado(factor: float)
@@ -37,9 +35,9 @@ func _ready() -> void:
 	var caja := VBoxContainer.new()
 	caja.add_theme_constant_override("separation", 6)
 	add_child(caja)
-	caja.add_child(_titulo("Herramientas"))
+	caja.add_child(_drar_titulo("Herramientas"))
 
-	_corte = _interruptor("Corte", "Corta el cuerpo con un plano para ver su interior")
+	_corte = _drar_interruptor("Corte", "Corta el cuerpo con un plano para ver su interior")
 	caja.add_child(_corte)
 	_fila_corte = VBoxContainer.new()
 	_fila_corte.visible = false
@@ -49,56 +47,54 @@ func _ready() -> void:
 	for p in PLANOS:
 		_plano.add_item(p[1])
 	_fila_corte.add_child(_plano)
-	_posicion = _deslizador(0.5, "Mueve el plano de corte")
+	_posicion = _drar_deslizador(0.5, "Mueve el plano de corte")
 	_fila_corte.add_child(_posicion)
-	_corte.toggled.connect(func(v): _fila_corte.visible = v; _emitir_corte())
-	_plano.item_selected.connect(func(_i): _emitir_corte())
-	_posicion.value_changed.connect(func(_v): _emitir_corte())
+	_corte.toggled.connect(func(v): _fila_corte.visible = v; _drar_emitir_corte())
+	_plano.item_selected.connect(func(_i): _drar_emitir_corte())
+	_posicion.value_changed.connect(func(_v): _drar_emitir_corte())
 
-	caja.add_child(_etiqueta("Despiece"))
-	_despiece = _deslizador(0.0, "Separa los órganos del sistema que estás viendo")
+	caja.add_child(_drar_etiqueta("Despiece"))
+	_despiece = _drar_deslizador(0.0, "Separa los órganos del sistema que estás viendo")
 	_despiece.value_changed.connect(func(v): despiece_cambiado.emit(v))
 	caja.add_child(_despiece)
-	_aviso_despiece = _etiqueta("Elige un sistema para separarlo", 12, Color(0.557, 0.639, 0.69, 1))
+	_aviso_despiece = _drar_etiqueta("Elige un sistema para separarlo", 12, Color(0.557, 0.639, 0.69, 1))
 	caja.add_child(_aviso_despiece)
 
-	_etiquetas = _interruptor("Etiquetas", "Nombres de los órganos del sistema visible")
+	_etiquetas = _drar_interruptor("Etiquetas", "Nombres de los órganos del sistema visible")
 	_etiquetas.toggled.connect(func(v): etiquetas_cambiadas.emit(v))
 	caja.add_child(_etiquetas)
 
-	_comparar = _interruptor("Comparar", "Muestra el otro cuerpo al lado")
+	_comparar = _drar_interruptor("Comparar", "Muestra el otro cuerpo al lado")
 	_comparar.toggled.connect(func(v): comparar_cambiado.emit(v))
 	caja.add_child(_comparar)
 
 
-## Nombre del cuerpo con el que se compara (p. ej. "Cuerpo femenino"); vacío = no disponible.
-func configurar_comparar(nombre: String) -> void:
+func drar_configurar_comparar(nombre: String) -> void:
 	_comparar.visible = not nombre.is_empty()
 	_comparar.text = "Comparar con " + nombre.to_lower() if not nombre.is_empty() else "Comparar"
 
 
-## Al cambiar de sistema se reinicia el despiece (los órganos vuelven a su lugar).
-func al_cambiar_sistema(id_sistema: String) -> void:
+func drar_al_cambiar_sistema(id_sistema: String) -> void:
 	_despiece.set_value_no_signal(0.0)
 	_despiece.editable = not id_sistema.is_empty()
 	_aviso_despiece.visible = id_sistema.is_empty()
 
 
-func apagar_corte() -> void:
+func drar_apagar_corte() -> void:
 	if _corte.button_pressed:
 		_corte.button_pressed = false
 
 
-func _emitir_corte() -> void:
+func _drar_emitir_corte() -> void:
 	corte_cambiado.emit(_corte.button_pressed, PLANOS[_plano.selected][0], _posicion.value)
 
 
-func _titulo(texto: String) -> Label:
-	var l := _etiqueta(texto, 17, Color(0.89, 0.925, 0.945, 1))
+func _drar_titulo(texto: String) -> Label:
+	var l := _drar_etiqueta(texto, 17, Color(0.89, 0.925, 0.945, 1))
 	return l
 
 
-func _etiqueta(texto: String, tamano := 14, color := Color(0.89, 0.925, 0.945, 1)) -> Label:
+func _drar_etiqueta(texto: String, tamano := 14, color := Color(0.89, 0.925, 0.945, 1)) -> Label:
 	var l := Label.new()
 	l.text = texto
 	l.add_theme_font_size_override("font_size", tamano)
@@ -106,7 +102,7 @@ func _etiqueta(texto: String, tamano := 14, color := Color(0.89, 0.925, 0.945, 1
 	return l
 
 
-func _interruptor(texto: String, ayuda: String) -> CheckButton:
+func _drar_interruptor(texto: String, ayuda: String) -> CheckButton:
 	var b := CheckButton.new()
 	b.text = texto
 	b.tooltip_text = ayuda
@@ -114,7 +110,7 @@ func _interruptor(texto: String, ayuda: String) -> CheckButton:
 	return b
 
 
-func _deslizador(valor: float, ayuda: String) -> HSlider:
+func _drar_deslizador(valor: float, ayuda: String) -> HSlider:
 	var s := HSlider.new()
 	s.min_value = 0.0
 	s.max_value = 1.0

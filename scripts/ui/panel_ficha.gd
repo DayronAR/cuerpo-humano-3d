@@ -1,7 +1,5 @@
 class_name PanelFicha
 extends PanelContainer
-## Panel lateral derecho con la ficha del órgano seleccionado.
-## Solo muestra datos que recibe; no busca ni carga nada por sí mismo.
 
 signal cerrado
 signal aislar_cambiado(activo: bool)
@@ -24,7 +22,7 @@ var _ficha_actual: Dictionary = {}
 var _edad := 30.0
 
 const MARGEN := 16.0
-const ARRIBA := 58.0   ## Debajo de la barra de vistas (Frente, Espalda, ..., Centrar)
+const ARRIBA := 58.0
 const ANCHO := 360.0
 
 const ETAPAS := [[2.0, "bebe", "EN EL BEBÉ"], [12.0, "nino", "EN LA INFANCIA"], [60.0, "", ""], [999.0, "anciano", "EN EL ADULTO MAYOR"]]
@@ -32,17 +30,14 @@ const ETAPAS := [[2.0, "bebe", "EN EL BEBÉ"], [12.0, "nino", "EN LA INFANCIA"],
 
 func _ready() -> void:
 	hide()
-	_armar_secciones()
-	get_viewport().size_changed.connect(_ajustar_alto)
-	_boton_cerrar.pressed.connect(_on_cerrar)
+	_dymj_armar_secciones()
+	get_viewport().size_changed.connect(_dymj_ajustar_alto)
+	_boton_cerrar.pressed.connect(_dymj_on_cerrar)
 	_boton_aislar.toggled.connect(aislar_cambiado.emit)
 	_lista_partes.item_clicked.connect(func(i, _pos, _boton): parte_elegida.emit(_lista_partes.get_item_metadata(i)))
 
 
-## ficha: {nombre, funcion, datos_curiosos[]} del órgano · nombre_sistema/color_sistema para la
-## etiqueta · nombre_parte: si se eligió una parte del órgano (p. ej. "Estribo"), es el título.
-## ficha_parte: ficha propia de la parte (opcional); reemplaza función y datos del órgano.
-func mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, nombre_parte := "",
+func dymj_mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, nombre_parte := "",
 		ficha_parte: Dictionary = {}) -> void:
 	if nombre_parte.is_empty():
 		_titulo.text = ficha.get("nombre", "")
@@ -50,7 +45,7 @@ func mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, no
 	else:
 		_titulo.text = nombre_parte
 		_sistema.text = "Parte de: %s · %s" % [ficha.get("nombre", ""), nombre_sistema]
-	mostrar_aislado(false)
+	dymj_mostrar_aislado(false)
 	_marca_color.visible = false
 	if not ficha_parte.is_empty():
 		ficha = ficha_parte
@@ -66,20 +61,19 @@ func mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, no
 	_enfermedades.text = "\n".join(enf)
 	_enfermedades.get_meta("titulo").visible = not enf.is_empty()
 	_enfermedades.visible = not enf.is_empty()
-	_mostrar_edad()
+	_dymj_mostrar_edad()
 	_desplazable.scroll_vertical = 0
 	show()
-	_ajustar_alto()
+	_dymj_ajustar_alto()
 
 
-## La ficha muestra cómo es el órgano en la etapa de la edad elegida en la barra.
-func fijar_edad(anios: float, _final := false) -> void:
+func dymj_fijar_edad(anios: float, _final := false) -> void:
 	_edad = anios
 	if visible:
-		_mostrar_edad()
+		_dymj_mostrar_edad()
 
 
-func _mostrar_edad() -> void:
+func _dymj_mostrar_edad() -> void:
 	var clave := ""
 	var titulo := ""
 	for e in ETAPAS:
@@ -94,9 +88,7 @@ func _mostrar_edad() -> void:
 	_texto_edad.visible = not texto.is_empty()
 
 
-## Las secciones de texto van dentro de un contenedor con barra de desplazamiento, para que la
-## ficha no se salga de la pantalla aunque tenga mucho contenido.
-func _armar_secciones() -> void:
+func _dymj_armar_secciones() -> void:
 	var contenido: VBoxContainer = $Contenido
 	_desplazable = ScrollContainer.new()
 	_desplazable.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -109,18 +101,18 @@ func _armar_secciones() -> void:
 	contenido.move_child(_desplazable, titulo_funcion.get_index())
 	for nodo in [titulo_funcion, _funcion, contenido.get_node("EtiquetaCuriosos"), _curiosos]:
 		nodo.reparent(secciones)
-	var t_enf := _titulo_seccion("ENFERMEDADES FRECUENTES", Color(1.0, 0.5, 0.47))
+	var t_enf := _dymj_titulo_seccion("ENFERMEDADES FRECUENTES", Color(1.0, 0.5, 0.47))
 	secciones.add_child(t_enf)
-	_enfermedades = _texto()
+	_enfermedades = _dymj_texto()
 	_enfermedades.set_meta("titulo", t_enf)
 	secciones.add_child(_enfermedades)
-	_etiqueta_edad = _titulo_seccion("", Color(0.72, 0.6, 0.98))
+	_etiqueta_edad = _dymj_titulo_seccion("", Color(0.72, 0.6, 0.98))
 	secciones.add_child(_etiqueta_edad)
-	_texto_edad = _texto()
+	_texto_edad = _dymj_texto()
 	secciones.add_child(_texto_edad)
 
 
-func _titulo_seccion(texto: String, color: Color) -> Label:
+func _dymj_titulo_seccion(texto: String, color: Color) -> Label:
 	var l := Label.new()
 	l.text = texto
 	l.add_theme_color_override("font_color", color)
@@ -128,7 +120,7 @@ func _titulo_seccion(texto: String, color: Color) -> Label:
 	return l
 
 
-func _texto() -> Label:
+func _dymj_texto() -> Label:
 	var l := Label.new()
 	l.custom_minimum_size = Vector2(320, 0)
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -136,13 +128,11 @@ func _texto() -> Label:
 	return l
 
 
-func _ajustar_alto() -> void:
+func _dymj_ajustar_alto() -> void:
 	var alto_pantalla := get_viewport_rect().size.y
 	var reservado := 260.0 + (150.0 if _lista_partes.visible else 0.0)
 	var contenido_alto: float = _desplazable.get_child(0).get_combined_minimum_size().y
 	_desplazable.custom_minimum_size.y = minf(contenido_alto, maxf(160.0, alto_pantalla - reservado))
-	# Siempre pegada al borde derecho y debajo de la barra de vistas. (reset_size() conservaba la
-	# esquina superior izquierda: al cambiar el ancho, la ficha se iba corriendo hacia el centro.)
 	var minimo := get_combined_minimum_size()
 	anchor_left = 1.0
 	anchor_right = 1.0
@@ -154,8 +144,7 @@ func _ajustar_alto() -> void:
 	offset_bottom = ARRIBA + minf(minimo.y, alto_pantalla - ARRIBA - MARGEN)
 
 
-## partes: [[id, nombre], ...] del órgano seleccionado ([] = no tiene partes; se oculta la lista).
-func mostrar_partes(partes: Array, id_seleccionada: String) -> void:
+func dymj_mostrar_partes(partes: Array, id_seleccionada: String) -> void:
 	_lista_partes.clear()
 	_etiqueta_partes.visible = not partes.is_empty()
 	_lista_partes.visible = not partes.is_empty()
@@ -166,18 +155,18 @@ func mostrar_partes(partes: Array, id_seleccionada: String) -> void:
 		if p[0] == id_seleccionada:
 			_lista_partes.select(i)
 			_lista_partes.ensure_current_is_visible()
-	_ajustar_alto()
+	_dymj_ajustar_alto()
 
 
-func mostrar_aislado(activo: bool) -> void:
+func dymj_mostrar_aislado(activo: bool) -> void:
 	_boton_aislar.set_pressed_no_signal(activo)
 	_boton_aislar.text = "Mostrar todo" if activo else "Aislar"
 
 
-func ocultar() -> void:
+func dymj_ocultar() -> void:
 	hide()
 
 
-func _on_cerrar() -> void:
+func _dymj_on_cerrar() -> void:
 	hide()
 	cerrado.emit()

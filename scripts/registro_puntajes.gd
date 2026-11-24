@@ -1,14 +1,11 @@
 class_name RegistroPuntajes
 extends RefCounted
-## Guarda los puntajes del cuestionario en user://puntajes.json (carpeta de datos del usuario:
-## en Windows %APPDATA%\Godot\app_userdata\Cuerpo Humano 3D, en macOS
-## ~/Library/Application Support/Godot/app_userdata/Cuerpo Humano 3D).
 
 const RUTA := "user://puntajes.json"
 const MAXIMO_HISTORIAL := 20
 
 
-static func cargar() -> Dictionary:
+static func dymj_cargar() -> Dictionary:
 	if not FileAccess.file_exists(RUTA):
 		return {"mejor_puntaje": 0, "mejor_total": 0, "historial": []}
 	var datos = JSON.parse_string(FileAccess.get_file_as_string(RUTA))
@@ -18,9 +15,8 @@ static func cargar() -> Dictionary:
 	return datos
 
 
-## Registra una partida. Devuelve true si es un nuevo récord.
-static func registrar(puntaje: int, total: int, nivel := "facil") -> bool:
-	var datos := cargar()
+static func dymj_registrar(puntaje: int, total: int, nivel := "facil") -> bool:
+	var datos := dymj_cargar()
 	var historial: Array = datos.get("historial", [])
 	historial.push_front({
 		"fecha": Time.get_datetime_string_from_system(false, true),
@@ -29,7 +25,6 @@ static func registrar(puntaje: int, total: int, nivel := "facil") -> bool:
 		"nivel": nivel,
 	})
 	datos["historial"] = historial.slice(0, MAXIMO_HISTORIAL)
-	# Récord por nivel (las partidas antiguas, sin nivel, cuentan como "facil")
 	var mejores: Dictionary = datos.get("mejores", {"facil": {"puntaje": datos.get("mejor_puntaje", 0),
 			"total": datos.get("mejor_total", 0)}})
 	var record := puntaje > int(mejores.get(nivel, {}).get("puntaje", 0))
@@ -44,8 +39,8 @@ static func registrar(puntaje: int, total: int, nivel := "facil") -> bool:
 	return record
 
 
-static func mejor_puntaje(nivel := "facil") -> Dictionary:
-	var datos := cargar()
+static func dymj_mejor_puntaje(nivel := "facil") -> Dictionary:
+	var datos := dymj_cargar()
 	var mejores: Dictionary = datos.get("mejores", {"facil": {"puntaje": datos.get("mejor_puntaje", 0),
 			"total": datos.get("mejor_total", 0)}})
 	var m: Dictionary = mejores.get(nivel, {})

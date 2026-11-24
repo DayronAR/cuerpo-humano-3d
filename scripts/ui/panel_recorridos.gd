@@ -1,12 +1,10 @@
 class_name PanelRecorridos
 extends VBoxContainer
-## Pestaña "Recorridos": lista de recorridos guiados. Al elegir uno emite la señal; la escena
-## principal lo ejecuta paso a paso (ver TarjetaRecorrido).
 
 signal recorrido_elegido(indice: int)
 
 
-func configurar(recorridos: Array) -> void:
+func dymj_configurar(recorridos: Array) -> void:
 	for hijo in get_children():
 		hijo.queue_free()
 	add_theme_constant_override("separation", 10)

@@ -1,14 +1,11 @@
 class_name GraficoVivo
 extends Control
-## Gráfico de líneas en vivo dibujado con _draw(): muestra los últimos N segundos SIMULADOS de
-## varias variables. Cada variable se normaliza a su propio rango [min, max] de escenarios.json,
-## así caben en el mismo gráfico; la leyenda muestra el valor actual con su unidad.
 
-@export var ventana := 60.0           ## Segundos simulados visibles
-@export var intervalo_muestra := 0.25 ## Cada cuánto tiempo simulado se guarda un punto
+@export var ventana := 60.0
+@export var intervalo_muestra := 0.25
 
-var _series: Dictionary = {}          ## id -> PackedVector2Array (tiempo, valor)
-var _info: Dictionary = {}            ## id -> info de la variable
+var _series: Dictionary = {}
+var _info: Dictionary = {}
 var _ids: Array = []
 var _ultimo_tiempo := -INF
 var _tiempo_actual := 0.0
@@ -20,8 +17,7 @@ const ALTO_LEYENDA := 22.0
 const ALTO_EJE := 16.0
 
 
-## variables: diccionario de escenarios.json; se grafican las que tienen "grafico": true
-func configurar(variables: Dictionary) -> void:
+func jlrl_configurar(variables: Dictionary) -> void:
 	_ids.clear()
 	for id in variables:
 		if variables[id].get("grafico", false):
@@ -31,7 +27,7 @@ func configurar(variables: Dictionary) -> void:
 	queue_redraw()
 
 
-func agregar(estado: Dictionary) -> void:
+func jlrl_agregar(estado: Dictionary) -> void:
 	var t: float = estado.get("tiempo", 0.0)
 	_tiempo_actual = t
 	for id in _ids:
@@ -42,7 +38,6 @@ func agregar(estado: Dictionary) -> void:
 	for id in _ids:
 		var serie: PackedVector2Array = _series[id]
 		serie.append(Vector2(t, estado.get(id, 0.0)))
-		# Descartar puntos fuera de la ventana
 		var corte := 0
 		while corte < serie.size() and serie[corte].x < t - ventana:
 			corte += 1
@@ -52,7 +47,7 @@ func agregar(estado: Dictionary) -> void:
 	queue_redraw()
 
 
-func limpiar() -> void:
+func jlrl_limpiar() -> void:
 	for id in _ids:
 		_series[id] = PackedVector2Array()
 	_ultimo_tiempo = -INF
@@ -63,22 +58,19 @@ func _draw() -> void:
 	var fuente := get_theme_default_font()
 	var area := Rect2(MARGEN_IZQ, ALTO_LEYENDA, size.x - MARGEN_IZQ - MARGEN_DER,
 			size.y - ALTO_LEYENDA - ALTO_EJE)
-	# Fondo y cuadrícula
-	draw_rect(area, Tema.color(Color(0.06, 0.09, 0.125)))
+	draw_rect(area, Tema.dymj_color(Color(0.06, 0.09, 0.125)))
 	for i in 5:
 		var y := area.position.y + area.size.y * i / 4.0
-		draw_line(Vector2(area.position.x, y), Vector2(area.end.x, y), Tema.color(Color(0.17, 0.22, 0.28)), 1.0)
+		draw_line(Vector2(area.position.x, y), Vector2(area.end.x, y), Tema.dymj_color(Color(0.17, 0.22, 0.28)), 1.0)
 	for i in 7:
 		var x := area.position.x + area.size.x * i / 6.0
-		draw_line(Vector2(x, area.position.y), Vector2(x, area.end.y), Tema.color(Color(0.12, 0.16, 0.21)), 1.0)
-	# Eje de tiempo
+		draw_line(Vector2(x, area.position.y), Vector2(x, area.end.y), Tema.dymj_color(Color(0.12, 0.16, 0.21)), 1.0)
 	for etiqueta in [[0.0, "-%d s" % int(ventana)], [0.5, "-%d s" % int(ventana / 2)], [1.0, "ahora"]]:
 		var x: float = area.position.x + area.size.x * etiqueta[0]
 		var ancho := fuente.get_string_size(etiqueta[1], HORIZONTAL_ALIGNMENT_LEFT, -1, 11).x
 		x = clampf(x - ancho / 2.0, area.position.x, area.end.x - ancho)
 		draw_string(fuente, Vector2(x, size.y - 3), etiqueta[1], HORIZONTAL_ALIGNMENT_LEFT, -1, 11,
-				Tema.color(Color(0.557, 0.639, 0.69, 1)))
-	# Líneas
+				Tema.dymj_color(Color(0.557, 0.639, 0.69, 1)))
 	for id in _ids:
 		var info: Dictionary = _info[id]
 		var color := Color.from_string(info.get("color", "#888888"), Color.GRAY)
@@ -91,7 +83,6 @@ func _draw() -> void:
 			puntos.append(Vector2(x, y))
 		if puntos.size() >= 2:
 			draw_polyline(puntos, color, 2.0, true)
-	# Leyenda: abreviatura + valor actual
 	var x_leyenda := MARGEN_IZQ
 	for id in _ids:
 		var info: Dictionary = _info[id]
@@ -101,5 +92,5 @@ func _draw() -> void:
 				float(_valores_actuales.get(id, info.get("base", 0.0))), info.get("unidad", "")]
 		draw_rect(Rect2(x_leyenda, 6, 10, 10), color)
 		draw_string(fuente, Vector2(x_leyenda + 14, 16), texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 12,
-				Tema.color(Color(0.89, 0.925, 0.945, 1)))
+				Tema.dymj_color(Color(0.89, 0.925, 0.945, 1)))
 		x_leyenda += 20 + fuente.get_string_size(texto, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x

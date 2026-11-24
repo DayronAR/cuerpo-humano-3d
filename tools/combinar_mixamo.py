@@ -1,19 +1,3 @@
-"""
-combinar_mixamo.py — Une un personaje de Mixamo y sus animaciones en un solo .glb para Godot.
-
-Uso (Blender sin interfaz, desde la raíz del proyecto):
-    blender -b --factory-startup --python tools/combinar_mixamo.py -- \
-        --carpeta assets_fuente/mixamo --salida models/mixamo/Personaje.glb
-
-Espera en la carpeta:
-    personaje.fbx            personaje "With Skin" (T-pose)
-    idle.fbx, caminar.fbx, trotar.fbx, correr.fbx, cansado.fbx   animaciones "Without Skin"
-Si falta alguna animación se avisa y se omite (el personaje usará otra en su lugar).
-
-Cada animación se renombra (Idle, Walking, Jogging, Running, Breathing) para que coincida con
-data/visuales.json → personaje.animaciones, y se exportan todas las acciones en el .glb.
-"""
-
 import argparse
 import os
 import sys
@@ -50,7 +34,6 @@ def main():
     objetos = importar_fbx(os.path.abspath(os.path.join(args.carpeta, "personaje.fbx")))
     armadura = next(o for o in objetos if o.type == "ARMATURE")
     armadura.name = "Personaje"
-    # La pose de descanso del personaje no es una animación útil
     if armadura.animation_data and armadura.animation_data.action:
         accion_tpose = armadura.animation_data.action
         armadura.animation_data.action = None
@@ -67,7 +50,6 @@ def main():
         accion = temporal.animation_data.action
         accion.name = nombre
         accion.use_fake_user = True
-        # Una pista NLA por animación: el exportador glTF crea una animación por pista
         pista = armadura.animation_data.nla_tracks.new()
         pista.name = nombre
         pista.strips.new(nombre, int(accion.frame_range[0]), accion)

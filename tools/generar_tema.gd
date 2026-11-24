@@ -1,14 +1,6 @@
 extends SceneTree
-## Genera res://ui/tema.tres: el tema visual de toda la aplicación (paleta médica limpia).
-## Se asigna en Proyecto > Configuración > GUI > Tema (gui/theme/custom).
-##
-##     godot --headless --path . --script res://tools/generar_tema.gd
-##
-## Cambiar aquí la paleta y volver a ejecutar; no editar el .tres a mano.
 
 
-# Paletas: oscura (azul noche con acento turquesa) y clara (blanco con azul petróleo).
-# Deben tener las mismas claves que Tema.PALETAS (scripts/tema.gd).
 const PALETAS := {
 	"oscuro": {
 		"primario": Color("2cc5b5"), "primario_oscuro": Color("1f9d91"), "primario_suave": Color("163c40"),
@@ -34,7 +26,7 @@ const PALETAS := {
 	},
 }
 const SALIDAS := {"oscuro": "res://ui/tema.tres", "claro": "res://ui/tema_claro.tres"}
-var P: Dictionary   ## Paleta que se está generando
+var P: Dictionary
 
 
 func _init() -> void:
@@ -52,7 +44,6 @@ func _generar() -> Theme:
 	var t := Theme.new()
 	t.default_font_size = 14
 
-	# --- Botones ---
 	t.set_stylebox("normal", "Button", _caja(P.fondo_boton, P.borde))
 	t.set_stylebox("hover", "Button", _caja(P.fondo_boton_hover, P.primario.lerp(P.borde, 0.5)))
 	t.set_stylebox("pressed", "Button", _caja(P.primario, P.primario_oscuro))
@@ -71,24 +62,19 @@ func _generar() -> Theme:
 	t.set_color("icon_hover_pressed_color", "Button", P.sobre_primario)
 	t.set_color("icon_focus_color", "Button", P.texto)
 
-	# --- CheckButton (interruptor) ---
 	t.set_color("font_color", "CheckButton", P.texto)
 	t.set_color("font_pressed_color", "CheckButton", P.primario)
 	t.set_color("font_hover_color", "CheckButton", P.primario)
 	t.set_color("font_hover_pressed_color", "CheckButton", P.primario)
-	# El interruptor encendido no pinta el fondo del botón (el texto turquesa ya lo indica)
 	for estado in ["normal", "hover", "pressed", "hover_pressed"]:
 		t.set_stylebox(estado, "CheckButton", _caja(P.fondo_boton if not estado.begins_with("hover") else P.fondo_boton_hover, P.borde))
 	t.set_stylebox("focus", "CheckButton", StyleBoxEmpty.new())
 
-	# --- Textos ---
 	t.set_color("font_color", "Label", P.texto)
 
-	# --- Paneles ---
 	t.set_stylebox("panel", "PanelContainer", _caja(P.panel, Color(0, 0, 0, 0), 12, 12, true))
 	t.set_stylebox("panel", "Panel", _caja(P.panel, Color(0, 0, 0, 0), 12, 12, true))
 
-	# --- Pestañas ---
 	t.set_stylebox("panel", "TabContainer", _caja(P.panel, Color(0, 0, 0, 0), 12, 12, true))
 	t.set_stylebox("tab_selected", "TabContainer", _pestana(P.panel, P.primario))
 	t.set_stylebox("tab_unselected", "TabContainer", _pestana(P.pestana_inactiva, Color(0, 0, 0, 0)))
@@ -98,13 +84,11 @@ func _generar() -> Theme:
 	t.set_color("font_hovered_color", "TabContainer", P.texto)
 	t.set_font_size("font_size", "TabContainer", 13)
 
-	# --- Tooltips ---
 	var tip := _caja(P.tooltip, P.primario_oscuro, 6, 8)
 	t.set_stylebox("panel", "TooltipPanel", tip)
 	t.set_color("font_color", "TooltipLabel", Color.WHITE)
 	t.set_font_size("font_size", "TooltipLabel", 13)
 
-	# --- Barras de desplazamiento finas ---
 	var barra := _caja(P.barra, P.barra, 4, 0)
 	barra.content_margin_left = 3
 	barra.content_margin_right = 3
@@ -113,7 +97,6 @@ func _generar() -> Theme:
 	t.set_stylebox("grabber_pressed", "VScrollBar", _caja(P.primario, P.primario, 4, 0))
 	t.set_stylebox("scroll", "VScrollBar", _caja(Color(0, 0, 0, 0), Color(0, 0, 0, 0), 4, 0))
 
-	# --- Campo de texto (buscador) ---
 	t.set_stylebox("normal", "LineEdit", _caja(P.campo, P.borde))
 	t.set_stylebox("focus", "LineEdit", _caja(Color(0, 0, 0, 0), P.primario))
 	t.set_color("selection_color", "LineEdit", P.primario_suave)
@@ -123,7 +106,6 @@ func _generar() -> Theme:
 	t.set_color("clear_button_color_pressed", "LineEdit", P.primario)
 	t.set_color("caret_color", "LineEdit", P.primario)
 
-	# --- Lista de resultados ---
 	t.set_stylebox("panel", "ItemList", _caja(P.campo, P.borde, 8, 4))
 	t.set_stylebox("focus", "ItemList", StyleBoxEmpty.new())
 	t.set_stylebox("hovered", "ItemList", _caja(P.fondo_boton_hover, Color(0, 0, 0, 0), 6, 2))
@@ -136,17 +118,14 @@ func _generar() -> Theme:
 	t.set_color("font_selected_color", "ItemList", P.primario)
 	t.set_color("guide_color", "ItemList", P.guia)
 
-	# --- Barra de progreso ---
 	t.set_stylebox("background", "ProgressBar", _caja(P.guia, Color(0, 0, 0, 0), 4, 0))
 	t.set_stylebox("fill", "ProgressBar", _caja(P.primario, Color(0, 0, 0, 0), 4, 0))
 
-	# --- Separadores ---
 	var linea := StyleBoxLine.new()
 	linea.color = P.riel
 	linea.thickness = 1
 	t.set_stylebox("separator", "HSeparator", linea)
 
-	# --- Deslizadores (barra de edad, corte, despiece...) ---
 	var riel := _caja(P.riel, Color(0, 0, 0, 0), 3, 0)
 	riel.content_margin_top = 3
 	riel.content_margin_bottom = 3
@@ -157,7 +136,6 @@ func _generar() -> Theme:
 	t.set_stylebox("grabber_area", "HSlider", lleno)
 	t.set_stylebox("grabber_area_highlight", "HSlider", lleno)
 
-	# --- Listas desplegables y menús ---
 	t.set_stylebox("panel", "PopupMenu", _caja(P.fondo_boton, P.borde, 8, 6))
 	t.set_stylebox("hover", "PopupMenu", _caja(P.primario_suave, Color(0, 0, 0, 0), 6, 4))
 	t.set_color("font_color", "PopupMenu", P.texto)
@@ -166,7 +144,6 @@ func _generar() -> Theme:
 	t.set_color("font_hover_color", "OptionButton", P.primario)
 	t.set_color("font_pressed_color", "OptionButton", P.texto)
 
-	# --- Tipos con nombre (los usan los paneles por código) ---
 	t.set_color("font_color", "TextoSuave", P.texto_suave)
 	t.set_type_variation("TextoSuave", "Label")
 	t.set_color("font_color", "TextoAcento", P.primario)
@@ -188,7 +165,7 @@ func _caja(fondo: Color, borde: Color, radio := 8, margen := 8, sombra := false)
 	if sombra:
 		c.shadow_color = P.sombra
 		c.shadow_size = 10
-		c.border_color = P.borde_panel   # Borde finito: separa el panel del fondo oscuro
+		c.border_color = P.borde_panel
 		c.set_border_width_all(1)
 	return c
 

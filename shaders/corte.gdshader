@@ -1,7 +1,3 @@
-// Corte transversal: reemplaza al material de cada malla mientras se usa la herramienta de corte.
-// Copia lo esencial del material original (color, rugosidad, brillo, borde) y descarta lo que
-// queda del lado cortado del plano. El interior de cada órgano (sus caras de atrás) se ve un poco
-// más oscuro, así se distingue la superficie de corte de la de afuera.
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_disabled;
 
@@ -11,7 +7,7 @@ uniform float especular : hint_range(0.0, 1.0) = 0.5;
 uniform float borde : hint_range(0.0, 1.0) = 0.0;
 uniform float tinte_borde : hint_range(0.0, 1.0) = 0.5;
 uniform float brillo : hint_range(0.0, 1.0) = 0.0;
-uniform vec4 plano = vec4(0.0, 0.0, 1.0, 1000.0);   // Normal (xyz) y distancia (w): se quita dot(p, n) > w
+uniform vec4 plano = vec4(0.0, 0.0, 1.0, 1000.0);
 
 varying vec3 posicion_mundo;
 

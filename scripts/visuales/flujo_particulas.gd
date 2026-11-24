@@ -1,15 +1,12 @@
 class_name FlujoParticulas
 extends MultiMeshInstance3D
-## Partículas que recorren una trayectoria (Curve3D): humo hacia los pulmones, glóbulos rojos.
-## Usa un MultiMesh (una sola llamada de dibujo para todas las partículas): barato en GPU integradas.
-## Se dibujan sin prueba de profundidad para verse aunque estén dentro de un órgano.
 
 var curva := Curve3D.new()
-var cerrada := false            ## true: circuito cerrado (circulación); false: de inicio a fin (humo)
-var velocidad := 0.2            ## Metros por segundo
-var factor_tiempo := 1.0        ## Velocidad de la simulación (0 = pausa)
-var emitiendo := false          ## Las partículas aparecen o se desvanecen suavemente
-var crecer := false             ## true: la partícula crece a lo largo del recorrido (humo que se expande)
+var cerrada := false
+var velocidad := 0.2
+var factor_tiempo := 1.0
+var emitiendo := false
+var crecer := false
 
 var _tamano := 0.01
 var _color := Color.WHITE
@@ -19,11 +16,11 @@ var _distancias := PackedFloat32Array()
 var _desvios := PackedVector3Array()
 
 
-func configurar(puntos: Array, es_cerrada: bool, cantidad: int, tamano: float, color: Color, dispersion: float) -> void:
+func jlrl_configurar(puntos: Array, es_cerrada: bool, cantidad: int, tamano: float, color: Color, dispersion: float) -> void:
 	cerrada = es_cerrada
 	_tamano = tamano
 	_color = color
-	_construir_curva(puntos)
+	_jlrl_construir_curva(puntos)
 	_largo = maxf(curva.get_baked_length(), 0.001)
 
 	var esfera := SphereMesh.new()
@@ -78,8 +75,7 @@ func _process(delta: float) -> void:
 		multimesh.set_instance_color(i, c)
 
 
-## Curva suave (tipo Catmull-Rom) a partir de una lista de puntos [x, y, z].
-func _construir_curva(puntos: Array) -> void:
+func _jlrl_construir_curva(puntos: Array) -> void:
 	curva.clear_points()
 	curva.bake_interval = 0.01
 	var p: Array[Vector3] = []

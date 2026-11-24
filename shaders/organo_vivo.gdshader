@@ -1,7 +1,3 @@
-// Material de los órganos que se mueven por sí mismos (peristaltismo del tubo digestivo).
-// Copia lo esencial del material original y desplaza la superficie con ondas que avanzan, como
-// las contracciones que empujan el alimento. Admite el plano de corte y la transparencia de las
-// capas (las variantes opaca y transparente se crean en MaterialVivo).
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back;
 
@@ -13,17 +9,16 @@ uniform float tinte_borde : hint_range(0.0, 1.0) = 0.5;
 uniform float brillo : hint_range(0.0, 1.0) = 0.0;
 uniform vec4 plano = vec4(0.0, 0.0, 1.0, 1000.0);
 uniform float alfa : hint_range(0.0, 1.0) = 1.0;
-global uniform float peristaltismo_onda;   // Amplitud (m) — la fija VisualesFisiologia
-global uniform float peristaltismo_fase;   // Avance de las ondas
-uniform float longitud = 0.045;     // Distancia entre ondas (m)
-uniform vec3 direccion = vec3(0.0, -1.0, 0.2);   // Dirección general en que avanzan
-uniform float variacion = 0.15;     // Color moteado (como "variacion" de los materiales estándar)
+global uniform float peristaltismo_onda;
+global uniform float peristaltismo_fase;
+uniform float longitud = 0.045;
+uniform vec3 direccion = vec3(0.0, -1.0, 0.2);
+uniform float variacion = 0.15;
 uniform float escala_variacion = 25.0;
 
 varying vec3 posicion_mundo;
 varying vec3 posicion_local;
 
-// Ruido de valor 3D (barato) para el color moteado
 float hash(vec3 p) {
 	p = fract(p * 0.3183099 + 0.1);
 	p *= 17.0;
@@ -41,8 +36,6 @@ float ruido(vec3 x) {
 void vertex() {
 	vec3 p = VERTEX;
 	posicion_local = VERTEX;
-	// Dos trenes de ondas en direcciones distintas: en un intestino enrollado se ven como
-	// contracciones que recorren el tubo y no como una ola recta
 	float a = sin(dot(p, normalize(direccion)) * 6.2832 / longitud - peristaltismo_fase);
 	float b = sin(dot(p, normalize(vec3(direccion.z, 0.4, -direccion.x))) * 6.2832 / (longitud * 1.7) - peristaltismo_fase * 0.7);
 	float contraccion = max(0.0, a) * 0.7 + max(0.0, b) * 0.3;
