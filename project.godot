@@ -1,6 +1,3 @@
-; Archivo de configuración del proyecto Godot 4.
-; Renderer: Mobile (ver README, sección "Renderer").
-
 config_version=5
 
 [application]

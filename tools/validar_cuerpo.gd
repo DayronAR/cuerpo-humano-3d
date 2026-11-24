@@ -1,11 +1,4 @@
 extends SceneTree
-## Valida que la escena del cuerpo cumpla la convención de nombres y que los datos JSON coincidan.
-## Úsalo cada vez que cambies data/*.json o reemplaces primitivas por modelos .glb.
-##
-##     godot --headless --path . --script res://tools/validar_cuerpo.gd
-##     godot --headless --path . --script res://tools/validar_cuerpo.gd -- res://scenes/otro_cuerpo.tscn
-##
-## Termina con código 1 si hay errores (útil para automatizar).
 
 const ESCENA_POR_DEFECTO := "res://scenes/cuerpo_prueba.tscn"
 
@@ -60,7 +53,6 @@ func _init() -> void:
 			print("  AVISO: la ficha '%s' no corresponde a ningún nodo de la escena" % id_o)
 			avisos += 1
 
-	# Nombres usados por la simulación y las visualizaciones
 	var visuales := _json("res://data/visuales.json")
 	for clave in ["corazon", "pulmones"]:
 		for id_o in visuales.get(clave, {}).get("organos", []):

@@ -1,49 +1,3 @@
-"""
-procesar_modelo.py — Preparación de modelos anatómicos para Godot (ejecutar con Blender sin interfaz).
-
-Toma un .blend o .fbx (por ejemplo, de Z-Anatomy o Mixamo), conserva solo los objetos /
-colecciones indicados en un archivo de mapeo JSON, aplica transformaciones, reduce polígonos
-con Decimate, renombra los objetos según la convención del proyecto (Corazon, PulmonIzq, ...)
-y exporta un .glb por sistema (Piel.glb, Oseo.glb, Circulatorio.glb, ...).
-
-Uso:
-    # Con un .blend (se abre directamente):
-    blender -b assets_fuente/z-anatomy/Z-Anatomy.blend --python tools/procesar_modelo.py -- \
-        --mapeo tools/mapeo_ejemplo.json
-
-    # Con un .fbx (Blender arranca vacío y el script lo importa):
-    blender -b --factory-startup --python tools/procesar_modelo.py -- \
-        --entrada assets_fuente/mixamo/personaje.fbx --mapeo tools/mapeo_mixamo.json
-
-    # Solo listar nombres de objetos y colecciones (para armar el mapeo):
-    blender -b archivo.blend --python tools/procesar_modelo.py -- --listar
-
-Argumentos (después de "--"):
-    --entrada RUTA       .blend o .fbx de entrada. Si se omite, se usa el .blend abierto con "-b".
-    --mapeo RUTA         JSON con sistemas -> {NombreDestino: [nombres fuente]}.
-    --salida DIR         Carpeta de salida (por defecto: models/ del proyecto).
-    --max-tris N         Máximo de triángulos por objeto (sobrescribe el valor del JSON).
-    --sistemas A,B       Exportar solo estos sistemas (por defecto: todos los del JSON).
-    --escala F           Factor de escala uniforme extra (por defecto: el del JSON o 1.0).
-    --sin-origen         No mover el origen de cada objeto al centro de su geometría.
-    --listar             Solo imprime colecciones y objetos de malla con sus triángulos.
-    --simular            Procesa y reporta, pero no escribe ningún .glb.
-
-Formato del JSON de mapeo (ver tools/mapeo_ejemplo.json):
-    {
-      "max_triangulos": 15000,
-      "escala": 1.0,
-      "sistemas": {
-        "Circulatorio": {
-          "Corazon": ["Heart"],                      <- nombre exacto de objeto
-          "Aorta":   ["coleccion:Aorta"],            <- todas las mallas de una colección
-          "Venas":   ["*vein*"]                      <- comodines estilo fnmatch (sin mayúsculas)
-        }
-      }
-    }
-    Si varios objetos fuente coinciden con un mismo destino, se unen (Join) en un solo objeto.
-"""
-
 import fnmatch
 import json
 import math
@@ -55,10 +9,10 @@ import bmesh
 import bpy
 from mathutils import Matrix, Vector
 
-TIPOS_GEOMETRIA = ("MESH", "CURVE")   # Las curvas con grosor (vasos, esófago...) se convierten a malla
-EXCLUIR = None                        # Expresión regular de nombres a ignorar (del JSON: "excluir_regex")
-RESOLUCION_CURVAS = 0                 # Resolución máxima de las curvas al convertirlas (0 = sin cambio)
-BRAZOS = None                         # Rotación de los brazos alrededor del hombro (del JSON: "brazos")
+TIPOS_GEOMETRIA = ("MESH", "CURVE")
+EXCLUIR = None
+RESOLUCION_CURVAS = 0
+BRAZOS = None
 
 
 def centro_original(o):
@@ -66,10 +20,6 @@ def centro_original(o):
 
 
 def ajuste_de(f, base):
-    """Transformación que se aplica a un objeto fuente antes de unirlo:
-    - objetos importados ya ubicados ("sin_ajuste"): ninguna,
-    - el resto: la global (escala + desplazamiento) y, si es del miembro superior, la rotación
-      del brazo alrededor del hombro (para adaptar la pose a otro cuerpo, p. ej. el femenino)."""
     if f.get("sin_ajuste"):
         return Matrix.Identity(4)
     if BRAZOS:
@@ -84,8 +34,6 @@ def ajuste_de(f, base):
 
 
 def importar_glb_ubicado(definicion):
-    """Importa un .glb externo (p. ej. del Human Reference Atlas) y lo ubica con la transformación
-    indicada. Sus objetos se marcan para que no reciban la transformación global."""
     antes = set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=os.path.abspath(definicion["archivo"]))
     nuevos = [o for o in bpy.data.objects if o not in antes]
@@ -95,8 +43,6 @@ def importar_glb_ubicado(definicion):
         if o.parent is None:
             o.matrix_world = m @ o.matrix_world
     bpy.context.view_layer.update()
-    # El importador deja los objetos en la colección activa (en Z-Anatomy, una del esqueleto):
-    # se pasan a una colección propia para que ninguna regla de "resto" los tome.
     destino = bpy.data.collections.get("Importados") or bpy.data.collections.new("Importados")
     if destino.name not in bpy.context.scene.collection.children:
         bpy.context.scene.collection.children.link(destino)
@@ -109,7 +55,6 @@ def importar_glb_ubicado(definicion):
 
 
 def mezclar(base, cambios):
-    """Combina un mapeo base con cambios: diccionarios se combinan, null elimina la clave."""
     resultado = dict(base)
     for k, v in cambios.items():
         if v is None:
@@ -120,16 +65,10 @@ def mezclar(base, cambios):
             resultado[k] = v
     return resultado
 
-# Raíz del proyecto Godot = carpeta padre de tools/
 RAIZ_PROYECTO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# ---------------------------------------------------------------------------
-# Argumentos
-# ---------------------------------------------------------------------------
-
 def leer_argumentos():
-    """Lee los argumentos que vienen después de '--' en la línea de comandos de Blender."""
     import argparse
 
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
@@ -146,12 +85,7 @@ def leer_argumentos():
     return p.parse_args(argv)
 
 
-# ---------------------------------------------------------------------------
-# Utilidades
-# ---------------------------------------------------------------------------
-
 def contar_triangulos(obj):
-    """Triángulos de la malla evaluada (incluye modificadores aún no aplicados)."""
     if obj.type != "MESH":
         return 0
     dg = bpy.context.evaluated_depsgraph_get()
@@ -162,7 +96,6 @@ def contar_triangulos(obj):
 
 
 def contexto_objeto(obj, seleccion=None):
-    """Contexto mínimo para ejecutar operadores sobre un objeto en modo sin interfaz."""
     seleccion = seleccion if seleccion is not None else [obj]
     return bpy.context.temp_override(
         object=obj,
@@ -178,7 +111,6 @@ def deseleccionar_todo():
 
 
 def importar_entrada(ruta):
-    """Abre un .blend o importa un .fbx en una escena vacía."""
     ruta = os.path.abspath(ruta)
     ext = os.path.splitext(ruta)[1].lower()
     if ext == ".blend":
@@ -187,7 +119,7 @@ def importar_entrada(ruta):
         bpy.ops.wm.read_factory_settings(use_empty=True)
         if hasattr(bpy.ops.import_scene, "fbx"):
             bpy.ops.import_scene.fbx(filepath=ruta)
-        else:  # Importador nuevo de Blender 4.5+
+        else:
             bpy.ops.wm.fbx_import(filepath=ruta)
     else:
         raise SystemExit(f"[ERROR] Formato no soportado: {ext} (usa .blend o .fbx)")
@@ -206,7 +138,6 @@ def mallas_de_coleccion(nombre):
 
 
 def buscar_fuentes(patrones):
-    """Resuelve una lista de patrones (nombre exacto, 'coleccion:X' o comodín) a objetos de malla."""
     encontrados = []
     for patron in patrones:
         if patron.lower().startswith("coleccion:"):
@@ -219,9 +150,7 @@ def buscar_fuentes(patrones):
             if o is not None and es_geometria(o):
                 encontrados.append(o)
             elif o is None:
-                # Si no es objeto, se intenta como colección con ese nombre.
                 encontrados += mallas_de_coleccion(patron)
-    # Quitar duplicados conservando el orden
     vistos, unicos = set(), []
     for o in encontrados:
         if o.name not in vistos:
@@ -240,28 +169,13 @@ def listar_escena():
             print(f"  {o.name:<50} {contar_triangulos(o):>9}")
 
 
-# ---------------------------------------------------------------------------
-# Procesamiento de un órgano
-# ---------------------------------------------------------------------------
-
 def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_origen, remallado=0.0,
                     soldar=0.0004, simetria=False):
-    """Une las fuentes en un objeto nuevo, decima y renombra. Devuelve (obj, tris_antes).
-
-    No usa operadores de Blender (fallan con objetos ocultos o fuera de la capa de vista):
-    toma la malla EVALUADA de cada fuente (con modificadores y el grosor de las curvas ya
-    aplicados), la lleva a coordenadas de mundo y la agrega a un bmesh común. El archivo
-    fuente nunca se modifica en disco.
-    """
     escena = bpy.context.scene
     for f in fuentes:
-        # Las curvas (vasos, nervios) se convierten con poca resolución: son tubos finos y el
-        # Decimate casi no puede reducirlos después. Solo cambia la copia en memoria.
         if f.type == "CURVE" and RESOLUCION_CURVAS:
             f.data.resolution_u = min(f.data.resolution_u, RESOLUCION_CURVAS)
-            # Al menos resolución 1 en el bisel: con 0 los tubos finos quedan como cintas planas
             f.data.bevel_resolution = max(1, min(f.data.bevel_resolution, 2))
-        # Asegurar que la fuente se evalúe (la plantilla de Z-Anatomy oculta muchos objetos)
         f.hide_viewport = False
         if f.name not in bpy.context.view_layer.objects:
             escena.collection.objects.link(f)
@@ -276,14 +190,7 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
         malla.transform(ajuste_de(f, ajuste) @ f.matrix_world)
         bm.from_mesh(malla)
         bpy.data.meshes.remove(malla)
-    # Soldar vértices coincidentes: elimina las costuras entre piezas vecinas (p. ej. las
-    # regiones de la piel) y ayuda a que el Decimate no abra grietas
     if simetria:
-        # Simetría: conservar solo el lado derecho del paciente (x <= 0), cortado exactamente en
-        # la línea media. Modos:
-        #   True / "completa": completar con su reflejo (pieza central, p. ej. el tórax)
-        #   "derecha":         solo el lado derecho (pieza lateral derecha)
-        #   "izquierda":       el reflejo del lado derecho (pieza lateral izquierda)
         bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], dist=0.0001,
                                plane_co=(0, 0, 0), plane_no=(1, 0, 0), clear_outer=True)
         if simetria in (True, "completa"):
@@ -296,7 +203,6 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
             bmesh.ops.scale(bm, vec=(-1, 1, 1), verts=bm.verts[:])
             bmesh.ops.reverse_faces(bm, faces=bm.faces[:])
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=soldar)
-    # Caras repetidas (piezas superpuestas que quedaron con los mismos vértices tras soldar)
     vistas = set()
     repetidas = []
     for cara in bm.faces:
@@ -321,13 +227,10 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
     escena.collection.objects.link(obj)
     tris_antes = sum(len(p.vertices) - 2 for p in malla.polygons)
 
-    # Remallado por vóxeles (opcional): convierte piezas solapadas en UNA superficie continua.
-    # Útil para la piel de Z-Anatomy, que viene dividida en regiones con costuras.
     if remallado > 0.0:
         aplicar_modificador(obj, "REMESH", lambda m: (setattr(m, "mode", "VOXEL"), setattr(m, "voxel_size", remallado),
                                                       setattr(m, "adaptivity", 0.0)))
 
-    # Reducción de polígonos: modificador Decimate y malla evaluada (sin operadores)
     tris_actuales = sum(len(p.vertices) - 2 for p in obj.data.polygons)
     if max_tris and tris_actuales > max_tris:
         mod = obj.modifiers.new(name="Decimate", type="DECIMATE")
@@ -344,7 +247,6 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
         bpy.data.meshes.remove(vieja)
 
     obj.data.shade_smooth()
-    # Origen en el centro de la geometría: necesario para el latido, la respiración y las capas
     if centrar_origen and len(obj.data.vertices) > 0:
         mn = Vector((min(v.co[i] for v in obj.data.vertices) for i in range(3)))
         mx = Vector((max(v.co[i] for v in obj.data.vertices) for i in range(3)))
@@ -355,7 +257,6 @@ def preparar_organo(destino, fuentes, max_tris, escala, desplazamiento, centrar_
 
 
 def aplicar_modificador(obj, tipo, configurar):
-    """Aplica un modificador tomando la malla evaluada (sin operadores de Blender)."""
     mod = obj.modifiers.new(name=tipo, type=tipo)
     configurar(mod)
     dg = bpy.context.evaluated_depsgraph_get()
@@ -369,13 +270,11 @@ def aplicar_modificador(obj, tipo, configurar):
 
 
 def exportar_glb(objetos, ruta):
-    """Exporta solo los objetos dados a un .glb (eje Y hacia arriba, como usa Godot)."""
     deseleccionar_todo()
     for o in objetos:
         o.select_set(True)
     bpy.context.view_layer.objects.active = objetos[0]
 
-    # Se filtran opciones según las que existan en esta versión de Blender
     disponibles = {p.identifier for p in bpy.ops.export_scene.gltf.get_rna_type().properties}
     opciones = {
         "filepath": ruta,
@@ -391,20 +290,11 @@ def exportar_glb(objetos, ruta):
     bpy.ops.export_scene.gltf(**opciones)
 
 
-# ---------------------------------------------------------------------------
-# Programa principal
-# ---------------------------------------------------------------------------
-
-# ---------------------------------------------------------------------------
-# Partes (estructuras individuales dentro de un órgano) y nombres en español
-# ---------------------------------------------------------------------------
-
 LADO = re.compile(r"\.([lr])$")
 LADO_GUION = re.compile(r"_([LR])$")
 
 
 def separar_lado(nombre):
-    """'Stapes.r' -> ('Stapes', 'r'); 'VH_F_left_ovary' -> ('left ovary', ''); 'X_L' -> ('X', 'l')."""
     m = LADO.search(nombre)
     if m:
         return nombre[:m.start()], m.group(1)
@@ -418,14 +308,11 @@ def separar_lado(nombre):
 
 
 def id_valido(texto):
-    """Nombre de nodo válido en Godot: solo letras, números y guion bajo."""
     limpio = re.sub(r"[^A-Za-z0-9]+", "_", texto).strip("_")
     return limpio or "Parte"
 
 
 class Terminologia:
-    """Traducción inglés -> español con la Terminología Anatómica (TA2.csv de Z-Anatomy) y
-    una lista de excepciones del JSON de mapeo (nombres más usados en clase)."""
 
     def __init__(self, ruta, excepciones):
         self.tabla = {}
@@ -450,8 +337,6 @@ class Terminologia:
 
 
 def agrupar_partes(fuentes, modo):
-    """Agrupa las fuentes en partes: {clave: (nombre_ingles, lado, [objetos])}.
-    'individual': una parte por objeto; 'bilateral': une izquierda y derecha de cada estructura."""
     grupos = {}
     for f in fuentes:
         base, lado = separar_lado(f.name)
@@ -466,9 +351,6 @@ def agrupar_partes(fuentes, modo):
 
 def construir_organo_con_partes(destino, partes, max_tris, min_tris_parte, escala, desplazamiento, soldar,
                                 sin_reducir=None):
-    """partes: {clave: {"fuentes": [...], "simetria": ..., "nombre": ..., "lado": ...}}.
-    Crea un objeto por parte (origen en su centro) colgando de un vacío con el nombre del órgano,
-    ubicado en el centro del órgano. El presupuesto de triángulos se reparte según el tamaño."""
     tris_fuente = {}
     for clave, p in partes.items():
         tris_fuente[clave] = max(1, sum(contar_triangulos(f) if f.type == "MESH" else 500 for f in p["fuentes"]))
@@ -477,7 +359,7 @@ def construir_organo_con_partes(destino, partes, max_tris, min_tris_parte, escal
     for clave, p in partes.items():
         limite = max(min_tris_parte, int(max_tris * tris_fuente[clave] / total))
         if sin_reducir and sin_reducir.search(clave):
-            limite = 0   # Estructuras diminutas que se ven aisladas de cerca (p. ej. huesecillos del oído)
+            limite = 0
         obj, _ = preparar_organo(f"{destino}__{clave}", p["fuentes"], limite, escala, desplazamiento, True,
                                  soldar=soldar, simetria=p.get("simetria", False))
         if len(obj.data.polygons) == 0:
@@ -490,7 +372,7 @@ def construir_organo_con_partes(destino, partes, max_tris, min_tris_parte, escal
     mx = Vector((max(o.location[i] for _, o in objetos) for i in range(3)))
     anterior = bpy.data.objects.get(destino)
     if anterior is not None:
-        anterior.name = destino + "_original"   # Z-Anatomy puede tener un objeto con el mismo nombre
+        anterior.name = destino + "_original"
     vacio = bpy.data.objects.new(destino, None)
     bpy.context.scene.collection.objects.link(vacio)
     vacio.location = (mn + mx) / 2
@@ -503,8 +385,6 @@ def construir_organo_con_partes(destino, partes, max_tris, min_tris_parte, escal
 
 
 def taubin(malla, iteraciones, lam=0.5, mu=-0.53):
-    """Alisado de Taubin: alterna un paso que suaviza (lam) y otro que 'infla' (mu). Quita los
-    bultos e irregularidades sin encoger la forma (el alisado normal la encoge)."""
     import numpy as np
     n = len(malla.vertices)
     co = np.empty(n * 3)
@@ -526,9 +406,6 @@ def taubin(malla, iteraciones, lam=0.5, mu=-0.53):
 
 
 def desplegar(malla, rondas=8):
-    """Corrige las caras plegadas que deja la reducción (Decimate): una cara cuya normal se opone
-    a la de sus vecinas queda "de espaldas" y Godot no la dibuja (parece un agujero). Sus
-    vértices y los de alrededor se alisan hasta que la cara vuelve a mirar hacia afuera."""
     bm = bmesh.new()
     bm.from_mesh(malla)
     for ronda in range(rondas):
@@ -560,17 +437,13 @@ def desplegar(malla, rondas=8):
 
 
 def alisar_linea_media(malla, mundo):
-    """Las dos mitades de la piel (una es el reflejo de la otra) se unen en la línea media y ahí
-    el remallado deja surcos pequeños (se ven como marcas en el esternón y bajo los pectorales).
-    Se alisa una franja estrecha del frente del tórax, desvaneciendo el efecto hacia los lados,
-    sin tocar el ombligo ni el cuello."""
     bm = bmesh.new()
     bm.from_mesh(malla)
     bm.verts.ensure_lookup_table()
     peso = {}
     for v in bm.verts:
         p = mundo @ v.co
-        if p.y > -0.03:   # Solo el frente (en Blender el frente es -Y)
+        if p.y > -0.03:
             continue
         lado = 1.0 - min(1.0, max(0.0, (abs(p.x) - 0.02) / 0.025))
         alto = min(1.0, max(0.0, (p.z - 1.07) / 0.03)) * min(1.0, max(0.0, (1.40 - p.z) / 0.03))
@@ -590,11 +463,7 @@ def alisar_linea_media(malla, mundo):
 
 
 def separar_brazos(malla, mundo, arbol, etiquetas):
-    """El remallado une con puentes finos las manos y antebrazos con los muslos y las caderas
-    (están a pocos milímetros). En la postura fetal del recién nacido el brazo se mueve y esos
-    puentes se estirarían. Se cortan: se quitan las caras de la zona de contacto (por debajo de
-    la axila) y se tapa el agujero de cada lado por separado."""
-    es_brazo = lambda e: any(k in e.lower() for k in ("brazo", "codo", "mano"))   # Incluye "Antebrazo"
+    es_brazo = lambda e: any(k in e.lower() for k in ("brazo", "codo", "mano"))
     bm = bmesh.new()
     bm.from_mesh(malla)
     bm.faces.ensure_lookup_table()
@@ -630,9 +499,6 @@ def separar_brazos(malla, mundo, arbol, etiquetas):
 
 
 def cerrar_huecos(malla):
-    """Último paso de la piel remallada: suelda bordes casi juntos (p. ej. en la línea media,
-    donde se unen las dos mitades), quita las aristas compartidas por más de dos caras y tapa
-    los agujeros pequeños que queden. Sin esto se ven puntitos (agujeros) en el esternón."""
     bm = bmesh.new()
     bm.from_mesh(malla)
     antes = sum(1 for e in bm.edges if e.is_boundary)
@@ -649,8 +515,6 @@ def cerrar_huecos(malla):
             break
         nuevas = bmesh.ops.holes_fill(bm, edges=bordes, sides=300)["faces"]
         parches |= set(bmesh.ops.triangulate(bm, faces=nuevas)["faces"]) | set(nuevas)
-    # Los parches son planos (se notan como marcas): se les agregan vértices interiores y se
-    # alisan junto con dos anillos de alrededor para que sigan la curva de la piel
     parches = [f for f in parches if f.is_valid]
     if parches:
         for _ in range(2):
@@ -678,11 +542,6 @@ def cerrar_huecos(malla):
 
 
 def solo_exterior(obj):
-    """La piel de Z-Anatomy son parches superpuestos (no un sólido), así que el remallado da una
-    lámina doble: una capa mira hacia afuera y otra hacia adentro, casi en el mismo lugar. Se
-    conserva la exterior: desde cada cara se lanzan rayos en un cono alrededor de su normal; si
-    alguno sale del cuerpo la cara es exterior (también en zonas cóncavas, como entre los
-    muslos), si todos chocan es la capa interior. Después se tapan agujeros y se quitan sueltos."""
     from mathutils.bvhtree import BVHTree
     bm = bmesh.new()
     bm.from_mesh(obj.data)
@@ -735,8 +594,6 @@ def solo_exterior(obj):
     bmesh.ops.delete(bm, geom=sobran, context="VERTS")
     abiertos = sum(1 for e in bm.edges if e.is_boundary)
     print(f"  remallado: {len(piezas)} piezas, {abiertos} aristas de borde restantes")
-    # Las caras de relleno pueden quedar al revés (Godot no las dibuja: se verían agujeros);
-    # se orientan todas de forma coherente y hacia afuera
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
     bm.normal_update()
     if sum(f.calc_area() * f.normal.dot(f.calc_center_median()) for f in bm.faces) < 0:
@@ -746,9 +603,6 @@ def solo_exterior(obj):
 
 
 def partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices):
-    """Corta la malla completa en un objeto por clave de "asignacion" ({clave: [caras]}). Cada
-    parte conserva las normales de la superficie completa (bordes idénticos entre partes) y
-    cuelga de un vacío con el nombre del órgano."""
     m = completa.data
     mundo = completa.matrix_world
     objetos = []
@@ -762,7 +616,6 @@ def partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices):
         nueva = bpy.data.meshes.new(f"{destino}__{clave}_malla")
         bm.to_mesh(nueva)
         bm.free()
-        # Normales de la superficie completa en cada vértice (bordes idénticos entre partes)
         nueva.normals_split_custom_set_from_vertices(
             [normales[arbol_vertices.find(v.co)[1]] for v in nueva.vertices])
         obj = bpy.data.objects.new(f"{destino}__{clave}", nueva)
@@ -793,21 +646,11 @@ def partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices):
 
 def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazamiento, soldar, cerrar=False,
                          ejes="xz"):
-    """Divide un órgano en regiones anatómicas (p. ej. el estómago: cardias, fondo, cuerpo, antro,
-    píloro). Cada región puede definirse, en este orden de prioridad, por:
-      - "en": [objetos]   las caras pegadas a esos objetos fuente (p. ej. la rótula en el fémur),
-      - "rango_z": [a, b] una franja de altura (fracción del alto del órgano, 0 = abajo),
-      - "radio" + marcas  un entorno de ese radio (m) alrededor de las marcas,
-      - marcas            el resto de las caras va a la marca más cercana (en los "ejes" pedidos:
-                          "xz" = vista de frente, "z" = por altura, "x" = de lado a lado, "xyz").
-    Marcas: nombre de una etiqueta de Z-Anatomy (".j" o ".t"); "junto:<obj>" = el punto del órgano
-    más cercano a otro objeto; "centro:<obj>" = el centro de otro objeto; "rel:x,y,z" = posición
-    relativa dentro de la caja del órgano (0 a 1)."""
     from mathutils.kdtree import KDTree
     from mathutils.bvhtree import BVHTree
     completa, _ = preparar_organo(destino + "__completa", fuentes, max_tris, escala, desplazamiento, False,
                                   soldar=soldar)
-    if cerrar:   # El modelo trae una ventana abierta (para ver el interior): se tapa
+    if cerrar:
         cerrar_huecos(completa.data)
         completa.data.shade_smooth()
     m = completa.data
@@ -899,8 +742,6 @@ def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazam
         if clave is None:
             clave = next((rad[0] for rad in radios if (c - rad[1]).length < rad[2]), None)
         if clave is None and puntos:
-            # Por defecto se compara vista de frente (las marcas de Z-Anatomy están sobre la cara
-            # de adelante: así la pared de atrás va a la misma región que la de adelante)
             _, k, _ = arbol.find(proyectar(c))
             clave = etiquetas[k]
         if clave is None:
@@ -912,10 +753,6 @@ def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazam
 
 def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar, superficie=None, alisado=0,
                        subdividir=False, remallar=0.0, alisado_remallado=0):
-    """Piel sin costuras: construye la superficie COMPLETA (simétrica y soldada), la reduce, y
-    después la corta en partes asignando cada cara a la región fuente más cercana. Las partes
-    comparten exactamente los bordes y conservan las normales de la superficie completa, así
-    que no se notan cortes entre ellas."""
     from mathutils.kdtree import KDTree
     todas = []
     for p in partes.values():
@@ -923,25 +760,17 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
             if f not in todas:
                 todas.append(f)
     if superficie:
-        # Superficie de otro modelo (p. ej. la piel femenina): las regiones solo dan los nombres
         completa, _ = preparar_organo(destino + "__completa", superficie, max_tris, escala, desplazamiento, False,
                                       soldar=soldar)
     else:
-        # Con remallado se parte de la malla completa (sin reducir) para no perder detalle
         completa, _ = preparar_organo(destino + "__completa", todas, max_tris * 40 if remallar else max_tris, escala,
                                       desplazamiento, False, soldar=soldar, simetria=True)
     if remallar:
-        # Piel hecha de parches (p. ej. la masculina de Z-Anatomy): un remallado por vóxeles la
-        # convierte en UNA superficie cerrada y uniforme, sin bordes entre parches ni pliegues
-        # El remallado de una superficie abierta da dos capas (afuera y adentro de la piel): se
-        # conserva la exterior (ver solo_exterior)
         aplicar_modificador(completa, "REMESH", lambda m: (setattr(m, "mode", "VOXEL"),
                                                            setattr(m, "voxel_size", remallar),
                                                            setattr(m, "adaptivity", 0.0)))
         solo_exterior(completa)
         if alisado_remallado:
-            # Se alisa la malla densa (antes de reducirla): los escalones de los vóxeles son de
-            # alta frecuencia aquí y se borran sin perder la forma; ya reducida costaría más
             taubin(completa.data, alisado_remallado)
         tris = sum(len(p.vertices) - 2 for p in completa.data.polygons)
         print(f"  remallado ({remallar * 1000:.1f} mm): {tris} triángulos")
@@ -949,8 +778,6 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
             aplicar_modificador(completa, "DECIMATE", lambda m: (setattr(m, "ratio", max_tris / tris),
                                                                  setattr(m, "use_collapse_triangulate", True)))
     if subdividir:
-        # Piel de pocos polígonos (p. ej. la masculina de Z-Anatomy): se subdivide (Catmull-Clark)
-        # para redondear las facetas y se vuelve a reducir al presupuesto de triángulos
         aplicar_modificador(completa, "SUBSURF", lambda m: (setattr(m, "levels", 1), setattr(m, "render_levels", 1)))
         tris = sum(len(p.vertices) - 2 for p in completa.data.polygons)
         if tris > max_tris:
@@ -965,7 +792,6 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
         cerrar_huecos(completa.data)
         alisar_linea_media(completa.data, completa.matrix_world)
         completa.data.shade_smooth()
-    # Centros de las caras de cada región fuente (el lado izquierdo es el reflejo del derecho)
     dg = bpy.context.evaluated_depsgraph_get()
     ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
     puntos, etiquetas = [], []
@@ -976,7 +802,7 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
             for poligono in malla.polygons:
                 c = poligono.center.copy()
                 if c.x > 0.0005:
-                    continue   # Solo el lado derecho (x <= 0) de las fuentes
+                    continue
                 espejo = Vector((-c.x, c.y, c.z))
                 if p.get("simetria") == "derecha":
                     puntos.append(c)
@@ -1010,7 +836,6 @@ def dividir_superficie(destino, partes, max_tris, escala, desplazamiento, soldar
 
 
 def clasificar_por_region(obj, regiones):
-    """Primera región cuya condición cumple el centro del objeto (coordenadas de Blender: Z arriba)."""
     centro = sum((obj.matrix_world @ Vector(c) for c in obj.bound_box), Vector()) / 8
     x, z = abs(centro.x), centro.z
     for r in regiones:
@@ -1021,10 +846,6 @@ def clasificar_por_region(obj, regiones):
         return r["organo"]
     return regiones[-1]["organo"]
 
-
-# ---------------------------------------------------------------------------
-# Programa principal
-# ---------------------------------------------------------------------------
 
 def main():
     args = leer_argumentos()
@@ -1067,13 +888,11 @@ def main():
         bpy.ops.object.mode_set(mode="OBJECT")
 
     os.makedirs(args.salida, exist_ok=True)
-    reporte = []      # (sistema, destino, partes, antes, despues)
-    faltantes = []    # (sistema, destino, patrones)
+    reporte = []
+    faltantes = []
     nombres_partes = {}
-    usados = set()    # Objetos fuente ya asignados (para el "resto" de cada sistema)
+    usados = set()
 
-    # Todo lo que usan los órganos explícitos de CUALQUIER sistema queda reservado: así el "resto"
-    # de un sistema no se queda con estructuras que otro sistema pidió por nombre.
     for organos in sistemas.values():
         for clave, d in organos.items():
             if clave.startswith("_") or clave == "resto":
@@ -1088,22 +907,19 @@ def main():
         organos_def = {k: v for k, v in organos.items() if not k.startswith("_")}
         resto = organos_def.pop("resto", None)
 
-        # El "resto" reparte por regiones del cuerpo los objetos de una colección que no usó
-        # ningún órgano explícito (p. ej. todos los demás músculos).
         if resto:
             for d in organos_def.values():
                 pats = d.get("fuentes", []) if isinstance(d, dict) else d
                 usados.update(o.name for o in buscar_fuentes(pats if isinstance(pats, list) else [pats]))
                 for g in (d.get("grupos", {}).values() if isinstance(d, dict) else []):
                     usados.update(o.name for o in buscar_fuentes(g.get("fuentes", [])))
-            # Varias reglas en orden; cada objeto lo toma la primera regla que lo acepta
             for regla in (resto if isinstance(resto, list) else [resto]):
                 filtro = re.compile(regla["incluir_regex"], re.I) if regla.get("incluir_regex") else None
                 restantes = [o for o in mallas_de_coleccion(regla["coleccion"])
                              if o.name not in usados and (filtro is None or filtro.search(o.name))]
                 usados.update(o.name for o in restantes)
                 if regla.get("descartar"):
-                    continue   # Estructuras que se omiten a propósito (p. ej. fascias que tapan los músculos)
+                    continue
                 por_organo = {}
                 for o in restantes:
                     por_organo.setdefault(clasificar_por_region(o, regla["regiones"]), []).append(o)
@@ -1116,7 +932,7 @@ def main():
 
         for destino, definicion in organos_def.items():
             limite = max_tris
-            soldar = 0.00005   # Tolerancia pequeña: hay piezas de pocos milímetros (huesecillos, oído interno)
+            soldar = 0.00005
             simetria = False
             modo = None
             patrones = definicion
@@ -1147,7 +963,6 @@ def main():
                                 sum(contar_triangulos(o) for _, o in objetos)))
                 continue
             if modo == "grupos":
-                # Partes definidas a mano (p. ej. regiones de la piel), con simetría por grupo
                 partes = {}
                 for clave, g in definicion["grupos"].items():
                     fg = buscar_fuentes(g["fuentes"])
@@ -1230,7 +1045,6 @@ def main():
                        "partes": dict(sorted(existentes.items()))}, f, ensure_ascii=False, indent=1)
         print(f"[OK] Nombres de {len(nombres_partes)} partes en {ruta_nombres}")
 
-    # ----- Reporte final -----
     print("\n" + "=" * 78)
     print(f"REPORTE DE TRIÁNGULOS (máximo por órgano: {max_tris})")
     print("=" * 78)

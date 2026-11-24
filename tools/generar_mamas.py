@@ -1,22 +1,3 @@
-"""
-generar_mamas.py — Genera la anatomía interna de las mamas para el cuerpo femenino.
-
-No existe un modelo libre de la glándula mamaria que coincida con la piel del Human Reference
-Atlas, así que se construye de forma procedural DENTRO de esa piel:
-  1. Se carga la piel femenina con la misma ubicación que usa tools/mapeo_zanatomy_femenino.json.
-  2. En cada lado se busca el pezón: el punto más adelantado de la piel a la altura del pecho.
-  3. Se calcula el tamaño de la mama (hasta dónde sobresale de la pared del tórax).
-  4. Se crean, orientados desde la pared torácica hacia el pezón:
-       - lóbulos de la glándula mamaria (15 a 20, dispuestos en radios, como en la realidad),
-       - conductos galactóforos (uno por lóbulo, con su seno antes del pezón),
-       - areola y pezón,
-       - tejido adiposo: el volumen entre la pared torácica y la piel (envoltura convexa de la
-         piel de la mama, 2 mm hacia adentro, cerrada contra la pared del tórax).
-Uso:
-    blender -b --factory-startup --python tools/generar_mamas.py
-Salida: assets_fuente/hra-femenino/Mamas_generadas.glb (en coordenadas finales del cuerpo).
-"""
-
 import math
 import os
 
@@ -24,7 +5,7 @@ import bmesh
 import bpy
 from mathutils import Matrix, Vector
 
-PIEL = "assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb"   # Ya en coordenadas finales
+PIEL = "assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb"
 DESPLAZAMIENTO_PIEL = Vector((0.0, 0.0, 0.0))
 SALIDA = "assets_fuente/hra-femenino/Mamas_generadas.glb"
 LOBULOS = 16
@@ -41,16 +22,11 @@ def cargar_piel():
 
 
 def medir_mama(vertices, signo):
-    """Pezón (punto más adelantado del pecho en ese lado) y profundidad de la pared torácica."""
-    # Altura del pecho (≈70-80 % de la estatura) y fuera de la línea media; el abdomen de este
-    # modelo sobresale más que las mamas, por eso se limita la altura.
     pecho = [(p, n) for p, n in vertices if 1.15 < p.z < 1.36 and 0.05 < p.x * signo < 0.17]
-    pezon, normal = min(pecho, key=lambda pn: pn[0].y)   # El frente del cuerpo está en -Y
-    # Pared torácica: frente de la piel por encima de la mama (misma x, unos 11 cm más arriba),
-    # donde el pecho es plano. La mama sobresale desde ahí hasta el pezón.
+    pezon, normal = min(pecho, key=lambda pn: pn[0].y)
     arriba = [p for p, _ in vertices if abs(p.x - pezon.x) < 0.012 and abs(p.z - (pezon.z + 0.11)) < 0.012]
     pared_y = min(p.y for p in arriba) if arriba else pezon.y + 0.06
-    proyeccion = max(0.035, pared_y - pezon.y + 0.015)   # +1,5 cm: grosor de la piel y la fascia
+    proyeccion = max(0.035, pared_y - pezon.y + 0.015)
     print(f"  lado {'izq' if signo > 0 else 'der'}: pezón {tuple(round(c, 3) for c in pezon)}, "
           f"proyección {proyeccion * 100:.1f} cm")
     return pezon, normal, proyeccion
@@ -59,7 +35,6 @@ def medir_mama(vertices, signo):
 def elipsoide(nombre, centro, radios, eje_largo, segmentos=12):
     bm = bmesh.new()
     bmesh.ops.create_uvsphere(bm, u_segments=segmentos, v_segments=segmentos // 2 + 2, radius=1.0)
-    # Escala en ejes locales y luego orientación: el eje Z local apunta a eje_largo
     rot = eje_largo.to_track_quat("Z", "Y").to_matrix().to_4x4()
     bmesh.ops.transform(bm, matrix=Matrix.Translation(centro) @ rot @ Matrix.Diagonal((*radios, 1)),
                         verts=bm.verts[:])
@@ -82,18 +57,16 @@ def unir(nombre, mallas):
 
 
 def grasa(vertices, pezon, eje, proyeccion, radio, sufijo):
-    """Tejido adiposo: puntos de la piel de la mama (2 mm hacia adentro) más su proyección sobre
-    la pared torácica; la envoltura convexa de esos puntos es el volumen de la mama."""
     base = pezon - eje * proyeccion
     puntos = []
     for p, n in vertices:
         delante = (p - base).dot(eje)
         lateral = ((p - base) - eje * delante).length
-        mismo_lado = p.x * math.copysign(1, pezon.x) > 0.02   # No cruza la línea media (escote)
+        mismo_lado = p.x * math.copysign(1, pezon.x) > 0.02
         if 0.0 < delante < proyeccion + 0.01 and lateral < radio and n.dot(eje) > 0.1 and mismo_lado:
             interior = p - n * 0.002
             puntos.append(interior)
-            puntos.append(interior - eje * (interior - base).dot(eje))   # Sobre la pared torácica
+            puntos.append(interior - eje * (interior - base).dot(eje))
     bm = bmesh.new()
     for p in puntos:
         bm.verts.new(p)
@@ -110,8 +83,7 @@ def grasa(vertices, pezon, eje, proyeccion, radio, sufijo):
 
 
 def construir_mama(vertices, pezon, normal, proyeccion, sufijo):
-    # Eje de la mama: desde el centro de su base (en la pared torácica) hacia el pezón
-    eje = (normal + Vector((0, -1, 0))).normalized()   # Hacia afuera (la normal de la piel) y al frente
+    eje = (normal + Vector((0, -1, 0))).normalized()
     base = pezon - eje * proyeccion
     u = eje.cross(Vector((0, 0, 1))).normalized()
     v = eje.cross(u).normalized()
@@ -120,19 +92,16 @@ def construir_mama(vertices, pezon, normal, proyeccion, sufijo):
     for i in range(LOBULOS):
         ang = math.tau * i / LOBULOS
         radial = u * math.cos(ang) + v * math.sin(ang)
-        # Lóbulo: alargado hacia el pezón, más grande en el cuadrante superior externo (cola axilar)
         externo = max(0.0, radial.dot(Vector((math.copysign(1, pezon.x), 0, 0.6)).normalized()))
         largo = proyeccion * (0.42 + 0.18 * externo)
         centro = base + eje * proyeccion * 0.38 + radial * radio_base * 0.55
         direccion = (pezon - centro).normalized()
         lobulos.append(elipsoide(f"lobulo{i}", centro, (proyeccion * 0.11, proyeccion * 0.08, largo * 0.5), direccion))
-        # Conducto galactóforo: del lóbulo al pezón, con un ensanchamiento (seno) cerca de la areola
         seno = pezon - eje * proyeccion * 0.12 + radial * proyeccion * 0.08
         conductos.append([centro + direccion * largo * 0.35, (centro + seno) / 2, seno, pezon - eje * 0.002])
     lob = unir(f"VH_F_mammary_gland_lobes_{sufijo}", lobulos)
     for m in lobulos:
         bpy.data.meshes.remove(m)
-    # Conductos: un objeto curva con todos los tramos
     curva = bpy.data.curves.new(f"VH_F_lactiferous_ducts_{sufijo}", "CURVE")
     curva.dimensions = "3D"
     curva.bevel_depth = max(0.0012, proyeccion * 0.02)
@@ -147,11 +116,10 @@ def construir_mama(vertices, pezon, normal, proyeccion, sufijo):
     temporal = bpy.data.objects.new("temporal", curva)
     bpy.context.scene.collection.objects.link(temporal)
     dg = bpy.context.evaluated_depsgraph_get()
-    malla = bpy.data.meshes.new_from_object(temporal.evaluated_get(dg), depsgraph=dg)   # Curva -> malla
+    malla = bpy.data.meshes.new_from_object(temporal.evaluated_get(dg), depsgraph=dg)
     bpy.data.objects.remove(temporal, do_unlink=True)
     duc = bpy.data.objects.new(f"VH_F_lactiferous_ducts_{sufijo}", malla)
     bpy.context.scene.collection.objects.link(duc)
-    # Areola (disco fino justo bajo la piel) y pezón
     areola = elipsoide("areola", pezon - eje * 0.003, (0.019, 0.019, 0.0025), eje, 24)
     pezon_m = elipsoide("pezon", pezon - eje * 0.0005, (0.0055, 0.0055, 0.006), eje, 16)
     are = unir(f"VH_F_areola_and_nipple_{sufijo}", [areola, pezon_m])

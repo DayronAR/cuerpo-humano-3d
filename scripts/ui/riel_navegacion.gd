@@ -1,7 +1,5 @@
 class_name RielNavegacion
 extends PanelContainer
-## Barra vertical de navegación (izquierda): logo, un botón con ícono por sección y, abajo, el
-## botón para volver al inicio. Solo emite señales; la escena principal cambia de sección.
 
 signal seccion_elegida(indice: int)
 signal inicio_pulsado
@@ -30,8 +28,7 @@ func _ready() -> void:
 	custom_minimum_size = Vector2(ANCHO, 0)
 
 
-## secciones: [[nombre, ruta del ícono], ...] en el orden de las pestañas.
-func configurar(secciones: Array) -> void:
+func dymj_configurar(secciones: Array) -> void:
 	var caja := VBoxContainer.new()
 	caja.add_theme_constant_override("separation", 10)
 	caja.alignment = BoxContainer.ALIGNMENT_BEGIN
@@ -49,7 +46,7 @@ func configurar(secciones: Array) -> void:
 	caja.add_child(separador)
 	var grupo := ButtonGroup.new()
 	for i in secciones.size():
-		var b := _boton(secciones[i][0], secciones[i][1])
+		var b := _dymj_boton(secciones[i][0], secciones[i][1])
 		b.toggle_mode = true
 		b.button_group = grupo
 		b.pressed.connect(seccion_elegida.emit.bind(i))
@@ -58,21 +55,20 @@ func configurar(secciones: Array) -> void:
 	var espacio := Control.new()
 	espacio.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	caja.add_child(espacio)
-	_boton_cuerpo = _boton("", "res://ui/iconos/barra/mujer.svg")
+	_boton_cuerpo = _dymj_boton("", "res://ui/iconos/barra/mujer.svg")
 	_boton_cuerpo.pressed.connect(cuerpo_pulsado.emit)
 	caja.add_child(_boton_cuerpo)
-	caja.add_child(_leyenda(_boton_cuerpo))
-	_boton_tema = _boton("", "res://ui/iconos/barra/sol.svg")
+	caja.add_child(_dymj_leyenda(_boton_cuerpo))
+	_boton_tema = _dymj_boton("", "res://ui/iconos/barra/sol.svg")
 	_boton_tema.pressed.connect(tema_pulsado.emit)
 	caja.add_child(_boton_tema)
-	caja.add_child(_leyenda(_boton_tema))
-	var inicio := _boton("Volver a la pantalla de inicio", "res://ui/iconos/barra/inicio.svg")
+	caja.add_child(_dymj_leyenda(_boton_tema))
+	var inicio := _dymj_boton("Volver a la pantalla de inicio", "res://ui/iconos/barra/inicio.svg")
 	inicio.pressed.connect(inicio_pulsado.emit)
 	caja.add_child(inicio)
 
 
-## femenino: el cuerpo que se ve ahora (el botón ofrece cambiar al otro).
-func mostrar_cuerpo(femenino: bool) -> void:
+func dymj_mostrar_cuerpo(femenino: bool) -> void:
 	if _boton_cuerpo == null:
 		return
 	_boton_cuerpo.icon = load("res://ui/iconos/barra/%s.svg" % ("hombre" if femenino else "mujer"))
@@ -80,7 +76,7 @@ func mostrar_cuerpo(femenino: bool) -> void:
 	_boton_cuerpo.get_meta("leyenda").text = "Hombre" if femenino else "Mujer"
 
 
-func mostrar_tema(claro: bool) -> void:
+func dymj_mostrar_tema(claro: bool) -> void:
 	if _boton_tema == null:
 		return
 	_boton_tema.icon = load("res://ui/iconos/barra/%s.svg" % ("luna" if claro else "sol"))
@@ -88,8 +84,7 @@ func mostrar_tema(claro: bool) -> void:
 	_boton_tema.get_meta("leyenda").text = "Oscuro" if claro else "Claro"
 
 
-## Texto pequeño bajo un botón (los íconos solos no dicen qué hacen).
-func _leyenda(boton: Button) -> Control:
+func _dymj_leyenda(boton: Button) -> Control:
 	var l := Label.new()
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.add_theme_font_size_override("font_size", 10)
@@ -102,12 +97,12 @@ func _leyenda(boton: Button) -> Control:
 	return margen
 
 
-func marcar(indice: int) -> void:
-	for i in _botones.size():   # set_pressed_no_signal no desmarca a los demás del grupo
+func dymj_marcar(indice: int) -> void:
+	for i in _botones.size():
 		_botones[i].set_pressed_no_signal(i == indice)
 
 
-func _boton(ayuda: String, icono: String) -> Button:
+func _dymj_boton(ayuda: String, icono: String) -> Button:
 	var b := Button.new()
 	b.icon = load(icono)
 	b.expand_icon = true

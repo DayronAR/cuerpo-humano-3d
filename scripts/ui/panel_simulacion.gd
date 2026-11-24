@@ -1,8 +1,5 @@
 class_name PanelSimulacion
 extends VBoxContainer
-## Controles de la simulación (escenario, iniciar/pausar/reiniciar, velocidad, intensidad) y
-## lectura de los valores actuales. Emite señales con lo que pide el usuario y muestra lo que
-## le llega; no modifica el motor directamente.
 
 signal escenario_elegido(id_escenario: String)
 signal iniciar_pulsado
@@ -10,7 +7,7 @@ signal pausar_pulsado
 signal reiniciar_pulsado
 signal velocidad_elegida(velocidad: float)
 signal intensidad_elegida(id_intensidad: String)
-signal anios_cambiados(anios: float)   ## Barra de deterioro (p. ej. años fumando)
+signal anios_cambiados(anios: float)
 
 const VELOCIDADES := [1.0, 2.0, 4.0]
 const COLOR_TEXTO := Color(0.89, 0.925, 0.945, 1)
@@ -29,11 +26,11 @@ const COLOR_ACENTO := Color(0.173, 0.773, 0.71, 1)
 @onready var _estados: Label = %Estados
 @onready var _actividad: Label = %Actividad
 
-var _datos_escenarios: Dictionary = {}     ## id -> Dictionary
+var _datos_escenarios: Dictionary = {}
 var _botones_escenario: Dictionary = {}
 var _botones_intensidad: Dictionary = {}
 var _botones_velocidad: Dictionary = {}
-var _etiquetas_valor: Dictionary = {}     ## id de variable -> Label
+var _etiquetas_valor: Dictionary = {}
 var _variables: Dictionary = {}
 var _info_estados: Dictionary = {}
 var _actividades: Dictionary = {}
@@ -41,7 +38,7 @@ var _escenario := ""
 var _intensidad := ""
 var _activo := false
 var _pausado := false
-var _deterioro: VBoxContainer          ## Sección de la barra de deterioro (se arma por escenario)
+var _deterioro: VBoxContainer
 var _barra_anios: HSlider
 var _valor_anios: Label
 var _lista_danos: VBoxContainer
@@ -54,7 +51,7 @@ func _ready() -> void:
 	_boton_reiniciar.pressed.connect(reiniciar_pulsado.emit)
 	var grupo := ButtonGroup.new()
 	for v in VELOCIDADES:
-		var b := _boton("x%d" % v, true, grupo)
+		var b := _jlrl_boton("x%d" % v, true, grupo)
 		b.tooltip_text = "Velocidad de la simulación"
 		b.pressed.connect(velocidad_elegida.emit.bind(v))
 		_velocidades.add_child(b)
@@ -62,8 +59,7 @@ func _ready() -> void:
 	_botones_velocidad[1.0].button_pressed = true
 
 
-## datos: contenido de escenarios.json
-func configurar(datos: Dictionary) -> void:
+func jlrl_configurar(datos: Dictionary) -> void:
 	_variables = datos.get("variables", {})
 	_actividades = datos.get("actividades", {})
 	for e in datos.get("estados", []):
@@ -72,13 +68,12 @@ func configurar(datos: Dictionary) -> void:
 	for e in datos.get("escenarios", []):
 		var id: String = e.get("id")
 		_datos_escenarios[id] = e
-		var b := _boton(e.get("nombre", id), true, grupo)
+		var b := _jlrl_boton(e.get("nombre", id), true, grupo)
 		b.tooltip_text = e.get("descripcion", "")
 		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		b.pressed.connect(escenario_elegido.emit.bind(id))
 		_escenarios.add_child(b)
 		_botones_escenario[id] = b
-	# Una fila por variable visible: nombre (con su color) y valor
 	for id in _variables:
 		var info: Dictionary = _variables[id]
 		if info.get("interna", false):
@@ -102,11 +97,11 @@ func configurar(datos: Dictionary) -> void:
 		_valores.add_child(nombre)
 		_valores.add_child(valor)
 		_etiquetas_valor[id] = valor
-	mostrar_escenario("", false)
-	mostrar_estados([])
+	jlrl_mostrar_escenario("", false)
+	jlrl_mostrar_estados([])
 
 
-func mostrar_estado(estado: Dictionary) -> void:
+func jlrl_mostrar_estado(estado: Dictionary) -> void:
 	for id in _etiquetas_valor:
 		var info: Dictionary = _variables[id]
 		var formato := "%." + str(int(info.get("decimales", 0))) + "f %s"
@@ -114,7 +109,7 @@ func mostrar_estado(estado: Dictionary) -> void:
 	_actividad.text = "Actividad: " + _actividades.get(estado.get("actividad", "reposo"), "")
 
 
-func mostrar_estados(estados: Array) -> void:
+func jlrl_mostrar_estados(estados: Array) -> void:
 	if estados.is_empty():
 		_estados.text = "Estado: normal"
 		_estados.add_theme_color_override("font_color", Color(0.36, 0.85, 0.55))
@@ -131,7 +126,7 @@ func mostrar_estados(estados: Array) -> void:
 	_estados.add_theme_color_override("font_color", Color.from_string(color, Color.RED))
 
 
-func mostrar_escenario(id: String, activo: bool) -> void:
+func jlrl_mostrar_escenario(id: String, activo: bool) -> void:
 	for clave in _botones_escenario:
 		_botones_escenario[clave].set_pressed_no_signal(clave == id)
 	var e: Dictionary = _datos_escenarios.get(id, {})
@@ -139,10 +134,9 @@ func mostrar_escenario(id: String, activo: bool) -> void:
 	var cambio := id != _escenario or _botones_intensidad.is_empty()
 	_escenario = id
 	_activo = activo
-	_actualizar_botones()
+	_jlrl_actualizar_botones()
 	if not cambio:
 		return
-	# Botones de intensidad del escenario (caminar / trotar / correr)
 	for hijo in _intensidades.get_children():
 		hijo.queue_free()
 	_botones_intensidad.clear()
@@ -150,17 +144,16 @@ func mostrar_escenario(id: String, activo: bool) -> void:
 	_fila_intensidad.visible = not intensidades.is_empty()
 	var grupo := ButtonGroup.new()
 	for i in intensidades:
-		var b := _boton(i.get("nombre", i.get("id")), true, grupo)
+		var b := _jlrl_boton(i.get("nombre", i.get("id")), true, grupo)
 		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		b.pressed.connect(intensidad_elegida.emit.bind(i.get("id")))
 		_intensidades.add_child(b)
 		_botones_intensidad[i.get("id")] = b
-	mostrar_intensidad(_intensidad)
-	_armar_deterioro(e.get("deterioro", {}))
+	jlrl_mostrar_intensidad(_intensidad)
+	_jlrl_armar_deterioro(e.get("deterioro", {}))
 
 
-## Escenarios con "deterioro" (Fumar): barra de años y lista de daños que aparecen con ellos.
-func _armar_deterioro(d: Dictionary) -> void:
+func _jlrl_armar_deterioro(d: Dictionary) -> void:
 	if _deterioro:
 		_deterioro.queue_free()
 		_deterioro = null
@@ -196,7 +189,7 @@ func _armar_deterioro(d: Dictionary) -> void:
 	_barra_anios.step = 1
 	_barra_anios.focus_mode = Control.FOCUS_NONE
 	_barra_anios.custom_minimum_size = Vector2(0, 24)
-	_barra_anios.value_changed.connect(_al_cambiar_anios)
+	_barra_anios.value_changed.connect(_jlrl_al_cambiar_anios)
 	_deterioro.add_child(_barra_anios)
 	_lista_danos = VBoxContainer.new()
 	_lista_danos.add_theme_constant_override("separation", 4)
@@ -208,10 +201,10 @@ func _armar_deterioro(d: Dictionary) -> void:
 	dejar.add_theme_color_override("font_color", Color(0.36, 0.85, 0.55))
 	dejar.add_theme_font_size_override("font_size", 12)
 	_deterioro.add_child(dejar)
-	_al_cambiar_anios(0.0)
+	_jlrl_al_cambiar_anios(0.0)
 
 
-func _al_cambiar_anios(anios: float) -> void:
+func _jlrl_al_cambiar_anios(anios: float) -> void:
 	_valor_anios.text = "Nunca" if anios <= 0.0 else ("%d año%s" % [anios, "" if anios == 1 else "s"])
 	for hijo in _lista_danos.get_children():
 		hijo.queue_free()
@@ -228,18 +221,18 @@ func _al_cambiar_anios(anios: float) -> void:
 	anios_cambiados.emit(anios)
 
 
-func mostrar_intensidad(id: String) -> void:
+func jlrl_mostrar_intensidad(id: String) -> void:
 	_intensidad = id
 	for clave in _botones_intensidad:
 		_botones_intensidad[clave].set_pressed_no_signal(clave == id)
 
 
-func mostrar_pausa(pausado: bool) -> void:
+func jlrl_mostrar_pausa(pausado: bool) -> void:
 	_pausado = pausado
-	_actualizar_botones()
+	_jlrl_actualizar_botones()
 
 
-func _actualizar_botones() -> void:
+func _jlrl_actualizar_botones() -> void:
 	_boton_pausar.disabled = _pausado
 	_boton_pausar.text = "⏸  En pausa" if _pausado else "⏸  Pausar"
 	if _pausado:
@@ -253,12 +246,12 @@ func _actualizar_botones() -> void:
 		_boton_iniciar.text = "▶  Iniciar"
 
 
-func mostrar_velocidad(velocidad: float) -> void:
+func jlrl_mostrar_velocidad(velocidad: float) -> void:
 	for v in _botones_velocidad:
 		_botones_velocidad[v].set_pressed_no_signal(is_equal_approx(v, velocidad))
 
 
-func _boton(texto: String, alternable: bool, grupo: ButtonGroup = null) -> Button:
+func _jlrl_boton(texto: String, alternable: bool, grupo: ButtonGroup = null) -> Button:
 	var b := Button.new()
 	b.text = texto
 	b.toggle_mode = alternable

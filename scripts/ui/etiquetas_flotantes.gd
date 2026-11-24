@@ -1,22 +1,19 @@
 class_name EtiquetasFlotantes
 extends Control
-## Nombres de los órganos alrededor del cuerpo, unidos con una línea al punto que señalan.
-## Las etiquetas se ordenan en dos columnas (izquierda y derecha de la pantalla) para que no se
-## tapen entre sí. La fuente de los puntos es una función (ver HerramientasVisor.puntos_etiquetas).
 
 const ALTO := 24.0
 const MARGEN := 14.0
 const SEPARACION := 4.0
-const TAMANO := 13          ## Tamaño de letra
-const DISTANCIA := 70.0     ## Separación entre la columna y el punto más cercano del cuerpo
+const TAMANO := 13
+const DISTANCIA := 70.0
 const CODO := 14.0
 const COLOR_LINEA := Color(0.173, 0.773, 0.71, 0.8)
 const COLOR_FONDO := Color(0.075, 0.105, 0.145, 0.94)
 const COLOR_TEXTO := Color(0.89, 0.925, 0.945, 1)
 
-var fuente_puntos: Callable   ## () -> [[nombre, Vector3], ...]
+var fuente_puntos: Callable
 var camara: Camera3D
-var zona := Rect2()           ## Zona libre de la pantalla (sin paneles) para las columnas
+var zona := Rect2()
 
 
 func _ready() -> void:
@@ -35,7 +32,6 @@ func _draw() -> void:
 	var area := zona if zona.has_area() else get_viewport_rect()
 	var paso := ALTO + SEPARACION
 	var capacidad := maxi(1, int((area.size.y - MARGEN * 2) / paso))
-	# Puntos en pantalla (vienen ordenados por tamaño: si no entran todos, quedan los más grandes)
 	var visibles := []
 	for p in fuente_puntos.call():
 		var mundo: Vector3 = p[1]
@@ -47,8 +43,6 @@ func _draw() -> void:
 	visibles = visibles.slice(0, capacidad * 2)
 	if visibles.is_empty():
 		return
-	# Dos columnas parejas: los puntos de la mitad izquierda del cuerpo a la izquierda y el resto a
-	# la derecha (se divide por la mediana, no por el centro de la pantalla)
 	var xs := visibles.map(func(e): return e[1].x)
 	xs.sort()
 	var mediana: float = xs[xs.size() / 2]
@@ -66,8 +60,7 @@ func _draw() -> void:
 			continue
 		var es_izq: bool = lado[1]
 		lista.sort_custom(func(a, b): return a[1].y < b[1].y)
-		var ys := _repartir(lista.map(func(e): return e[1].y - ALTO * 0.5), area)
-		# La columna se acerca al cuerpo (líneas cortas), sin salir de la zona libre
+		var ys := _drar_repartir(lista.map(func(e): return e[1].y - ALTO * 0.5), area)
 		var anchos := lista.map(func(e): return fuente.get_string_size(e[0], HORIZONTAL_ALIGNMENT_LEFT, -1, TAMANO).x + 16)
 		var borde: float
 		if es_izq:
@@ -82,18 +75,15 @@ func _draw() -> void:
 			var caja := Rect2(borde - ancho if es_izq else borde, ys[i], ancho, ALTO)
 			var ancla := Vector2(caja.end.x if es_izq else caja.position.x, caja.get_center().y)
 			var punto: Vector2 = lista[i][1]
-			# Línea con un codo: horizontal desde la etiqueta y luego al punto
 			var codo := Vector2(ancla.x + (CODO if es_izq else -CODO), ancla.y)
-			draw_polyline(PackedVector2Array([ancla, codo, punto]), Tema.color(COLOR_LINEA), 1.5, true)
-			draw_circle(punto, 3.5, Tema.color(COLOR_LINEA))
-			draw_style_box(_estilo(), caja)
+			draw_polyline(PackedVector2Array([ancla, codo, punto]), Tema.dymj_color(COLOR_LINEA), 1.5, true)
+			draw_circle(punto, 3.5, Tema.dymj_color(COLOR_LINEA))
+			draw_style_box(_drar_estilo(), caja)
 			draw_string(fuente, Vector2(caja.position.x + 8, caja.position.y + 17), texto,
-					HORIZONTAL_ALIGNMENT_LEFT, -1, TAMANO, Tema.color(COLOR_TEXTO))
+					HORIZONTAL_ALIGNMENT_LEFT, -1, TAMANO, Tema.dymj_color(COLOR_TEXTO))
 
 
-## Alturas de las etiquetas: cada una lo más cerca posible de su punto, sin pisarse y sin salir de
-## la zona (se empujan hacia abajo y, si se pasan del borde, hacia arriba).
-func _repartir(deseadas: Array, area: Rect2) -> Array:
+func _drar_repartir(deseadas: Array, area: Rect2) -> Array:
 	var paso := ALTO + SEPARACION
 	var ys := []
 	var minimo := area.position.y + MARGEN
@@ -111,12 +101,12 @@ func _repartir(deseadas: Array, area: Rect2) -> Array:
 var _estilo_cache: StyleBoxFlat
 
 
-func _estilo() -> StyleBoxFlat:
+func _drar_estilo() -> StyleBoxFlat:
 	if _estilo_cache == null or _estilo_cache.get_meta("tema", "") != Tema.modo:
 		_estilo_cache = StyleBoxFlat.new()
 		_estilo_cache.set_meta("tema", Tema.modo)
-		_estilo_cache.bg_color = Tema.color(COLOR_FONDO)
+		_estilo_cache.bg_color = Tema.dymj_color(COLOR_FONDO)
 		_estilo_cache.set_corner_radius_all(6)
-		_estilo_cache.border_color = Tema.color(COLOR_LINEA)
+		_estilo_cache.border_color = Tema.dymj_color(COLOR_LINEA)
 		_estilo_cache.set_border_width_all(1)
 	return _estilo_cache

@@ -1,7 +1,3 @@
-// Tinte de un órgano según la simulación (pulmón oscurecido, músculo con ácido láctico, daño del
-// tabaco). Se aplica como material_overlay: una capa semitransparente encima del material
-// original, así no hace falta modificar ni duplicar los materiales del modelo.
-// "manchas" (0 a 1) hace el tinte irregular, en parches (alquitrán, placas, nicotina).
 shader_type spatial;
 render_mode blend_mix, depth_draw_never, cull_back;
 
@@ -37,7 +33,6 @@ void fragment() {
 	if (manchas > 0.0) {
 		vec3 q = posicion * escala_manchas;
 		float n = ruido(q) * 0.55 + ruido(q * 2.7) * 0.3 + ruido(q * 7.1) * 0.15;
-		// Con más daño las manchas se juntan y cubren más superficie
 		float parche = smoothstep(0.62 - cantidad * 0.45, 0.72 - cantidad * 0.4, n);
 		a = cantidad * mix(1.0, parche * 1.25, manchas);
 	}

@@ -1,7 +1,5 @@
 class_name AvisoControles
 extends PanelContainer
-## Aviso con los controles de la cámara. Aparece solo la primera vez que se abre el visor (se
-## recuerda en user://preferencias.cfg) o cuando se pide.
 
 const RUTA := "user://preferencias.cfg"
 const LINEAS := [
@@ -51,25 +49,25 @@ func _ready() -> void:
 	boton.text = "Entendido"
 	boton.focus_mode = Control.FOCUS_NONE
 	boton.size_flags_horizontal = Control.SIZE_SHRINK_END
-	boton.pressed.connect(_cerrar)
+	boton.pressed.connect(_drar_cerrar)
 	caja.add_child(boton)
 
 
-func mostrar_si_es_la_primera_vez() -> void:
+func drar_mostrar_si_es_la_primera_vez() -> void:
 	var cfg := ConfigFile.new()
 	cfg.load(RUTA)
 	if not cfg.get_value("ayuda", "vista_vista", false):
-		mostrar()
+		drar_mostrar()
 
 
-func mostrar() -> void:
+func drar_mostrar() -> void:
 	show()
 	reset_size()
 	var pantalla := get_viewport_rect().size
 	position = Vector2((pantalla.x - size.x) * 0.5, pantalla.y - size.y - 90)
 
 
-func _cerrar() -> void:
+func _drar_cerrar() -> void:
 	hide()
 	var cfg := ConfigFile.new()
 	cfg.load(RUTA)

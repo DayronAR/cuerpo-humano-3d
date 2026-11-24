@@ -1,18 +1,13 @@
 class_name Cuestionario
 extends Node
-## Lógica del modo cuestionario (sin interfaz). Elige preguntas al azar de data/cuestionario.json,
-## evalúa la respuesta (el órgano en el que se hizo clic), lleva el puntaje y lo guarda al final.
-## La interfaz y el 3D reaccionan a sus señales.
 
 signal pregunta_nueva(numero: int, total: int, texto: String, id_organo: String)
-## correcta; id respondido ("" si se saltó); id correcto; puntos de esta respuesta; puntaje total;
-## intentos que quedan (0 = la pregunta terminó)
 signal respuesta_evaluada(correcta: bool, id_respondido: String, id_correcto: String, puntos: int,
 		puntaje: int, intentos_restantes: int)
 signal ronda_terminada(puntaje: int, maximo: int, es_record: bool)
 
-var activo := false          ## Hay una ronda en curso
-var esperando := false       ## La pregunta actual espera un clic
+var activo := false
+var esperando := false
 
 var _config: Dictionary = {}
 var _preguntas: Array = []
@@ -20,14 +15,11 @@ var _ronda: Array = []
 var _indice := -1
 var _intentos_usados := 0
 var _puntaje := 0
-var _racha := 0              ## Aciertos seguidos (al primer intento)
-var nivel := "facil"         ## facil, medio o dificil (ver data/cuestionario.json -> niveles)
+var _racha := 0
+var nivel := "facil"
 
 
-## ids_validos: órganos que existen en la escena (se ignoran preguntas de órganos que no estén).
-## partes_validas: ids de partes del modelo; las preguntas por partes que no existan se ignoran
-## (p. ej. con el cuerpo procedural, que no tiene esas partes).
-func configurar(datos: Dictionary, ids_validos: Array, partes_validas: Array = []) -> void:
+func dymj_configurar(datos: Dictionary, ids_validos: Array, partes_validas: Array = []) -> void:
 	_config = datos
 	_preguntas = datos.get("preguntas", []).filter(func(p):
 		if not p.get("organo") in ids_validos:
@@ -36,7 +28,7 @@ func configurar(datos: Dictionary, ids_validos: Array, partes_validas: Array = [
 		return parte.is_empty() or partes_validas.any(func(x): return x.begins_with(parte)))
 
 
-static func nivel_de(p: Dictionary) -> String:
+static func dymj_nivel_de(p: Dictionary) -> String:
 	if p.has("nivel"):
 		return p["nivel"]
 	if p.has("parte"):
@@ -44,18 +36,17 @@ static func nivel_de(p: Dictionary) -> String:
 	return "medio" if String(p.get("texto", "")).begins_with("¿") else "facil"
 
 
-func niveles() -> Array:
+func dymj_niveles() -> Array:
 	return _config.get("niveles", [])
 
 
-func iniciar() -> void:
+func dymj_iniciar() -> void:
 	var orden := ["facil", "medio", "dificil"]
-	var mezcladas := _preguntas.filter(func(p): return nivel_de(p) == nivel)
+	var mezcladas := _preguntas.filter(func(p): return dymj_nivel_de(p) == nivel)
 	mezcladas.shuffle()
-	# Si el nivel tiene pocas preguntas en este cuerpo, se completa con el nivel anterior
 	var anterior := orden.find(nivel) - 1
 	if anterior >= 0:
-		var extra := _preguntas.filter(func(p): return nivel_de(p) == orden[anterior])
+		var extra := _preguntas.filter(func(p): return dymj_nivel_de(p) == orden[anterior])
 		extra.shuffle()
 		mezcladas.append_array(extra)
 	_racha = 0
@@ -71,15 +62,15 @@ func iniciar() -> void:
 	_indice = -1
 	_puntaje = 0
 	activo = true
-	siguiente()
+	dymj_siguiente()
 
 
-func siguiente() -> void:
+func dymj_siguiente() -> void:
 	if not activo:
 		return
 	_indice += 1
 	if _indice >= _ronda.size():
-		_terminar()
+		_dymj_terminar()
 		return
 	_intentos_usados = 0
 	esperando = true
@@ -87,11 +78,10 @@ func siguiente() -> void:
 	pregunta_nueva.emit(_indice + 1, _ronda.size(), p.get("texto", ""), p.get("organo", ""))
 
 
-## id_parte: parte en la que se hizo clic (las preguntas con "parte" la exigen; ambos lados valen).
-func responder(id_organo: String, id_parte := "") -> void:
+func dymj_responder(id_organo: String, id_parte := "") -> void:
 	if not esperando:
 		return
-	var correcto := organo_actual()
+	var correcto := dymj_organo_actual()
 	var parte_pedida: String = _ronda[_indice].get("parte", "")
 	_intentos_usados += 1
 	var maximos := int(_config.get("intentos", 2))
@@ -102,7 +92,7 @@ func responder(id_organo: String, id_parte := "") -> void:
 		var tabla: Array = _config.get("puntos_por_intento", [10, 5])
 		var puntos := int(tabla[mini(_intentos_usados - 1, tabla.size() - 1)])
 		_racha = _racha + 1 if _intentos_usados == 1 else 0
-		if _racha >= 3:   # Bono por racha de aciertos al primer intento
+		if _racha >= 3:
 			puntos += int(_config.get("bono_racha", 2)) * (_racha - 2)
 		_puntaje += puntos
 		esperando = false
@@ -115,47 +105,45 @@ func responder(id_organo: String, id_parte := "") -> void:
 				restantes)
 
 
-func saltar() -> void:
+func dymj_saltar() -> void:
 	if not esperando:
 		return
 	esperando = false
 	_racha = 0
-	respuesta_evaluada.emit(false, "", organo_actual(), 0, _puntaje, 0)
+	respuesta_evaluada.emit(false, "", dymj_organo_actual(), 0, _puntaje, 0)
 
 
-func abandonar() -> void:
+func dymj_abandonar() -> void:
 	activo = false
 	esperando = false
 
 
-## Parte que pide la pregunta actual ("" si pregunta por el órgano completo).
-func parte_actual() -> String:
+func dymj_parte_actual() -> String:
 	if _indice < 0 or _indice >= _ronda.size():
 		return ""
 	return _ronda[_indice].get("parte", "")
 
 
-func racha() -> int:
+func dymj_racha() -> int:
 	return _racha
 
 
-func organo_actual() -> String:
+func dymj_organo_actual() -> String:
 	if _indice < 0 or _indice >= _ronda.size():
 		return ""
 	return _ronda[_indice].get("organo", "")
 
 
-func mostrar_sistema() -> bool:
+func dymj_mostrar_sistema() -> bool:
 	return _config.get("mostrar_sistema", true)
 
 
-func _terminar() -> void:
+func _dymj_terminar() -> void:
 	activo = false
 	esperando = false
-	# Máximo posible: todo al primer intento, con el bono de racha desde el tercer acierto
 	var n := _ronda.size()
 	var maximo := n * int(_config.get("puntos_por_intento", [10])[0])
 	for racha in range(3, n + 1):
 		maximo += int(_config.get("bono_racha", 2)) * (racha - 2)
-	var record := RegistroPuntajes.registrar(_puntaje, maximo, nivel)
+	var record := RegistroPuntajes.dymj_registrar(_puntaje, maximo, nivel)
 	ronda_terminada.emit(_puntaje, maximo, record)

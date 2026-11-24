@@ -1,19 +1,3 @@
-"""
-generar_cabello.py — Genera el cabello del cuerpo femenino sobre su cuero cabelludo.
-
-  1. Carga la piel femenina ajustada (ya en coordenadas finales).
-  2. Elige los vértices del cuero cabelludo con una línea de nacimiento del pelo: más alta en la
-     frente, bajando por los lados (por encima de las orejas) hasta la nuca.
-  3. Crea una capa de pelo desplazada hacia afuera (más gruesa arriba, fina en el borde).
-  4. Agrega una melena suelta que cae por detrás de las orejas hasta media espalda y se apoya
-     sobre los hombros y la espalda (detecta la piel para no atravesarla).
-Uso:
-    blender -b --factory-startup --python tools/generar_cabello.py
-    blender -b --factory-startup --python tools/generar_cabello.py -- --piel P.glb --salida S.glb \
-        --prefijo M --corto      (cabello corto, sin melena: cuerpo masculino)
-Salida: assets_fuente/hra-femenino/Cabello_generado.glb
-"""
-
 import math
 import os
 import sys
@@ -24,15 +8,15 @@ from mathutils import Matrix, Vector
 
 PIEL = "assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb"
 SALIDA = "assets_fuente/hra-femenino/Cabello_generado.glb"
-GROSOR = 0.013          # Volumen del pelo en la coronilla (m)
-GROSOR_BORDE = 0.0015   # En la línea de nacimiento
-COLUMNAS = 120          # Resolución de la melena alrededor de la cabeza
-ABERTURA = 95          # Grados a cada lado desde la nuca (cubre por detrás de las orejas)
-LARGO_ATRAS = 1.15      # Altura (m) a la que llegan las puntas en la espalda
-LARGO_LADOS = 1.24      # ... y a los lados, sobre los hombros
-PASO = 0.006            # Distancia entre filas
-SEPARACION = 0.006      # Distancia mínima entre el pelo y la piel
-FRENTE = 0.055          # Altura de la línea del pelo en la frente, medida desde la coronilla
+GROSOR = 0.013
+GROSOR_BORDE = 0.0015
+COLUMNAS = 120
+ABERTURA = 95
+LARGO_ATRAS = 1.15
+LARGO_LADOS = 1.24
+PASO = 0.006
+SEPARACION = 0.006
+FRENTE = 0.055
 
 
 def suave(a, b, x):
@@ -58,12 +42,11 @@ def main():
     global GROSOR, GROSOR_BORDE, FRENTE
     op = argumentos()
     if op["corto"]:
-        GROSOR = 0.007         # Cabello corto: capa delgada y pegada a la cabeza
+        GROSOR = 0.007
         GROSOR_BORDE = 0.003
-        FRENTE = 0.09          # Línea del pelo más baja (cabeza masculina más alta)
+        FRENTE = 0.09
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=os.path.abspath(op["piel"]))
-    # Toda la piel (puede venir en varias piezas, como la masculina)
     bm = bmesh.new()
     for o in bpy.data.objects:
         if o.type == "MESH" and ("Epidermis" in o.name or len(bpy.data.objects) < 3 or o.name.startswith("VH_F")):
@@ -84,10 +67,8 @@ def main():
     print(f"  cabeza: altura {z_top:.3f}, profundidad {2 * medio * 100:.1f} cm, ancho {2 * ancho * 100:.1f} cm")
 
     def nacimiento(p):
-        """Altura de la línea de nacimiento del pelo según qué tan adelante está el punto."""
-        frente = (p.y - cy) / medio                     # -1 = frente, +1 = nuca
+        frente = (p.y - cy) / medio
         atras = suave(-0.55, 0.65, frente)
-        # Frente redondeada: el nacimiento baja hacia las sienes (curva y no línea recta)
         sienes = 0.032 * min(1.0, abs(p.x) / (ancho * 0.75)) ** 2 * (1.0 - atras)
         return z_top - (FRENTE + 0.12 * atras + sienes)
 
@@ -97,13 +78,10 @@ def main():
 
     cuero_estricto = {v for v in bm.verts if v.co.z > 1.45 and abs(v.co.x) < 0.14
                       and v.co.z > nacimiento(v.co) and not es_oreja(v.co)}
-    # Se incluyen también las caras del borde; sus vértices de fuera se llevan exactamente a la
-    # línea de nacimiento, así el borde queda como una curva lisa y no dentado
     caras = [f for f in bm.faces if any(v in cuero_estricto for v in f.verts)
              and not any(es_oreja(v.co) for v in f.verts)]
     cuero = {v for f in caras for v in f.verts}
 
-    # Capa de pelo: copia de las caras del cuero cabelludo desplazada hacia afuera
     pelo = bmesh.new()
     mapa = {}
     for v in cuero:
@@ -111,19 +89,16 @@ def main():
         grosor = GROSOR_BORDE + (GROSOR - GROSOR_BORDE) * borde
         base = v.co.copy()
         if v not in cuero_estricto:
-            base.z = max(base.z, nacimiento(base))   # Borde llevado a la línea de nacimiento
+            base.z = max(base.z, nacimiento(base))
         mapa[v] = pelo.verts.new(base + v.normal * grosor)
     for f in caras:
         try:
             pelo.faces.new([mapa[v] for v in f.verts])
         except ValueError:
             pass
-    # Suavizar el contorno de la capa (sin escalones en el borde)
     for _ in range(4):
         bmesh.ops.smooth_vert(pelo, verts=pelo.verts[:], factor=0.5, use_axis_x=True, use_axis_y=True,
                               use_axis_z=True)
-    # El borde se alisa a lo largo de sí mismo: una línea curva y no dentada (con la piel densa
-    # el contorno sigue cada escalón de los triángulos)
     for _ in range(60 if op["corto"] else 0):
         nuevas = {}
         for v in pelo.verts:
@@ -151,26 +126,23 @@ def main():
         print(f"[OK] Cabello corto generado en {op['salida']}")
         return
 
-    # Melena suelta: columnas que bajan desde la parte más ancha de la cabeza (por detrás de las
-    # orejas) y se apoyan sobre los hombros y la espalda sin atravesar la piel
     from mathutils.bvhtree import BVHTree
     arbol = BVHTree.FromBMesh(bm)
-    z_ecuador = z_top - 0.035   # Nace cerca de la coronilla y baja abrazando la cabeza
+    z_ecuador = z_top - 0.035
     centro = Vector((0.0, cy, z_ecuador))
     columnas = []
     for c in range(COLUMNAS):
-        theta = math.radians(-ABERTURA + 2 * ABERTURA * c / (COLUMNAS - 1))   # 0 = atrás
+        theta = math.radians(-ABERTURA + 2 * ABERTURA * c / (COLUMNAS - 1))
         d = Vector((math.sin(theta), math.cos(theta), 0.0))
         golpe, _, _, _ = arbol.ray_cast(centro + d * 0.3, -d, 0.4)
         if golpe is None:
             continue
-        mechon = 0.0012 * math.sin(theta * 47.0) + 0.0008 * math.sin(theta * 113.0)   # Relieve de mechones
+        mechon = 0.0012 * math.sin(theta * 47.0) + 0.0008 * math.sin(theta * 113.0)
         punto = golpe + d * (GROSOR + 0.003 + mechon)
-        # Más largo atrás que a los lados; puntas irregulares
         z_fin = LARGO_ATRAS + (LARGO_LADOS - LARGO_ATRAS) * abs(math.sin(theta)) ** 2 + 0.006 * math.sin(theta * 9.0)
         columna = [punto.copy()]
         pasos = 0
-        siguiendo = True   # Sobre la cabeza: la sigue mientras se ensancha; después cae recto
+        siguiendo = True
         while punto.z > z_fin and pasos < 400:
             pasos += 1
             punto = punto + Vector((0, 0, -PASO))
@@ -185,12 +157,11 @@ def main():
                 if r_nuevo >= radial.length - 0.0015 or (punto - cercano).dot(normal) < GROSOR:
                     punto = Vector((propuesto.x, propuesto.y, punto.z))
                 else:
-                    siguiendo = False   # La cabeza se estrecha (nuca, mandíbula): el pelo cae libre
+                    siguiendo = False
             else:
-                # Al caer, el pelo se junta un poco detrás de la cabeza (no se abre como capa)
                 punto.x *= 0.996
                 falta = SEPARACION - (punto - cercano).dot(normal)
-                if falta > 0:   # Apoyado en hombros o espalda: resbala hacia atrás
+                if falta > 0:
                     punto = punto + Vector((0.0, 1.0, 0.0)) * falta * 1.6
             columna.append(punto.copy())
         columnas.append(columna)

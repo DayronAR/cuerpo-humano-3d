@@ -1,24 +1,3 @@
-"""
-ajustar_piel_femenina.py — Da a la piel femenina una complexión delgada y saludable.
-
-La piel del Visible Human Female corresponde a una mujer con obesidad. Este script reduce la
-grasa subcutánea donde corresponde (abdomen, cintura, brazos, piernas) y CONSERVA la
-distribución femenina típica (caderas, glúteos, muslos y mamas), que da la silueta natural.
-
-Cómo funciona:
-  1. Carga Z-Anatomy (músculos y huesos) con la misma escala y pose de brazos del cuerpo femenino.
-  2. Para cada vértice de la piel mide la distancia a la superficie muscular u ósea más cercana
-     (= grosor de grasa + piel en ese punto).
-  3. Si es mayor que el grosor objetivo de esa zona, acerca el vértice hacia el músculo hasta ese
-     grosor. Nunca lo aleja ni lo mete dentro de la anatomía.
-  4. Suaviza el desplazamiento para que la superficie quede lisa.
-
-Uso:
-    blender -b -Y assets_fuente/z-anatomy/plantilla/Z-Anatomy/Startup.blend \\
-        --python tools/ajustar_piel_femenina.py
-Salida: assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb (en coordenadas finales del cuerpo).
-"""
-
 import json
 import math
 import os
@@ -31,7 +10,7 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import procesar_modelo as pm  # noqa: E402  (reutiliza la escala y la rotación de brazos)
+import procesar_modelo as pm
 
 MAPEO = "tools/mapeo_zanatomy_femenino.json"
 PIEL = "assets_fuente/hra-femenino/VH_F_Skin.glb"
@@ -39,31 +18,26 @@ SALIDA = "assets_fuente/hra-femenino/VH_F_Skin_ajustada.glb"
 COLECCIONES = ["4: Muscular system", "1: Skeletal system"]
 ITERACIONES_SUAVIZADO = 120
 
-# Grosor objetivo de grasa + piel (m) según la altura (z, con los pies en 0)
-PERFIL_GROSOR = [  # (z, grosor)
-    (0.00, 1.0), (0.50, 1.0),                                      # piernas: sin cambio
-    (0.62, 0.030), (0.78, 0.034),                                  # muslos algo más delgados
-    (0.86, 0.045), (0.95, 0.042),                                  # caderas y glúteos: casi sin cambio (curvas)
-    (1.03, 0.016), (1.10, 0.012), (1.20, 0.013), (1.32, 0.016),    # cintura y abdomen
+PERFIL_GROSOR = [
+    (0.00, 1.0), (0.50, 1.0),
+    (0.62, 0.030), (0.78, 0.034),
+    (0.86, 0.045), (0.95, 0.042),
+    (1.03, 0.016), (1.10, 0.012), (1.20, 0.013), (1.32, 0.016),
 ]
-Z_DESDE = (0.50, 0.62)       # Transición suave entre las piernas (sin cambio) y los muslos
+Z_DESDE = (0.50, 0.62)
 GROSOR_BRAZO = 0.003
-Z_SIN_CAMBIO = 1.42          # Cuello y cabeza quedan igual
-RADIO_MAMA = (0.08, 0.13)    # Alrededor del pezón: sin cambio hasta 8 cm, transición hasta 13 cm
-# Torso: cintura y vientre por franjas de altura (deformación suave, sin bordes)
-Z_TORSO = (0.92, 1.00, 1.12, 1.22)   # Entra entre 0,92-1,00 y sale entre 1,12-1,22 (bajo las mamas)
-MARGEN_FRENTE = -0.012       # El vientre queda 6 mm por DETRÁS del contorno delgado de referencia
-MARGEN_LADO = -0.014         # La cintura queda 8 mm por dentro del contorno delgado
-K_ESPALDA = 0.86             # La mitad posterior del torso (espalda, flancos) se reduce al 90 %
-# Caderas y piernas: escala de la sección alrededor del eje (x, y) de cada pierna
-ESCALA_PIERNA = [(0.10, 1.00), (0.30, 0.93), (0.50, 0.86), (0.66, 0.85), (0.80, 0.96)]   # (z, factor)
-ESCALA_CADERA = 0.985        # Caderas (z 0,80-0,95): escala alrededor del eje del cuerpo
+Z_SIN_CAMBIO = 1.42
+RADIO_MAMA = (0.08, 0.13)
+Z_TORSO = (0.92, 1.00, 1.12, 1.22)
+MARGEN_FRENTE = -0.012
+MARGEN_LADO = -0.014
+K_ESPALDA = 0.86
+ESCALA_PIERNA = [(0.10, 1.00), (0.30, 0.93), (0.50, 0.86), (0.66, 0.85), (0.80, 0.96)]
+ESCALA_CADERA = 0.985
 Z_CADERA = (0.78, 0.82, 0.95, 1.02)
 
 
 def perfil_torso_delgado(escala):
-    """Por franjas de 2 cm de altura: frente (y mínima) y ancho (|x| máximo) del tronco de la piel
-    de Z-Anatomy, escalada como el cuerpo femenino."""
     franjas = {}
     for o in bpy.data.collections["9: Regions of human body"].all_objects:
         if o.type != "MESH" or pm.EXCLUIR.search(o.name):
@@ -76,15 +50,13 @@ def perfil_torso_delgado(escala):
             k = round(p.z / 0.02)
             f = franjas.setdefault(k, [0.0, 0.0])
             if abs(p.x) < 0.06:
-                f[0] = min(f[0], p.y)                   # Frente en la línea media
+                f[0] = min(f[0], p.y)
             if abs(p.y - 0.0) < 0.04:
-                f[1] = max(f[1], abs(p.x))              # Ancho a media profundidad (cintura)
+                f[1] = max(f[1], abs(p.x))
     return franjas
 
 
 def es_brazo(p):
-    """Los brazos están abiertos ~19° (eje del hombro (0,16; 1,33) hacia abajo y afuera); el
-    límite interno sigue ese ángulo para no confundir el costado del muslo con la mano."""
     return p.z > 0.70 and abs(p.x) > 0.11 + (1.33 - p.z) * 0.35
 
 
@@ -103,9 +75,6 @@ def suave(a, b, x):
 
 
 def torso_por_franjas(pts, franjas, pezones):
-    """Para cada altura z: el frente del torso (mitad anterior) se comprime hacia el plano medio
-    y el ancho se escala hacia el eje, hasta el contorno delgado + margen. Los factores se
-    interpolan entre franjas y se mezclan con un peso suave en z: la superficie queda lisa."""
     zs = sorted(franjas)
     medida = {}
     for k in zs:
@@ -123,7 +92,6 @@ def torso_por_franjas(pts, franjas, pezones):
         kx = min(1.0, a_obj / max(1e-4, ancho)) if franjas[k][1] > 0 else 1.0
         medida[k] = (medio, ky, kx)
     claves = sorted(medida)
-    # Suavizar los factores entre franjas vecinas (evita escalones horizontales)
     for _ in range(6):
         nuevo = {}
         for idx, k in enumerate(claves):
@@ -157,9 +125,8 @@ def torso_por_franjas(pts, franjas, pezones):
     return resultado
 
 
-# Tono muscular: la piel se acerca a los músculos en el abdomen y los brazos (definición ligera)
-TONO = {"abdomen": (0.0075, 0.0), "brazo": (0.0035, 0.4)}   # El abdomen se esculpe aparte   # zona: (grosor objetivo, intensidad)
-ITERACIONES_TONO = 3         # Suavizado corto: conserva el relieve de los músculos
+TONO = {"abdomen": (0.0075, 0.0), "brazo": (0.0035, 0.4)}
+ITERACIONES_TONO = 3
 
 
 def tono_muscular(pts, desplazamiento, arbol, pezones):
@@ -168,7 +135,7 @@ def tono_muscular(pts, desplazamiento, arbol, pezones):
         p = p0 + Vector(desplazamiento[i])
         if es_brazo(p0) and p0.z < 1.28:
             zona = "brazo"
-            w = 1.0 - suave(1.02, 1.24, p0.z)   # Transición larga hacia el hombro (sin escalón)
+            w = 1.0 - suave(1.02, 1.24, p0.z)
         elif 0.96 < p0.z < 1.20 and abs(p0.x) < 0.13 and p0.y < 0.0:
             zona = "abdomen"
             w = suave(0.96, 1.00, p0.z) * (1.0 - suave(1.14, 1.20, p0.z)) * (1.0 - suave(0.10, 0.13, abs(p0.x)))
@@ -186,12 +153,11 @@ def tono_muscular(pts, desplazamiento, arbol, pezones):
     return resultado
 
 
-# Definición del abdomen esculpida (profundidades en m, hacia adentro)
-ABDOMEN_Z = (0.985, 1.015, 1.155, 1.185)   # Entra / sale suavemente (ombligo -> bajo las mamas)
-ALBA = (0.0042, 0.0095)          # Línea alba: profundidad, ancho (sigma en x)
-SEMILUNAR = (0.0030, 0.074, 0.015)   # Líneas semilunares: profundidad, |x| central, ancho
-INTERSECCIONES = [(1.065, 0.0022), (1.120, 0.0020)]   # (z, profundidad) de las líneas horizontales
-ANCHO_INTERSECCION = (0.0105, 0.062)  # sigma en z, mitad del ancho en x
+ABDOMEN_Z = (0.985, 1.015, 1.155, 1.185)
+ALBA = (0.0042, 0.0095)
+SEMILUNAR = (0.0030, 0.074, 0.015)
+INTERSECCIONES = [(1.065, 0.0022), (1.120, 0.0020)]
+ANCHO_INTERSECCION = (0.0105, 0.062)
 
 
 def definicion_abdomen(pts, desplazamiento, normales):
@@ -207,19 +173,18 @@ def definicion_abdomen(pts, desplazamiento, normales):
         banda = 1.0 - suave(ANCHO_INTERSECCION[1] - 0.012, ANCHO_INTERSECCION[1], x)
         for zi, di in INTERSECCIONES:
             prof += di * banda * math.exp(-((p.z - zi) / ANCHO_INTERSECCION[0]) ** 2)
-        resultado[i] = np.array([0.0, prof * w, 0.0])   # Hacia adentro (+y: el frente está en -y)
+        resultado[i] = np.array([0.0, prof * w, 0.0])
     return resultado
 
 
-# Vientre bajo (entre el ombligo y el pubis): no puede sobresalir por delante del abdomen de arriba
-VIENTRE_Z = (0.86, 0.91, 1.00, 1.03)   # Entra / sale suavemente
-Z_REFERENCIA = (1.025, 1.06)            # Franja sobre el ombligo que da el plano de referencia
-INCLINACION = 0.12                      # Hacia abajo el plano se inclina hacia atrás (m por m)
+VIENTRE_Z = (0.86, 0.91, 1.00, 1.03)
+Z_REFERENCIA = (1.025, 1.06)
+INCLINACION = 0.12
 
 
 def aplanar_vientre(pts, desplazamiento, normales):
     actual = [p + Vector(desplazamiento[i]) for i, p in enumerate(pts)]
-    referencia = {}   # Columna de 1 cm en x -> frente (y mínima) sobre el ombligo
+    referencia = {}
     for p, nrm in zip(actual, normales):
         if Z_REFERENCIA[0] < p.z < Z_REFERENCIA[1] and abs(p.x) < 0.15 and nrm.y < -0.3:
             k = round(p.x / 0.01)
@@ -234,15 +199,13 @@ def aplanar_vientre(pts, desplazamiento, normales):
             continue
         plano = sum(refs) / len(refs) + (Z_REFERENCIA[0] - p.z) * INCLINACION
         if p.y >= plano:
-            continue   # Ya está por detrás del plano
+            continue
         w = suave(VIENTRE_Z[0], VIENTRE_Z[1], p.z) * (1.0 - suave(VIENTRE_Z[2], VIENTRE_Z[3], p.z))
-        w *= 1.0 - suave(0.05, 0.15, abs(p.x))   # Transición ancha hacia los costados
+        w *= 1.0 - suave(0.05, 0.15, abs(p.x))
         resultado[i] = np.array([0.0, (plano - p.y) * w, 0.0])
     return resultado
 
 
-# Alisado de la pared del abdomen (quita pliegues heredados de la piel original, p. ej. en el
-# costado derecho) ANTES de esculpir la definición, para no borrar el relieve muscular
 ALISADO_Z = (0.94, 0.98, 1.17, 1.21)
 ALISADO_X = (0.03, 0.06, 0.15, 0.18)
 ITERACIONES_ALISADO = 40
@@ -282,8 +245,6 @@ def interpolar(tabla, z):
 
 
 def caderas_y_piernas(pts):
-    """Muslos y piernas: cada sección horizontal se escala hacia el eje de SU pierna (centro de
-    la franja en ese lado). Caderas: hacia el eje del cuerpo. Todo con pesos suaves en z."""
     centros = {}
     for p in pts:
         if p.z > Z_CADERA[1] or es_brazo(p) or abs(p.x) < 0.005:
@@ -293,7 +254,6 @@ def caderas_y_piernas(pts):
         c[0] += p.x
         c[1] += p.y
         c[2] += 1
-    # Centros suavizados entre franjas vecinas (evita bandas horizontales)
     suavizados = {}
     for (k, lado), c in centros.items():
         vecinos = [centros[(k + d, lado)] for d in range(-4, 5) if (k + d, lado) in centros]
@@ -304,7 +264,6 @@ def caderas_y_piernas(pts):
     for i, p in enumerate(pts):
         if es_brazo(p) or p.z > Z_CADERA[3]:
             continue
-        # Pierna (hasta la ingle), mezclada con la cadera
         k_pierna = interpolar(ESCALA_PIERNA, p.z)
         c = centros.get((round(p.z / 0.02), 1 if p.x > 0 else -1))
         destino = Vector(p)
@@ -327,7 +286,6 @@ def main():
     escala = mapeo.get("escala", 1.0)
     base = pm.Matrix.Scale(escala, 4)
 
-    # --- Superficie interna (músculos y huesos) en coordenadas finales ---
     dg = bpy.context.evaluated_depsgraph_get()
     vertices, caras = [], []
     for nombre in COLECCIONES:
@@ -337,16 +295,13 @@ def main():
             m = pm.ajuste_de(o, base) @ o.matrix_world
             inicio = len(vertices)
             vertices += [m @ v.co for v in o.data.vertices]
-            # Los objetos reflejados (escala negativa, la mitad de Z-Anatomy) tienen las caras al
-            # revés: se invierte su orden para que las normales apunten hacia afuera
             invertir = m.determinant() < 0
             caras += [[inicio + i for i in (reversed(p.vertices) if invertir else p.vertices)]
                       for p in o.data.polygons]
     arbol = BVHTree.FromPolygons(vertices, caras)
     print(f"[OK] Anatomía interna: {len(caras)} caras")
 
-    # --- Piel femenina en su ubicación final ---
-    desplazamiento_piel = Vector((0.0, -0.058, 0.795))   # Pies en 0 y centrada (ver mapeo femenino)
+    desplazamiento_piel = Vector((0.0, -0.058, 0.795))
     for o in list(bpy.data.objects):
         o.hide_viewport = True
     antes = set(bpy.data.objects)
@@ -356,7 +311,6 @@ def main():
     piel.data.transform(piel.matrix_world)
     piel.matrix_world = pm.Matrix.Identity(4)
     malla = piel.data
-    # glTF duplica vértices en las costuras de UV: se unen para que el suavizado no abra grietas
     import bmesh
     bm = bmesh.new()
     bm.from_mesh(malla)
@@ -364,7 +318,6 @@ def main():
     bm.to_mesh(malla)
     bm.free()
 
-    # Pezones (para no tocar las mamas): punto más adelantado del pecho a cada lado
     pts = [v.co for v in malla.vertices]
     pezones = [min((p for p in pts if 1.15 < p.z < 1.36 and 0.05 < p.x * s < 0.17), key=lambda p: p.y)
                for s in (1, -1)]
@@ -378,11 +331,11 @@ def main():
             continue
         cercano, normal, _, distancia = arbol.find_nearest(p)
         if cercano is None or (p - cercano).dot(normal) < 0:
-            continue   # Fuera de alcance o la piel ya está por dentro: no se toca
+            continue
         exceso = distancia - grosor_objetivo(p)
         if exceso <= 0 or not es_brazo(p):
-            continue   # El primer paso solo adelgaza los brazos; el torso se hace por franjas
-        w = 1.0 - suave(1.27, 1.37, p.z)   # Hombros y cuello sin cambio (evita pliegues)
+            continue
+        w = 1.0 - suave(1.27, 1.37, p.z)
         if not es_brazo(p):
             w *= suave(*Z_DESDE, p.z)
         for pz in pezones:
@@ -391,11 +344,9 @@ def main():
         desplazamiento[i] = np.array(direccion) * exceso * w
         peso[i] = w
 
-    # Segundo paso (después del suavizado, ver abajo): torso por franjas
     desplazamiento += torso_por_franjas(pts, franjas, pezones)
     desplazamiento += caderas_y_piernas(pts)
 
-    # Suavizado del desplazamiento (promedio con los vecinos) para que no queden bultos ni bandas
     aristas = np.array([e.vertices[:] for e in malla.edges])
     grado = np.bincount(aristas.ravel(), minlength=n).astype(float)
     grado[grado == 0] = 1
@@ -406,7 +357,6 @@ def main():
         desplazamiento = 0.5 * desplazamiento + 0.5 * suma / grado[:, None]
 
 
-    # Tono muscular sobre la forma ya adelgazada, con un suavizado corto
     tono = tono_muscular(pts, desplazamiento, arbol, pezones)
     for _ in range(ITERACIONES_TONO):
         suma = np.zeros((n, 3))
@@ -417,7 +367,7 @@ def main():
     normales = [v.normal.copy() for v in malla.vertices]
     desplazamiento = alisar_abdomen(pts, desplazamiento, normales, aristas, grado, pezones)
     definicion = definicion_abdomen(pts, desplazamiento, normales)
-    for _ in range(4):   # Suaviza el relieve: músculos, no cortes
+    for _ in range(4):
         suma = np.zeros((n, 3))
         np.add.at(suma, aristas[:, 0], definicion[aristas[:, 1]])
         np.add.at(suma, aristas[:, 1], definicion[aristas[:, 0]])

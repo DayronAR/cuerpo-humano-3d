@@ -1,12 +1,10 @@
 class_name BarraSistemas
 extends PanelContainer
-## Barra lateral izquierda: lista de sistemas (desde sistemas.json), botón "Cuerpo completo"
-## y el interruptor de modo fantasma. Solo emite señales; no toca el 3D.
 
-signal sistema_solicitado(id_sistema: String)   ## "" = cuerpo completo
+signal sistema_solicitado(id_sistema: String)
 signal modo_fantasma_cambiado(activo: bool)
-signal estructura_elegida(id_organo: String, id_parte: String)   ## Desde el buscador ("" = órgano completo)
-signal edad_cambiada(anios: float, final: bool)   ## final = true al soltar la barra
+signal estructura_elegida(id_organo: String, id_parte: String)
+signal edad_cambiada(anios: float, final: bool)
 
 const MAX_RESULTADOS := 40
 
@@ -18,66 +16,63 @@ const ALTO_ELEMENTO := 66
 @onready var _buscador: LineEdit = %Buscador
 @onready var _resultados: ItemList = %Resultados
 
-var _indice_busqueda: Array = []   ## [texto normalizado, nombre visible, id_organo, id_parte]
+var _indice_busqueda: Array = []
 
 const COLOR_TEXTO := Color(0.89, 0.925, 0.945, 1)
 const COLOR_TEXTO_SUAVE := Color(0.557, 0.639, 0.69, 1)
 const COLOR_ACENTO := Color(0.173, 0.773, 0.71, 1)
 
 var _grupo := ButtonGroup.new()
-var _botones: Dictionary = {}   ## id -> Button ("" para cuerpo completo)
+var _botones: Dictionary = {}
 
 
 func _ready() -> void:
-	_aplicar_estilo(_boton_completo)
+	_dymj_aplicar_estilo(_boton_completo)
 	_boton_completo.button_group = _grupo
 	_boton_completo.toggle_mode = true
 	_boton_completo.button_pressed = true
 	_boton_completo.pressed.connect(sistema_solicitado.emit.bind(""))
 	_botones[""] = _boton_completo
 	_fantasma.toggled.connect(modo_fantasma_cambiado.emit)
-	_buscador.text_changed.connect(_buscar)
-	_buscador.text_submitted.connect(func(_t): _elegir(0))
-	_resultados.item_clicked.connect(func(i, _pos, _boton): _elegir(i))
-	%BarraEdad.value_changed.connect(func(v): _mostrar_edad(v); edad_cambiada.emit(v, false))
+	_buscador.text_changed.connect(_dymj_buscar)
+	_buscador.text_submitted.connect(func(_t): _dymj_elegir(0))
+	_resultados.item_clicked.connect(func(i, _pos, _boton): _dymj_elegir(i))
+	%BarraEdad.value_changed.connect(func(v): _dymj_mostrar_edad(v); edad_cambiada.emit(v, false))
 	%BarraEdad.drag_ended.connect(func(cambio): if cambio: edad_cambiada.emit(%BarraEdad.value, true))
 
 
-## cfg: data/edad.json
-func configurar_edad(cfg: Dictionary) -> void:
+func dymj_configurar_edad(cfg: Dictionary) -> void:
 	%BarraEdad.min_value = cfg.get("edad_min", 0)
 	%BarraEdad.max_value = cfg.get("edad_max", 90)
 	%BarraEdad.set_value_no_signal(cfg.get("edad_inicial", 30))
-	_mostrar_edad(%BarraEdad.value)
+	_dymj_mostrar_edad(%BarraEdad.value)
 
 
-func fijar_edad_sin_senal(anios: float) -> void:
+func dymj_fijar_edad_sin_senal(anios: float) -> void:
 	%BarraEdad.set_value_no_signal(anios)
-	_mostrar_edad(anios)
+	_dymj_mostrar_edad(anios)
 
 
-func _mostrar_edad(anios: float) -> void:
+func _dymj_mostrar_edad(anios: float) -> void:
 	var texto := "Recién nacido" if anios < 1 else ("1 año" if anios < 2 else "%d años" % int(anios))
-	%ValorEdad.text = "%s · %s" % [texto, Datos.etapa_edad(anios)] if anios >= 1 else texto
+	%ValorEdad.text = "%s · %s" % [texto, Datos.dymj_etapa_edad(anios)] if anios >= 1 else texto
 
 
-func configurar(sistemas: Array) -> void:
+func dymj_configurar(sistemas: Array) -> void:
 	for hijo in _lista.get_children():
 		hijo.queue_free()
 	for s in sistemas:
-		var boton := _crear_elemento(s)
+		var boton := _dymj_crear_elemento(s)
 		_lista.add_child(boton)
 		_botones[s.get("id", "")] = boton
 
 
-## Marca un sistema como activo sin volver a emitir la señal (p. ej. si lo eligió un escenario).
-func marcar(id_sistema: String) -> void:
-	# set_pressed_no_signal no desmarca a los demás del grupo, así que se hace a mano
+func dymj_marcar(id_sistema: String) -> void:
 	for id in _botones:
 		_botones[id].set_pressed_no_signal(id == id_sistema)
 
 
-func _crear_elemento(s: Dictionary) -> Button:
+func _dymj_crear_elemento(s: Dictionary) -> Button:
 	var id: String = s.get("id", "")
 	var boton := Button.new()
 	boton.name = "Sistema" + id
@@ -87,9 +82,8 @@ func _crear_elemento(s: Dictionary) -> Button:
 	boton.custom_minimum_size = Vector2(0, ALTO_ELEMENTO)
 	boton.tooltip_text = s.get("descripcion", "")
 	boton.pressed.connect(sistema_solicitado.emit.bind(id))
-	_aplicar_estilo(boton)
+	_dymj_aplicar_estilo(boton)
 
-	# Contenido: nombre + descripción breve
 	var margen := MarginContainer.new()
 	margen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for lado in ["left", "right", "top", "bottom"]:
@@ -120,8 +114,7 @@ func _crear_elemento(s: Dictionary) -> Button:
 	return boton
 
 
-## Estilo claro para los botones: el sistema activo queda resaltado con borde de color.
-func _aplicar_estilo(boton: Button) -> void:
+func _dymj_aplicar_estilo(boton: Button) -> void:
 	var estados := {
 		"normal": [Color(0.11, 0.153, 0.2), Color(0, 0, 0, 0)],
 		"hover": [Color(0.141, 0.196, 0.255), Color(0, 0, 0, 0)],
@@ -139,11 +132,7 @@ func _aplicar_estilo(boton: Button) -> void:
 		boton.add_theme_color_override(estado, COLOR_ACENTO if "pressed" in estado else COLOR_TEXTO)
 
 
-# --- Buscador ---------------------------------------------------------------------------
-
-## organos: id -> ficha (organos.json) · partes: id -> {nombre, organo} (partes.json) ·
-## existentes: ids de órganos y partes que tiene el modelo cargado (se ignoran los demás).
-func configurar_buscador(organos: Dictionary, partes: Dictionary, existentes: Array) -> void:
+func dymj_configurar_buscador(organos: Dictionary, partes: Dictionary, existentes: Array) -> void:
 	_indice_busqueda.clear()
 	var hay := {}
 	for id in existentes:
@@ -151,19 +140,19 @@ func configurar_buscador(organos: Dictionary, partes: Dictionary, existentes: Ar
 	for id in organos:
 		if hay.has(id):
 			var nombre: String = organos[id].get("nombre", id)
-			_indice_busqueda.append([_normalizar(nombre), nombre, id, ""])
+			_indice_busqueda.append([_dymj_normalizar(nombre), nombre, id, ""])
 	for id in partes:
 		if hay.has(id):
 			var p: Dictionary = partes[id]
 			var nombre: String = p.get("nombre", id)
 			var organo: String = p.get("organo", "")
 			var texto := "%s  ·  %s" % [nombre, organos.get(organo, {}).get("nombre", organo)]
-			_indice_busqueda.append([_normalizar(nombre + " " + p.get("nombre_en", "")), texto, organo, id])
+			_indice_busqueda.append([_dymj_normalizar(nombre + " " + p.get("nombre_en", "")), texto, organo, id])
 
 
-func _buscar(texto: String) -> void:
+func _dymj_buscar(texto: String) -> void:
 	_resultados.clear()
-	var consulta := _normalizar(texto.strip_edges())
+	var consulta := _dymj_normalizar(texto.strip_edges())
 	_resultados.visible = consulta.length() >= 2
 	if not _resultados.visible:
 		return
@@ -187,15 +176,14 @@ func _buscar(texto: String) -> void:
 		_resultados.set_item_disabled(0, true)
 
 
-func _elegir(indice: int) -> void:
+func _dymj_elegir(indice: int) -> void:
 	if indice < 0 or indice >= _resultados.item_count or _resultados.is_item_disabled(indice):
 		return
 	var datos: Array = _resultados.get_item_metadata(indice)
 	estructura_elegida.emit(datos[0], datos[1])
 
 
-## Minúsculas y sin tildes, para que "rinon" encuentre "riñón" y "femur" encuentre "fémur".
-static func _normalizar(texto: String) -> String:
+static func _dymj_normalizar(texto: String) -> String:
 	var t := texto.to_lower()
 	for par in [["á", "a"], ["é", "e"], ["í", "i"], ["ó", "o"], ["ú", "u"], ["ü", "u"], ["ñ", "n"]]:
 		t = t.replace(par[0], par[1])

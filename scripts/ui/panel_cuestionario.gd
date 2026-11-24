@@ -1,7 +1,5 @@
 class_name PanelCuestionario
 extends VBoxContainer
-## Interfaz del cuestionario: muestra preguntas, retroalimentación y resultado.
-## Solo emite lo que pulsa el usuario; la lógica está en Cuestionario.
 
 signal comenzar_pulsado
 signal siguiente_pulsado
@@ -30,8 +28,7 @@ var _botones_nivel := {}
 var _descripcion_nivel: Label
 
 
-## niveles: [{id, nombre, descripcion}, ...] (data/cuestionario.json). Crea los botones de nivel.
-func configurar_niveles(niveles: Array) -> void:
+func dymj_configurar_niveles(niveles: Array) -> void:
 	if niveles.is_empty():
 		return
 	var fila := HBoxContainer.new()
@@ -46,7 +43,7 @@ func configurar_niveles(niveles: Array) -> void:
 		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		b.add_theme_color_override("font_pressed_color", Color.WHITE)
 		b.add_theme_color_override("font_hover_pressed_color", Color.WHITE)
-		b.pressed.connect(_elegir_nivel.bind(n))
+		b.pressed.connect(_dymj_elegir_nivel.bind(n))
 		fila.add_child(b)
 		_botones_nivel[n.get("id")] = b
 	_descripcion_nivel = Label.new()
@@ -59,31 +56,31 @@ func configurar_niveles(niveles: Array) -> void:
 	_inicio.move_child(fila, _boton_comenzar.get_index())
 	_inicio.move_child(_descripcion_nivel, _boton_comenzar.get_index())
 	_botones_nivel[niveles[0].get("id")].button_pressed = true
-	_elegir_nivel(niveles[0])
+	_dymj_elegir_nivel(niveles[0])
 
 
-func _elegir_nivel(n: Dictionary) -> void:
+func _dymj_elegir_nivel(n: Dictionary) -> void:
 	_nivel = n.get("id", "facil")
 	_descripcion_nivel.text = n.get("descripcion", "")
 	nivel_elegido.emit(_nivel)
-	_actualizar_record()
+	_dymj_actualizar_record()
 
 
 func _ready() -> void:
 	_boton_comenzar.pressed.connect(comenzar_pulsado.emit)
 	_boton_siguiente.pressed.connect(siguiente_pulsado.emit)
 	_boton_saltar.pressed.connect(saltar_pulsado.emit)
-	mostrar_inicio()
+	dymj_mostrar_inicio()
 
 
-func mostrar_inicio() -> void:
+func dymj_mostrar_inicio() -> void:
 	_inicio.visible = true
 	_juego.visible = false
 	_boton_comenzar.text = "Comenzar"
-	_actualizar_record()
+	_dymj_actualizar_record()
 
 
-func mostrar_pregunta(numero: int, total: int, texto: String, puntaje: int) -> void:
+func dymj_mostrar_pregunta(numero: int, total: int, texto: String, puntaje: int) -> void:
 	_inicio.visible = false
 	_juego.visible = true
 	_progreso.text = "Pregunta %d de %d" % [numero, total]
@@ -97,7 +94,7 @@ func mostrar_pregunta(numero: int, total: int, texto: String, puntaje: int) -> v
 	_boton_siguiente.visible = false
 
 
-func mostrar_resultado(correcta: bool, nombre_respondido: String, nombre_correcto: String, puntos: int,
+func dymj_mostrar_resultado(correcta: bool, nombre_respondido: String, nombre_correcto: String, puntos: int,
 		puntaje: int, restantes: int, racha := 0) -> void:
 	_puntos.text = "Puntos: %d" % puntaje
 	if correcta:
@@ -121,11 +118,11 @@ func mostrar_resultado(correcta: bool, nombre_respondido: String, nombre_correct
 	_boton_siguiente.visible = true
 
 
-func mostrar_final(puntaje: int, maximo: int, es_record: bool) -> void:
+func dymj_mostrar_final(puntaje: int, maximo: int, es_record: bool) -> void:
 	_inicio.visible = true
 	_juego.visible = false
 	_boton_comenzar.text = "Jugar otra vez"
-	_actualizar_record()
+	_dymj_actualizar_record()
 	var texto := "Obtuviste %d de %d puntos." % [puntaje, maximo]
 	if es_record:
 		texto += "\n¡Nuevo récord!"
@@ -133,8 +130,8 @@ func mostrar_final(puntaje: int, maximo: int, es_record: bool) -> void:
 	%Resultado.visible = true
 
 
-func _actualizar_record() -> void:
-	var mejor := RegistroPuntajes.mejor_puntaje(_nivel)
+func _dymj_actualizar_record() -> void:
+	var mejor := RegistroPuntajes.dymj_mejor_puntaje(_nivel)
 	var nombre: String = _botones_nivel[_nivel].text if _botones_nivel.has(_nivel) else ""
 	var sufijo := " (%s)" % nombre if not nombre.is_empty() else ""
 	_record.text = "Mejor puntaje%s: %d de %d" % [sufijo, mejor.puntaje, mejor.total] if mejor.total > 0 \

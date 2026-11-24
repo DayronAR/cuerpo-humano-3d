@@ -1,7 +1,5 @@
 class_name TarjetaRecorrido
 extends PanelContainer
-## Tarjeta de un recorrido en curso (abajo al centro): título, paso actual, explicación y botones
-## Anterior / Siguiente / Salir. Solo muestra y emite señales.
 
 signal anterior
 signal siguiente
@@ -55,18 +53,18 @@ func _ready() -> void:
 	botones.alignment = BoxContainer.ALIGNMENT_END
 	botones.add_theme_constant_override("separation", 8)
 	caja.add_child(botones)
-	var b_salir := _boton("Salir", salir)
+	var b_salir := _dymj_boton("Salir", salir)
 	botones.add_child(b_salir)
 	var espacio := Control.new()
 	espacio.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	botones.add_child(espacio)
-	_boton_anterior = _boton("◀  Anterior", anterior)
+	_boton_anterior = _dymj_boton("◀  Anterior", anterior)
 	botones.add_child(_boton_anterior)
-	_boton_siguiente = _boton("Siguiente  ▶", siguiente)
+	_boton_siguiente = _dymj_boton("Siguiente  ▶", siguiente)
 	botones.add_child(_boton_siguiente)
 
 
-func mostrar_paso(nombre: String, color: Color, numero: int, total: int, organo: String, texto: String) -> void:
+func dymj_mostrar_paso(nombre: String, color: Color, numero: int, total: int, organo: String, texto: String) -> void:
 	_titulo.text = nombre
 	_barra_color.color = color
 	_paso.text = "Paso %d de %d · %s" % [numero, total, organo]
@@ -78,7 +76,7 @@ func mostrar_paso(nombre: String, color: Color, numero: int, total: int, organo:
 	position = Vector2((get_viewport_rect().size.x - size.x) * 0.5, get_viewport_rect().size.y - size.y - 70)
 
 
-func _boton(texto: String, senal: Signal) -> Button:
+func _dymj_boton(texto: String, senal: Signal) -> Button:
 	var b := Button.new()
 	b.text = texto
 	b.focus_mode = Control.FOCUS_NONE
