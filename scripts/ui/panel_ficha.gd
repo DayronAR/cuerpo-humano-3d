@@ -51,7 +51,7 @@ func mostrar(ficha: Dictionary, nombre_sistema: String, color_sistema: Color, no
 		_titulo.text = nombre_parte
 		_sistema.text = "Parte de: %s · %s" % [ficha.get("nombre", ""), nombre_sistema]
 	mostrar_aislado(false)
-	_marca_color.color = color_sistema
+	_marca_color.visible = false
 	if not ficha_parte.is_empty():
 		ficha = ficha_parte
 	_funcion.text = ficha.get("funcion", "")

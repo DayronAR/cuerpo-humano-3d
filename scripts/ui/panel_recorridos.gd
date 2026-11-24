@@ -29,8 +29,6 @@ func configurar(recorridos: Array) -> void:
 		var estilo := StyleBoxFlat.new()
 		estilo.bg_color = Color(0.11, 0.153, 0.2)
 		estilo.set_corner_radius_all(8)
-		estilo.border_width_left = 5
-		estilo.border_color = Color.from_string(r.get("color", "#2a7f9e"), Color.TEAL)
 		estilo.content_margin_left = 14
 		estilo.content_margin_right = 8
 		var hover := estilo.duplicate()

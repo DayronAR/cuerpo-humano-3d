@@ -877,12 +877,33 @@ class Choque:
 	var parte: Node3D
 
 
+## Caja de las mallas tal como se ven. La AABB de las mallas incluye el espacio de todas las formas
+## de edad (bebé, anciano, posturas) y es mucho más grande que el órgano: se usa la forma de
+## colisión (que tiene la edad actual) o, si aún no está lista, los vértices con la edad actual.
 func _caja_de_mallas(mallas: Array[MeshInstance3D]) -> AABB:
 	var resultado := AABB()
-	for i in mallas.size():
-		var caja: AABB = mallas[i].global_transform * mallas[i].get_aabb()
-		resultado = caja if i == 0 else resultado.merge(caja)
+	var primero := true
+	for malla in mallas:
+		var caja := _caja_real(malla)
+		if caja.size == Vector3.ZERO and caja.position == Vector3.ZERO:
+			continue
+		resultado = caja if primero else resultado.merge(caja)
+		primero = false
 	return resultado
+
+
+func _caja_real(malla: MeshInstance3D) -> AABB:
+	for hijo in malla.get_children():
+		if hijo is StaticBody3D and hijo.get_child_count() > 0:
+			var forma = (hijo.get_child(0) as CollisionShape3D).shape
+			if forma is ConcavePolygonShape3D:
+				var caras: PackedVector3Array = forma.get_faces()
+				if not caras.is_empty():
+					var caja := AABB(caras[0], Vector3.ZERO)
+					for k in range(0, caras.size(), maxi(1, caras.size() / 2000)):
+						caja = caja.expand(caras[k])
+					return malla.global_transform * caja
+	return malla.global_transform * malla.get_aabb()
 
 
 func _actualizar_overlay_si(organo: Node3D) -> void:

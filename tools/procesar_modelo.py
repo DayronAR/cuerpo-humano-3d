@@ -791,12 +791,18 @@ def partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices):
     return vacio, objetos
 
 
-def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazamiento, soldar, cerrar=False):
-    """Divide un órgano que viene en una sola malla (p. ej. el estómago) en regiones anatómicas.
-    regiones: {clave: {"nombre": ..., "marcas": [nombres de objetos de Z-Anatomy]}}. Cada marca
-    es la etiqueta de posición que trae el modelo (objetos ".j" o textos ".t"), o "junto:<objeto>":
-    el punto del órgano más cercano a otro órgano (p. ej. el duodeno, para el píloro). Cada cara
-    va a la región de la marca más cercana."""
+def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazamiento, soldar, cerrar=False,
+                         ejes="xz"):
+    """Divide un órgano en regiones anatómicas (p. ej. el estómago: cardias, fondo, cuerpo, antro,
+    píloro). Cada región puede definirse, en este orden de prioridad, por:
+      - "en": [objetos]   las caras pegadas a esos objetos fuente (p. ej. la rótula en el fémur),
+      - "rango_z": [a, b] una franja de altura (fracción del alto del órgano, 0 = abajo),
+      - "radio" + marcas  un entorno de ese radio (m) alrededor de las marcas,
+      - marcas            el resto de las caras va a la marca más cercana (en los "ejes" pedidos:
+                          "xz" = vista de frente, "z" = por altura, "x" = de lado a lado, "xyz").
+    Marcas: nombre de una etiqueta de Z-Anatomy (".j" o ".t"); "junto:<obj>" = el punto del órgano
+    más cercano a otro objeto; "centro:<obj>" = el centro de otro objeto; "rel:x,y,z" = posición
+    relativa dentro de la caja del órgano (0 a 1)."""
     from mathutils.kdtree import KDTree
     from mathutils.bvhtree import BVHTree
     completa, _ = preparar_organo(destino + "__completa", fuentes, max_tris, escala, desplazamiento, False,
@@ -808,36 +814,74 @@ def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazam
     mundo = completa.matrix_world
     ajuste = Matrix.Translation(Vector(desplazamiento)) @ Matrix.Scale(escala, 4)
     vertices = [mundo @ v.co for v in m.vertices]
-    puntos, etiquetas = [], []
-    radios = []   # [clave, punto, radio]: regiones pequeñas alrededor de un punto (p. ej. el píloro)
+    minimo = Vector((min(v[i] for v in vertices) for i in range(3)))
+    maximo = Vector((max(v[i] for v in vertices) for i in range(3)))
+    tamano = maximo - minimo
+
+    def malla_mundo(nombre):
+        obj = bpy.data.objects.get(nombre)
+        if obj is None:
+            print(f"[AVISO] {destino}: no existe {nombre}")
+            return None
+        dg = bpy.context.evaluated_depsgraph_get()
+        malla = bpy.data.meshes.new_from_object(obj.evaluated_get(dg), depsgraph=dg)
+        malla.transform(ajuste_de(obj, ajuste) @ obj.matrix_world)
+        return malla
+
+    def arbol_de(nombre):
+        malla = malla_mundo(nombre)
+        if malla is None:
+            return None
+        bm = bmesh.new()
+        bm.from_mesh(malla)
+        arbol_o = BVHTree.FromBMesh(bm)
+        bm.free()
+        bpy.data.meshes.remove(malla)
+        return arbol_o
+
+    def marca_a_punto(marca):
+        if marca.startswith("rel:"):
+            f = [float(x) for x in marca[4:].split(",")]
+            return Vector((minimo.x + tamano.x * f[0], minimo.y + tamano.y * f[1], minimo.z + tamano.z * f[2]))
+        if marca.startswith("centro:"):
+            malla = malla_mundo(marca[7:])
+            if malla is None:
+                return None
+            c = sum((v.co for v in malla.vertices), Vector()) / max(1, len(malla.vertices))
+            bpy.data.meshes.remove(malla)
+            return c
+        if marca.startswith("junto:"):
+            arbol_o = arbol_de(marca[6:])
+            if arbol_o is None:
+                return None
+            return min(vertices, key=lambda v: (arbol_o.find_nearest(v)[3] or 1e9))
+        obj = bpy.data.objects.get(marca)
+        if obj is None:
+            print(f"[AVISO] {destino}: no existe la marca {marca}")
+            return None
+        return ajuste_de(obj, ajuste) @ obj.matrix_world.translation
+
+    def proyectar(v):
+        return Vector((v.x if "x" in ejes else 0.0, v.y if "y" in ejes else 0.0, v.z if "z" in ejes else 0.0))
+
+    puntos, etiquetas, radios, franjas, pertenencias = [], [], [], [], []
     for clave, r in regiones.items():
-        for marca in r["marcas"]:
-            if marca.startswith("junto:"):
-                otro = bpy.data.objects.get(marca[6:])
-                if otro is None:
-                    print(f"[AVISO] {destino}: no existe {marca[6:]}")
-                    continue
-                dg = bpy.context.evaluated_depsgraph_get()
-                malla = bpy.data.meshes.new_from_object(otro.evaluated_get(dg), depsgraph=dg)
-                malla.transform(ajuste_de(otro, ajuste) @ otro.matrix_world)
-                bm = bmesh.new()
-                bm.from_mesh(malla)
-                arbol_otro = BVHTree.FromBMesh(bm)
-                punto = min(vertices, key=lambda v: (arbol_otro.find_nearest(v)[3] or 1e9))
-                bm.free()
-                bpy.data.meshes.remove(malla)
-            else:
-                obj = bpy.data.objects.get(marca)
-                if obj is None:
-                    print(f"[AVISO] {destino}: no existe la marca {marca}")
-                    continue
-                punto = ajuste_de(obj, ajuste) @ obj.matrix_world.translation
+        for nombre in r.get("en", []):
+            arbol_o = arbol_de(nombre)
+            if arbol_o is not None:
+                pertenencias.append((clave, arbol_o))
+        if r.get("rango_z"):
+            franjas.append((clave, minimo.z + tamano.z * r["rango_z"][0], minimo.z + tamano.z * r["rango_z"][1]))
+        for marca in r.get("marcas", []):
+            punto = marca_a_punto(marca)
+            if punto is None:
+                continue
             if r.get("radio"):
                 radios.append([clave, punto, float(r["radio"])])
-                continue
-            puntos.append(Vector((punto.x, 0.0, punto.z)))   # Vista de frente (ver abajo)
-            etiquetas.append(clave)
-    arbol = KDTree(len(puntos))
+            else:
+                puntos.append(proyectar(punto))
+                etiquetas.append(clave)
+    arbol = KDTree(max(1, len(puntos)))
     for k, pt in enumerate(puntos):
         arbol.insert(pt, k)
     arbol.balance()
@@ -848,13 +892,19 @@ def dividir_por_regiones(destino, fuentes, regiones, max_tris, escala, desplazam
     arbol_vertices.balance()
     asignacion = {}
     for poligono in m.polygons:
-        # Las marcas están sobre la cara de adelante: se compara la posición vista de frente
-        # (sin la profundidad), así la pared de atrás va a la misma región que la de adelante
         c = mundo @ poligono.center
-        clave = next((rad[0] for rad in radios if (c - rad[1]).length < rad[2]), None)
+        clave = next((k for k, a in pertenencias if (a.find_nearest(c)[3] or 1.0) < 0.001), None)
         if clave is None:
-            _, k, _ = arbol.find(Vector((c.x, 0.0, c.z)))
+            clave = next((k for k, z0, z1 in franjas if z0 <= c.z <= z1), None)
+        if clave is None:
+            clave = next((rad[0] for rad in radios if (c - rad[1]).length < rad[2]), None)
+        if clave is None and puntos:
+            # Por defecto se compara vista de frente (las marcas de Z-Anatomy están sobre la cara
+            # de adelante: así la pared de atrás va a la misma región que la de adelante)
+            _, k, _ = arbol.find(proyectar(c))
             clave = etiquetas[k]
+        if clave is None:
+            clave = next(iter(regiones))
         asignacion.setdefault(clave, []).append(poligono.index)
     print(f"  {destino}: " + ", ".join(f"{c} {len(v)} caras" for c, v in asignacion.items()))
     return partir_en_objetos(destino, completa, asignacion, normales, arbol_vertices)
@@ -1086,7 +1136,8 @@ def main():
                 partes = {c: {"nombre": r["nombre"], "lado": "", "nombre_en": r.get("nombre_en", "")}
                           for c, r in definicion["regiones"].items()}
                 vacio, objetos = dividir_por_regiones(destino, fuentes, definicion["regiones"], limite, escala,
-                                                      desplazamiento, soldar, bool(definicion.get("cerrar")))
+                                                      desplazamiento, soldar, bool(definicion.get("cerrar")),
+                                                      definicion.get("ejes", "xz"))
                 exportables.append(vacio)
                 exportables.extend(o for _, o in objetos)
                 for clave, o in objetos:

@@ -76,6 +76,1181 @@
    "nombre_en": "Thoracic aorta",
    "organo": "Aorta"
   },
+  "ArteriasPerifericas__Accessory_branch_of_middle_meningeal_artery": {
+   "nombre": "Rama accesoria de la arteria meníngea media",
+   "nombre_en": "Accessory branch of middle meningeal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Angular_artery": {
+   "nombre": "Arteria angular",
+   "nombre_en": "Angular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_basal_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria basal anterior del pulmón izquierdo",
+   "nombre_en": "Anterior basal segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_basal_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria basal anterior del pulmón derecho",
+   "nombre_en": "Anterior basal segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_branch_of_renal_artery": {
+   "nombre": "Rama anterior de la arteria renal",
+   "nombre_en": "Anterior branch of renal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_cerebral_artery": {
+   "nombre": "Arteria cerebral anterior",
+   "nombre_en": "Anterior cerebral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_circumflex_humeral_artery": {
+   "nombre": "Arteria circunfleja anterior del húmero",
+   "nombre_en": "Anterior circumflex humeral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_communicating_artery": {
+   "nombre": "Arteria comunicante anterior",
+   "nombre_en": "Anterior communicating artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_deep_temporal_artery": {
+   "nombre": "Arteria temporal profunda anterior",
+   "nombre_en": "Anterior deep temporal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_division_of_internal_iliac_artery": {
+   "nombre": "División anterior de la arteria ilíaca interna",
+   "nombre_en": "Anterior division of internal iliac artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_ethmoidal_artery": {
+   "nombre": "Arteria etmoidal anterior",
+   "nombre_en": "Anterior ethmoidal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_inferior_cerebellar_artery": {
+   "nombre": "Arteria cerebelosa inferior anterior",
+   "nombre_en": "Anterior inferior cerebellar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_inferior_pancreaticoduodenal_artery": {
+   "nombre": "Arteria pancreáticoduodenal inferior anterior",
+   "nombre_en": "Anterior inferior pancreaticoduodenal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_interventricular_artery": {
+   "nombre": "Arteria interventricular anterior",
+   "nombre_en": "Anterior interventricular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria anterior del pulmón izquierdo",
+   "nombre_en": "Anterior segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria anterior del pulmón derecho",
+   "nombre_en": "Anterior segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_septal_branches_of_anterior_ethmoidal_artery": {
+   "nombre": "Ramas del septales anteriores de la arteria etmoidal anterior",
+   "nombre_en": "Anterior septal branches of anterior ethmoidal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_spinal_artery": {
+   "nombre": "Arteria espinal anterior",
+   "nombre_en": "Anterior spinal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_temporal_branch": {
+   "nombre": "Anterior temporal branch",
+   "nombre_en": "Anterior temporal branch",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Anterior_tibial_artery": {
+   "nombre": "Arteria tibial anterior",
+   "nombre_en": "Anterior tibial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Apical_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria apical del pulmón izquierdo",
+   "nombre_en": "Apical segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Apical_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria apical del pulmón derecho",
+   "nombre_en": "Apical segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Appendicular_artery": {
+   "nombre": "Arteria apendicular",
+   "nombre_en": "Appendicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Arcuate_artery": {
+   "nombre": "Arteria arqueada",
+   "nombre_en": "Arcuate artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Artery_of_central_sulcus": {
+   "nombre": "Artery of central sulcus",
+   "nombre_en": "Artery of central sulcus",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Artery_of_precentral_sulcus": {
+   "nombre": "Artery of precentral sulcus",
+   "nombre_en": "Artery of precentral sulcus",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Artery_of_pterygoid_canal": {
+   "nombre": "Arteria del canal pterigoideo",
+   "nombre_en": "Artery of pterygoid canal",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Ascending_branch_of_left_colic_artery": {
+   "nombre": "Rama ascendente de la arteria cólica izquierda",
+   "nombre_en": "Ascending branch of left colic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Ascending_pharyngeal_artery": {
+   "nombre": "Arteria faríngea ascendente",
+   "nombre_en": "Ascending pharyngeal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Axillary_artery": {
+   "nombre": "Arteria axilar",
+   "nombre_en": "Axillary artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Basilar_artery": {
+   "nombre": "Arteria basilar",
+   "nombre_en": "Basilar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Bifurcation_of_pulmonary_trunk": {
+   "nombre": "Bifurcación del tronco pulmonar",
+   "nombre_en": "Bifurcation of pulmonary trunk",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Brachial_artery": {
+   "nombre": "Arteria braquial",
+   "nombre_en": "Brachial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Branch_to_angular_gyrus": {
+   "nombre": "Branch to angular gyrus",
+   "nombre_en": "Branch to angular gyrus",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Buccal_artery": {
+   "nombre": "Arteria bucal",
+   "nombre_en": "Buccal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Calcaneal_branches_of_fibular_artery": {
+   "nombre": "Ramas calcáneas de la arteria fibular",
+   "nombre_en": "Calcaneal branches of fibular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Calcaneal_branches_of_posterior_tibial_artery": {
+   "nombre": "Ramas calcáneas de la arteria tibial posterior",
+   "nombre_en": "Calcaneal branches of posterior tibial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Callosomarginal_artery": {
+   "nombre": "Arteria callosomarginal",
+   "nombre_en": "Callosomarginal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Central_retinal_artery": {
+   "nombre": "Arteria central de la retina",
+   "nombre_en": "Central retinal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Circumflex_artery_of_heart": {
+   "nombre": "Arteria circunfleja del corazón",
+   "nombre_en": "Circumflex artery of heart",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Circumflex_scapular_artery": {
+   "nombre": "Arteria circunfleja de la escápula",
+   "nombre_en": "Circumflex scapular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Coeliac_trunk": {
+   "nombre": "Tronco celiaco",
+   "nombre_en": "Coeliac trunk",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Colic_branch_of_ileocolic_artery": {
+   "nombre": "Rama cólica de la arteria ileocólica",
+   "nombre_en": "Colic branch of ileocolic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Common_hepatic_artery": {
+   "nombre": "Arteria hepática común",
+   "nombre_en": "Common hepatic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Common_interosseous_artery": {
+   "nombre": "Arteria interósea común",
+   "nombre_en": "Common interosseous artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Common_palmar_digital_arteries": {
+   "nombre": "Arterias digitales palmares comunes",
+   "nombre_en": "Common palmar digital arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Common_plantar_digital_arteries": {
+   "nombre": "Arterias digitales plantares comunes",
+   "nombre_en": "Common plantar digital arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Costocervical_trunk": {
+   "nombre": "Tronco costocervical",
+   "nombre_en": "Costocervical trunk",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_artery_of_penis": {
+   "nombre": "Arteria profunda del pene",
+   "nombre_en": "Deep artery of penis",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_brachial_artery": {
+   "nombre": "Arteria braquial profunda",
+   "nombre_en": "Deep brachial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_branch_of_transverse_cervical_artery": {
+   "nombre": "(Rama profunda de la arteria cervical transversa)",
+   "nombre_en": "(Deep branch of transverse cervical artery)",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_cervical_artery": {
+   "nombre": "Arteria cervical profunda",
+   "nombre_en": "Deep cervical artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_external_pudendal_artery": {
+   "nombre": "Arteria pudenda externa profunda",
+   "nombre_en": "Deep external pudendal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_femoral_artery": {
+   "nombre": "Arteria femoral profunda",
+   "nombre_en": "Deep femoral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_palmar_arch": {
+   "nombre": "Arco palmar profundo",
+   "nombre_en": "Deep palmar arch",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Deep_plantar_artery": {
+   "nombre": "Arteria plantar profunda",
+   "nombre_en": "Deep plantar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Descending_branch_of_lateral_circumflex_femoral_artery": {
+   "nombre": "Rama descendente de la arteria femoral circunfleja lateral",
+   "nombre_en": "Descending branch of lateral circumflex femoral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Descending_branch_of_left_colic_artery": {
+   "nombre": "Rama descendente de la arteria cólica izquierda",
+   "nombre_en": "Descending branch of left colic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Descending_palatine_artery": {
+   "nombre": "Arteria palatina descendente",
+   "nombre_en": "Descending palatine artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Distal_lateral_striate_branches": {
+   "nombre": "Distal lateral striate branches",
+   "nombre_en": "Distal lateral striate branches",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Dorsal_artery_of_penis": {
+   "nombre": "Arteria dorsal del pene",
+   "nombre_en": "Dorsal artery of penis",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Dorsal_carpal_anastomosis": {
+   "nombre": "Red carpiana dorsal",
+   "nombre_en": "Dorsal carpal anastomosis",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Dorsal_carpal_branch_of_ulnar_artery": {
+   "nombre": "Rama carpiana dorsal de la arteria ulnar",
+   "nombre_en": "Dorsal carpal branch of ulnar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Dorsal_digital_arteries_of_foot": {
+   "nombre": "Arterias digitales dorsales del pie",
+   "nombre_en": "Dorsal digital arteries of foot",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Dorsal_digital_arteries_of_hand": {
+   "nombre": "Arterias digitales dorsales de la mano",
+   "nombre_en": "Dorsal digital arteries of hand",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Dorsalis_pedis_artery": {
+   "nombre": "Arteria dorsal del pie",
+   "nombre_en": "Dorsalis pedis artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__External_carotid_artery": {
+   "nombre": "Arteria carótida externa",
+   "nombre_en": "External carotid artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__External_iliac_artery": {
+   "nombre": "Arteria iliaca externa",
+   "nombre_en": "External iliac artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Facial_artery": {
+   "nombre": "Arteria facial",
+   "nombre_en": "Facial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Femoral_artery": {
+   "nombre": "Arteria femoral",
+   "nombre_en": "Femoral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Fibular_artery": {
+   "nombre": "Arteria fibular",
+   "nombre_en": "Fibular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__First_posterior_intercostal_artery": {
+   "nombre": "Primera arteria intercostal posterior",
+   "nombre_en": "First posterior intercostal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Frontal_branch_of_superficial_temporal_artery": {
+   "nombre": "Rama frontal de la arteria temporal superficial",
+   "nombre_en": "Frontal branch of superficial temporal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Frontal_branches_of_callosomarginal_artery": {
+   "nombre": "Ramas frontales de la arteria callosomarginal",
+   "nombre_en": "Frontal branches of callosomarginal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Gastroduodenal_artery": {
+   "nombre": "Arteria gastroduodenal",
+   "nombre_en": "Gastroduodenal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Greater_palatine_artery": {
+   "nombre": "Arteria palatina mayor",
+   "nombre_en": "Greater palatine artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Ileal_branch_of_ileocolic_artery": {
+   "nombre": "Rama ileal de la arteria ileocólica",
+   "nombre_en": "Ileal branch of ileocolic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Ileocolic_artery": {
+   "nombre": "Arteria lleocólica",
+   "nombre_en": "Ileocolic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Iliacus_branch_of_iliolumbar_artery": {
+   "nombre": "Rama ilíaca de la arteria iliolumbar",
+   "nombre_en": "Iliacus branch of iliolumbar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Iliolumbar_artery": {
+   "nombre": "Arteria iliolumbar",
+   "nombre_en": "Iliolumbar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_alveolar_artery": {
+   "nombre": "Arteria alveolar inferior",
+   "nombre_en": "Inferior alveolar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_epigastric_artery": {
+   "nombre": "Arteria epigástrica inferior",
+   "nombre_en": "Inferior epigastric artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_gluteal_artery": {
+   "nombre": "Arteria glútea inferior",
+   "nombre_en": "Inferior gluteal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_labial_artery": {
+   "nombre": "Arteria labial inferior",
+   "nombre_en": "Inferior labial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_lateral_genicular_artery": {
+   "nombre": "Arteria genicular inferior lateral",
+   "nombre_en": "Inferior lateral genicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_lingular_artery_of_left_lung": {
+   "nombre": "Arteria lingular inferior del pulmón izquierdo",
+   "nombre_en": "Inferior lingular artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_lobar_artery_of_right_lung": {
+   "nombre": "Arteria lobar inferior del pulmón derecho",
+   "nombre_en": "Inferior lobar artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_medial_genicular_artery": {
+   "nombre": "Arteria genicular inferior medial",
+   "nombre_en": "Inferior medial genicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_mesenteric_artery": {
+   "nombre": "Arteria mesentérica inferior",
+   "nombre_en": "Inferior mesenteric artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_pancreaticoduodenal_artery": {
+   "nombre": "Arteria pancreaticoduodenal inferior",
+   "nombre_en": "Inferior pancreaticoduodenal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_phrenic_artery": {
+   "nombre": "Arteria frénica inferior",
+   "nombre_en": "Inferior phrenic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_suprarenal_artery": {
+   "nombre": "Arteria suprarrenal inferior",
+   "nombre_en": "Inferior suprarenal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_thyroid_artery": {
+   "nombre": "Arteria tiroidea inferior",
+   "nombre_en": "Inferior thyroid artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Inferior_ulnar_collateral_artery": {
+   "nombre": "Arteria colateral ulnar inferior",
+   "nombre_en": "Inferior ulnar collateral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Infra_orbital_artery": {
+   "nombre": "Arteria infraorbitaria",
+   "nombre_en": "Infra-orbital artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Insular_branches_of_middle_cerebral_artery_M2": {
+   "nombre": "Ramas insulares de la arteria cerebra media (M2)",
+   "nombre_en": "Insular branches of middle cerebral artery (M2)",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Insular_branches_of_middle_cerebral_artery_M2_segment": {
+   "nombre": "Insular branches of middle cerebral artery (M2-segment)",
+   "nombre_en": "Insular branches of middle cerebral artery (M2-segment)",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Internal_carotid_artery": {
+   "nombre": "Arteria carótida interna",
+   "nombre_en": "Internal carotid artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Internal_iliac_artery": {
+   "nombre": "Arteria ilíaca interna",
+   "nombre_en": "Internal iliac artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Internal_pudendal_artery": {
+   "nombre": "Arteria pudenda interna",
+   "nombre_en": "Internal pudendal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Internal_thoracic_artery": {
+   "nombre": "Arteria torácica interna",
+   "nombre_en": "Internal thoracic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Intrarenal_arteries_of_left_kidney": {
+   "nombre": "Arterias intrarrenales del riñón izquierdo",
+   "nombre_en": "Intrarenal arteries of left kidney",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Intrarenal_arteries_of_right_kidney": {
+   "nombre": "Arterias intrarrenales del riñón derecho",
+   "nombre_en": "Intrarenal arteries of right kidney",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lacrimal_artery": {
+   "nombre": "Arteria lagrimal",
+   "nombre_en": "Lacrimal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_basal_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria basal lateral del pulmón izquierdo",
+   "nombre_en": "Lateral basal segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_basal_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria basal lateral del pulmón derecho",
+   "nombre_en": "Lateral basal segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_circumflex_femoral_artery": {
+   "nombre": "Arteria circunfleja femoral lateral",
+   "nombre_en": "Lateral circumflex femoral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_frontobasal_artery": {
+   "nombre": "Lateral frontobasal artery",
+   "nombre_en": "Lateral frontobasal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_occipital_artery": {
+   "nombre": "Arteria occipital lateral",
+   "nombre_en": "Lateral occipital artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_plantar_artery": {
+   "nombre": "Arteria plantar lateral",
+   "nombre_en": "Lateral plantar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_pontine_branches_of_basilar_artery": {
+   "nombre": "Ramas pontinas laterales de la arteria basilar",
+   "nombre_en": "Lateral pontine branches of basilar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria lateral del pulmón derecho",
+   "nombre_en": "Lateral segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_tarsal_artery": {
+   "nombre": "Arteria tarsal lateral",
+   "nombre_en": "Lateral tarsal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lateral_thoracic_artery": {
+   "nombre": "Arteria torácica lateral",
+   "nombre_en": "Lateral thoracic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Left_colic_artery": {
+   "nombre": "Arteria cólica izquierda",
+   "nombre_en": "Left colic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Left_coronary_artery": {
+   "nombre": "Arteria coronaria izquierda",
+   "nombre_en": "Left coronary artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Left_gastric_artery": {
+   "nombre": "Arteria gástrica izquierda",
+   "nombre_en": "Left gastric artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Left_renal_artery": {
+   "nombre": "Arteria renal izquierda",
+   "nombre_en": "Left renal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Left_testicular_artery": {
+   "nombre": "Arteria testicular izquierda",
+   "nombre_en": "Left testicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Long_posterior_ciliary_arteries": {
+   "nombre": "Arterias ciliares posteriores largas",
+   "nombre_en": "Long posterior ciliary arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lumbar_arteries": {
+   "nombre": "Arterias lumbares",
+   "nombre_en": "Lumbar arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Lumbar_branch_of_iliolumbar_artery": {
+   "nombre": "Rama lumbar de la arteria iliolumbar",
+   "nombre_en": "Lumbar branch of iliolumbar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Marginal_artery": {
+   "nombre": "Arteria marginal del colon",
+   "nombre_en": "Marginal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Maxillary_artery": {
+   "nombre": "Arteria maxilar",
+   "nombre_en": "Maxillary artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Medial_basal_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria basal medial del pulmón izquierdo",
+   "nombre_en": "Medial basal segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Medial_basal_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria basal medial del pulmón derecho",
+   "nombre_en": "Medial basal segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Medial_circumflex_femoral_artery": {
+   "nombre": "Arteria femoral circunfleja medial",
+   "nombre_en": "Medial circumflex femoral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Medial_occipital_artery": {
+   "nombre": "Arteria occipital medial",
+   "nombre_en": "Medial occipital artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Medial_plantar_artery": {
+   "nombre": "Arteria plantar medial",
+   "nombre_en": "Medial plantar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Medial_pontine_branches_of_basilar_artery": {
+   "nombre": "Ramas pontinas mediales de la arteria basilar",
+   "nombre_en": "Medial pontine branches of basilar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Medial_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria medial del pulmón derecho",
+   "nombre_en": "Medial segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Median_sacral_artery": {
+   "nombre": "Arteria sacral mediana",
+   "nombre_en": "Median sacral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Mental_branch_of_inferior_alveolar_artery": {
+   "nombre": "Rama mental de la arteria alveolar inferior",
+   "nombre_en": "Mental branch of inferior alveolar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Middle_cerebral_artery_M1_segment": {
+   "nombre": "Arteria cerebral media (Segmento M1)",
+   "nombre_en": "Middle cerebral artery (M1-segment)",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Middle_cerebral_artery_M3_segment": {
+   "nombre": "Arteria cerebral media (Segmento M3)",
+   "nombre_en": "Middle cerebral artery (M3-segment)",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Middle_colic_artery": {
+   "nombre": "Arteria cólica media",
+   "nombre_en": "Middle colic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Middle_collateral_artery": {
+   "nombre": "Arteria colateral media",
+   "nombre_en": "Middle collateral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Middle_genicular_artery": {
+   "nombre": "Middle genicular artery",
+   "nombre_en": "Middle genicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Middle_lobar_artery_of_right_lung": {
+   "nombre": "Arteria lobar media del pulmón derecho",
+   "nombre_en": "Middle lobar artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Middle_meningeal_artery": {
+   "nombre": "Arteria meníngea media",
+   "nombre_en": "Middle meningeal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Musculophrenic_artery": {
+   "nombre": "Arteria musculofrénica",
+   "nombre_en": "Musculophrenic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Mylohyoid_branch_of_inferior_alveolar_artery": {
+   "nombre": "Rama milohioidea de la arteria alveolar inferior",
+   "nombre_en": "Mylohyoid branch of inferior alveolar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Obturator_artery": {
+   "nombre": "Arteria obturatriz",
+   "nombre_en": "Obturator artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Occipital_artery": {
+   "nombre": "Arteria occipital",
+   "nombre_en": "Occipital artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Ophthalmic_artery": {
+   "nombre": "Arteria oftálmica",
+   "nombre_en": "Ophthalmic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Orbitofrontal_branches_of_anterior_cerebral_artery": {
+   "nombre": "Ramas orbitofrontales de la arteria cerebral anterior",
+   "nombre_en": "Orbitofrontal branches of anterior cerebral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Palmar_carpal_branch_of_radial_artery": {
+   "nombre": "Rama carpiana palmar de la arteria radial",
+   "nombre_en": "Palmar carpal branch of radial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Parietal_branches_of_middle_cerebral_artery": {
+   "nombre": "Ramas parietales de la arteria cerebral media",
+   "nombre_en": "Parietal branches of middle cerebral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Parieto_occipital_artery": {
+   "nombre": "Arteria parietooccipital",
+   "nombre_en": "Parieto-occipital artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Parte": {
+   "nombre": "????????",
+   "nombre_en": "????????",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Patellar_anastomosis": {
+   "nombre": "Anastomosis patelar",
+   "nombre_en": "Patellar anastomosis",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Pectoral_branches_of_thoraco_acromial_artery": {
+   "nombre": "Ramas pectorales de la arteria toracoacromial",
+   "nombre_en": "Pectoral branches of thoraco-acromial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Perforating_femoral_arteries": {
+   "nombre": "Arterias femorales perforantes",
+   "nombre_en": "Perforating femoral arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Pericallosal_artery": {
+   "nombre": "Arteria pericallosa",
+   "nombre_en": "Pericallosal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Plantar_arch": {
+   "nombre": "Arco plantar",
+   "nombre_en": "Plantar arch",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Popliteal_artery": {
+   "nombre": "Arteria poplítea",
+   "nombre_en": "Popliteal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Postcentral_arterial_branch": {
+   "nombre": "Rama arterial poscentral",
+   "nombre_en": "Postcentral arterial branch",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_basal_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria basal posterior del pulmón izquierdo",
+   "nombre_en": "Posterior basal segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_basal_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria basal posterior del pulmón derecho",
+   "nombre_en": "Posterior basal segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_branch_of_renal_artery": {
+   "nombre": "Rama posterior de la arteria renal",
+   "nombre_en": "Posterior branch of renal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_cerebral_artery": {
+   "nombre": "Arteria cerebral posterior",
+   "nombre_en": "Posterior cerebral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_circumflex_humeral_artery": {
+   "nombre": "Arteria circunfleja posterior del húmero",
+   "nombre_en": "Posterior circumflex humeral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_communicating_artery": {
+   "nombre": "Arteria comunicante posterior",
+   "nombre_en": "Posterior communicating artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_deep_temporal_artery": {
+   "nombre": "Arteria temporal profunda posterior",
+   "nombre_en": "Posterior deep temporal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_division_of_internal_iliac_artery": {
+   "nombre": "División posterior de la arteria ilíaca interna",
+   "nombre_en": "Posterior division of internal iliac artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_ethmoidal_artery": {
+   "nombre": "Arteria etmoidal posterior",
+   "nombre_en": "Posterior ethmoidal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_inferior_cerebellar_artery": {
+   "nombre": "Arteria cerebelosa inferior posterior",
+   "nombre_en": "Posterior inferior cerebellar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_intercostal_arteries": {
+   "nombre": "Arterias intercostales posteriores",
+   "nombre_en": "Posterior intercostal arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_interosseous_artery": {
+   "nombre": "Arteria interósea posterior",
+   "nombre_en": "Posterior interosseous artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_lateral_nasal_branches_of_sphenopalatine_artery": {
+   "nombre": "Posterior lateral nasal branches of sphenopalatine artery.",
+   "nombre_en": "Posterior lateral nasal branches of sphenopalatine artery.",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_parietal_artery": {
+   "nombre": "Posterior parietal artery",
+   "nombre_en": "Posterior parietal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria posterior del pulmón izquierdo",
+   "nombre_en": "Posterior segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria posterior del pulmón derecho",
+   "nombre_en": "Posterior segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_septal_branches_of_sphenopalatine_artery": {
+   "nombre": "Ramas septales posteriores anteriores-arteria esfenopalatina",
+   "nombre_en": "Posterior septal branches of sphenopalatine artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_superior_alveolar_artery": {
+   "nombre": "Arteria alveolar superior posterior",
+   "nombre_en": "Posterior superior alveolar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_temporal_branch": {
+   "nombre": "Posterior temporal branch",
+   "nombre_en": "Posterior temporal branch",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Posterior_tibial_artery": {
+   "nombre": "Arteria tibial posterior",
+   "nombre_en": "Posterior tibial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Prefrontal_artery": {
+   "nombre": "Prefrontal artery",
+   "nombre_en": "Prefrontal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Proper_hepatic_artery": {
+   "nombre": "Arteria hepática propia",
+   "nombre_en": "Proper hepatic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Proper_palmar_digital_arteries": {
+   "nombre": "Arterias digitales palmares propias",
+   "nombre_en": "Proper palmar digital arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Proper_plantar_digital_arteries": {
+   "nombre": "Arterias digitales plantares propias",
+   "nombre_en": "Proper plantar digital arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Proximal_lateral_striate_branches": {
+   "nombre": "Proximal lateral striate branches",
+   "nombre_en": "Proximal lateral striate branches",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Radial_artery": {
+   "nombre": "Arteria radial",
+   "nombre_en": "Radial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Radial_collateral_artery": {
+   "nombre": "Arteria colateral radial",
+   "nombre_en": "Radial collateral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Recurrent_interosseous_artery": {
+   "nombre": "Arteria interósea recurrente",
+   "nombre_en": "Recurrent interosseous artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Right_colic_artery": {
+   "nombre": "Arteria cólica derecha",
+   "nombre_en": "Right colic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Right_coronary_artery": {
+   "nombre": "Arteria coronaria derecha",
+   "nombre_en": "Right coronary artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Right_inferolateral_branch_of_right_coronary_artery": {
+   "nombre": "Rama inferolateral derecha de la arteria coronaria derecha",
+   "nombre_en": "Right inferolateral branch of right coronary artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Right_renal_artery": {
+   "nombre": "Arteria renal derecha",
+   "nombre_en": "Right renal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Right_testicular_artery": {
+   "nombre": "Arteria testicular derecha",
+   "nombre_en": "Right testicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Second_posterior_intercostal_artery": {
+   "nombre": "Segunda arteria intercostal posterior",
+   "nombre_en": "Second posterior intercostal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Septal_branches_of_anterior_interventricular_artery": {
+   "nombre": "Ramas septales de la arteria interventricular anterior",
+   "nombre_en": "Septal branches of anterior interventricular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Septal_branches_of_posterior_ethmoidal_artery": {
+   "nombre": "Ramas septales de la arteria etmoidal posterior",
+   "nombre_en": "Septal branches of posterior ethmoidal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Short_posterior_ciliary_arteries": {
+   "nombre": "Arterias ciliares posteriores cortas",
+   "nombre_en": "Short posterior ciliary arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Sigmoid_arteries": {
+   "nombre": "Arterias sigmoideas",
+   "nombre_en": "Sigmoid arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Spinal_branch_of_iliolumbar_artery": {
+   "nombre": "Rama espinal de la arteria iliolumbar",
+   "nombre_en": "Spinal branch of iliolumbar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Splenic_artery": {
+   "nombre": "Arteria esplénica",
+   "nombre_en": "Splenic artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Subcostal_artery": {
+   "nombre": "Arteria subcostal",
+   "nombre_en": "Subcostal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Submental_artery": {
+   "nombre": "Arteria submental",
+   "nombre_en": "Submental artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Subscapular_artery": {
+   "nombre": "Arteria subescapular",
+   "nombre_en": "Subscapular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superficial_branch_of_medial_plantar_artery": {
+   "nombre": "Rama superficial de la arteria plantar medial",
+   "nombre_en": "Superficial branch of medial plantar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superficial_branch_of_transverse_cervical_artery": {
+   "nombre": "(Rama superficial de la arteria cervical transversa)",
+   "nombre_en": "(Superficial branch of transverse cervical artery)",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superficial_epigastric_artery": {
+   "nombre": "Arteria epigástrica superficial",
+   "nombre_en": "Superficial epigastric artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superficial_external_pudendal_artery": {
+   "nombre": "Arteria pudenda externa superficial",
+   "nombre_en": "Superficial external pudendal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superficial_palmar_arch": {
+   "nombre": "Arco palmar superficial",
+   "nombre_en": "Superficial palmar arch",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superficial_temporal_artery": {
+   "nombre": "Arteria temporal superficial",
+   "nombre_en": "Superficial temporal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_anorectal_artery": {
+   "nombre": "Arteria anorrectal superior",
+   "nombre_en": "Superior anorectal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_cerebellar_artery": {
+   "nombre": "Arteria cerebelosa superior",
+   "nombre_en": "Superior cerebellar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_epigastric_artery": {
+   "nombre": "Arteria epigástrica superior",
+   "nombre_en": "Superior epigastric artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_gluteal_artery": {
+   "nombre": "Arteria glútea superior",
+   "nombre_en": "Superior gluteal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_labial_artery": {
+   "nombre": "Arteria labial superior",
+   "nombre_en": "Superior labial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_lateral_genicular_artery": {
+   "nombre": "Arteria genicular superior lateral",
+   "nombre_en": "Superior lateral genicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_lingular_artery_of_left_lung": {
+   "nombre": "Arteria lingular superior del pulmón izquierdo",
+   "nombre_en": "Superior lingular artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_lobar_artery_of_right_lung": {
+   "nombre": "Arteria lobar superior del pulmón derecho",
+   "nombre_en": "Superior lobar artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_medial_genicular_artery": {
+   "nombre": "Arteria genicular superior medial",
+   "nombre_en": "Superior medial genicular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_mesenteric_artery": {
+   "nombre": "Arteria mesentérica superior",
+   "nombre_en": "Superior mesenteric artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_phrenic_arteries": {
+   "nombre": "Arterias frénicas superiores",
+   "nombre_en": "Superior phrenic arteries",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_segmental_artery_of_left_lung": {
+   "nombre": "Arteria segmentaria superior del pulmón izquierdo",
+   "nombre_en": "Superior segmental artery of left lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_segmental_artery_of_right_lung": {
+   "nombre": "Arteria segmentaria superior del pulmón derecho",
+   "nombre_en": "Superior segmental artery of right lung",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Superior_ulnar_collateral_artery": {
+   "nombre": "Arteria colateral ulnar superior",
+   "nombre_en": "Superior ulnar collateral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Supra_orbital_artery": {
+   "nombre": "Arteria supraorbitaria",
+   "nombre_en": "Supra-orbital artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Suprascapular_artery": {
+   "nombre": "Arteria supraescapular",
+   "nombre_en": "Suprascapular artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Supratrochlear_artery": {
+   "nombre": "Arteria supratroclear",
+   "nombre_en": "Supratrochlear artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Supreme_intercostal_artery": {
+   "nombre": "Arteria intercostal suprema",
+   "nombre_en": "Supreme intercostal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Temporal_branches_of_middle_cerebral_artery": {
+   "nombre": "Ramas temporales de la arteria cerebral media",
+   "nombre_en": "Temporal branches of middle cerebral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Temporo_occipital_branch": {
+   "nombre": "Temporo-occipital branch",
+   "nombre_en": "Temporo-occipital branch",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Thoraco_acromial_artery": {
+   "nombre": "Arteria toracoacromial",
+   "nombre_en": "Thoraco-acromial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Thoracodorsal_artery": {
+   "nombre": "Arteria toracodorsal",
+   "nombre_en": "Thoracodorsal artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Thyrocervical_trunk": {
+   "nombre": "Tronco tirocervical",
+   "nombre_en": "Thyrocervical trunk",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Transverse_cervical_artery": {
+   "nombre": "Arteria cervical transversal",
+   "nombre_en": "Transverse cervical artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Transverse_facial_artery": {
+   "nombre": "Arteria facial transversa",
+   "nombre_en": "Transverse facial artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Ulnar_artery": {
+   "nombre": "Arteria ulnar",
+   "nombre_en": "Ulnar artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Ulnar_recurrent_artery": {
+   "nombre": "(Arteria recurrente ulnar)",
+   "nombre_en": "(Ulnar recurrent artery)",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__Vertebral_artery": {
+   "nombre": "Arteria vertebral",
+   "nombre_en": "Vertebral artery",
+   "organo": "ArteriasPerifericas"
+  },
+  "ArteriasPerifericas__x": {
+   "nombre": "?x",
+   "nombre_en": "?x",
+   "organo": "ArteriasPerifericas"
+  },
   "Bazo__Spleen": {
    "nombre": "Bazo",
    "nombre_en": "Spleen",
@@ -2266,6 +3441,21 @@
    "nombre_en": "Scapula",
    "organo": "Escapulas"
   },
+  "Esofago__Abdominal": {
+   "nombre": "Porción abdominal del esófago",
+   "nombre_en": "Abdominal part of oesophagus",
+   "organo": "Esofago"
+  },
+  "Esofago__Cervical": {
+   "nombre": "Porción cervical del esófago",
+   "nombre_en": "Cervical part of oesophagus",
+   "organo": "Esofago"
+  },
+  "Esofago__Toracica": {
+   "nombre": "Porción torácica del esófago",
+   "nombre_en": "Thoracic part of oesophagus",
+   "organo": "Esofago"
+  },
   "Esternocleidomastoideo__Sternocleidomastoid_muscle_Der": {
    "nombre": "Músculo esternocleidomastoideo (lado derecho)",
    "nombre_en": "Sternocleidomastoid muscle",
@@ -2316,6 +3506,16 @@
    "nombre_en": "Oropharynx",
    "organo": "Faringe"
   },
+  "FemurDer__Diafisis": {
+   "nombre": "Diáfisis del fémur",
+   "nombre_en": "Shaft of femur",
+   "organo": "FemurDer"
+  },
+  "FemurDer__Distal": {
+   "nombre": "Epífisis distal del fémur (cóndilos)",
+   "nombre_en": "Distal femur",
+   "organo": "FemurDer"
+  },
   "FemurDer__Femur_Der": {
    "nombre": "Fémur (lado derecho)",
    "nombre_en": "Femur",
@@ -2326,6 +3526,26 @@
    "nombre_en": "Patella",
    "organo": "FemurDer"
   },
+  "FemurDer__Proximal": {
+   "nombre": "Epífisis proximal del fémur (cabeza, cuello y trocánteres)",
+   "nombre_en": "Proximal femur",
+   "organo": "FemurDer"
+  },
+  "FemurDer__Rotula": {
+   "nombre": "Rótula",
+   "nombre_en": "Patella",
+   "organo": "FemurDer"
+  },
+  "FemurIzq__Diafisis": {
+   "nombre": "Diáfisis del fémur",
+   "nombre_en": "Shaft of femur",
+   "organo": "FemurIzq"
+  },
+  "FemurIzq__Distal": {
+   "nombre": "Epífisis distal del fémur (cóndilos)",
+   "nombre_en": "Distal femur",
+   "organo": "FemurIzq"
+  },
   "FemurIzq__Femur_Izq": {
    "nombre": "Fémur (lado izquierdo)",
    "nombre_en": "Femur",
@@ -2335,6 +3555,541 @@
    "nombre": "Rótula (lado izquierdo)",
    "nombre_en": "Patella",
    "organo": "FemurIzq"
+  },
+  "FemurIzq__Proximal": {
+   "nombre": "Epífisis proximal del fémur (cabeza, cuello y trocánteres)",
+   "nombre_en": "Proximal femur",
+   "organo": "FemurIzq"
+  },
+  "FemurIzq__Rotula": {
+   "nombre": "Rótula",
+   "nombre_en": "Patella",
+   "organo": "FemurIzq"
+  },
+  "GangliosAbdomenPelvis__Appendicular_nodes": {
+   "nombre": "Nodos apendiculares",
+   "nombre_en": "Appendicular nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Central_superior_mesenteric_nodes": {
+   "nombre": "Nodos mesentéricos superiores centrales",
+   "nombre_en": "Central superior mesenteric nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Coeliac_nodes": {
+   "nombre": "Nodos celiacos",
+   "nombre_en": "Coeliac nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Ileocolic_nodes": {
+   "nombre": "Nodos ileocólicos",
+   "nombre_en": "Ileocolic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Inferior_epigastric_nodes": {
+   "nombre": "Nodos epigástricos inferiores",
+   "nombre_en": "Inferior epigastric nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Inferior_gluteal_nodes": {
+   "nombre": "Nodos glúteos inferiores",
+   "nombre_en": "Inferior gluteal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Inferior_pancreatic_nodes": {
+   "nombre": "Nodos pancreáticos inferiores",
+   "nombre_en": "Inferior pancreatic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Inferior_superficial_inguinal_nodes": {
+   "nombre": "Nodos inguinales superficiales inferiores",
+   "nombre_en": "Inferior superficial inguinal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Intermediate_common_iliac_nodes": {
+   "nombre": "Nodos ilíacos comunes intermedios",
+   "nombre_en": "Intermediate common iliac nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Intermediate_deep_inguinal_node": {
+   "nombre": "(Nodo inguinal profundo intermedio)",
+   "nombre_en": "(Intermediate deep inguinal node)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Intermediate_external_iliac_nodes": {
+   "nombre": "Nodos ilíacos externos intermedios",
+   "nombre_en": "Intermediate external iliac nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Intermediate_lacunar_node": {
+   "nombre": "(Nodo lacunar intermedio)",
+   "nombre_en": "(Intermediate lacunar node)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Intermediate_lumbar_nodes": {
+   "nombre": "Nodos lumbares intermedios",
+   "nombre_en": "Intermediate lumbar nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Juxta_intestinal_mesenteric_nodes": {
+   "nombre": "Nodos mesentéricos yuxta-intestinales",
+   "nombre_en": "Juxta-intestinal mesenteric nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Lateral_aortic_nodes": {
+   "nombre": "Nodos aórticos laterales",
+   "nombre_en": "Lateral aortic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Lateral_caval_nodes": {
+   "nombre": "Nodos cavales laterales",
+   "nombre_en": "Lateral caval nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Lateral_common_iliac_nodes": {
+   "nombre": "Nodos ilíacos comunes laterales",
+   "nombre_en": "Lateral common iliac nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Lateral_lacunar_node": {
+   "nombre": "(Nodo lacunar lateral)",
+   "nombre_en": "(Lateral lacunar node)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Lateral_sacral_nodes": {
+   "nombre": "Nodos sacros laterales",
+   "nombre_en": "Lateral sacral nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Lateral_vesical_nodes": {
+   "nombre": "Nodos vesicales laterales",
+   "nombre_en": "Lateral vesical nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Left_colic_nodes": {
+   "nombre": "Nodos cólicos izquierdos",
+   "nombre_en": "Left colic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Medial_common_iliac_nodes": {
+   "nombre": "Nodos ilíacos comunes mediales",
+   "nombre_en": "Medial common iliac nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Medial_external_iliac_nodes": {
+   "nombre": "Nodos iliacos externos mediales",
+   "nombre_en": "Medial external iliac nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Medial_lacunar_node": {
+   "nombre": "(Nodo lacunar medial)",
+   "nombre_en": "(Medial lacunar node)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Median_sacral_nodes": {
+   "nombre": "Nodos sacros medianos",
+   "nombre_en": "Median sacral nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Middle_colic_nodes": {
+   "nombre": "Nodos cólicos medios",
+   "nombre_en": "Middle colic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Obturator_nodes": {
+   "nombre": "Nodos obturadores",
+   "nombre_en": "Obturator nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Paracolic_superior_mesenteric_nodes": {
+   "nombre": "Nodos mesentéricos superiores paracólicos",
+   "nombre_en": "Paracolic superior mesenteric nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Pararectal_nodes": {
+   "nombre": "Nodos anorrectales",
+   "nombre_en": "Pararectal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Postvesical_nodes": {
+   "nombre": "Nodos retrovesicales",
+   "nombre_en": "Postvesical nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Pre_aortic_nodes": {
+   "nombre": "Nodi prae-aortici",
+   "nombre_en": "Pre-aortic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Precaecal_nodes": {
+   "nombre": "Nodos praecaecales",
+   "nombre_en": "Precaecal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Precaval_nodes": {
+   "nombre": "Nodos praecavales",
+   "nombre_en": "Precaval nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Prevesical_nodes": {
+   "nombre": "Nodos praevesicales",
+   "nombre_en": "Prevesical nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Proximal_deep_inguinal_node": {
+   "nombre": "(Nodo inguinal profundo proximal)",
+   "nombre_en": "(Proximal deep inguinal node)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Retro_aortic_nodes": {
+   "nombre": "Nodi postaortici",
+   "nombre_en": "Retro-aortic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Retrocaecal_nodes": {
+   "nombre": "Nodos retrocecales",
+   "nombre_en": "Retrocaecal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Retrocaval_nodes": {
+   "nombre": "Nodos postcavales",
+   "nombre_en": "Retrocaval nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Retropyloric_nodes": {
+   "nombre": "(Nodos retropilóricos)",
+   "nombre_en": "(Retropyloric nodes)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Right_colic_nodes": {
+   "nombre": "Nodos cólicos derechos",
+   "nombre_en": "Right colic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Sigmoid_nodes": {
+   "nombre": "Nodos sigmoides",
+   "nombre_en": "Sigmoid nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Subaortic_nodes": {
+   "nombre": "Nodos subaórticos",
+   "nombre_en": "Subaortic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Subpyloric_nodes": {
+   "nombre": "(Nodos subpilóricos)",
+   "nombre_en": "(Subpyloric nodes)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Superior_gluteal_nodes": {
+   "nombre": "Nodos glúteos superiores",
+   "nombre_en": "Superior gluteal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Superior_pancreatic_nodes": {
+   "nombre": "Nodos pancreáticos superiores",
+   "nombre_en": "Superior pancreatic nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Superior_pancreaticoduodenal_nodes": {
+   "nombre": "Nodos pancreatoduodenales superiores",
+   "nombre_en": "Superior pancreaticoduodenal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Superolateral_superficial_inguinal_nodes": {
+   "nombre": "Nodos inguinales superficiales superlaterales",
+   "nombre_en": "Superolateral superficial inguinal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Superomedial_superficial_inguinal_nodes": {
+   "nombre": "Nodos inguinales superficiales superomediales",
+   "nombre_en": "Superomedial superficial inguinal nodes",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosAbdomenPelvis__Suprapyloric_node": {
+   "nombre": "(Nodo suprapilórico)",
+   "nombre_en": "(Suprapyloric node)",
+   "organo": "GangliosAbdomenPelvis"
+  },
+  "GangliosCabezaCuello__Anterior_inferior_jugular_nodes": {
+   "nombre": "Nodos yugulares antero-inferiores",
+   "nombre_en": "Anterior inferior jugular nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Brachiocephalic_nodes": {
+   "nombre": "Nodos braquiocefálicos",
+   "nombre_en": "Brachiocephalic nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Bucinator_node": {
+   "nombre": "Nodo bucinador",
+   "nombre_en": "Bucinator node",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Inferior_deep_lateral_cervical_nodes": {
+   "nombre": "Nodos cervicales laterales inferiores profundos",
+   "nombre_en": "Inferior deep lateral cervical nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Infra_auricular_nodes": {
+   "nombre": "Nodos infra-auriculares",
+   "nombre_en": "Infra-auricular nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Infraclavicular_nodes": {
+   "nombre": "Nodos infraclaviculares",
+   "nombre_en": "Infraclavicular nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Intraglandular_parotid_nodes": {
+   "nombre": "Nodos parótidos intraglandulares",
+   "nombre_en": "Intraglandular parotid nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Jugulodigastric_node": {
+   "nombre": "Nodo yugulodigástrico",
+   "nombre_en": "Jugulodigastric node",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Lateral_superior_jugular_node": {
+   "nombre": "Nodo yugular superolateral",
+   "nombre_en": "Lateral superior jugular node",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Mandibular_node": {
+   "nombre": "Nodo mandibular",
+   "nombre_en": "Mandibular node",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Mastoid_nodes": {
+   "nombre": "Nodos mastoideos",
+   "nombre_en": "Mastoid nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Nasolabial_node": {
+   "nombre": "Nodo nasolabial",
+   "nombre_en": "Nasolabial node",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Occipital_nodes": {
+   "nombre": "Nodos occipitales",
+   "nombre_en": "Occipital nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Paratracheal_cervical_nodes": {
+   "nombre": "Nodos cervicales paratraqueales",
+   "nombre_en": "Paratracheal cervical nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Paratracheal_thoracic_nodes": {
+   "nombre": "Nodos torácicos paratraqueales",
+   "nombre_en": "Paratracheal thoracic nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Pre_auricular_nodes": {
+   "nombre": "Nodos pre-auriculares",
+   "nombre_en": "Pre-auricular nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Prepericardial_nodes": {
+   "nombre": "Nodos prepericadiacos",
+   "nombre_en": "Prepericardial nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Pretracheal_nodes": {
+   "nombre": "Nodos pretraqueales",
+   "nombre_en": "Pretracheal nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Retropharyngeal_nodes": {
+   "nombre": "Nodos retrofaríngeos",
+   "nombre_en": "Retropharyngeal nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Submandibular_nodes": {
+   "nombre": "Nodos submandibulares",
+   "nombre_en": "Submandibular nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Submental_nodes": {
+   "nombre": "Nodos submentonianos",
+   "nombre_en": "Submental nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Superficial_anterior_cervical_nodes": {
+   "nombre": "Nodos cervicales anteriores superficiales",
+   "nombre_en": "Superficial anterior cervical nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Superficial_lateral_cervical_nodes": {
+   "nombre": "Nodos cervicales laterales superficiales",
+   "nombre_en": "Superficial lateral cervical nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Superficial_parotid_nodes": {
+   "nombre": "Nodos parótidos superficiales",
+   "nombre_en": "Superficial parotid nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Supraclavicular_nodes": {
+   "nombre": "Nodos supraclaviculares",
+   "nombre_en": "Supraclavicular nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosCabezaCuello__Thyroid_nodes": {
+   "nombre": "Nodos tiroideos",
+   "nombre_en": "Thyroid nodes",
+   "organo": "GangliosCabezaCuello"
+  },
+  "GangliosMiembroInferior__Anterior_tibial_node": {
+   "nombre": "(Nodo tibial anterior)",
+   "nombre_en": "(Anterior tibial node)",
+   "organo": "GangliosMiembroInferior"
+  },
+  "GangliosMiembroInferior__Deep_popliteal_nodes": {
+   "nombre": "Nodos poplíteos profundos",
+   "nombre_en": "Deep popliteal nodes",
+   "organo": "GangliosMiembroInferior"
+  },
+  "GangliosMiembroInferior__Fibular_node": {
+   "nombre": "(Nodo fibular)",
+   "nombre_en": "(Fibular node)",
+   "organo": "GangliosMiembroInferior"
+  },
+  "GangliosMiembroInferior__Posterior_tibial_node": {
+   "nombre": "(Nodo tibial posterior)",
+   "nombre_en": "(Posterior tibial node)",
+   "organo": "GangliosMiembroInferior"
+  },
+  "GangliosMiembroInferior__Superficial_popliteal_nodes": {
+   "nombre": "Nodos poplíteos superficiales",
+   "nombre_en": "Superficial popliteal nodes",
+   "organo": "GangliosMiembroInferior"
+  },
+  "GangliosMiembroSuperior__Apical_axillary_nodes": {
+   "nombre": "Nodos axilares apicales",
+   "nombre_en": "Apical axillary nodes",
+   "organo": "GangliosMiembroSuperior"
+  },
+  "GangliosMiembroSuperior__Brachial_nodes": {
+   "nombre": "Nodos braquiales",
+   "nombre_en": "Brachial nodes",
+   "organo": "GangliosMiembroSuperior"
+  },
+  "GangliosMiembroSuperior__Central_axillary_nodes": {
+   "nombre": "Nodos axilares centrales",
+   "nombre_en": "Central axillary nodes",
+   "organo": "GangliosMiembroSuperior"
+  },
+  "GangliosMiembroSuperior__Cubital_nodes": {
+   "nombre": "Nodos cubitales",
+   "nombre_en": "Cubital nodes",
+   "organo": "GangliosMiembroSuperior"
+  },
+  "GangliosMiembroSuperior__Lateral_axillary_nodes": {
+   "nombre": "Nodos axilares laterales",
+   "nombre_en": "Lateral axillary nodes",
+   "organo": "GangliosMiembroSuperior"
+  },
+  "GangliosMiembroSuperior__Posterior_axillary_nodes": {
+   "nombre": "Nodos axilares posteriores",
+   "nombre_en": "Posterior axillary nodes",
+   "organo": "GangliosMiembroSuperior"
+  },
+  "GangliosMiembroSuperior__Supratrochlear_nodes": {
+   "nombre": "Nodos supratrocleares",
+   "nombre_en": "Supratrochlear nodes",
+   "organo": "GangliosMiembroSuperior"
+  },
+  "GangliosTorax__Anterior_axillary_nodes": {
+   "nombre": "Nodos axilares anteriores",
+   "nombre_en": "Anterior axillary nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Cystic_node": {
+   "nombre": "Nodo quístico",
+   "nombre_en": "Cystic node",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Inferior_diaphragmatic_nodes": {
+   "nombre": "Nodos diafragmáticos inferiores",
+   "nombre_en": "Inferior diaphragmatic nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Inferior_tracheobronchial_nodes": {
+   "nombre": "Nodos traqueobronquiales inferiores",
+   "nombre_en": "Inferior tracheobronchial nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Intercostal_nodes": {
+   "nombre": "Nodos intercostales",
+   "nombre_en": "Intercostal nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Interpectoral_nodes": {
+   "nombre": "Nodos interpectorales",
+   "nombre_en": "Interpectoral nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Intrapulmonary_nodes": {
+   "nombre": "Nodos intrapulmonares",
+   "nombre_en": "Intrapulmonary nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Juxta_oesophageal_nodes": {
+   "nombre": "Nodos yuxta-esofágicos",
+   "nombre_en": "Juxta-oesophageal nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Lateral_pericardial_nodes": {
+   "nombre": "Nodos pericárdicos laterales",
+   "nombre_en": "Lateral pericardial nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Node_of_arch_of_azygos_vein": {
+   "nombre": "Node of arch of azygos vein",
+   "nombre_en": "Node of arch of azygos vein",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Node_of_ligamentum_arteriosum": {
+   "nombre": "Node of ligamentum arteriosum",
+   "nombre_en": "Node of ligamentum arteriosum",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Parasternal_nodes": {
+   "nombre": "Nodos para-esternales",
+   "nombre_en": "Parasternal nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Prevertebral_nodes": {
+   "nombre": "Nodos prevertebrales",
+   "nombre_en": "Prevertebral nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Right_gastric_nodes": {
+   "nombre": "Nodos gástricos derechos",
+   "nombre_en": "Right gastric nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Right_gastro_omental_nodes": {
+   "nombre": "Nodos gastro-omentales derechos",
+   "nombre_en": "Right gastro-omental nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Splenic_nodes": {
+   "nombre": "Nodos lienales",
+   "nombre_en": "Splenic nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Superior_diaphragmatic_nodes": {
+   "nombre": "Nodos diafragmáticos superiores",
+   "nombre_en": "Superior diaphragmatic nodes",
+   "organo": "GangliosTorax"
+  },
+  "GangliosTorax__Superior_tracheobronchial_nodes": {
+   "nombre": "Nodos traqueobronquiales superiores",
+   "nombre_en": "Superior tracheobronchial nodes",
+   "organo": "GangliosTorax"
   },
   "GemeloDer__Lateral_head_of_gastrocnemius_Der": {
    "nombre": "Cabeza lateral del músculo gastrocnemio (lado derecho)",
@@ -2446,6 +4201,11 @@
    "nombre_en": "Bile duct",
    "organo": "Higado"
   },
+  "Higado__Coledoco": {
+   "nombre": "Conducto colédoco",
+   "nombre_en": "Bile duct",
+   "organo": "Higado"
+  },
   "Higado__Gallbladder": {
    "nombre": "Vesícula biliar",
    "nombre_en": "Gallbladder",
@@ -2454,6 +4214,31 @@
   "Higado__Liver": {
    "nombre": "Hígado",
    "nombre_en": "Liver",
+   "organo": "Higado"
+  },
+  "Higado__LobuloCaudado": {
+   "nombre": "Lóbulo caudado",
+   "nombre_en": "Caudate lobe",
+   "organo": "Higado"
+  },
+  "Higado__LobuloCuadrado": {
+   "nombre": "Lóbulo cuadrado",
+   "nombre_en": "Quadrate lobe",
+   "organo": "Higado"
+  },
+  "Higado__LobuloDerecho": {
+   "nombre": "Lóbulo derecho del hígado",
+   "nombre_en": "Right lobe of liver",
+   "organo": "Higado"
+  },
+  "Higado__LobuloIzquierdo": {
+   "nombre": "Lóbulo izquierdo del hígado",
+   "nombre_en": "Left lobe of liver",
+   "organo": "Higado"
+  },
+  "Higado__Vesicula": {
+   "nombre": "Vesícula biliar",
+   "nombre_en": "Gallbladder",
    "organo": "Higado"
   },
   "Hipofisis__Adenohypophysis": {
@@ -3136,15 +4921,60 @@
    "nombre_en": "Third metatarsal bone",
    "organo": "HuesosPie"
   },
+  "HumeroDer__Diafisis": {
+   "nombre": "Diáfisis del húmero",
+   "nombre_en": "Shaft of humerus",
+   "organo": "HumeroDer"
+  },
+  "HumeroDer__Distal": {
+   "nombre": "Epífisis distal del húmero (cóndilo y epicóndilos)",
+   "nombre_en": "Distal humerus",
+   "organo": "HumeroDer"
+  },
   "HumeroDer__Humerus_Der": {
    "nombre": "Húmero (lado derecho)",
    "nombre_en": "Humerus",
    "organo": "HumeroDer"
   },
+  "HumeroDer__Proximal": {
+   "nombre": "Epífisis proximal del húmero (cabeza y tubérculos)",
+   "nombre_en": "Proximal humerus",
+   "organo": "HumeroDer"
+  },
+  "HumeroIzq__Diafisis": {
+   "nombre": "Diáfisis del húmero",
+   "nombre_en": "Shaft of humerus",
+   "organo": "HumeroIzq"
+  },
+  "HumeroIzq__Distal": {
+   "nombre": "Epífisis distal del húmero (cóndilo y epicóndilos)",
+   "nombre_en": "Distal humerus",
+   "organo": "HumeroIzq"
+  },
   "HumeroIzq__Humerus_Izq": {
    "nombre": "Húmero (lado izquierdo)",
    "nombre_en": "Humerus",
    "organo": "HumeroIzq"
+  },
+  "HumeroIzq__Proximal": {
+   "nombre": "Epífisis proximal del húmero (cabeza y tubérculos)",
+   "nombre_en": "Proximal humerus",
+   "organo": "HumeroIzq"
+  },
+  "IntestinoDelgado__Duodeno": {
+   "nombre": "Duodeno",
+   "nombre_en": "Duodenum",
+   "organo": "IntestinoDelgado"
+  },
+  "IntestinoDelgado__Ileon": {
+   "nombre": "Íleon",
+   "nombre_en": "Ileum",
+   "organo": "IntestinoDelgado"
+  },
+  "IntestinoDelgado__Yeyuno": {
+   "nombre": "Yeyuno",
+   "nombre_en": "Jejunum",
+   "organo": "IntestinoDelgado"
   },
   "IntestinoGrueso__Ascending_colon": {
    "nombre": "Colon ascendente",
@@ -4175,6 +6005,21 @@
    "nombre": "Lóbulos de la glándula mamaria (lado izquierdo)",
    "nombre_en": "mammary gland lobes",
    "organo": "Mamas"
+  },
+  "MedulaEspinal__Cervical": {
+   "nombre": "Médula cervical",
+   "nombre_en": "Cervical spinal cord",
+   "organo": "MedulaEspinal"
+  },
+  "MedulaEspinal__Lumbar": {
+   "nombre": "Médula lumbar y cono medular",
+   "nombre_en": "Lumbar spinal cord",
+   "organo": "MedulaEspinal"
+  },
+  "MedulaEspinal__Toracica": {
+   "nombre": "Médula torácica",
+   "nombre_en": "Thoracic spinal cord",
+   "organo": "MedulaEspinal"
   },
   "Meniscos__Lateral_meniscus_Der": {
    "nombre": "Menisco lateral (lado derecho)",
@@ -5251,6 +7096,686 @@
    "nombre_en": "Ventral parts of lateral intertransversarii lumborum muscles",
    "organo": "MusculosTronco"
   },
+  "Nervios__Abducens_nerve_VI": {
+   "nombre": "Nervio abducens (VI)",
+   "nombre_en": "Abducens nerve (VI)",
+   "organo": "Nervios"
+  },
+  "Nervios__Accessory_nerve_XI": {
+   "nombre": "Nervio accesorio (XI)",
+   "nombre_en": "Accessory nerve (XI)",
+   "organo": "Nervios"
+  },
+  "Nervios__Accessory_nucleus_of_oculomotor_nerve": {
+   "nombre": "Núcleo accesorio del nervio oculomotor",
+   "nombre_en": "Accessory nucleus of oculomotor nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_branch_of_medial_antebrachial_cutaneous_nerve": {
+   "nombre": "Ramo anterior del nervio cutáneo antebraquial medial",
+   "nombre_en": "Anterior branch of medial antebrachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_branch_of_obturator_nerve": {
+   "nombre": "Ramo anterior del nervio obturador",
+   "nombre_en": "Anterior branch of obturator nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_cutaneous_branches_of_femoral_nerve": {
+   "nombre": "Ramos cutáneos anteriores del nervio femoral",
+   "nombre_en": "Anterior cutaneous branches of femoral nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_division_of_inferior_trunk_of_brachial_plexus": {
+   "nombre": "División anterior del tronco inferior del plexo braquial",
+   "nombre_en": "Anterior division of inferior trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_division_of_mandibular_nerve": {
+   "nombre": "División anterior del nervio mandibular",
+   "nombre_en": "Anterior division of mandibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_division_of_middle_trunk_of_brachial_plexus": {
+   "nombre": "División anterior del tronco medio del plexo braquial",
+   "nombre_en": "Anterior division of middle trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_division_of_superior_trunk_of_brachial_plexus": {
+   "nombre": "División anterior del tronco superior del plexo braquial",
+   "nombre_en": "Anterior division of superior trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_interosseous_nerve_of_forearm": {
+   "nombre": "Nervio interóseo anterior del antebrazo",
+   "nombre_en": "Anterior interosseous nerve of forearm",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_root_of_posterior_femoral_cutaneous_nerve": {
+   "nombre": "Raíz anterior del nervio cutáneo femoral posterior",
+   "nombre_en": "Anterior root of posterior femoral cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Anterior_root_of_spinal_nerve": {
+   "nombre": "Raíz anterior del nervio espinal",
+   "nombre_en": "Anterior root of spinal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Axillary_nerve": {
+   "nombre": "Nervio axilar",
+   "nombre_en": "Axillary nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Buccal_nerve": {
+   "nombre": "Nervio bucal",
+   "nombre_en": "Buccal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Choroid_plexus": {
+   "nombre": "Plexo coroideo",
+   "nombre_en": "Choroid plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Cochlear_nerve": {
+   "nombre": "Nervio coclear",
+   "nombre_en": "Cochlear nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Common_fibular_nerve": {
+   "nombre": "Nervio fibular común",
+   "nombre_en": "Common fibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Common_palmar_digital_branches_of_median_nerve": {
+   "nombre": "Ramos digitales palmares comunes del nervio mediano",
+   "nombre_en": "Common palmar digital branches of median nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Common_palmar_digital_branches_of_ulnar_nerve": {
+   "nombre": "Ramos digitales palmares comunes del nervio ulnar",
+   "nombre_en": "Common palmar digital branches of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Common_plantar_digital_branches_of_lateral_plantar_nerve": {
+   "nombre": "Ramos digitales plantares comunes del nervio plantar lateral",
+   "nombre_en": "Common plantar digital branches of lateral plantar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Common_plantar_digital_branches_of_medial_plantar_nerve": {
+   "nombre": "Ramos digitales plantares comunes del nervio plantar medial",
+   "nombre_en": "Common plantar digital branches of medial plantar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Communicating_branch_of_median_nerve_with_ulnar_nerve": {
+   "nombre": "(Ramo comunicante del nervio mediano con el nervio ulnar)",
+   "nombre_en": "(Communicating branch of median nerve with ulnar nerve)",
+   "organo": "Nervios"
+  },
+  "Nervios__Deep_branch_of_radial_nerve": {
+   "nombre": "Ramo profundo del nervio radial",
+   "nombre_en": "Deep branch of radial nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Deep_branch_of_ulnar_nerve": {
+   "nombre": "Ramo profunda del nervio ulnar",
+   "nombre_en": "Deep branch of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Deep_fibular_nerve": {
+   "nombre": "Nervio fibular profundo",
+   "nombre_en": "Deep fibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Dorsal_branch_of_ulnar_nerve": {
+   "nombre": "Ramo dorsal del nervio ulnar",
+   "nombre_en": "Dorsal branch of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Dorsal_digital_branches_of_deep_fibular_nerve": {
+   "nombre": "Ramos digitales dorsales del nervio fibular profundo",
+   "nombre_en": "Dorsal digital branches of deep fibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Dorsal_digital_branches_of_radial_nerve": {
+   "nombre": "Ramos digitales dorsales del nervio radial",
+   "nombre_en": "Dorsal digital branches of radial nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Dorsal_digital_branches_of_superficial_fibular_nerve": {
+   "nombre": "Ramos digitales dorsales del nervio fibularo superficial",
+   "nombre_en": "Dorsal digital branches of superficial fibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Dorsal_digital_branches_of_ulnar_nerve": {
+   "nombre": "Ramos digitales dorsales del nervio ulnar",
+   "nombre_en": "Dorsal digital branches of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Dorsal_scapular_nerve": {
+   "nombre": "Nervio dorsal de la escápula",
+   "nombre_en": "Dorsal scapular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Facial_nerve_VII": {
+   "nombre": "Nervio facial (VII)",
+   "nombre_en": "Facial nerve (VII)",
+   "organo": "Nervios"
+  },
+  "Nervios__Femoral_branch_of_genitofemoral_nerve": {
+   "nombre": "Ramo femoral del nervio genitofemoral",
+   "nombre_en": "Femoral branch of genitofemoral nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Femoral_nerve": {
+   "nombre": "Nervio femoral",
+   "nombre_en": "Femoral nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Ganglia_of_sympathetic_trunk": {
+   "nombre": "Ganglios del tronco simpático",
+   "nombre_en": "Ganglia of sympathetic trunk",
+   "organo": "Nervios"
+  },
+  "Nervios__Genital_branch_of_genitofemoral_nerve": {
+   "nombre": "Ramo genital del nervio genitofemoral",
+   "nombre_en": "Genital branch of genitofemoral nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Genitofemoral_nerve": {
+   "nombre": "Nervio genitofemoral",
+   "nombre_en": "Genitofemoral nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Glossopharyngeal_nerve_IX": {
+   "nombre": "Nervio glosofaríngeo (IX)",
+   "nombre_en": "Glossopharyngeal nerve (IX)",
+   "organo": "Nervios"
+  },
+  "Nervios__Hypoglossal_nerve_XII": {
+   "nombre": "Nervio hipogloso (XII)",
+   "nombre_en": "Hypoglossal nerve (XII)",
+   "organo": "Nervios"
+  },
+  "Nervios__Ilio_inguinal_nerve": {
+   "nombre": "Nervio ilioinguinal",
+   "nombre_en": "Ilio-inguinal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Iliohypogastric_nerve": {
+   "nombre": "Nervio iliohipogástrico",
+   "nombre_en": "Iliohypogastric nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Inferior_alveolar_nerve": {
+   "nombre": "Nervio alveolar inferior",
+   "nombre_en": "Inferior alveolar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Inferior_lateral_brachial_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo braquial lateral inferior",
+   "nombre_en": "Inferior lateral brachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Inferior_subscapular_nerve": {
+   "nombre": "Nervio subescapular inferior",
+   "nombre_en": "Inferior subscapular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Inferior_trunk_of_brachial_plexus": {
+   "nombre": "Tronco inferior del plexo braquial",
+   "nombre_en": "Inferior trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Infrapatellar_branch_of_saphenous_nerve": {
+   "nombre": "Ramo infrapatelar del nervio safeno",
+   "nombre_en": "Infrapatellar branch of saphenous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Intercostal_nerves": {
+   "nombre": "Nervios intercostales",
+   "nombre_en": "Intercostal nerves",
+   "organo": "Nervios"
+  },
+  "Nervios__Intermediate_dorsal_cutaneous_nerve_of_foot": {
+   "nombre": "Nervio cutáneo dorsal intermedio del pie",
+   "nombre_en": "Intermediate dorsal cutaneous nerve of foot",
+   "organo": "Nervios"
+  },
+  "Nervios__Lateral_antebrachial_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo antebraquial lateral",
+   "nombre_en": "Lateral antebrachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Lateral_femoral_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo femoral lateral",
+   "nombre_en": "Lateral femoral cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Lateral_pectoral_nerve": {
+   "nombre": "Nervio pectoral lateral",
+   "nombre_en": "Lateral pectoral nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Lateral_plantar_nerve": {
+   "nombre": "Nervio plantar lateral",
+   "nombre_en": "Lateral plantar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Lingual_nerve": {
+   "nombre": "Nervio lingual",
+   "nombre_en": "Lingual nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Long_thoracic_nerve": {
+   "nombre": "Nervio torácico largo",
+   "nombre_en": "Long thoracic nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Maxillary_nerve": {
+   "nombre": "Nervio maxilar",
+   "nombre_en": "Maxillary nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Medial_antebrachial_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo antebraquial medial",
+   "nombre_en": "Medial antebrachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Medial_brachial_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo braquial medial",
+   "nombre_en": "Medial brachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Medial_crural_cutaneous_branches_of_saphenous_nerve": {
+   "nombre": "Ramos cutáneos crurales mediales del nervio safeno",
+   "nombre_en": "Medial crural cutaneous branches of saphenous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Medial_dorsal_cutaneous_nerve_of_foot": {
+   "nombre": "Nervio cutáneo dorsal medial del pie",
+   "nombre_en": "Medial dorsal cutaneous nerve of foot",
+   "organo": "Nervios"
+  },
+  "Nervios__Medial_pectoral_nerve": {
+   "nombre": "Nervio pectoral medial",
+   "nombre_en": "Medial pectoral nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Medial_plantar_nerve": {
+   "nombre": "Nervio plantar medial",
+   "nombre_en": "Medial plantar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Medial_sural_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo sural medial",
+   "nombre_en": "Medial sural cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Median_nerve": {
+   "nombre": "Nervio mediano",
+   "nombre_en": "Median nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Meningeal_branch_of_maxillary_nerve": {
+   "nombre": "Ramo meníngeo del nervio maxilar",
+   "nombre_en": "Meningeal branch of maxillary nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Mental_nerve": {
+   "nombre": "Nervio mental",
+   "nombre_en": "Mental nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Middle_trunk_of_brachial_plexus": {
+   "nombre": "Tronco medio del plexo braquial",
+   "nombre_en": "Middle trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Motor_nucleus_of_facial_nerve": {
+   "nombre": "Núcleo motor del nervio facial",
+   "nombre_en": "Motor nucleus of facial nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Motor_root_of_trigeminal_nerve": {
+   "nombre": "Raíz motora del nervio trigémino",
+   "nombre_en": "Motor root of trigeminal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Muscular_branches_of_axillary_nerve": {
+   "nombre": "Ramos musculares del nervio axilar",
+   "nombre_en": "Muscular branches of axillary nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Muscular_branches_of_deep_fibular_nerve": {
+   "nombre": "Ramos musculares del nervio fibular profundo",
+   "nombre_en": "Muscular branches of deep fibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Muscular_branches_of_median_nerve": {
+   "nombre": "Ramos musculares del nervio mediano",
+   "nombre_en": "Muscular branches of median nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Muscular_branches_of_radial_nerve": {
+   "nombre": "Ramos musculares del nervio radial",
+   "nombre_en": "Muscular branches of radial nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Muscular_branches_of_ulnar_nerve": {
+   "nombre": "Ramos musculares del nervio ulnar",
+   "nombre_en": "Muscular branches of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Musculocutaneous_nerve": {
+   "nombre": "Nervio musculocutáneo",
+   "nombre_en": "Musculocutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Nerve_to_mylohyoid_muscle": {
+   "nombre": "Nervio del músculo milohioideo",
+   "nombre_en": "Nerve to mylohyoid muscle",
+   "organo": "Nervios"
+  },
+  "Nervios__Nerve_to_piriformis_muscle": {
+   "nombre": "Nervio del músculo piriforme",
+   "nombre_en": "Nerve to piriformis muscle",
+   "organo": "Nervios"
+  },
+  "Nervios__Nerve_to_quadratus_femoris_muscle": {
+   "nombre": "Nervio del músculo cuadrado femoral",
+   "nombre_en": "Nerve to quadratus femoris muscle",
+   "organo": "Nervios"
+  },
+  "Nervios__Nucleus_of_abducens_nerve": {
+   "nombre": "Núcleo del nervio abducens",
+   "nombre_en": "Nucleus of abducens nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Nucleus_of_accessory_nerve": {
+   "nombre": "Núcleo del nervio accesorio",
+   "nombre_en": "Nucleus of accessory nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Nucleus_of_hypoglossal_nerve": {
+   "nombre": "Núcleo del nervio hipogloso",
+   "nombre_en": "Nucleus of hypoglossal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Nucleus_of_oculomotor_nerve": {
+   "nombre": "Núcleo del nervio oculomotor",
+   "nombre_en": "Nucleus of oculomotor nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Nucleus_of_trochlear_nerve": {
+   "nombre": "Núcleo del nervio troclear",
+   "nombre_en": "Nucleus of trochlear nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Obturator_nerve": {
+   "nombre": "Nervio obturador",
+   "nombre_en": "Obturator nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Oculomotor_nerve_III": {
+   "nombre": "Nervio oculomotor (III)",
+   "nombre_en": "Oculomotor nerve (III)",
+   "organo": "Nervios"
+  },
+  "Nervios__Olfactory_nerve_I": {
+   "nombre": "Nervio olfatorio (I)",
+   "nombre_en": "Olfactory nerve (I)",
+   "organo": "Nervios"
+  },
+  "Nervios__Ophthalmic_nerve": {
+   "nombre": "Nervio oftálmico",
+   "nombre_en": "Ophthalmic nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Optic_nerve_II": {
+   "nombre": "Nervio óptico (II)",
+   "nombre_en": "Optic nerve (II)",
+   "organo": "Nervios"
+  },
+  "Nervios__Palmar_branch_of_median_nerve": {
+   "nombre": "Ramo palmar del nervio mediano",
+   "nombre_en": "Palmar branch of median nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Palmar_branch_of_ulnar_nerve": {
+   "nombre": "Ramo palmar del nervio ulnar",
+   "nombre_en": "Palmar branch of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_antebrachial_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo antebraquial posterior",
+   "nombre_en": "Posterior antebrachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_branch_of_medial_antebrachial_cutaneous_nerve": {
+   "nombre": "Ramo posterior del nervio cutáneo antebraquial medial",
+   "nombre_en": "Posterior branch of medial antebrachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_branch_of_obturator_nerve": {
+   "nombre": "Ramo posterior del nervio obturador",
+   "nombre_en": "Posterior branch of obturator nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_cord_of_brachial_plexus": {
+   "nombre": "Fascículo posterior del plexo braquial",
+   "nombre_en": "Posterior cord of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_division_of_inferior_trunk_of_brachial_plexus": {
+   "nombre": "División posterior del tronco inferior del plexo braquial",
+   "nombre_en": "Posterior division of inferior trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_division_of_mandibular_nerve": {
+   "nombre": "División posterior del nervio mandibular",
+   "nombre_en": "Posterior division of mandibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_division_of_middle_trunk_of_brachial_plexus": {
+   "nombre": "División posterior del tronco medio del plexo braquial",
+   "nombre_en": "Posterior division of middle trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_division_of_superior_trunk_of_brachial_plexus": {
+   "nombre": "División posterior del tronco superior del plexo braquial",
+   "nombre_en": "Posterior division of superior trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_femoral_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo femoral posterior",
+   "nombre_en": "Posterior femoral cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_interosseous_nerve_of_forearm": {
+   "nombre": "Nervio interóseo posterior del antebrazo",
+   "nombre_en": "Posterior interosseous nerve of forearm",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_nucleus_of_vagus_nerve": {
+   "nombre": "Núcleo posterior del nervio vago",
+   "nombre_en": "Posterior nucleus of vagus nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_root_of_posterior_femoral_cutaneous_nerve": {
+   "nombre": "Raíz posterior del nervio cutáneo femoral posterior",
+   "nombre_en": "Posterior root of posterior femoral cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Posterior_root_of_spinal_nerve": {
+   "nombre": "Raíz posterior del nervio espinal",
+   "nombre_en": "Posterior root of spinal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Proper_palmar_digital_branches_of_median_nerve": {
+   "nombre": "Ramos digitales palmares propias del nervio mediano",
+   "nombre_en": "Proper palmar digital branches of median nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Proper_palmar_digital_branches_of_ulnar_nerve": {
+   "nombre": "Ramos digitales palmares propias del nervio ulnar",
+   "nombre_en": "Proper palmar digital branches of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Proper_plantar_digital_branches_of_lateral_plantar_nerve": {
+   "nombre": "Ramos digitales plantares propios del nervio plantar lateral",
+   "nombre_en": "Proper plantar digital branches of lateral plantar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Proper_plantar_digital_branches_of_medial_plantar_nerve": {
+   "nombre": "Ramos digitales plantares propios del nervio plantar medial",
+   "nombre_en": "Proper plantar digital branches of medial plantar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Pudendal_nerve": {
+   "nombre": "Nervio pudendo",
+   "nombre_en": "Pudendal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Pyramid_of_medulla_oblongata": {
+   "nombre": "Pirámide bulbar",
+   "nombre_en": "Pyramid of medulla oblongata",
+   "organo": "Nervios"
+  },
+  "Nervios__Radial_nerve": {
+   "nombre": "Nervio radial",
+   "nombre_en": "Radial nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Roots_of_brachial_plexus": {
+   "nombre": "Raíces del plexo braquial",
+   "nombre_en": "Roots of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Saphenous_nerve": {
+   "nombre": "Nervio safeno",
+   "nombre_en": "Saphenous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Sciatic_nerve": {
+   "nombre": "Nervio ciático",
+   "nombre_en": "Sciatic nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Sensory_root_of_trigeminal_nerve": {
+   "nombre": "Raíz sensorial del nervio trigémino",
+   "nombre_en": "Sensory root of trigeminal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Spinal_ganglion": {
+   "nombre": "Ganglio espinal",
+   "nombre_en": "Spinal ganglion",
+   "organo": "Nervios"
+  },
+  "Nervios__Subclavian_nerve": {
+   "nombre": "Nervio subclavio",
+   "nombre_en": "Subclavian nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Superficial_branch_of_radial_nerve": {
+   "nombre": "Ramo superficial del nervio radial",
+   "nombre_en": "Superficial branch of radial nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Superficial_branch_of_ulnar_nerve": {
+   "nombre": "Ramo superficial del nervio ulnar",
+   "nombre_en": "Superficial branch of ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Superficial_fibular_nerve": {
+   "nombre": "Nervio fibular superficial",
+   "nombre_en": "Superficial fibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Superior_gluteal_nerve": {
+   "nombre": "Nervio glúteo superior",
+   "nombre_en": "Superior gluteal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Superior_lateral_brachial_cutaneous_nerve": {
+   "nombre": "Nervio cutáneo braquial lateroposterior",
+   "nombre_en": "Superior lateral brachial cutaneous nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Superior_subscapular_nerve": {
+   "nombre": "Nervio subescapular superior",
+   "nombre_en": "Superior subscapular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Superior_trunk_of_brachial_plexus": {
+   "nombre": "Tronco superior del plexo braquial",
+   "nombre_en": "Superior trunk of brachial plexus",
+   "organo": "Nervios"
+  },
+  "Nervios__Suprascapular_nerve": {
+   "nombre": "Nervio supraescapular",
+   "nombre_en": "Suprascapular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Sural_communicating_branch_of_common_fibular_nerve": {
+   "nombre": "Ramo sural comunicante del nervio fibular común",
+   "nombre_en": "Sural communicating branch of common fibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Sural_nerve": {
+   "nombre": "Nervio sural",
+   "nombre_en": "Sural nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Sympathetic_nerves": {
+   "nombre": "Nervios simpáticos",
+   "nombre_en": "Sympathetic nerves",
+   "organo": "Nervios"
+  },
+  "Nervios__Sympathetic_trunk": {
+   "nombre": "Tronco simpático",
+   "nombre_en": "Sympathetic trunk",
+   "organo": "Nervios"
+  },
+  "Nervios__Thoracodorsal_nerve": {
+   "nombre": "Nervio toracodorsal",
+   "nombre_en": "Thoracodorsal nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Tibial_nerve": {
+   "nombre": "Nervio tibial",
+   "nombre_en": "Tibial nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Trigeminal_nerve_V": {
+   "nombre": "Nervio trigémino (V)",
+   "nombre_en": "Trigeminal nerve (V)",
+   "organo": "Nervios"
+  },
+  "Nervios__Trochlear_nerve_IV": {
+   "nombre": "Nervio troclear (IV)",
+   "nombre_en": "Trochlear nerve (IV)",
+   "organo": "Nervios"
+  },
+  "Nervios__Ulnar_nerve": {
+   "nombre": "Nervio ulnar",
+   "nombre_en": "Ulnar nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Vagus_nerve_X": {
+   "nombre": "Nervio vago (X)",
+   "nombre_en": "Vagus nerve (X)",
+   "organo": "Nervios"
+  },
+  "Nervios__Vestibular_nerve": {
+   "nombre": "Nervio vestibular",
+   "nombre_en": "Vestibular nerve",
+   "organo": "Nervios"
+  },
+  "Nervios__Vestibulocochlear_nerve_VIII": {
+   "nombre": "Nervio vestibulococlear (VIII)",
+   "nombre_en": "Vestibulocochlear nerve (VIII)",
+   "organo": "Nervios"
+  },
   "Oblicuos__External_abdominal_oblique_muscle_Der": {
    "nombre": "Músculo oblicuo externo del abdomen (lado derecho)",
    "nombre_en": "External abdominal oblique muscle",
@@ -5404,6 +7929,36 @@
   "Pancreas__Accessory_pancreatic_duct": {
    "nombre": "Conducto pancreático accesorio",
    "nombre_en": "Accessory pancreatic duct",
+   "organo": "Pancreas"
+  },
+  "Pancreas__Cabeza": {
+   "nombre": "Cabeza del páncreas",
+   "nombre_en": "Head of pancreas",
+   "organo": "Pancreas"
+  },
+  "Pancreas__Cola": {
+   "nombre": "Cola del páncreas",
+   "nombre_en": "Tail of pancreas",
+   "organo": "Pancreas"
+  },
+  "Pancreas__ConductoAccesorio": {
+   "nombre": "Conducto pancreático accesorio",
+   "nombre_en": "Accessory pancreatic duct",
+   "organo": "Pancreas"
+  },
+  "Pancreas__ConductoPancreatico": {
+   "nombre": "Conducto pancreático",
+   "nombre_en": "Pancreatic duct",
+   "organo": "Pancreas"
+  },
+  "Pancreas__Cuello": {
+   "nombre": "Cuello del páncreas",
+   "nombre_en": "Neck of pancreas",
+   "organo": "Pancreas"
+  },
+  "Pancreas__Cuerpo": {
+   "nombre": "Cuerpo del páncreas",
+   "nombre_en": "Body of pancreas",
    "organo": "Pancreas"
   },
   "Pancreas__Pancreas": {
@@ -5641,9 +8196,29 @@
    "nombre_en": "Testis",
    "organo": "Testiculos"
   },
+  "TibiaDer__Diafisis": {
+   "nombre": "Diáfisis de la tibia",
+   "nombre_en": "Shaft of tibia",
+   "organo": "TibiaDer"
+  },
+  "TibiaDer__Distal": {
+   "nombre": "Epífisis distal de la tibia (maléolo medial)",
+   "nombre_en": "Distal tibia",
+   "organo": "TibiaDer"
+  },
   "TibiaDer__Fibula_Der": {
    "nombre": "Peroné (lado derecho)",
    "nombre_en": "Fibula",
+   "organo": "TibiaDer"
+  },
+  "TibiaDer__Perone": {
+   "nombre": "Peroné",
+   "nombre_en": "Fibula",
+   "organo": "TibiaDer"
+  },
+  "TibiaDer__Proximal": {
+   "nombre": "Epífisis proximal de la tibia (meseta tibial)",
+   "nombre_en": "Proximal tibia",
    "organo": "TibiaDer"
   },
   "TibiaDer__Tibia_Der": {
@@ -5651,9 +8226,29 @@
    "nombre_en": "Tibia",
    "organo": "TibiaDer"
   },
+  "TibiaIzq__Diafisis": {
+   "nombre": "Diáfisis de la tibia",
+   "nombre_en": "Shaft of tibia",
+   "organo": "TibiaIzq"
+  },
+  "TibiaIzq__Distal": {
+   "nombre": "Epífisis distal de la tibia (maléolo medial)",
+   "nombre_en": "Distal tibia",
+   "organo": "TibiaIzq"
+  },
   "TibiaIzq__Fibula_Izq": {
    "nombre": "Peroné (lado izquierdo)",
    "nombre_en": "Fibula",
+   "organo": "TibiaIzq"
+  },
+  "TibiaIzq__Perone": {
+   "nombre": "Peroné",
+   "nombre_en": "Fibula",
+   "organo": "TibiaIzq"
+  },
+  "TibiaIzq__Proximal": {
+   "nombre": "Epífisis proximal de la tibia (meseta tibial)",
+   "nombre_en": "Proximal tibia",
    "organo": "TibiaIzq"
   },
   "TibiaIzq__Tibia_Izq": {
@@ -5680,6 +8275,21 @@
    "nombre": "Lóbulo derecho del timo",
    "nombre_en": "Right lobe of thymus",
    "organo": "Timo"
+  },
+  "Tiroides__Istmo": {
+   "nombre": "Istmo de la tiroides",
+   "nombre_en": "Isthmus of thyroid gland",
+   "organo": "Tiroides"
+  },
+  "Tiroides__LobuloDerecho": {
+   "nombre": "Lóbulo derecho de la tiroides",
+   "nombre_en": "Right lobe of thyroid gland",
+   "organo": "Tiroides"
+  },
+  "Tiroides__LobuloIzquierdo": {
+   "nombre": "Lóbulo izquierdo de la tiroides",
+   "nombre_en": "Left lobe of thyroid gland",
+   "organo": "Tiroides"
   },
   "Tiroides__Thyroid_gland": {
    "nombre": "Glándula tiroides",
@@ -5866,9 +8476,29 @@
    "nombre_en": "posterior wall of uterus",
    "organo": "Utero"
   },
+  "Vejiga__Cuello": {
+   "nombre": "Cuello de la vejiga",
+   "nombre_en": "Neck of bladder",
+   "organo": "Vejiga"
+  },
+  "Vejiga__Cuerpo": {
+   "nombre": "Cuerpo de la vejiga",
+   "nombre_en": "Body of bladder",
+   "organo": "Vejiga"
+  },
+  "Vejiga__Fondo": {
+   "nombre": "Fondo de la vejiga",
+   "nombre_en": "Fundus of bladder",
+   "organo": "Vejiga"
+  },
   "Vejiga__Urinary_bladder": {
    "nombre": "Vejiga urinaria",
    "nombre_en": "Urinary bladder",
+   "organo": "Vejiga"
+  },
+  "Vejiga__Vertice": {
+   "nombre": "Vértice de la vejiga",
+   "nombre_en": "Apex of bladder",
    "organo": "Vejiga"
   },
   "Vejiga__fundus_of_urinary_bladder_base": {
@@ -5945,6 +8575,706 @@
    "nombre": "Vena cava superior",
    "nombre_en": "Superior vena cava",
    "organo": "VenaCava"
+  },
+  "VenasPerifericas__Accessory_hemi_azygos_vein": {
+   "nombre": "Vena hemiácigos accessoria",
+   "nombre_en": "Accessory hemi-azygos vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Angular_vein": {
+   "nombre": "Vena angular",
+   "nombre_en": "Angular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Anterior_circumflex_humeral_vein": {
+   "nombre": "Vena circunfleja humeral anterior",
+   "nombre_en": "Anterior circumflex humeral vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Anterior_division_of_retromandibular_vein": {
+   "nombre": "División anterior de la vena retromandibular",
+   "nombre_en": "Anterior division of retromandibular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Anterior_intercavernous_sinus": {
+   "nombre": "Seno intercavernoso anterior",
+   "nombre_en": "Anterior intercavernous sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Anterior_jugular_vein": {
+   "nombre": "Vena yugular anterior",
+   "nombre_en": "Anterior jugular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Anterior_tibial_veins": {
+   "nombre": "Venas tibiales anteriores",
+   "nombre_en": "Anterior tibial veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Anterior_vein_of_left_lung": {
+   "nombre": "Vena anterior del pulmón izquierdo",
+   "nombre_en": "Anterior vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Anterior_vein_of_right_lung": {
+   "nombre": "Vena anterior del pulmón derecho",
+   "nombre_en": "Anterior vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Apical_vein_of_right_lung": {
+   "nombre": "Vena apical del pulmón derecho",
+   "nombre_en": "Apical vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Apicoposterior_vein_of_left_lung": {
+   "nombre": "Vena apicoposterior del pulmón izquierdo",
+   "nombre_en": "Apicoposterior vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Axillary_vein": {
+   "nombre": "Vena axilar",
+   "nombre_en": "Axillary vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Azygos_vein": {
+   "nombre": "Vena ácigos",
+   "nombre_en": "Azygos vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Basilar_venous_plexus": {
+   "nombre": "Plexo venoso basilar",
+   "nombre_en": "Basilar venous plexus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Basilic_vein": {
+   "nombre": "Vena basílica",
+   "nombre_en": "Basilic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Brachial_veins": {
+   "nombre": "Venas braquiales",
+   "nombre_en": "Brachial veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Cavernous_sinus": {
+   "nombre": "Seno cavernoso",
+   "nombre_en": "Cavernous sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Cephalic_vein": {
+   "nombre": "Vena cefálica",
+   "nombre_en": "Cephalic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Circumflex_scapular_vein": {
+   "nombre": "Vena circunfleja escapular",
+   "nombre_en": "Circumflex scapular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Common_facial_vein": {
+   "nombre": "Vena facial común",
+   "nombre_en": "Common facial vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Coronary_sinus": {
+   "nombre": "Seno coronario",
+   "nombre_en": "Coronary sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Deep_dorsal_vein_of_penis": {
+   "nombre": "Vena dorsal profunda del pene",
+   "nombre_en": "Deep dorsal vein of penis",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Deep_femoral_vein": {
+   "nombre": "Vena femoral profunda",
+   "nombre_en": "Deep femoral vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Deep_venous_palmar_arch": {
+   "nombre": "Arco venoso palmar profundo",
+   "nombre_en": "Deep venous palmar arch",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Dorsal_digital_veins_of_foot": {
+   "nombre": "Venas digitales dorsales del pie",
+   "nombre_en": "Dorsal digital veins of foot",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Dorsal_digital_veins_of_hand": {
+   "nombre": "Venas digitales dorsales de la mano",
+   "nombre_en": "Dorsal digital veins of hand",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Dorsal_venous_arch_of_foot": {
+   "nombre": "Arco venoso dorsal del pie",
+   "nombre_en": "Dorsal venous arch of foot",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Dorsal_venous_network_of_hand": {
+   "nombre": "Red venosa dorsal de la mano",
+   "nombre_en": "Dorsal venous network of hand",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__External_iliac_vein": {
+   "nombre": "Vena iliaca externa",
+   "nombre_en": "External iliac vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__External_jugular_vein": {
+   "nombre": "Vena yugular externa",
+   "nombre_en": "External jugular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__External_pudendal_veins": {
+   "nombre": "Venas pudendas externas",
+   "nombre_en": "External pudendal veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Facial_vein": {
+   "nombre": "Vena facial",
+   "nombre_en": "Facial vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Femoral_vein": {
+   "nombre": "Vena femoral",
+   "nombre_en": "Femoral vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Fibular_veins": {
+   "nombre": "Venas fibulares",
+   "nombre_en": "Fibular veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Genicular_veins": {
+   "nombre": "Venas geniculares",
+   "nombre_en": "Genicular veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Great_cardiac_vein": {
+   "nombre": "Vena cardíaca mayor",
+   "nombre_en": "Great cardiac vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Great_saphenous_vein": {
+   "nombre": "Gran vena safena",
+   "nombre_en": "Great saphenous vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Hemi_azygos_vein": {
+   "nombre": "Vena hemiácigos",
+   "nombre_en": "Hemi-azygos vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Hepatic_portal_vein": {
+   "nombre": "Vena porta hepática",
+   "nombre_en": "Hepatic portal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Hepatic_veins": {
+   "nombre": "Venas hepáticas",
+   "nombre_en": "Hepatic veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Iliolumbar_vein": {
+   "nombre": "Vena iliolumbar",
+   "nombre_en": "Iliolumbar vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_basal_vein_of_left_lung": {
+   "nombre": "Vena basal inferior del pulmón izquierdo",
+   "nombre_en": "Inferior basal vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_basal_vein_of_right_lung": {
+   "nombre": "Vena basal inferior del pulmón derecho",
+   "nombre_en": "Inferior basal vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_epigastric_vein": {
+   "nombre": "Vena epigástrica inferior",
+   "nombre_en": "Inferior epigastric vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_gluteal_veins": {
+   "nombre": "Venas glúteas inferiores",
+   "nombre_en": "Inferior gluteal veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_labial_veins": {
+   "nombre": "Venas labiales inferiores",
+   "nombre_en": "Inferior labial veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_lingular_vein_of_left_lung": {
+   "nombre": "Vena lingular inferior del pulmón izquierdo",
+   "nombre_en": "Inferior lingular vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_mesenteric_vein": {
+   "nombre": "Vena mesentérica inferior",
+   "nombre_en": "Inferior mesenteric vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_ophthalmic_vein": {
+   "nombre": "Vena oftálmica inferior",
+   "nombre_en": "Inferior ophthalmic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_petrosal_sinus": {
+   "nombre": "Seno petroso inferior",
+   "nombre_en": "Inferior petrosal sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_sagittal_sinus": {
+   "nombre": "Seno sagital inferior",
+   "nombre_en": "Inferior sagittal sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_vein_of_left_ventricle": {
+   "nombre": "Vena inferior del ventrículo izquierdo",
+   "nombre_en": "Inferior vein of left ventricle",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Inferior_vein_of_left_ventricle_Posterior": {
+   "nombre": "Inferior vein of left ventricle (//Posterior '')",
+   "nombre_en": "Inferior vein of left ventricle (//Posterior '')",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Intercapitular_veins_of_foot": {
+   "nombre": "Venas intercapitulares del pie",
+   "nombre_en": "Intercapitular veins of foot",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Internal_iliac_vein": {
+   "nombre": "Vena iliaca interna",
+   "nombre_en": "Internal iliac vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Internal_pudendal_vein": {
+   "nombre": "Vena pudenda interna",
+   "nombre_en": "Internal pudendal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Internal_thoracic_veins": {
+   "nombre": "Venas torácicas internas",
+   "nombre_en": "Internal thoracic veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Intrarenal_veins_of_left_kidney": {
+   "nombre": "Venas intrarrenales del riñón izquierdo",
+   "nombre_en": "Intrarenal veins of left kidney",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Intrarenal_veins_of_right_kidney": {
+   "nombre": "Venas intrarrenales del riñón derecho",
+   "nombre_en": "Intrarenal veins of right kidney",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lateral_circumflex_femoral_veins": {
+   "nombre": "Venas femorales circunflejas laterales",
+   "nombre_en": "Lateral circumflex femoral veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lateral_plantar_veins": {
+   "nombre": "Venas plantares laterales",
+   "nombre_en": "Lateral plantar veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lateral_sacral_veins": {
+   "nombre": "Venas sacras laterales",
+   "nombre_en": "Lateral sacral veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lateral_thoracic_vein": {
+   "nombre": "Vena torácica lateral",
+   "nombre_en": "Lateral thoracic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lateral_vein_of_right_lung": {
+   "nombre": "Vena lateral del pulmón derecho",
+   "nombre_en": "Lateral vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_ascending_lumbar_vein": {
+   "nombre": "Vena lumbar ascendente izquierda",
+   "nombre_en": "Left ascending lumbar vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_gastro_omental_vein": {
+   "nombre": "Vena gastro-omental izquierda",
+   "nombre_en": "Left gastro-omental vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_inferior_pulmonary_vein": {
+   "nombre": "Vena pulmonar inferior izquierda",
+   "nombre_en": "Left inferior pulmonary vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_renal_vein": {
+   "nombre": "Vena renal izquierda",
+   "nombre_en": "Left renal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_subclavian_vein": {
+   "nombre": "Vena subclavia izquierda",
+   "nombre_en": "Left subclavian vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_subcostal_vein": {
+   "nombre": "Vena subcostal izquierda",
+   "nombre_en": "Left subcostal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_superior_intercostal_vein": {
+   "nombre": "Vena intercostal superior izquierda",
+   "nombre_en": "Left superior intercostal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_superior_pulmonary_vein": {
+   "nombre": "Vena pulmonar superior izquierda",
+   "nombre_en": "Left superior pulmonary vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Left_testicular_vein": {
+   "nombre": "Vena testicular izquierda",
+   "nombre_en": "Left testicular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lingual_vein": {
+   "nombre": "Vena lingual",
+   "nombre_en": "Lingual vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lingular_vein_of_left_lung": {
+   "nombre": "Vena lingular del pulmón izquierdo",
+   "nombre_en": "Lingular vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Lumbar_veins": {
+   "nombre": "Venas lumbares",
+   "nombre_en": "Lumbar veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Maxillary_veins": {
+   "nombre": "Venas maxilares",
+   "nombre_en": "Maxillary veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Medial_circumflex_femoral_veins": {
+   "nombre": "Venas femorales circunflejas mediales",
+   "nombre_en": "Medial circumflex femoral veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Medial_plantar_veins": {
+   "nombre": "Venas plantares mediales",
+   "nombre_en": "Medial plantar veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Medial_vein_of_right_lung": {
+   "nombre": "Vena medial del pulmón derecho",
+   "nombre_en": "Medial vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Median_antebrachial_vein": {
+   "nombre": "Vena antebraquial mediana",
+   "nombre_en": "Median antebrachial vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Median_cubital_vein": {
+   "nombre": "Vena cubital mediana",
+   "nombre_en": "Median cubital vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Middle_cardiac_vein": {
+   "nombre": "Vena cardiaca media",
+   "nombre_en": "Middle cardiac vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Middle_colic_vein": {
+   "nombre": "Vena cólico media",
+   "nombre_en": "Middle colic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Musculophrenic_veins": {
+   "nombre": "Venas musculofrénicas",
+   "nombre_en": "Musculophrenic veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Occipital_sinus": {
+   "nombre": "Seno occipital",
+   "nombre_en": "Occipital sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Occipital_vein": {
+   "nombre": "Vena occipital",
+   "nombre_en": "Occipital vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Palmar_digital_veins": {
+   "nombre": "Venas digitales palmares",
+   "nombre_en": "Palmar digital veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Perforating_veins": {
+   "nombre": "Venas perforantes",
+   "nombre_en": "Perforating veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Plantar_digital_veins": {
+   "nombre": "Venas digitales plantares",
+   "nombre_en": "Plantar digital veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Plantar_venous_arch": {
+   "nombre": "Arco venoso plantar",
+   "nombre_en": "Plantar venous arch",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Popliteal_vein": {
+   "nombre": "Vena poplítea",
+   "nombre_en": "Popliteal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Posterior_auricular_vein": {
+   "nombre": "Vena auricular posterior",
+   "nombre_en": "Posterior auricular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Posterior_circumflex_humeral_vein": {
+   "nombre": "Vena circunfleja humeral posterior",
+   "nombre_en": "Posterior circumflex humeral vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Posterior_division_of_retromandibular_vein": {
+   "nombre": "División posterior de la vena retromandibular",
+   "nombre_en": "Posterior division of retromandibular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Posterior_intercavernous_sinus": {
+   "nombre": "Seno intercavernoso posterior",
+   "nombre_en": "Posterior intercavernous sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Posterior_tibial_veins": {
+   "nombre": "Venas tibiales posteriores",
+   "nombre_en": "Posterior tibial veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Posterior_vein_of_right_lung": {
+   "nombre": "Vena posterior del pulmón derecho",
+   "nombre_en": "Posterior vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Radial_veins": {
+   "nombre": "Venas radiales",
+   "nombre_en": "Radial veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Retromandibular_vein": {
+   "nombre": "Vena retromandibular",
+   "nombre_en": "Retromandibular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_ascending_lumbar_vein": {
+   "nombre": "Vena lumbar ascendente derecha",
+   "nombre_en": "Right ascending lumbar vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_colic_vein": {
+   "nombre": "Vena cólica derecha",
+   "nombre_en": "Right colic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_gastro_omental_vein": {
+   "nombre": "Vena gastro-omental derecha",
+   "nombre_en": "Right gastro-omental vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_inferior_pulmonary_vein": {
+   "nombre": "Vena pulmonar inferior derecha",
+   "nombre_en": "Right inferior pulmonary vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_renal_vein": {
+   "nombre": "Vena renal derecha",
+   "nombre_en": "Right renal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_subclavian_vein": {
+   "nombre": "Vena subclavia derecha",
+   "nombre_en": "Right subclavian vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_subcostal_vein": {
+   "nombre": "Vena subcostal derecha",
+   "nombre_en": "Right subcostal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_superior_intercostal_vein": {
+   "nombre": "Vena intercostal superior derecha",
+   "nombre_en": "Right superior intercostal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_superior_phrenic_vein": {
+   "nombre": "Vena frénica superior derecha",
+   "nombre_en": "Right superior phrenic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_superior_pulmonary_vein": {
+   "nombre": "Vena ulmonar superior derecha",
+   "nombre_en": "Right superior pulmonary vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Right_testicular_vein": {
+   "nombre": "Vena testicular derecha",
+   "nombre_en": "Right testicular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Sigmoid_sinus": {
+   "nombre": "Seno sigmoideo",
+   "nombre_en": "Sigmoid sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Sigmoid_veins": {
+   "nombre": "Venas sigmoideas",
+   "nombre_en": "Sigmoid veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Small_saphenous_vein": {
+   "nombre": "Pequeña vena safena",
+   "nombre_en": "Small saphenous vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Splenic_vein": {
+   "nombre": "Vena esplénica",
+   "nombre_en": "Splenic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Straight_sinus": {
+   "nombre": "Seno recto",
+   "nombre_en": "Straight sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Submental_vein": {
+   "nombre": "Vena submental",
+   "nombre_en": "Submental vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Subscapular_vein": {
+   "nombre": "Vena subescapular",
+   "nombre_en": "Subscapular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superficial_dorsal_veins_of_penis": {
+   "nombre": "Venas dorsales superficiales del pene",
+   "nombre_en": "Superficial dorsal veins of penis",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superficial_epigastric_vein": {
+   "nombre": "Vena epigástrica superficial",
+   "nombre_en": "Superficial epigastric vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superficial_temporal_veins": {
+   "nombre": "Venas temporales superficiales",
+   "nombre_en": "Superficial temporal veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superficial_venous_palmar_arch": {
+   "nombre": "Arco venoso palmar superficial",
+   "nombre_en": "Superficial venous palmar arch",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_basal_vein_of_left_lung": {
+   "nombre": "Vena basal superior del pulmón izquierdo",
+   "nombre_en": "Superior basal vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_basal_vein_of_right_lung": {
+   "nombre": "Vena basal superior del pulmón derecho",
+   "nombre_en": "Superior basal vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_epigastric_veins": {
+   "nombre": "Venas epigástricas superiores",
+   "nombre_en": "Superior epigastric veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_gluteal_veins": {
+   "nombre": "Venas glúteas superiores",
+   "nombre_en": "Superior gluteal veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_labial_vein": {
+   "nombre": "Vena labial superior",
+   "nombre_en": "Superior labial vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_lingular_vein_of_left_lung": {
+   "nombre": "Vena lingular superior del pulmón izquierdo",
+   "nombre_en": "Superior lingular vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_mesenteric_vein": {
+   "nombre": "Vena mesentérica superior",
+   "nombre_en": "Superior mesenteric vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_ophthalmic_vein": {
+   "nombre": "Vena oftalmica superior",
+   "nombre_en": "Superior ophthalmic vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_petrosal_sinus": {
+   "nombre": "Seno petroso superior",
+   "nombre_en": "Superior petrosal sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_sagittal_sinus": {
+   "nombre": "Seno sagital superior",
+   "nombre_en": "Superior sagittal sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_thyroid_vein": {
+   "nombre": "Vena tiroidea superior",
+   "nombre_en": "Superior thyroid vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_vein_of_left_lung": {
+   "nombre": "Vena superior del pulmón izquierdo",
+   "nombre_en": "Superior vein of left lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Superior_vein_of_right_lung": {
+   "nombre": "Vena superior del pulmón derecho",
+   "nombre_en": "Superior vein of right lung",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Suprascapular_vein": {
+   "nombre": "Vena supraescapular",
+   "nombre_en": "Suprascapular vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Thoracodorsal_vein": {
+   "nombre": "Vena toracodorsal",
+   "nombre_en": "Thoracodorsal vein",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Transverse_sinus": {
+   "nombre": "Seno transverso",
+   "nombre_en": "Transverse sinus",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Ulnar_veins": {
+   "nombre": "Venas ulnares",
+   "nombre_en": "Ulnar veins",
+   "organo": "VenasPerifericas"
+  },
+  "VenasPerifericas__Vertebral_vein": {
+   "nombre": "Vena vertebral",
+   "nombre_en": "Vertebral vein",
+   "organo": "VenasPerifericas"
   }
  }
 }

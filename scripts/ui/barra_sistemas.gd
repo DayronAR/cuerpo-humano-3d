@@ -89,16 +89,13 @@ func _crear_elemento(s: Dictionary) -> Button:
 	boton.pressed.connect(sistema_solicitado.emit.bind(id))
 	_aplicar_estilo(boton)
 
-	# Contenido: marca de color + nombre + descripción breve
+	# Contenido: nombre + descripción breve
 	var margen := MarginContainer.new()
 	margen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for lado in ["left", "right", "top", "bottom"]:
 		margen.add_theme_constant_override("margin_" + lado, 8 if lado in ["top", "bottom"] else 10)
 	var fila := HBoxContainer.new()
 	fila.add_theme_constant_override("separation", 10)
-	var color := ColorRect.new()
-	color.color = Color.from_string(s.get("color", "#888888"), Color.GRAY)
-	color.custom_minimum_size = Vector2(6, 0)
 	var textos := VBoxContainer.new()
 	textos.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	textos.add_theme_constant_override("separation", 0)
@@ -115,10 +112,9 @@ func _crear_elemento(s: Dictionary) -> Button:
 	descripcion.add_theme_color_override("font_color", COLOR_TEXTO_SUAVE)
 	textos.add_child(nombre)
 	textos.add_child(descripcion)
-	fila.add_child(color)
 	fila.add_child(textos)
 	margen.add_child(fila)
-	for c in [margen, fila, color, textos, nombre, descripcion]:
+	for c in [margen, fila, textos, nombre, descripcion]:
 		c.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	boton.add_child(margen)
 	return boton

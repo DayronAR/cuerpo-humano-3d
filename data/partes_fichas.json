@@ -57,6 +57,311 @@
         "En algunos bebés el píloro se engrosa (estenosis pilórica) y vomitan con fuerza después de comer; se corrige con una cirugía sencilla.",
         "La comida tarda entre 2 y 4 horas en pasar por el píloro."
       ]
+    },
+    "Esofago__Cervical": {
+      "funcion": "Primer tramo del esófago, en el cuello, detrás de la tráquea.",
+      "datos_curiosos": [
+        "Empieza a la altura de la sexta vértebra cervical."
+      ]
+    },
+    "Esofago__Toracica": {
+      "funcion": "Tramo más largo del esófago: baja por el tórax detrás del corazón y al lado de la aorta.",
+      "datos_curiosos": [
+        "Mide unos 18 cm.",
+        "Por eso a veces una acidez se confunde con dolor de pecho."
+      ]
+    },
+    "Esofago__Abdominal": {
+      "funcion": "Tramo corto, debajo del diafragma, que termina en el cardias del estómago.",
+      "datos_curiosos": [
+        "Mide apenas 1 a 2 cm."
+      ]
+    },
+    "IntestinoDelgado__Duodeno": {
+      "funcion": "Primera parte del intestino delgado, en forma de C alrededor de la cabeza del páncreas. Recibe la bilis y los jugos del páncreas.",
+      "datos_curiosos": [
+        "Mide unos 25 cm: su nombre viene de «doce dedos» de largo.",
+        "Aquí aparecen muchas úlceras (úlcera duodenal)."
+      ]
+    },
+    "IntestinoDelgado__Yeyuno": {
+      "funcion": "Parte media del intestino delgado. Absorbe la mayoría de los azúcares, proteínas y grasas.",
+      "datos_curiosos": [
+        "Mide unos 2,5 m y ocupa la parte alta e izquierda del abdomen.",
+        "Su pared tiene muchos pliegues que aumentan la superficie de absorción."
+      ]
+    },
+    "IntestinoDelgado__Ileon": {
+      "funcion": "Última parte del intestino delgado. Absorbe la vitamina B12 y las sales biliares, y desemboca en el ciego.",
+      "datos_curiosos": [
+        "Mide unos 3,5 m.",
+        "Tiene placas de Peyer, grupos de tejido linfático que vigilan las bacterias."
+      ]
+    },
+    "Higado__LobuloDerecho": {
+      "funcion": "El lóbulo más grande del hígado; procesa nutrientes, guarda glucógeno y produce bilis.",
+      "datos_curiosos": [
+        "Es unas seis veces más grande que el izquierdo."
+      ]
+    },
+    "Higado__LobuloIzquierdo": {
+      "funcion": "Lóbulo más pequeño, a la izquierda del ligamento falciforme, sobre el estómago.",
+      "datos_curiosos": [
+        "En los bebés es proporcionalmente más grande."
+      ]
+    },
+    "Higado__LobuloCuadrado": {
+      "funcion": "Pequeño lóbulo en la cara inferior del hígado, junto a la vesícula biliar.",
+      "datos_curiosos": [
+        "Se ve solo mirando el hígado desde abajo."
+      ]
+    },
+    "Higado__LobuloCaudado": {
+      "funcion": "Pequeño lóbulo en la cara posterior del hígado, junto a la vena cava inferior.",
+      "datos_curiosos": [
+        "Tiene su propia irrigación: a veces sigue funcionando cuando el resto del hígado está dañado."
+      ]
+    },
+    "Higado__Vesicula": {
+      "funcion": "Bolsa que guarda y concentra la bilis hasta que se come grasa.",
+      "datos_curiosos": [
+        "Cabe unos 50 ml de bilis.",
+        "Los cálculos biliares se forman aquí."
+      ]
+    },
+    "Higado__Coledoco": {
+      "funcion": "Conducto que lleva la bilis del hígado y la vesícula al duodeno.",
+      "datos_curiosos": [
+        "Mide unos 7 cm de largo."
+      ]
+    },
+    "Pancreas__Cabeza": {
+      "funcion": "Parte ancha del páncreas, metida en la curva del duodeno.",
+      "datos_curiosos": [
+        "Aquí desemboca el conducto pancreático junto al colédoco."
+      ]
+    },
+    "Pancreas__Cuello": {
+      "funcion": "Parte estrecha que une la cabeza con el cuerpo del páncreas, delante de grandes vasos.",
+      "datos_curiosos": [
+        "Mide unos 2 cm."
+      ]
+    },
+    "Pancreas__Cuerpo": {
+      "funcion": "Parte central del páncreas, detrás del estómago.",
+      "datos_curiosos": [
+        "Tiene muchos islotes de Langerhans, que producen insulina."
+      ]
+    },
+    "Pancreas__Cola": {
+      "funcion": "Extremo del páncreas, que llega hasta el bazo.",
+      "datos_curiosos": [
+        "Es la zona con más islotes de Langerhans."
+      ]
+    },
+    "Pancreas__ConductoPancreatico": {
+      "funcion": "Conducto que recorre el páncreas y lleva sus jugos digestivos al duodeno.",
+      "datos_curiosos": [
+        "También se llama conducto de Wirsung."
+      ]
+    },
+    "Pancreas__ConductoAccesorio": {
+      "funcion": "Conducto secundario que también vierte jugo pancreático en el duodeno.",
+      "datos_curiosos": [
+        "Se llama conducto de Santorini."
+      ]
+    },
+    "Tiroides__LobuloDerecho": {
+      "funcion": "Mitad derecha de la tiroides, al lado de la tráquea.",
+      "datos_curiosos": [
+        "Detrás de cada lóbulo están las paratiroides."
+      ]
+    },
+    "Tiroides__LobuloIzquierdo": {
+      "funcion": "Mitad izquierda de la tiroides, al lado de la tráquea.",
+      "datos_curiosos": [
+        "Los lóbulos miden unos 5 cm de alto."
+      ]
+    },
+    "Tiroides__Istmo": {
+      "funcion": "Puente de tejido que une los dos lóbulos por delante de la tráquea.",
+      "datos_curiosos": [
+        "Le da a la tiroides su forma de mariposa."
+      ]
+    },
+    "Vejiga__Vertice": {
+      "funcion": "Parte superior de la vejiga, que apunta hacia adelante y arriba.",
+      "datos_curiosos": [
+        "Se continúa con un cordón fibroso hasta el ombligo (el uraco)."
+      ]
+    },
+    "Vejiga__Cuerpo": {
+      "funcion": "Parte principal de la vejiga, que se estira al llenarse de orina.",
+      "datos_curiosos": [
+        "Su músculo (el detrusor) se contrae para orinar."
+      ]
+    },
+    "Vejiga__Fondo": {
+      "funcion": "Pared posterior e inferior de la vejiga, donde llegan los uréteres.",
+      "datos_curiosos": [
+        "Contiene el trígono vesical, una zona lisa en forma de triángulo."
+      ]
+    },
+    "Vejiga__Cuello": {
+      "funcion": "Parte inferior de la vejiga, que se continúa con la uretra.",
+      "datos_curiosos": [
+        "Tiene un esfínter que mantiene la orina dentro."
+      ]
+    },
+    "MedulaEspinal__Cervical": {
+      "funcion": "Tramo de la médula en el cuello: controla los brazos, las manos y el diafragma.",
+      "datos_curiosos": [
+        "Una lesión aquí puede paralizar brazos y piernas (tetraplejia)."
+      ]
+    },
+    "MedulaEspinal__Toracica": {
+      "funcion": "Tramo de la médula en el tórax: controla los músculos del tronco.",
+      "datos_curiosos": [
+        "Es el tramo más largo."
+      ]
+    },
+    "MedulaEspinal__Lumbar": {
+      "funcion": "Tramo final de la médula, que controla las piernas. Termina en el cono medular a la altura de la primera o segunda vértebra lumbar; por debajo solo bajan raíces nerviosas (la cola de caballo).",
+      "datos_curiosos": [
+        "En adultos la médula no llega hasta abajo: mide unos 45 cm."
+      ]
+    },
+    "FemurDer__Proximal": {
+      "funcion": "Parte superior del fémur: la cabeza encaja en la cadera, el cuello la une al hueso y los trocánteres sujetan músculos.",
+      "datos_curiosos": [
+        "La fractura de cadera suele ser del cuello del fémur."
+      ]
+    },
+    "FemurDer__Diafisis": {
+      "funcion": "Cuerpo largo del fémur. Tiene médula ósea amarilla en su interior.",
+      "datos_curiosos": [
+        "Es el hueso más largo y fuerte del cuerpo."
+      ]
+    },
+    "FemurDer__Distal": {
+      "funcion": "Parte inferior del fémur: sus cóndilos forman la rodilla con la tibia.",
+      "datos_curiosos": [
+        "En los niños aquí está la placa de crecimiento que alarga la pierna."
+      ]
+    },
+    "FemurDer__Rotula": {
+      "funcion": "Hueso de la rodilla dentro del tendón del cuádriceps; hace de polea para estirar la pierna.",
+      "datos_curiosos": [
+        "Es el hueso sesamoideo más grande del cuerpo."
+      ]
+    },
+    "HumeroDer__Proximal": {
+      "funcion": "Parte superior del húmero: la cabeza encaja en el hombro y los tubérculos sujetan los músculos del manguito rotador.",
+      "datos_curiosos": [
+        "El hombro es la articulación que más se mueve y la que más se disloca."
+      ]
+    },
+    "HumeroDer__Diafisis": {
+      "funcion": "Cuerpo del húmero. Por su cara posterior pasa el nervio radial.",
+      "datos_curiosos": [
+        "Una fractura aquí puede dañar ese nervio."
+      ]
+    },
+    "HumeroDer__Distal": {
+      "funcion": "Parte inferior del húmero, que forma el codo con el radio y el cúbito.",
+      "datos_curiosos": [
+        "El «hueso de la risa» es el nervio cubital pasando por aquí."
+      ]
+    },
+    "TibiaDer__Proximal": {
+      "funcion": "Parte superior de la tibia (meseta tibial), donde apoya el fémur.",
+      "datos_curiosos": [
+        "Sobre ella están los meniscos."
+      ]
+    },
+    "TibiaDer__Diafisis": {
+      "funcion": "Cuerpo de la tibia, la «canilla». Su borde anterior se toca bajo la piel.",
+      "datos_curiosos": [
+        "Por eso un golpe en la canilla duele tanto."
+      ]
+    },
+    "TibiaDer__Distal": {
+      "funcion": "Parte inferior de la tibia; forma el tobillo y el maléolo medial (el bulto interno del tobillo).",
+      "datos_curiosos": [
+        "Soporta casi todo el peso del cuerpo."
+      ]
+    },
+    "TibiaDer__Perone": {
+      "funcion": "Hueso delgado al costado de la tibia; da apoyo a músculos y forma el maléolo lateral del tobillo.",
+      "datos_curiosos": [
+        "Casi no carga peso: se puede usar como injerto óseo."
+      ]
+    },
+    "FemurIzq__Proximal": {
+      "funcion": "Parte superior del fémur: la cabeza encaja en la cadera, el cuello la une al hueso y los trocánteres sujetan músculos.",
+      "datos_curiosos": [
+        "La fractura de cadera suele ser del cuello del fémur."
+      ]
+    },
+    "FemurIzq__Diafisis": {
+      "funcion": "Cuerpo largo del fémur. Tiene médula ósea amarilla en su interior.",
+      "datos_curiosos": [
+        "Es el hueso más largo y fuerte del cuerpo."
+      ]
+    },
+    "FemurIzq__Distal": {
+      "funcion": "Parte inferior del fémur: sus cóndilos forman la rodilla con la tibia.",
+      "datos_curiosos": [
+        "En los niños aquí está la placa de crecimiento que alarga la pierna."
+      ]
+    },
+    "FemurIzq__Rotula": {
+      "funcion": "Hueso de la rodilla dentro del tendón del cuádriceps; hace de polea para estirar la pierna.",
+      "datos_curiosos": [
+        "Es el hueso sesamoideo más grande del cuerpo."
+      ]
+    },
+    "HumeroIzq__Proximal": {
+      "funcion": "Parte superior del húmero: la cabeza encaja en el hombro y los tubérculos sujetan los músculos del manguito rotador.",
+      "datos_curiosos": [
+        "El hombro es la articulación que más se mueve y la que más se disloca."
+      ]
+    },
+    "HumeroIzq__Diafisis": {
+      "funcion": "Cuerpo del húmero. Por su cara posterior pasa el nervio radial.",
+      "datos_curiosos": [
+        "Una fractura aquí puede dañar ese nervio."
+      ]
+    },
+    "HumeroIzq__Distal": {
+      "funcion": "Parte inferior del húmero, que forma el codo con el radio y el cúbito.",
+      "datos_curiosos": [
+        "El «hueso de la risa» es el nervio cubital pasando por aquí."
+      ]
+    },
+    "TibiaIzq__Proximal": {
+      "funcion": "Parte superior de la tibia (meseta tibial), donde apoya el fémur.",
+      "datos_curiosos": [
+        "Sobre ella están los meniscos."
+      ]
+    },
+    "TibiaIzq__Diafisis": {
+      "funcion": "Cuerpo de la tibia, la «canilla». Su borde anterior se toca bajo la piel.",
+      "datos_curiosos": [
+        "Por eso un golpe en la canilla duele tanto."
+      ]
+    },
+    "TibiaIzq__Distal": {
+      "funcion": "Parte inferior de la tibia; forma el tobillo y el maléolo medial (el bulto interno del tobillo).",
+      "datos_curiosos": [
+        "Soporta casi todo el peso del cuerpo."
+      ]
+    },
+    "TibiaIzq__Perone": {
+      "funcion": "Hueso delgado al costado de la tibia; da apoyo a músculos y forma el maléolo lateral del tobillo.",
+      "datos_curiosos": [
+        "Casi no carga peso: se puede usar como injerto óseo."
+      ]
     }
   }
 }

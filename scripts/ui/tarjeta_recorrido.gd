@@ -34,6 +34,7 @@ func _ready() -> void:
 	caja.add_child(fila)
 	_barra_color = ColorRect.new()
 	_barra_color.custom_minimum_size = Vector2(6, 22)
+	_barra_color.visible = false
 	fila.add_child(_barra_color)
 	_titulo = Label.new()
 	_titulo.add_theme_font_size_override("font_size", 17)
@@ -66,7 +67,7 @@ func _ready() -> void:
 
 
 func mostrar_paso(nombre: String, color: Color, numero: int, total: int, organo: String, texto: String) -> void:
-	_titulo.text = "  " + nombre
+	_titulo.text = nombre
 	_barra_color.color = color
 	_paso.text = "Paso %d de %d · %s" % [numero, total, organo]
 	_texto.text = texto

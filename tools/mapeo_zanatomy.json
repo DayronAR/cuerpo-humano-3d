@@ -524,41 +524,225 @@
         "fuentes": [
           "Humerus.l"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Proximal": {
+            "nombre": "Epífisis proximal del húmero (cabeza y tubérculos)",
+            "nombre_en": "Proximal humerus",
+            "rango_z": [
+              0.85,
+              1.0
+            ]
+          },
+          "Distal": {
+            "nombre": "Epífisis distal del húmero (cóndilo y epicóndilos)",
+            "nombre_en": "Distal humerus",
+            "rango_z": [
+              0.0,
+              0.13
+            ]
+          },
+          "Diafisis": {
+            "nombre": "Diáfisis del húmero",
+            "nombre_en": "Shaft of humerus",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          }
+        }
       },
       "HumeroDer": {
         "fuentes": [
           "Humerus.r"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Proximal": {
+            "nombre": "Epífisis proximal del húmero (cabeza y tubérculos)",
+            "nombre_en": "Proximal humerus",
+            "rango_z": [
+              0.85,
+              1.0
+            ]
+          },
+          "Distal": {
+            "nombre": "Epífisis distal del húmero (cóndilo y epicóndilos)",
+            "nombre_en": "Distal humerus",
+            "rango_z": [
+              0.0,
+              0.13
+            ]
+          },
+          "Diafisis": {
+            "nombre": "Diáfisis del húmero",
+            "nombre_en": "Shaft of humerus",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          }
+        }
       },
       "FemurIzq": {
         "fuentes": [
           "Femur.l",
           "Patella.l"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Rotula": {
+            "nombre": "Rótula",
+            "nombre_en": "Patella",
+            "en": [
+              "Patella.l"
+            ]
+          },
+          "Proximal": {
+            "nombre": "Epífisis proximal del fémur (cabeza, cuello y trocánteres)",
+            "nombre_en": "Proximal femur",
+            "rango_z": [
+              0.84,
+              1.0
+            ]
+          },
+          "Distal": {
+            "nombre": "Epífisis distal del fémur (cóndilos)",
+            "nombre_en": "Distal femur",
+            "rango_z": [
+              0.0,
+              0.12
+            ]
+          },
+          "Diafisis": {
+            "nombre": "Diáfisis del fémur",
+            "nombre_en": "Shaft of femur",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          }
+        }
       },
       "FemurDer": {
         "fuentes": [
           "Femur.r",
           "Patella.r"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Rotula": {
+            "nombre": "Rótula",
+            "nombre_en": "Patella",
+            "en": [
+              "Patella.r"
+            ]
+          },
+          "Proximal": {
+            "nombre": "Epífisis proximal del fémur (cabeza, cuello y trocánteres)",
+            "nombre_en": "Proximal femur",
+            "rango_z": [
+              0.84,
+              1.0
+            ]
+          },
+          "Distal": {
+            "nombre": "Epífisis distal del fémur (cóndilos)",
+            "nombre_en": "Distal femur",
+            "rango_z": [
+              0.0,
+              0.12
+            ]
+          },
+          "Diafisis": {
+            "nombre": "Diáfisis del fémur",
+            "nombre_en": "Shaft of femur",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          }
+        }
       },
       "TibiaIzq": {
         "fuentes": [
           "Tibia.l",
           "Fibula.l"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Perone": {
+            "nombre": "Peroné",
+            "nombre_en": "Fibula",
+            "en": [
+              "Fibula.l"
+            ]
+          },
+          "Proximal": {
+            "nombre": "Epífisis proximal de la tibia (meseta tibial)",
+            "nombre_en": "Proximal tibia",
+            "rango_z": [
+              0.86,
+              1.0
+            ]
+          },
+          "Distal": {
+            "nombre": "Epífisis distal de la tibia (maléolo medial)",
+            "nombre_en": "Distal tibia",
+            "rango_z": [
+              0.0,
+              0.1
+            ]
+          },
+          "Diafisis": {
+            "nombre": "Diáfisis de la tibia",
+            "nombre_en": "Shaft of tibia",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          }
+        }
       },
       "TibiaDer": {
         "fuentes": [
           "Tibia.r",
           "Fibula.r"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Perone": {
+            "nombre": "Peroné",
+            "nombre_en": "Fibula",
+            "en": [
+              "Fibula.r"
+            ]
+          },
+          "Proximal": {
+            "nombre": "Epífisis proximal de la tibia (meseta tibial)",
+            "nombre_en": "Proximal tibia",
+            "rango_z": [
+              0.86,
+              1.0
+            ]
+          },
+          "Distal": {
+            "nombre": "Epífisis distal de la tibia (maléolo medial)",
+            "nombre_en": "Distal tibia",
+            "rango_z": [
+              0.0,
+              0.1
+            ]
+          },
+          "Diafisis": {
+            "nombre": "Diáfisis de la tibia",
+            "nombre_en": "Shaft of tibia",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          }
+        }
       },
       "Claviculas": {
         "fuentes": [
@@ -714,7 +898,8 @@
             {
               "organo": "VenasPerifericas"
             }
-          ]
+          ],
+          "partes": "bilateral"
         },
         {
           "coleccion": "5: Cardiovascular system",
@@ -723,7 +908,8 @@
             {
               "organo": "ArteriasPerifericas"
             }
-          ]
+          ],
+          "partes": "bilateral"
         }
       ]
     },
@@ -786,7 +972,34 @@
       "Esofago": {
         "fuentes": [
           "Oesophagus"
-        ]
+        ],
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Cervical": {
+            "nombre": "Porción cervical del esófago",
+            "nombre_en": "Cervical part of oesophagus",
+            "rango_z": [
+              0.8,
+              1.0
+            ]
+          },
+          "Toracica": {
+            "nombre": "Porción torácica del esófago",
+            "nombre_en": "Thoracic part of oesophagus",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          },
+          "Abdominal": {
+            "nombre": "Porción abdominal del esófago",
+            "nombre_en": "Abdominal part of oesophagus",
+            "marcas": [
+              "junto:Stomach"
+            ],
+            "radio": 0.022
+          }
+        }
       },
       "Estomago": {
         "fuentes": [
@@ -844,14 +1057,84 @@
           "Gallbladder",
           "Bile duct"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "regiones": {
+          "Vesicula": {
+            "nombre": "Vesícula biliar",
+            "nombre_en": "Gallbladder",
+            "en": [
+              "Gallbladder"
+            ]
+          },
+          "Coledoco": {
+            "nombre": "Conducto colédoco",
+            "nombre_en": "Bile duct",
+            "en": [
+              "Bile duct"
+            ]
+          },
+          "LobuloCuadrado": {
+            "nombre": "Lóbulo cuadrado",
+            "nombre_en": "Quadrate lobe",
+            "marcas": [
+              "Quadrate lobe.j"
+            ],
+            "radio": 0.03
+          },
+          "LobuloCaudado": {
+            "nombre": "Lóbulo caudado",
+            "nombre_en": "Caudate lobe",
+            "marcas": [
+              "Caudate lobe.j"
+            ],
+            "radio": 0.03
+          },
+          "LobuloDerecho": {
+            "nombre": "Lóbulo derecho del hígado",
+            "nombre_en": "Right lobe of liver",
+            "marcas": [
+              "Right lobe of liver.j"
+            ]
+          },
+          "LobuloIzquierdo": {
+            "nombre": "Lóbulo izquierdo del hígado",
+            "nombre_en": "Left lobe of liver",
+            "marcas": [
+              "Left lobe of liver.j"
+            ]
+          }
+        }
       },
       "IntestinoDelgado": {
         "fuentes": [
           "Duodenum",
           "Jejunum"
         ],
-        "max_triangulos": 12000
+        "max_triangulos": 12000,
+        "partes": "regiones",
+        "regiones": {
+          "Duodeno": {
+            "nombre": "Duodeno",
+            "nombre_en": "Duodenum",
+            "en": [
+              "Duodenum"
+            ]
+          },
+          "Yeyuno": {
+            "nombre": "Yeyuno",
+            "nombre_en": "Jejunum",
+            "marcas": [
+              "rel:0.75,0.5,0.8"
+            ]
+          },
+          "Ileon": {
+            "nombre": "Íleon",
+            "nombre_en": "Ileum",
+            "marcas": [
+              "rel:0.3,0.5,0.2"
+            ]
+          }
+        }
       },
       "IntestinoGrueso": {
         "fuentes": [
@@ -872,7 +1155,52 @@
           "Pancreatic duct",
           "Accessory pancreatic duct"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "x",
+        "regiones": {
+          "ConductoPancreatico": {
+            "nombre": "Conducto pancreático",
+            "nombre_en": "Pancreatic duct",
+            "en": [
+              "Pancreatic duct"
+            ]
+          },
+          "ConductoAccesorio": {
+            "nombre": "Conducto pancreático accesorio",
+            "nombre_en": "Accessory pancreatic duct",
+            "en": [
+              "Accessory pancreatic duct"
+            ]
+          },
+          "Cabeza": {
+            "nombre": "Cabeza del páncreas",
+            "nombre_en": "Head of pancreas",
+            "marcas": [
+              "Head of pancreas.j"
+            ]
+          },
+          "Cuello": {
+            "nombre": "Cuello del páncreas",
+            "nombre_en": "Neck of pancreas",
+            "marcas": [
+              "Neck of pancreas.j"
+            ]
+          },
+          "Cuerpo": {
+            "nombre": "Cuerpo del páncreas",
+            "nombre_en": "Body of pancreas",
+            "marcas": [
+              "Body of pancreas.j"
+            ]
+          },
+          "Cola": {
+            "nombre": "Cola del páncreas",
+            "nombre_en": "Tail of pancreas",
+            "marcas": [
+              "Tail of pancreas.j"
+            ]
+          }
+        }
       },
       "Boca": {
         "fuentes": [
@@ -948,7 +1276,8 @@
             {
               "organo": "GangliosMiembroInferior"
             }
-          ]
+          ],
+          "partes": "bilateral"
         }
       ]
     },
@@ -957,7 +1286,32 @@
         "fuentes": [
           "Thyroid gland"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "x",
+        "regiones": {
+          "Istmo": {
+            "nombre": "Istmo de la tiroides",
+            "nombre_en": "Isthmus of thyroid gland",
+            "marcas": [
+              "rel:0.5,0.0,0.3"
+            ],
+            "radio": 0.011
+          },
+          "LobuloDerecho": {
+            "nombre": "Lóbulo derecho de la tiroides",
+            "nombre_en": "Right lobe of thyroid gland",
+            "marcas": [
+              "rel:0.15,0.5,0.5"
+            ]
+          },
+          "LobuloIzquierdo": {
+            "nombre": "Lóbulo izquierdo de la tiroides",
+            "nombre_en": "Left lobe of thyroid gland",
+            "marcas": [
+              "rel:0.85,0.5,0.5"
+            ]
+          }
+        }
       },
       "Paratiroides": {
         "fuentes": [
@@ -1003,7 +1357,41 @@
         "fuentes": [
           "Urinary bladder"
         ],
-        "partes": "individual"
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Vertice": {
+            "nombre": "Vértice de la vejiga",
+            "nombre_en": "Apex of bladder",
+            "rango_z": [
+              0.8,
+              1.0
+            ]
+          },
+          "Cuello": {
+            "nombre": "Cuello de la vejiga",
+            "nombre_en": "Neck of bladder",
+            "rango_z": [
+              0.0,
+              0.18
+            ]
+          },
+          "Fondo": {
+            "nombre": "Fondo de la vejiga",
+            "nombre_en": "Fundus of bladder",
+            "marcas": [
+              "rel:0.5,1.0,0.35"
+            ],
+            "radio": 0.025
+          },
+          "Cuerpo": {
+            "nombre": "Cuerpo de la vejiga",
+            "nombre_en": "Body of bladder",
+            "marcas": [
+              "rel:0.5,0.5,0.5"
+            ]
+          }
+        }
       },
       "Uretra": {
         "fuentes": [
@@ -1062,7 +1450,32 @@
         "fuentes": [
           "Spinal dura"
         ],
-        "max_triangulos": 6000
+        "max_triangulos": 6000,
+        "partes": "regiones",
+        "ejes": "z",
+        "regiones": {
+          "Cervical": {
+            "nombre": "Médula cervical",
+            "nombre_en": "Cervical spinal cord",
+            "marcas": [
+              "centro:Vertebra C4"
+            ]
+          },
+          "Toracica": {
+            "nombre": "Médula torácica",
+            "nombre_en": "Thoracic spinal cord",
+            "marcas": [
+              "centro:Vertebra T7"
+            ]
+          },
+          "Lumbar": {
+            "nombre": "Médula lumbar y cono medular",
+            "nombre_en": "Lumbar spinal cord",
+            "marcas": [
+              "centro:Vertebra L2"
+            ]
+          }
+        }
       },
       "resto": [
         {
@@ -1073,7 +1486,8 @@
             {
               "organo": "Nervios"
             }
-          ]
+          ],
+          "partes": "bilateral"
         },
         {
           "coleccion": "7: Nervous system & Sense organs",
